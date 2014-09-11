@@ -1,5 +1,5 @@
 package tull;
 
-public class random {
+public class Random {
 
 }
