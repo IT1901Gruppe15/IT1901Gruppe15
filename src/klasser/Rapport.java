@@ -1,17 +1,26 @@
 package klasser;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 
 public class Rapport {
-	private int koieID;
+	private String koieID;
 	private List<Utstyr> odelagtUtstyr;
 	private int vedstatus;
 	
-	public void lesRapport(Reader input){
+	
+	public void lesRapport(Reader input) throws IOException{
 		BufferedReader reader = new BufferedReader(input);
-		while(reader.ready()){
+		String line = null;
+		while((line = reader.readLine())!=null){
+			int pos = line.indexOf(";");
+			if(pos>0){
+				koieID=line.substring(0,pos);
+			}
+			pos = line.indexOf(";",pos+1);
+			
 			
 		}
 		
