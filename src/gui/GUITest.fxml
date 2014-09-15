@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+
+<BorderPane fx:id="root" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="gui.GUITestController">
+
+	<fx:define>
+		<Pane fx:id="loginScreen">
+			<VBox layoutX="525" layoutY="200" spacing="8">
+				<Text text="NTNUI Koier" />
+				<HBox>
+					<Label text="Brukernavn" prefWidth="80" />
+					<TextField fx:id="usernameField" prefWidth="150" />
+				</HBox>
+				<HBox>
+					<Label text="Passord" prefWidth="80" />
+					<PasswordField fx:id="passwordField" prefWidth="150" />
+				</HBox>
+				<HBox>
+					<Button text="Ny bruker" onAction="#newUser" prefWidth="100" />
+					<Button text="Logg inn" onAction="#logIn" prefWidth="130" />
+				</HBox>
+			</VBox>
+		</Pane>
+	</fx:define>
+
+	<fx:define>
+		<VBox fx:id="koieListe" spacing="5">
+			<Text text=" Koie1" >
+			<font>
+				<Font size="14"/>
+			</font>
+			</Text>
+			<Text text=" Koie2" >
+			<font>
+				<Font size="14"/>
+			</font>
+			</Text>
+			<Text text=" Koie3" >
+			<font>
+				<Font size="14"/>
+			</font>
+			</Text>
+			<Text text=" Koie4" >
+			<font>
+				<Font size="14"/>
+			</font>
+			</Text>
+			<Text text=" Koie5" >
+			<font>
+				<Font size="14"/>
+			</font>
+			</Text>
+			<Text text=" Koie6" >
+			<font>
+				<Font size="14"/>
+			</font>
+			</Text>
+			<Text text=" Koie7" >
+			<font>
+				<Font size="14"/>
+			</font>
+			</Text>
+			<Text text=" Koie8" >
+			<font>
+				<Font size="14"/>
+			</font>
+			</Text>
+		</VBox>
+	</fx:define>
+
+	<fx:define>
+		<HBox fx:id="toolbar" spacing="10">
+			<Button text="Action1" prefHeight="60" prefWidth="60" />
+			<Button text="Action2" prefHeight="60" prefWidth="60" />
+			<Button text="Action3" prefHeight="60" prefWidth="60" />
+			<Button text="Action4" prefHeight="60" prefWidth="60" />
+			<Button text="Action5" prefHeight="60" prefWidth="60" />
+			<Button text="Action6" prefHeight="60" prefWidth="60" />
+			<Button text="Action7" prefHeight="60" prefWidth="60" />
+		</HBox>
+	</fx:define>
+
+	<fx:define>
+		<ImageView fx:id="image">
+			<Image url="Untitled.png" />
+		</ImageView>
+	</fx:define>
+
+</BorderPane>
+
