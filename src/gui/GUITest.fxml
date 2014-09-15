@@ -29,53 +29,56 @@
 	</fx:define>
 
 	<fx:define>
-		<VBox fx:id="koieListe" spacing="5">
-			<Text text=" Koie1" >
-			<font>
-				<Font size="14"/>
-			</font>
-			</Text>
-			<Text text=" Koie2" >
-			<font>
-				<Font size="14"/>
-			</font>
-			</Text>
-			<Text text=" Koie3" >
-			<font>
-				<Font size="14"/>
-			</font>
-			</Text>
-			<Text text=" Koie4" >
-			<font>
-				<Font size="14"/>
-			</font>
-			</Text>
-			<Text text=" Koie5" >
-			<font>
-				<Font size="14"/>
-			</font>
-			</Text>
-			<Text text=" Koie6" >
-			<font>
-				<Font size="14"/>
-			</font>
-			</Text>
-			<Text text=" Koie7" >
-			<font>
-				<Font size="14"/>
-			</font>
-			</Text>
-			<Text text=" Koie8" >
-			<font>
-				<Font size="14"/>
-			</font>
-			</Text>
-		</VBox>
+		<Pane fx:id="koieListe">
+			<VBox spacing="5" layoutY="20">
+				<Hyperlink text="Koie1" onAction="#test">
+					<font>
+						<Font size="14" />
+					</font>
+				</Hyperlink>
+				<Hyperlink text="Koie2">
+					<font>
+						<Font size="14" />
+					</font>
+				</Hyperlink>
+				<Hyperlink text="Koie3">
+					<font>
+						<Font size="14" />
+					</font>
+				</Hyperlink>
+				<Hyperlink text="Koie4">
+					<font>
+						<Font size="14" />
+					</font>
+				</Hyperlink>
+				<Hyperlink text="Koie5">
+					<font>
+						<Font size="14" />
+					</font>
+				</Hyperlink>
+				<Hyperlink text="Koie6">
+					<font>
+						<Font size="14" />
+					</font>
+				</Hyperlink>
+				<Hyperlink text="Koie7">
+					<font>
+						<Font size="14" />
+					</font>
+				</Hyperlink>
+				<Hyperlink text="Koie8">
+					<font>
+						<Font size="14" />
+					</font>
+				</Hyperlink>
+			</VBox>
+		</Pane>
 	</fx:define>
 
 	<fx:define>
 		<HBox fx:id="toolbar" spacing="10">
-			<Button text="Action1" prefHeight="60" prefWidth="60" />
+			<Button text="Action1" prefHeight="60" prefWidth="60"
+				onAction="#test" />
 			<Button text="Action2" prefHeight="60" prefWidth="60" />
 			<Button text="Action3" prefHeight="60" prefWidth="60" />
 			<Button text="Action4" prefHeight="60" prefWidth="60" />
