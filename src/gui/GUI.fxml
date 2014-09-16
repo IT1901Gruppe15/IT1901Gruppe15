@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+
+<BorderPane fx:id="root" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="gui.GUIController">
+
+	<fx:define>
+		<Pane fx:id="loginScreen">
+			<VBox layoutX="525" layoutY="200" spacing="8">
+				<Text text="NTNUI Koier" />
+				<HBox>
+					<Label text="Brukernavn" prefWidth="80" />
+					<TextField fx:id="usernameField" prefWidth="150" />
+				</HBox>
+				<HBox>
+					<Label text="Passord" prefWidth="80" />
+					<PasswordField fx:id="passwordField" prefWidth="150" />
+				</HBox>
+				<HBox>
+					<Button text="Ny bruker" onAction="#newUser" prefWidth="100" />
+					<Button text="Logg inn" onAction="#logIn" prefWidth="130" />
+				</HBox>
+			</VBox>
+		</Pane>
+	</fx:define>
+
+	<fx:define>
+		<Pane fx:id="koieListe" prefWidth="120">
+			<VBox spacing="2" layoutY="20">
+				<Hyperlink text="Flåkoia" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Fosenkoia" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Heinfjordstua" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Hognabu" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Holmsåkoia" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Holvassgamma" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Iglbu" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Kamtjønnkoia" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Kråklikåten" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Kvernmovollen" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Kåsen" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Lynhøgen" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Mortenskåten" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Nicokoia" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Rindalsløa" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Selbukåten" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Sonvasskoia" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Stabburet" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Stakkslettbua" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Telin" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Taagaabu" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Vekvessætra" onAction="#koieClicked">
+				</Hyperlink>
+				<Hyperlink text="Øvensenget" onAction="#koieClicked">
+				</Hyperlink>
+			</VBox>
+			<Separator orientation="vertical" layoutX="120" prefHeight="9999" />
+		</Pane>
+	</fx:define>
+
+	<fx:define>
+		<Pane fx:id="toolbar" prefHeight="70">
+			<HBox spacing="10" layoutY="5">
+				<Button text="Hjem" prefHeight="60" prefWidth="60" onAction="#openWelcome"
+					contentDisplay="top">
+					<graphic>
+						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+							preserveRatio="true">
+							<Image url="hjemIkon.png" />
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button text="Kart" prefHeight="60" prefWidth="60" onAction="#openMap"
+					contentDisplay="top">
+					<graphic>
+						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+							preserveRatio="true">
+							<Image url="kartIkon.png" />
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button text="Action2" prefHeight="60" prefWidth="60" />
+				<Button text="Action3" prefHeight="60" prefWidth="60" />
+				<Button text="Action4" prefHeight="60" prefWidth="60" />
+				<Button text="Action5" prefHeight="60" prefWidth="60" />
+				<Button text="Action6" prefHeight="60" prefWidth="60" />
+				<Button text="Logg ut" prefHeight="60" prefWidth="60"
+					onAction="#logOut" contentDisplay="top">
+					<graphic>
+						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+							preserveRatio="true">
+							<Image url="logoutIkon.png" />
+						</ImageView>
+					</graphic>
+				</Button>
+			</HBox>
+			<Separator orientation="horizontal" layoutY="70" prefWidth="9999" />
+		</Pane>
+	</fx:define>
+
+	<fx:define>
+		<Pane fx:id="welcomePane">
+			<Text text="NTNUI koiesystem" layoutX="15" layoutY="30">
+				<font>
+					<Font size="30" />
+				</font>
+			</Text>
+			<Text fx:id="welcomeText" text="Velkommen, [brukernavn]"
+				layoutX="15" layoutY="100">
+				<font>
+					<Font size="20" />
+				</font>
+			</Text>
+		</Pane>
+	</fx:define>
+
+	<fx:define>
+		<Pane fx:id="mapPane">
+			<ImageView>
+				<Image url="Untitled.png" />
+			</ImageView>
+			<ImageView layoutX="200" layoutY="200">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView layoutX="100" layoutY="400">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView layoutX="500" layoutY="450">
+				<Image url="koieIkon.png" />
+			</ImageView>
+		</Pane>
+	</fx:define>
+
+	<fx:define>
+		<Pane fx:id="koiePane">
+			<Text fx:id="activeKoieName" layoutX="15" layoutY="20">
+				<font>
+					<Font size="20" />
+				</font>
+			</Text>
+		</Pane>
+	</fx:define>
+
+</BorderPane>
+

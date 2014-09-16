@@ -8,11 +8,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class GUITest extends Application {
+public class GUI extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		Parent root = FXMLLoader.load(this.getClass().getResource("GUITest.fxml"));
+		Parent root = FXMLLoader.load(this.getClass().getResource("GUI.fxml"));
 		primaryStage.setScene(new Scene(root, 1280, 720));
 		primaryStage.show();
 	}
