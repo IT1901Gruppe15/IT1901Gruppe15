@@ -1,18 +1,20 @@
 package klasser;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 
 public class Rapport {
-	private String koieID, gjenglemte ting;
+	private String koieID;
+	private List<String> gjenglemte_ting;
 	private List<Utstyr> odelagtUtstyr;
 	private int vedstatus;
 	
 	
-	public void lesRapport(Reader input) {
-		BufferedReader reader = new BufferedReader(input);
+	public void lesRapport( ) {
+		BufferedReader reader = new BufferedReader(new FileReader("testinput"));
 		String line = null;
 		try{
 			while((line = reader.readLine())!=null){
