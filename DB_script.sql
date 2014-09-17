@@ -2,7 +2,7 @@ CREATE TABLE Koie(
 	KoieID VARCHAR(30) NOT NULL PRIMARY KEY,
 	Adresse VARCHAR(30),
 	Standard VARCHAR(30),
-	Størrelse INT,
+	Storrelse INT,
 	Vedstatus INT,
 	URL VARCHAR(120)
 );
@@ -30,7 +30,7 @@ CREATE TABLE Utstyr(
 	UtstyrsID INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(UtstyrsID),
 	Navn VARCHAR(30),
-	Innkjøpsdato DATE,
+	Innkjopsdato DATE,
 	Status BOOLEAN,
 	AdminID VARCHAR(30) NOT NULL,
 	FOREIGN KEY(AdminID)
