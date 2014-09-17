@@ -22,7 +22,33 @@
 				</HBox>
 				<HBox>
 					<Button text="Ny bruker" onAction="#newUser" prefWidth="100" />
-					<Button text="Logg inn" onAction="#logIn" prefWidth="130" />
+					<Button text="Logg inn" onAction="#logIn" prefWidth="130"
+						defaultButton="true" />
+				</HBox>
+			</VBox>
+		</Pane>
+	</fx:define>
+	
+	<fx:define>
+		<Pane fx:id="registerScreen">
+			<VBox layoutX="525" layoutY="200" spacing="8">
+				<Text text="Registrer ny konto" />
+				<HBox>
+					<Label text="Brukernavn" prefWidth="80" />
+					<TextField fx:id="regUsernameField" prefWidth="150" />
+				</HBox>
+				<HBox>
+					<Label text="Passord" prefWidth="80" />
+					<PasswordField fx:id="regPasswordField" prefWidth="150" />
+				</HBox>
+				<HBox>
+					<Label text="Passord igjen" prefWidth="80" />
+					<PasswordField fx:id="regPasswordFieldConfirmation" prefWidth="150" />
+				</HBox>
+				<HBox>
+					<Button text="Tilbake" onAction="#logOut" prefWidth="100" />
+					<Button text="Registrer" onAction="#register" prefWidth="130"
+						defaultButton="true" />
 				</HBox>
 			</VBox>
 		</Pane>
@@ -30,53 +56,53 @@
 
 	<fx:define>
 		<Pane fx:id="koieListe" prefWidth="120">
-			<VBox spacing="2" layoutY="20">
-				<Hyperlink text="Flåkoia" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Fosenkoia" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Heinfjordstua" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Hognabu" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Holmsåkoia" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Holvassgamma" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Iglbu" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Kamtjønnkoia" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Kråklikåten" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Kvernmovollen" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Kåsen" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Lynhøgen" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Mortenskåten" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Nicokoia" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Rindalsløa" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Selbukåten" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Sonvasskoia" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Stabburet" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Stakkslettbua" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Telin" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Taagaabu" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Vekvessætra" onAction="#koieClicked">
-				</Hyperlink>
-				<Hyperlink text="Øvensenget" onAction="#koieClicked">
-				</Hyperlink>
+			<VBox spacing="2" layoutY="5">
+				<Hyperlink text="Flåkoia" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Fosenkoia" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Heinfjordstua" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Hognabu" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Holmsåkoia" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Holvassgamma" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Iglbu" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Kamtjønnkoia" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Kråklikåten" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Kvernmovollen" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Kåsen" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Lynhøgen" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Mortenskåten" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Nicokoia" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Rindalsløa" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Selbukåten" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Sonvasskoia" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Stabburet" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Stakkslettbua" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Telin" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Taagaabu" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Vekvessætra" onAction="#koieClicked"
+					focusTraversable="false" />
+				<Hyperlink text="Øvensenget" onAction="#koieClicked"
+					focusTraversable="false" />
 			</VBox>
 			<Separator orientation="vertical" layoutX="120" prefHeight="9999" />
 		</Pane>
@@ -84,9 +110,9 @@
 
 	<fx:define>
 		<Pane fx:id="toolbar" prefHeight="70">
-			<HBox spacing="10" layoutY="5">
+			<HBox spacing="10" layoutX="5" layoutY="5">
 				<Button text="Hjem" prefHeight="60" prefWidth="60" onAction="#openWelcome"
-					contentDisplay="top">
+					contentDisplay="top" cancelButton="true" focusTraversable="false">
 					<graphic>
 						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
 							preserveRatio="true">
@@ -95,7 +121,7 @@
 					</graphic>
 				</Button>
 				<Button text="Kart" prefHeight="60" prefWidth="60" onAction="#openMap"
-					contentDisplay="top">
+					contentDisplay="top" focusTraversable="false">
 					<graphic>
 						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
 							preserveRatio="true">
@@ -103,13 +129,25 @@
 						</ImageView>
 					</graphic>
 				</Button>
-				<Button text="Action2" prefHeight="60" prefWidth="60" />
-				<Button text="Action3" prefHeight="60" prefWidth="60" />
-				<Button text="Action4" prefHeight="60" prefWidth="60" />
-				<Button text="Action5" prefHeight="60" prefWidth="60" />
-				<Button text="Action6" prefHeight="60" prefWidth="60" />
+				<Button text="Rapport" prefHeight="60" prefWidth="60"
+					contentDisplay="top" focusTraversable="false">
+					<graphic>
+						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+							preserveRatio="true">
+							<Image url="rapportIkon.png" />
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button text="Action3" prefHeight="60" prefWidth="60"
+					focusTraversable="false" />
+				<Button text="Action4" prefHeight="60" prefWidth="60"
+					focusTraversable="false" />
+				<Button text="Action5" prefHeight="60" prefWidth="60"
+					focusTraversable="false" />
+				<Button text="Action6" prefHeight="60" prefWidth="60"
+					focusTraversable="false" />
 				<Button text="Logg ut" prefHeight="60" prefWidth="60"
-					onAction="#logOut" contentDisplay="top">
+					onAction="#logOut" contentDisplay="top" focusTraversable="false">
 					<graphic>
 						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
 							preserveRatio="true">
@@ -129,8 +167,7 @@
 					<Font size="30" />
 				</font>
 			</Text>
-			<Text fx:id="welcomeText" text="Velkommen, [brukernavn]"
-				layoutX="15" layoutY="100">
+			<Text text="Velkommen, [brukernavn]" layoutX="15" layoutY="100">
 				<font>
 					<Font size="20" />
 				</font>
@@ -140,16 +177,76 @@
 
 	<fx:define>
 		<Pane fx:id="mapPane">
-			<ImageView>
-				<Image url="Untitled.png" />
+			<ImageView layoutX="2" layoutY="1">
+				<Image url="kart.png" />
 			</ImageView>
-			<ImageView layoutX="200" layoutY="200">
+			<ImageView fx:id="FlåkoiaMap" layoutX="310" layoutY="305">
 				<Image url="koieIkon.png" />
 			</ImageView>
-			<ImageView layoutX="100" layoutY="400">
+			<ImageView fx:id="FosenkoiaMap" layoutX="290" layoutY="130">
 				<Image url="koieIkon.png" />
 			</ImageView>
-			<ImageView layoutX="500" layoutY="450">
+			<ImageView fx:id="HeinfjordstuaMap" layoutX="375" layoutY="230">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="HognabuMap" layoutX="530" layoutY="320">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="HolmsåkoiaMap" layoutX="550" layoutY="330">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="HolvassgammaMap" layoutX="300" layoutY="30">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="IglbuMap" layoutX="270" layoutY="370">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="KamtjønnkoiaMap" layoutX="105" layoutY="445">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="KråklikåtenMap" layoutX="350" layoutY="320">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="KvernmovollenMap" layoutX="420" layoutY="380">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="KåsenMap" layoutX="145" layoutY="300">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="LynhøgenMap" layoutX="360" layoutY="280">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="MortenskåtenMap" layoutX="410" layoutY="350">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="NicokoiaMap" layoutX="340" layoutY="300">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="RindasløaMap" layoutX="100" layoutY="335">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="SelbukåtenMap" layoutX="430" layoutY="225">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="SonvasskoiaMap" layoutX="500" layoutY="205">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="StabburetMap" layoutX="570" layoutY="305">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="StakkslettbuaMap" layoutX="85" layoutY="285">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="TelinMap" layoutX="200" layoutY="405">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="TaagaabuMap" layoutX="360" layoutY="410">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="VekvessætraMap" layoutX="210" layoutY="475">
+				<Image url="koieIkon.png" />
+			</ImageView>
+			<ImageView fx:id="ØvensengetMap" layoutX="450" layoutY="580">
 				<Image url="koieIkon.png" />
 			</ImageView>
 		</Pane>
@@ -166,4 +263,3 @@
 	</fx:define>
 
 </BorderPane>
-
