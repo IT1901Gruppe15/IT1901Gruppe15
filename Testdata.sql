@@ -47,7 +47,7 @@ INSERT INTO Koie
 VALUES ('Selbukaaten', '63.56813, 10.29541', 'skog', '2', '0','http://org.ntnu.no/koiene/koiene/koiene.php?k=selbukaaten' );
 
 INSERT INTO Koie
-VALUES ('Sonsvasskoia', '63.56813, 10.29541', 'skog', '8', '0' ,'http://org.ntnu.no/koiene/koiene/koiene.php?k=sonvasskoia');
+VALUES ('Sonvasskoia', '63.56813, 10.29541', 'skog', '8', '0' ,'http://org.ntnu.no/koiene/koiene/koiene.php?k=sonvasskoia');
 
 INSERT INTO Koie
 VALUES ('Stabburet', '63.56813, 10.29541', 'tregrense', '2', '0' ,'http://org.ntnu.no/koiene/koiene/koiene.php?k=stabburet');
@@ -91,56 +91,56 @@ VALUES ('Morten','passord','Morten Lundenes','12345678','morten23_lundenes@hotma
 INSERT INTO Admin
 VALUES ('Kristoffer','passord','Kristoffer Lervik','12345678','kristoffer-lervik@hotmail.com');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('badstue','2011.05.01','true','madeleine','Flaakoia');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('badstue','2011.05.01','1','madeleine','Flaakoia');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('baat','2011.05.01','true','madeleine','Flaakoia');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('baat','2011.05.01','1','madeleine','Flaakoia');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('isbor','2011.05.01','true','Madeleine','Flaakoia');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('isbor','2011.05.01','1','Madeleine','Flaakoia');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('badstue','2011.05.01','true','Marius','Heinfjordstua');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('badstue','2011.05.01','1','Marius','Heinfjordstua');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('stekeovn','2011.05.01','true','Madeleine','Heinfjordstua');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('stekeovn','2011.05.01','1','Madeleine','Heinfjordstua');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('badstue','2011.05.01','true','Madeleine','Holmsaakoia');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('badstue','2011.05.01','1','Madeleine','Holmsaakoia');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('piano','2011.05.01','true','Madeleine','Holmsaakoia');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('piano','2011.05.01','1','Madeleine','Holmsaakoia');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('baat','2011.05.01','true','Madeleine','Holvassgamme');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('baat','2011.05.01','1','Madeleine','Holvassgamma');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('isbor','2011.05.01','true','Madeleine','Kamtjonnkoia');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('isbor','2011.05.01','1','Madeleine','Kamtjonnkoia');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('do','2011.05.01','true','Madeleine','Kvernmovollen');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('do','2011.05.01','1','Madeleine','Kvernmovollen');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('olbua','2011.05.01','true','Madeleine','Mortenskaten');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('olbua','2011.05.01','1','Madeleine','Mortenskaaten');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('hengekoie','2011.05.01','true','Madeleine','Mortenskaten');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('hengekoie','2011.05.01','1','Madeleine','Mortenskaaten');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('kano','2011.05.01','true','Madeleine','Sonvasskoia');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('kano','2011.05.01','1','Madeleine','Sonvasskoia');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('isbor','2011.05.01','true','Madeleine','Sonvasskoia');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('isbor','2011.05.01','1','Madeleine','Sonvasskoia');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('lenestol','2011.05.01','true','Madeleine','Telin');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('lenestol','2011.05.01','1','Madeleine','Telin');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('sagkrakk','2011.05.01','true','Madeleine','Vekvessaetra');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('sagkrakk','2011.05.01','1','Madeleine','Vekvessaetra');
 
-INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES ('badstue','2011.05.01','true','Madeleine','Ovensenget');
+INSERT INTO Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID)
+VALUES ('badstue','2011.05.01','1','Madeleine','Ovensenget');
 
 INSERT INTO Rapport (tekst, gjenglemt, vedstatus, koierapportID)
 VALUES ('For en fantastisk fin tur!','lue','0','Flaakoia');
