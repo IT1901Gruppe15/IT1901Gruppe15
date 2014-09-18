@@ -134,15 +134,15 @@ public class GUIController {
 	public void logIn(ActionEvent event) { // når man trykker på "logg inn" knappen
 		ResultSet rs = connection.login(usernameField.getText());
 		try {
-			if(rs.first()) { // hvis det finnes minst ett gyldig element i db
-				while(rs.next()){
-					if (rs.getString(1).equals(usernameField.getText()) && rs.getString(2).equals(passwordField.getText())) {
-						admin = new Admin(usernameField.getText());
-						welcomeName.setText("Velkommen, " + usernameField.getText());
-						root.setLeft(koieListe);
-						root.setCenter(welcomePane);
-						root.setTop(toolbar);
-					}
+			if (rs.next()) {
+				if (rs.getString(1).equals(usernameField.getText()) && rs.getString(2).equals(passwordField.getText())) {
+					admin = new Admin(usernameField.getText());
+					welcomeName.setText("Velkommen, " + usernameField.getText());
+					root.setLeft(koieListe);
+					root.setCenter(welcomePane);
+					root.setTop(toolbar);
+				} else {
+					feilLoginInfo.setVisible(true);
 				}
 			} else {
 				feilLoginInfo.setVisible(true);
