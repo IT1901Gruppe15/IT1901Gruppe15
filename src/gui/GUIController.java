@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -38,6 +39,10 @@ public class GUIController {
 	private Admin admin;
 
 	public void initialize() { //basically konstruktør
+		TextArea area = new TextArea();
+		area.setText("test");
+		area.setDisable(true);
+		root.setRight(area);
 		mapBtn = new Button(); 
 		mapBtn.setFocusTraversable(false); //gjør at man ikke kan "hoppe" til knappen ved å trykke på tab
 		mapBtn.setOnAction(new EventHandler<ActionEvent>() { //når man trykker på knappen
