@@ -1,9 +1,3 @@
-Testdata
-
-
-
-Kommentar: Adresse = breddegrad, lengdegrad. Standart = type terreng (skog, tregrense, høyfjell), Størrelse = antall sengeplasser.
-
 INSERT INTO Koie
 VALUES (‘Flaakoia’, ’63.56813, 10.29541’, ’skog’, ’11’, ’0’, ’http://org.ntnu.no/koiene/koiene/koiene.php?k=flaakoia’ );
 
@@ -73,19 +67,11 @@ VALUES (‘Vekvessaetra’, ’63.56813, 10.29541’, ’tregrense’, ’20’,
 INSERT INTO Koie
 VALUES (‘Ovensenget’, ’63.56813, 10.29541’, ’skog, tregrense’, ’8’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=ovensenget’);
 
-
-
-
-Kommentar: skal det være fra-til dato?
-
 INSERT INTO Reservasjon (epost,dato,reservertkoieid) 
 VAUES (‘madelelo@stud.ntnu.no','2014.09.14-2014.09.15’,’Fosenkoia’);
 
-INSERT INTO Reservasjon (epost,dato,reservertkoieid) 
+INSERT INTO Reservasjon (epost,datoTil, datoFra,reservertkoieid) 
 VAUES (‘madelelo@stud.ntnu.no','2014.11.01’,’Flaakoia’);
-
-
-
 
 INSERT INTO Admin
 VALUES (‘Madeleine‘,‘passord‘,‘Madeleine Loras‘,‘92885006‘,‘madelelo@stud.ntnu.no‘);
@@ -105,9 +91,6 @@ VALUES (‘Morten‘,‘passord‘,‘Morten Lundenes‘,‘12345678‘,‘morte
 INSERT INTO Admin
 VALUES (‘Kristoffer‘,‘passord‘,‘Kristoffer Lervik‘,‘12345678‘,‘kristoffer-lervik@hotmail.com‘);
 
-
-
-Kommentar: hvorfor adminID??
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
 VALUES (‘badstue‘,‘2011.05.01‘,‘true‘,‘madeleine‘,‘Flaakoia‘);
 
@@ -159,8 +142,6 @@ VALUES (‘sagkrakk‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Vekvessaet
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
 VALUES (‘badstue‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Ovensenget‘);
 
-
-
-
-INSERT INTO Rapport (tekst, gjenglemt, vedtstus, koierapportID)
+INSERT INTO Rapport (tekst, gjenglemt, vedstatus, koierapportID)
 VALUES (‘For en fantastisk fin tur!‘,‘lue‘,‘0‘,‘Flaakoia‘);
+
