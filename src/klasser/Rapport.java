@@ -26,15 +26,16 @@ public class Rapport {
 	//glemt2
 	
 	public void lesRapport(Reader input) throws IOException {
-		BufferedReader reader = new BufferedReader(input);
-		String line = null;
-		//instansierer begge listene som ArrayList
-		odelagtUtstyr = new ArrayList<String>();
-		gjenglemteTing = new ArrayList<String>();
 		try{
-			while((line = reader.readLine())!=null){//kjører denne while-løkka så lenge det finnes en neste linje i input-filen
+			BufferedReader reader = new BufferedReader(input);
+			
+			String line = null;
+			odelagtUtstyr = new ArrayList<String>();
+			gjenglemteTing = new ArrayList<String>();
+			
+			while((line = reader.readLine())!=null){//kjøres så lenge det finnes en neste linje i input-filen
 				if(line.equals("KoieID")){
-					line = reader.readLine();//hopper over nåværende linje, siden den bare er en overskrift
+					line = reader.readLine();//hopper over nåværende linje
 					koieID=line;//setter koieID til linje 2 i input
 				}else if(line.equals("Vedstatus")){
 					line = reader.readLine();//hopper over overskrift
@@ -51,6 +52,9 @@ public class Rapport {
 					}
 				}
 			}			
+		}catch (Exception e){
+			System.err.println(e.getStackTrace());
+			
 		}finally {
 			System.out.println(koieID);
 			System.out.println(vedstatus);
