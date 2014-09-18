@@ -26,6 +26,9 @@
 						defaultButton="true" />
 				</HBox>
 			</VBox>
+			<Label fx:id="feilLoginInfo" text="Feil brukernavn og/eller passord"
+				style="-fx-font-size: 14px; -fx-text-fill: #ff0000" layoutX="540"
+				layoutY="350" />
 		</Pane>
 	</fx:define>
 
@@ -285,10 +288,10 @@
 				text="gjreagrjk&#10;agklragmerl&#10;mtrklshm&#10;gmrklgsmrs&#10;grgajkerg&#10;jgeralgr&#10;grjkslg&#10;klnlknlk&#10;nklnlk&#10;nklnlk&#10;nkljk"
 				editable="false" focusTraversable="false" layoutX="150" layoutY="110"
 				prefWidth="125" prefHeight="150" />
-			<Text text="Vedstatus:" layoutX="300" layoutY="110"/>
+			<Text text="Vedstatus:" layoutX="300" layoutY="110" />
 			<Label text="Kommentarfelt" layoutX="15" layoutY="280" />
 			<TextArea text="fdkagjrkag gjkralg jdfakl gfal kgfa lkgfmad lgfm adlkg"
-				editable="false" focusTraversable="false" layoutX="15" layoutY="300"/>
+				editable="false" focusTraversable="false" layoutX="15" layoutY="300" />
 		</Pane>
 	</fx:define>
 

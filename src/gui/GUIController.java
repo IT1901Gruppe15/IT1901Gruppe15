@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -38,12 +39,14 @@ public class GUIController {
 	@FXML private Pane reportPane;
 	@FXML private Text welcomeName; // overskriften på welcome-panelet
 	@FXML private Text activeKoieName; // overskriften på koie-panelet
+	@FXML private Label feilLoginInfo; // skrift som dukker opp når man prøver å logge inn med feil info
 	private String activeKoie; // holder styr på aktiv koie (skal alltid være lik activeKoieName.getText())
 	private Button mapBtn; //knappen som dukker opp når man trykker på en koie på kartet
 	private Admin admin;
 	private DBConnection connection = new DBConnection();
 
 	public void initialize() { //basically konstruktør
+		feilLoginInfo.setVisible(false);
 		mapBtn = new Button(); 
 		mapBtn.setFocusTraversable(false); //gjør at man ikke kan "hoppe" til knappen ved å trykke på tab
 		mapBtn.setOnAction(new EventHandler<ActionEvent>() { //når man trykker på knappen
@@ -131,16 +134,18 @@ public class GUIController {
 	public void logIn(ActionEvent event) { // når man trykker på "logg inn" knappen
 		ResultSet rs = connection.login(usernameField.getText());
 		try {
-			while(rs.next()){
-				if (rs.getString(1).equals(usernameField.getText()) && rs.getString(2).equals(passwordField.getText())) {
-					admin = new Admin(usernameField.getText());
-					welcomeName.setText("Velkommen, " + usernameField.getText());
-					root.setLeft(koieListe);
-					root.setCenter(welcomePane);
-					root.setTop(toolbar);
-				} else {
-					System.out.println("feil brukernavn/passord");
+			if(rs.first()) { // hvis det finnes minst ett gyldig element i db
+				while(rs.next()){
+					if (rs.getString(1).equals(usernameField.getText()) && rs.getString(2).equals(passwordField.getText())) {
+						admin = new Admin(usernameField.getText());
+						welcomeName.setText("Velkommen, " + usernameField.getText());
+						root.setLeft(koieListe);
+						root.setCenter(welcomePane);
+						root.setTop(toolbar);
+					}
 				}
+			} else {
+				feilLoginInfo.setVisible(true);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
