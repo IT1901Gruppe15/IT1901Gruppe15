@@ -1,5 +1,8 @@
 package gui;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import klasser.Admin;
+import klasser.DBConnection;
 
 public class GUIController {
 
@@ -32,10 +36,12 @@ public class GUIController {
 	@FXML private Pane welcomePane;
 	@FXML private Pane koiePane;
 	@FXML private Pane reportPane;
+	@FXML private Text welcomeName; // overskriften på welcome-panelet
 	@FXML private Text activeKoieName; // overskriften på koie-panelet
 	private String activeKoie; // holder styr på aktiv koie (skal alltid være lik activeKoieName.getText())
 	private Button mapBtn; //knappen som dukker opp når man trykker på en koie på kartet
 	private Admin admin;
+	private DBConnection connection = new DBConnection();
 
 	public void initialize() { //basically konstruktør
 		mapBtn = new Button(); 
@@ -90,7 +96,7 @@ public class GUIController {
 		mapPane.getChildren().remove(mapBtn);
 		root.setCenter(mapPane);
 	}
-	
+
 	@FXML
 	public void openReport(ActionEvent event) { // når man trykker på rapport-knappen
 		root.setCenter(reportPane);
@@ -123,11 +129,21 @@ public class GUIController {
 
 	@FXML
 	public void logIn(ActionEvent event) { // når man trykker på "logg inn" knappen
-		if (/*SQL query returns true*/ true) {
-			admin = new Admin(usernameField.getText());
-			root.setLeft(koieListe);
-			root.setCenter(welcomePane);
-			root.setTop(toolbar);
+		ResultSet rs = connection.login(usernameField.getText());
+		try {
+			while(rs.next()){
+				if (rs.getString(1).equals(usernameField.getText()) && rs.getString(2).equals(passwordField.getText())) {
+					admin = new Admin(usernameField.getText());
+					welcomeName.setText("Velkommen, " + usernameField.getText());
+					root.setLeft(koieListe);
+					root.setCenter(welcomePane);
+					root.setTop(toolbar);
+				} else {
+					System.out.println("feil brukernavn/passord");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
