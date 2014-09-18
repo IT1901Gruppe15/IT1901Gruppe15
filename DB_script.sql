@@ -32,7 +32,7 @@ CREATE TABLE Utstyr(
 	PRIMARY KEY(UtstyrsID),
 	Navn VARCHAR(30),
 	Innkjopsdato DATE,
-	Status BOOLEAN,
+	stat BOOLEAN,
 	AdminID VARCHAR(30) NOT NULL,
 	FOREIGN KEY(AdminID)
 		REFERENCES Admin(Brukernavn)
