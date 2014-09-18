@@ -1,1 +1,0 @@
-koie; epostadresse; start_dato; slutt_dato
