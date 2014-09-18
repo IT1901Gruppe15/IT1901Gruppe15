@@ -11,7 +11,8 @@ CREATE TABLE Reservasjon(
 	ID INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(ID),
 	Epost VARCHAR(45),
-	Dato DATE,
+	DatoFra DATE,
+	DatoTil DATE,
 	ReservertKoieID VARCHAR(30) NOT NULL,
 	FOREIGN KEY(ReservertKoieID)
 		REFERENCES Koie (KoieID)
