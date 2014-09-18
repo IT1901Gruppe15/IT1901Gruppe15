@@ -131,7 +131,7 @@
 					</graphic>
 				</Button>
 				<Button text="Rapport" prefHeight="60" prefWidth="60"
-					contentDisplay="top" focusTraversable="false">
+					onAction="#openReport" contentDisplay="top" focusTraversable="false">
 					<graphic>
 						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
 							preserveRatio="true">
@@ -163,11 +163,11 @@
 
 	<fx:define>
 		<Pane fx:id="welcomePane">
-			<Text text="NTNUI koiesystem" layoutX="15" layoutY="30">
+			<Label text="NTNUI koiesystem" layoutX="15">
 				<font>
 					<Font size="30" />
 				</font>
-			</Text>
+			</Label>
 			<Text text="Velkommen, [brukernavn]" layoutX="15" layoutY="100">
 				<font>
 					<Font size="20" />
@@ -262,10 +262,33 @@
 			</Text>
 		</Pane>
 	</fx:define>
-	
+
 	<fx:define>
 		<Pane fx:id="reportPane">
-			
+			<Label text="Rapport" layoutX="15">
+				<font>
+					<Font size="30" />
+				</font>
+			</Label>
+			<Text text="Koie: koieID.getName()" layoutX="15" layoutY="70">
+				<font>
+					<Font size="20" />
+				</font>
+			</Text>
+			<Label text="Ødelagte ting" layoutX="15" layoutY="90" />
+			<TextArea
+				text="gjreagrjk&#10;agklragmerl&#10;mtrklshm&#10;gmrklgsmrs&#10;grgajkerg&#10;jgeralgr&#10;grjkslg&#10;jkljnlk&#10;lkjnlknjm&#10;nlknlk&#10;mlkklnm"
+				editable="false" focusTraversable="false" layoutX="15" layoutY="110"
+				prefWidth="125" prefHeight="150" />
+			<Label text="Gjenglemte ting" layoutX="150" layoutY="90" />
+			<TextArea
+				text="gjreagrjk&#10;agklragmerl&#10;mtrklshm&#10;gmrklgsmrs&#10;grgajkerg&#10;jgeralgr&#10;grjkslg&#10;klnlknlk&#10;nklnlk&#10;nklnlk&#10;nkljk"
+				editable="false" focusTraversable="false" layoutX="150" layoutY="110"
+				prefWidth="125" prefHeight="150" />
+			<Text text="Vedstatus:" layoutX="300" layoutY="110"/>
+			<Label text="Kommentarfelt" layoutX="15" layoutY="280" />
+			<TextArea text="fdkagjrkag gjkralg jdfakl gfal kgfa lkgfmad lgfm adlkg"
+				editable="false" focusTraversable="false" layoutX="15" layoutY="300"/>
 		</Pane>
 	</fx:define>
 
