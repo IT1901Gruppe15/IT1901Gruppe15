@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import klasser.Admin;
 
 public class GUIController {
 
@@ -33,6 +34,7 @@ public class GUIController {
 	@FXML private Text activeKoieName;
 	private String activeKoie;
 	private Button mapBtn;
+	private Admin admin;
 
 	public void initialize() {
 		mapBtn = new Button();
@@ -103,6 +105,7 @@ public class GUIController {
 
 	@FXML
 	public void logOut(ActionEvent event) {
+		admin = null;
 		usernameField.clear();
 		passwordField.clear();
 		regUsernameField.clear();
@@ -115,6 +118,7 @@ public class GUIController {
 	@FXML
 	public void logIn(ActionEvent event) {
 		if (/*SQL query returns true*/ true) {
+			admin = new Admin(usernameField.getText());
 			root.setLeft(koieListe);
 			root.setCenter(welcomePane);
 			root.setTop(toolbar);

@@ -28,7 +28,7 @@
 			</VBox>
 		</Pane>
 	</fx:define>
-	
+
 	<fx:define>
 		<Pane fx:id="registerScreen">
 			<VBox layoutX="525" layoutY="200" spacing="8">
@@ -43,7 +43,8 @@
 				</HBox>
 				<HBox>
 					<Label text="Passord igjen" prefWidth="80" />
-					<PasswordField fx:id="regPasswordFieldConfirmation" prefWidth="150" />
+					<PasswordField fx:id="regPasswordFieldConfirmation"
+						prefWidth="150" />
 				</HBox>
 				<HBox>
 					<Button text="Tilbake" onAction="#logOut" prefWidth="100" />
@@ -58,51 +59,51 @@
 		<Pane fx:id="koieListe" prefWidth="120">
 			<VBox spacing="2" layoutY="5">
 				<Hyperlink text="Flåkoia" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Fosenkoia" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Heinfjordstua" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Hognabu" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Holmsåkoia" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Holvassgamma" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Iglbu" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Kamtjønnkoia" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Kråklikåten" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Kvernmovollen" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Kåsen" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Lynhøgen" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Mortenskåten" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Nicokoia" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Rindalsløa" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Selbukåten" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Sonvasskoia" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Stabburet" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Stakkslettbua" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Telin" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Taagaabu" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Vekvessætra" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 				<Hyperlink text="Øvensenget" onAction="#koieClicked"
-					focusTraversable="false" />
+					focusTraversable="false" style="-fx-text-fill: black;" />
 			</VBox>
 			<Separator orientation="vertical" layoutX="120" prefHeight="9999" />
 		</Pane>
