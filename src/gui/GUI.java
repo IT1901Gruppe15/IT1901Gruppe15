@@ -8,8 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class GUI extends Application {
-
+public class GUI extends Application {  // får programmet til å dukke opp på skjermen
+										// ikke mye å se her...
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getResource("GUI.fxml"));

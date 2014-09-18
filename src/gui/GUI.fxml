@@ -262,5 +262,11 @@
 			</Text>
 		</Pane>
 	</fx:define>
+	
+	<fx:define>
+		<Pane fx:id="reportPane">
+			
+		</Pane>
+	</fx:define>
 
 </BorderPane>
