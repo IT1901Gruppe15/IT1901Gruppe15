@@ -1,146 +1,146 @@
 INSERT INTO Koie
-VALUES (´Flaakoia´, ´63.56813, 10.29541´, ´skog´, ´11´, ´0´, ´http://org.ntnu.no/koiene/koiene/koiene.php?k=flaakoia´ );
+VALUES (‘Flaakoia´, ´63.56813, 10.29541´, ´skog´, ´11´, ´0´, ´http://org.ntnu.no/koiene/koiene/koiene.php?k=flaakoia´ );
 
 INSERT INTO Koie
-VALUES (´Fosenkoia´, ´63.56813, 10.29541´, ´skog, tregrense´, ´10´, ´0´,´http://org.ntnu.no/koiene/koiene/koiene.php?k´=fosenkoia´ );
+VALUES (‘Fosenkoia´, ´63.56813, 10.29541´, ´skog, tregrense´, ´10´, ´0´,´http://org.ntnu.no/koiene/koiene/koiene.php?k=fosenkoia´ );
 
 INSERT INTO Koie
-VALUES (´Heinfjordstua´, ´63.56813, 10.29541´, ´skog´, ´25´, ´0´,´http://org.ntnu.no/koiene/koiene/koiene.php?k=heinfjordstua´ );
+VALUES (‘Heinfjordstua´, ´63.56813, 10.29541´, ´skog´, ´25´, ´0´,´http://org.ntnu.no/koiene/koiene/koiene.php?k=heinfjordstua´ );
 
 INSERT INTO Koie
-VALUES (´Hognabu´, ´63.56813, 10.29541´, ´tregrense´, ´6´, ´0´,´http://org.ntnu.no/koiene/koiene/koiene.php?k=hognabu´ );
+VALUES (‘Hognabu´, ´63.56813, 10.29541´, ´tregrense´, ´6´, ´0´,´http://org.ntnu.no/koiene/koiene/koiene.php?k=hognabu´ );
 
 INSERT INTO Koie
-VALUES (´Holmsaakoia´, ´63.56813, 10.29541´, ´skog´, ´20´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=holmsaakoia´);
+VALUES (‘Holmsaakoia´, ´63.56813, 10.29541´, ´skog´, ´20´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=holmsaakoia´);
 
 INSERT INTO Koie
-VALUES (´Holvassgamma´, ´63.56813, 10.29541´, ´skog´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=holvassgamma´);
+VALUES (‘Holvassgamma´, ´63.56813, 10.29541´, ´skog´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=holvassgamma´);
 
 INSERT INTO Koie
-VALUES (´Iglbu´, ´63.56813, 10.29541´, ´tregrense´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=iglbu´);
+VALUES (‘Iglbu´, ´63.56813, 10.29541´, ´tregrense´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=iglbu´);
 
 INSERT INTO Koie
-VALUES (´Kamtjonnkoia´, ´63.56813, 10.29541´, ´hoyfjell´, ´6´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=kamtjonnkoia´);
+VALUES (‘Kamtjonnkoia´, ´63.56813, 10.29541´, ´hoyfjell´, ´6´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=kamtjonnkoia´);
 
 INSERT INTO Koie
-VALUES (´Kraaklikaaten´, ´63.56813, 10.29541´, ´skog´, ´4´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=kraaklikaaten´);
+VALUES (‘Kraaklikaaten´, ´63.56813, 10.29541´, ´skog´, ´4´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=kraaklikaaten´);
 
 INSERT INTO Koie
-VALUES (´Kvernmovollen´, ´63.56813, 10.29541´, ´tregrense´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=kvernmovollen´);
+VALUES (‘Kvernmovollen´, ´63.56813, 10.29541´, ´tregrense´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=kvernmovollen´);
 
 INSERT INTO Koie
-VALUES (´Kaasen´, ´63.56813, 10.29541´, ´skog´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=kaasen´);
+VALUES (‘Kaasen´, ´63.56813, 10.29541´, ´skog´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=kaasen´);
 
 INSERT INTO Koie
-VALUES (´Lynhogen´, ´63.56813, 10.29541´, ´skog, tregrense´, ´4´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=lynhogen´);
+VALUES (‘Lynhogen´, ´63.56813, 10.29541´, ´skog, tregrense´, ´4´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=lynhogen´);
 
 INSERT INTO Koie
-VALUES (´Mortenskaaten´, ´63.56813, 10.29541´, ´tregrense´, ´2´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=mortenskaaten´);
+VALUES (‘Mortenskaaten´, ´63.56813, 10.29541´, ´tregrense´, ´2´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=mortenskaaten´);
 
 INSERT INTO Koie
-VALUES (´Nicokoia´, ´63.56813, 10.29541´, ´skog, tregrense´, ´8´, ´0´,´http://org.ntnu.no/koiene/koiene/koiene.php?k=nicokoia´ );
+VALUES (‘Nicokoia´, ´63.56813, 10.29541´, ´skog, tregrense´, ´8´, ´0´,´http://org.ntnu.no/koiene/koiene/koiene.php?k=nicokoia´ );
 
 INSERT INTO Koie
-VALUES (´Rindalsloa´, ´63.56813, 10.29541´, ´skog´, ´4´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=rindalsloa´);
+VALUES (‘Rindalsloa´, ´63.56813, 10.29541´, ´skog´, ´4´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=rindalsloa´);
 
 INSERT INTO Koie
-VALUES (´Selbukaaten´, ´63.56813, 10.29541´, ´skog´, ´2´, ´0´,´http://org.ntnu.no/koiene/koiene/koiene.php?k=selbukaaten´ );
+VALUES (‘Selbukaaten´, ´63.56813, 10.29541´, ´skog´, ´2´, ´0´,´http://org.ntnu.no/koiene/koiene/koiene.php?k=selbukaaten´ );
 
 INSERT INTO Koie
-VALUES (´Sonsvasskoia´, ´63.56813, 10.29541´, ´skog´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=sonvasskoia´);
+VALUES (‘Sonsvasskoia´, ´63.56813, 10.29541´, ´skog´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=sonvasskoia´);
 
 INSERT INTO Koie
 VALUES (´Stabburet´, ´63.56813, 10.29541´, ´tregrense´, ´2´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=stabburet´);
 
 INSERT INTO Koie
-VALUES (´Stakkslettbua´, ´63.56813, 10.29541´, ´tregrense´, ´11´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=stakksletbua´);
+VALUES (‘Stakkslettbua´, ´63.56813, 10.29541´, ´tregrense´, ´11´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=stakksletbua´);
 
 INSERT INTO Koie
-VALUES (´Telin´, ´63.56813, 10.29541´, ´tregrense´, ´9´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=telin´);
+VALUES (‘Telin´, ´63.56813, 10.29541´, ´tregrense´, ´9´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=telin´);
 
 INSERT INTO Koie
-VALUES (´Taagaabu´, ´63.56813, 10.29541´, ´tregrense´, ´6´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=taagaabu´);
+VALUES (‘Taagaabu´, ´63.56813, 10.29541´, ´tregrense´, ´6´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=taagaabu´);
 
 INSERT INTO Koie
-VALUES (´Vekvessaetra´, ´63.56813, 10.29541´, ´tregrense´, ´20´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=vekvessaetra´);
+VALUES (‘Vekvessaetra´, ´63.56813, 10.29541´, ´tregrense´, ´20´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=vekvessaetra´);
 
 INSERT INTO Koie
-VALUES (´Ovensenget´, ´63.56813, 10.29541´, ´skog, tregrense´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=ovensenget´);
+VALUES (‘Ovensenget´, ´63.56813, 10.29541´, ´skog, tregrense´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=ovensenget´);
 
 INSERT INTO Reservasjon (epost,dato,reservertkoieid) 
-VAUES (´madelelo@stud.ntnu.no','2014.09.14-2014.09.15´,´Fosenkoia´);
+VAUES (‘madelelo@stud.ntnu.no','2014.09.14-2014.09.15´,´Fosenkoia´);
 
 INSERT INTO Reservasjon (epost,datoTil, datoFra,reservertkoieid) 
-VAUES (´madelelo@stud.ntnu.no','2014.11.01´,´Flaakoia´);
+VAUES (‘madelelo@stud.ntnu.no','2014.11.01´,´Flaakoia´);
 
 INSERT INTO Admin
-VALUES (´Madeleine´,´passord´,´Madeleine Loras´,´92885006´,´madelelo@stud.ntnu.no´);
+VALUES (‘Madeleine‘,‘passord‘,‘Madeleine Loras‘,‘92885006‘,‘madelelo@stud.ntnu.no‘);
 
 INSERT INTO Admin
-VALUES (´Marius´,´passord´,´Marius Lundbo´,´12345678´,´marius.lundbo@gmail.com´);
+VALUES (‘Marius‘,‘passord‘,‘Marius Lundbo‘,‘12345678‘,‘marius.lundbo@gmail.com‘);
 
 INSERT INTO Admin
-VALUES (´Kathrine´,´passord´,´Kathrine Lofqvist´,´12345678´,´kathrinelof@gmail.com´);
+VALUES (‘Kathrine‘,‘passord‘,‘Kathrine Lofqvist‘,‘12345678‘,‘kathrinelof@gmail.com‘);
 
 INSERT INTO Admin
-VALUES (´Joakim´,´passord´,´Joakim Lindgren´,´12345678´,´joakigl@stud.ntnu.no´);
+VALUES (‘Joakim‘,‘passord‘,‘Joakim Lindgren‘,‘12345678‘,‘joakigl@stud.ntnu.no‘);
 
 INSERT INTO Admin
-VALUES (´Morten´,´passord´,´Morten Lundenes´,´12345678´,´morten23_lundenes@hotmail.com´);
+VALUES (‘Morten‘,‘passord‘,‘Morten Lundenes‘,‘12345678‘,‘morten23_lundenes@hotmail.com‘);
 
 INSERT INTO Admin
-VALUES (´Kristoffer´,´passord´,´Kristoffer Lervik´,´12345678´,´kristoffer-lervik@hotmail.com´);
+VALUES (‘Kristoffer‘,‘passord‘,‘Kristoffer Lervik‘,‘12345678‘,‘kristoffer-lervik@hotmail.com‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´badstue´,´2011.05.01´,´true´,´madeleine´,´Flaakoia´);
+VALUES (‘badstue‘,‘2011.05.01‘,‘true‘,‘madeleine‘,‘Flaakoia‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´baat´,´2011.05.01´,´true´,´madeleine´,´Flaakoia´);
+VALUES (‘baat‘,‘2011.05.01‘,‘true‘,‘madeleine‘,‘Flaakoia‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´isbor´,´2011.05.01´,´true´,´Madeleine´,´Flaakoia´);
+VALUES (‘isbor‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Flaakoia‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´badstue´,´2011.05.01´,´true´,´Marius´,´Heinfjordstua´);
+VALUES (‘badstue‘,‘2011.05.01‘,‘true‘,‘Marius‘,‘Heinfjordstua‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´stekeovn´,´2011.05.01´,´true´,´Madeleine´,´Heinfjordstua´);
+VALUES (‘stekeovn‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Heinfjordstua‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´badstue´,´2011.05.01´,´true´,´Madeleine´,´Holmsaakoia´);
+VALUES (‘badstue‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Holmsaakoia‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´piano´,´2011.05.01´,´true´,´Madeleine´,´Holmsaakoia´);
+VALUES (‘piano‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Holmsaakoia‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´baat´,´2011.05.01´,´true´,´Madeleine´,´Holvassgamme´);
+VALUES (‘baat‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Holvassgamme‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´isbor´,´2011.05.01´,´true´,´Madeleine´,´Kamtjonnkoia´);
+VALUES (‘isbor‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Kamtjonnkoia‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´do´,´2011.05.01´,´true´,´Madeleine´,´Kvernmovollen´);
+VALUES (‘do‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Kvernmovollen‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´olbua´,´2011.05.01´,´true´,´Madeleine´,´Mortenskaten´);
+VALUES (‘olbua‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Mortenskaten‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´hengekoie´,´2011.05.01´,´true´,´Madeleine´,´Mortenskaten´);
+VALUES (‘hengekoie‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Mortenskaten‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´kano´,´2011.05.01´,´true´,´Madeleine´,´Sonvasskoia´);
+VALUES (‘kano‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Sonvasskoia‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´isbor´,´2011.05.01´,´true´,´Madeleine´,´Sonvasskoia´);
+VALUES (‘isbor‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Sonvasskoia‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´lenestol´,´2011.05.01´,´true´,´Madeleine´,´Telin´);
+VALUES (‘lenestol‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Telin‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´sagkrakk´,´2011.05.01´,´true´,´Madeleine´,´Vekvessaetra´);
+VALUES (‘sagkrakk‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Vekvessaetra‘);
 
 INSERT INTO Utstyr (navn, innkjopsdato, status, adminID,fraktesTilID)
-VALUES (´badstue´,´2011.05.01´,´true´,´Madeleine´,´Ovensenget´);
+VALUES (‘badstue‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Ovensenget‘);
 
 INSERT INTO Rapport (tekst, gjenglemt, vedstatus, koierapportID)
-VALUES (´For en fantastisk fin tur!´,´lue´,´0´,´Flaakoia´);
+VALUES (‘For en fantastisk fin tur!‘,‘lue‘,‘0‘,‘Flaakoia‘);
