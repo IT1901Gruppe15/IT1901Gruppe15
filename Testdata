@@ -1,77 +1,77 @@
 INSERT INTO Koie
-VALUES (‘Flaakoia’, ’63.56813, 10.29541’, ’skog’, ’11’, ’0’, ’http://org.ntnu.no/koiene/koiene/koiene.php?k=flaakoia’ );
+VALUES (‘Flaakoia´, ´63.56813, 10.29541´, ´skog´, ´11´, ´0´, ´http://org.ntnu.no/koiene/koiene/koiene.php?k=flaakoia´ );
 
 INSERT INTO Koie
-VALUES (‘Fosenkoia’, ’63.56813, 10.29541’, ’skog, tregrense’, ’10’, ’0’,’http://org.ntnu.no/koiene/koiene/koiene.php?k=fosenkoia’ );
+VALUES (‘Fosenkoia´, ´63.56813, 10.29541´, ´skog, tregrense´, ´10´, ´0´,´http://org.ntnu.no/koiene/koiene/koiene.php?k=fosenkoia´ );
 
 INSERT INTO Koie
-VALUES (‘Heinfjordstua’, ’63.56813, 10.29541’, ’skog’, ’25’, ’0’,’http://org.ntnu.no/koiene/koiene/koiene.php?k=heinfjordstua’ );
+VALUES (‘Heinfjordstua´, ´63.56813, 10.29541´, ´skog´, ´25´, ´0´,´http://org.ntnu.no/koiene/koiene/koiene.php?k=heinfjordstua´ );
 
 INSERT INTO Koie
-VALUES (‘Hognabu’, ’63.56813, 10.29541’, ’tregrense’, ’6’, ’0’,’http://org.ntnu.no/koiene/koiene/koiene.php?k=hognabu’ );
+VALUES (‘Hognabu´, ´63.56813, 10.29541´, ´tregrense´, ´6´, ´0´,´http://org.ntnu.no/koiene/koiene/koiene.php?k=hognabu´ );
 
 INSERT INTO Koie
-VALUES (‘Holmsaakoia’, ’63.56813, 10.29541’, ’skog’, ’20’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=holmsaakoia’);
+VALUES (‘Holmsaakoia´, ´63.56813, 10.29541´, ´skog´, ´20´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=holmsaakoia´);
 
 INSERT INTO Koie
-VALUES (‘Holvassgamma’, ’63.56813, 10.29541’, ’skog’, ’8’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=holvassgamma’);
+VALUES (‘Holvassgamma´, ´63.56813, 10.29541´, ´skog´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=holvassgamma´);
 
 INSERT INTO Koie
-VALUES (‘Iglbu’, ’63.56813, 10.29541’, ’tregrense’, ’8’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=iglbu’);
+VALUES (‘Iglbu´, ´63.56813, 10.29541´, ´tregrense´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=iglbu´);
 
 INSERT INTO Koie
-VALUES (‘Kamtjonnkoia’, ’63.56813, 10.29541’, ’hoyfjell’, ’6’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=kamtjonnkoia’);
+VALUES (‘Kamtjonnkoia´, ´63.56813, 10.29541´, ´hoyfjell´, ´6´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=kamtjonnkoia´);
 
 INSERT INTO Koie
-VALUES (‘Kraaklikaaten’, ’63.56813, 10.29541’, ’skog’, ’4’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=kraaklikaaten’);
+VALUES (‘Kraaklikaaten´, ´63.56813, 10.29541´, ´skog´, ´4´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=kraaklikaaten´);
 
 INSERT INTO Koie
-VALUES (‘Kvernmovollen’, ’63.56813, 10.29541’, ’tregrense’, ’8’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=kvernmovollen’);
+VALUES (‘Kvernmovollen´, ´63.56813, 10.29541´, ´tregrense´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=kvernmovollen´);
 
 INSERT INTO Koie
-VALUES (‘Kaasen’, ’63.56813, 10.29541’, ’skog’, ’8’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=kaasen’);
+VALUES (‘Kaasen´, ´63.56813, 10.29541´, ´skog´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=kaasen´);
 
 INSERT INTO Koie
-VALUES (‘Lynhogen’, ’63.56813, 10.29541’, ’skog, tregrense’, ’4’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=lynhogen’);
+VALUES (‘Lynhogen´, ´63.56813, 10.29541´, ´skog, tregrense´, ´4´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=lynhogen´);
 
 INSERT INTO Koie
-VALUES (‘Mortenskaaten’, ’63.56813, 10.29541’, ’tregrense’, ’2’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=mortenskaaten’);
+VALUES (‘Mortenskaaten´, ´63.56813, 10.29541´, ´tregrense´, ´2´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=mortenskaaten´);
 
 INSERT INTO Koie
-VALUES (‘Nicokoia’, ’63.56813, 10.29541’, ’skog, tregrense’, ’8’, ’0’,’http://org.ntnu.no/koiene/koiene/koiene.php?k=nicokoia’ );
+VALUES (‘Nicokoia´, ´63.56813, 10.29541´, ´skog, tregrense´, ´8´, ´0´,´http://org.ntnu.no/koiene/koiene/koiene.php?k=nicokoia´ );
 
 INSERT INTO Koie
-VALUES (‘Rindalsloa’, ’63.56813, 10.29541’, ’skog’, ’4’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=rindalsloa’);
+VALUES (‘Rindalsloa´, ´63.56813, 10.29541´, ´skog´, ´4´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=rindalsloa´);
 
 INSERT INTO Koie
-VALUES (‘Selbukaaten’, ’63.56813, 10.29541’, ’skog’, ’2’, ’0’,’http://org.ntnu.no/koiene/koiene/koiene.php?k=selbukaaten’ );
+VALUES (‘Selbukaaten´, ´63.56813, 10.29541´, ´skog´, ´2´, ´0´,´http://org.ntnu.no/koiene/koiene/koiene.php?k=selbukaaten´ );
 
 INSERT INTO Koie
-VALUES (‘Sonsvasskoia’, ’63.56813, 10.29541’, ’skog’, ’8’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=sonvasskoia’);
+VALUES (‘Sonsvasskoia´, ´63.56813, 10.29541´, ´skog´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=sonvasskoia´);
 
 INSERT INTO Koie
-VALUES (‘Stabburet’, ’63.56813, 10.29541’, ’tregrense’, ’2’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=stabburet’);
+VALUES (´Stabburet´, ´63.56813, 10.29541´, ´tregrense´, ´2´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=stabburet´);
 
 INSERT INTO Koie
-VALUES (‘Stakkslettbua’, ’63.56813, 10.29541’, ’tregrense’, ’11’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=stakksletbua’);
+VALUES (‘Stakkslettbua´, ´63.56813, 10.29541´, ´tregrense´, ´11´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=stakksletbua´);
 
 INSERT INTO Koie
-VALUES (‘Telin’, ’63.56813, 10.29541’, ’tregrense’, ’9’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=telin’);
+VALUES (‘Telin´, ´63.56813, 10.29541´, ´tregrense´, ´9´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=telin´);
 
 INSERT INTO Koie
-VALUES (‘Taagaabu’, ’63.56813, 10.29541’, ’tregrense’, ’6’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=taagaabu’);
+VALUES (‘Taagaabu´, ´63.56813, 10.29541´, ´tregrense´, ´6´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=taagaabu´);
 
 INSERT INTO Koie
-VALUES (‘Vekvessaetra’, ’63.56813, 10.29541’, ’tregrense’, ’20’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=vekvessaetra’);
+VALUES (‘Vekvessaetra´, ´63.56813, 10.29541´, ´tregrense´, ´20´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=vekvessaetra´);
 
 INSERT INTO Koie
-VALUES (‘Ovensenget’, ’63.56813, 10.29541’, ’skog, tregrense’, ’8’, ’0’ ,’http://org.ntnu.no/koiene/koiene/koiene.php?k=ovensenget’);
+VALUES (‘Ovensenget´, ´63.56813, 10.29541´, ´skog, tregrense´, ´8´, ´0´ ,´http://org.ntnu.no/koiene/koiene/koiene.php?k=ovensenget´);
 
 INSERT INTO Reservasjon (epost,dato,reservertkoieid) 
-VAUES (‘madelelo@stud.ntnu.no','2014.09.14-2014.09.15’,’Fosenkoia’);
+VAUES (‘madelelo@stud.ntnu.no','2014.09.14-2014.09.15´,´Fosenkoia´);
 
 INSERT INTO Reservasjon (epost,datoTil, datoFra,reservertkoieid) 
-VAUES (‘madelelo@stud.ntnu.no','2014.11.01’,’Flaakoia’);
+VAUES (‘madelelo@stud.ntnu.no','2014.11.01´,´Flaakoia´);
 
 INSERT INTO Admin
 VALUES (‘Madeleine‘,‘passord‘,‘Madeleine Loras‘,‘92885006‘,‘madelelo@stud.ntnu.no‘);
@@ -144,4 +144,3 @@ VALUES (‘badstue‘,‘2011.05.01‘,‘true‘,‘Madeleine‘,‘Ovensenget�
 
 INSERT INTO Rapport (tekst, gjenglemt, vedstatus, koierapportID)
 VALUES (‘For en fantastisk fin tur!‘,‘lue‘,‘0‘,‘Flaakoia‘);
-
