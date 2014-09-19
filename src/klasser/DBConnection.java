@@ -20,6 +20,7 @@ public class DBConnection {
 		return db.sporDB(q);
 	}
 	
+	// Registrere ny bruker
 	public void registrerBruker(String brukernavn, String passord) {
 		
 		String q = ("insert into Admin (Brukernavn, Passord) values ('"

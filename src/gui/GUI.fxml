@@ -51,8 +51,7 @@
 				</HBox>
 				<HBox>
 					<Button text="Tilbake" onAction="#logOut" prefWidth="100" />
-					<Button text="Registrer" onAction="#register" prefWidth="130"
-						defaultButton="true" />
+					<Button text="Registrer" onAction="#register" prefWidth="130" />
 				</HBox>
 			</VBox>
 		</Pane>

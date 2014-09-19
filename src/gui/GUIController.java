@@ -112,16 +112,29 @@ public class GUIController {
 
 	@FXML
 	public void register(ActionEvent event) { // når man trykker på "registrer" knappen
-		if (/*username does not exist*/ true && regPasswordField.getText().equals(regPasswordFieldConfirmation.getText())) {
-			
-			System.out.println("success!!");
-			logOut(event);
+		ResultSet rs = connection.login(regUsernameField.getText());
+		try {
+			if (regUsernameField.getText() == "" || regPasswordField.getText() == "") {
+				System.out.println("Brukernavn eller passord mangler");
+			}
+			else if (rs.next()) {
+				System.out.println("Brukernavn er allerede i bruk");
+			} else if (regPasswordField.getText().equals(regPasswordFieldConfirmation.getText())) {
+				connection.registrerBruker(regUsernameField.getText(), regPasswordField.getText());
+				System.out.println("Bruker er registrert");
+				logOut(event);
+			} else {
+				System.out.println("Passordene er ikke like");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	@FXML
 	public void logOut(ActionEvent event) { // når man trykker på "logg ut"  eller "tilbake" knappen
 		admin = null;
+		feilLoginInfo.setVisible(false);
 		usernameField.clear();
 		passwordField.clear();
 		regUsernameField.clear();
@@ -137,7 +150,6 @@ public class GUIController {
 		try {
 			if (dbUserInfo.next()) {
 				if (dbUserInfo.getString(1).equals(usernameField.getText()) && dbUserInfo.getString(2).equals(passwordField.getText())) {
-					feilLoginInfo.setVisible(false);
 					admin = new Admin(usernameField.getText());
 					welcomeName.setText("Velkommen, " + usernameField.getText());
 					root.setLeft(koieListe);
