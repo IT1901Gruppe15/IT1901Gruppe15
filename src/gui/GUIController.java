@@ -40,6 +40,7 @@ public class GUIController {
 	@FXML private Text welcomeName; // overskriften på welcome-panelet
 	@FXML private Text activeKoieName; // overskriften på koie-panelet
 	@FXML private Label feilLoginInfo; // skrift som dukker opp når man prøver å logge inn med feil info
+	@FXML private Text registreringsFeil; // skrift som dukker opp når man får feil ved registrering
 	private String activeKoie; // holder styr på aktiv koie (skal alltid være lik activeKoieName.getText())
 	private Button mapBtn; //knappen som dukker opp når man trykker på en koie på kartet
 	private Admin admin;
@@ -47,6 +48,7 @@ public class GUIController {
 
 	public void initialize() { //basically konstruktør
 		feilLoginInfo.setVisible(false);
+		registreringsFeil.setVisible(false);
 		root.setCenter(loginScreen);
 		mapBtn = new Button();
 		mapBtn.setFocusTraversable(false); //gjør at man ikke kan "hoppe" til knappen ved å trykke på tab
@@ -114,17 +116,20 @@ public class GUIController {
 	public void register(ActionEvent event) { // når man trykker på "registrer" knappen
 		ResultSet rs = connection.login(regUsernameField.getText());
 		try {
-			if (regUsernameField.getText() == "" || regPasswordField.getText() == "") {
-				System.out.println("Brukernavn eller passord mangler");
+			if (regUsernameField.getText().equals("") || regPasswordField.getText().equals("")) {
+				registreringsFeil.setText("Brukernavn eller passord mangler");
+				registreringsFeil.setVisible(true);
 			}
 			else if (rs.next()) {
-				System.out.println("Brukernavn er allerede i bruk");
+				registreringsFeil.setText("Brukernavn er allerede i bruk");
+				registreringsFeil.setVisible(true);
 			} else if (regPasswordField.getText().equals(regPasswordFieldConfirmation.getText())) {
 				connection.registrerBruker(regUsernameField.getText(), regPasswordField.getText());
 				System.out.println("Bruker er registrert");
 				logOut(event);
 			} else {
-				System.out.println("Passordene er ikke like");
+				registreringsFeil.setText("Passordene er ikke like");
+				registreringsFeil.setVisible(true);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -135,6 +140,7 @@ public class GUIController {
 	public void logOut(ActionEvent event) { // når man trykker på "logg ut"  eller "tilbake" knappen
 		admin = null;
 		feilLoginInfo.setVisible(false);
+		registreringsFeil.setVisible(false);
 		usernameField.clear();
 		passwordField.clear();
 		regUsernameField.clear();
