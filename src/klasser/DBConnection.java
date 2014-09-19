@@ -19,6 +19,17 @@ public class DBConnection {
 
 		return db.sporDB(q);
 	}
+	
+	public void registrerBruker(String brukernavn, String passord) {
+		
+		String q = ("insert into Admin (Brukernavn, Passord) values ('"
+				+ brukernavn
+				+ "','"
+				+ passord
+				+ "');");
+		
+		db.oppdaterDB(q);
+	}
 
 	//Sett inn rapport i DB
 	public void settinnRapport(String tekst, String gjenglemt, int vedstatus,

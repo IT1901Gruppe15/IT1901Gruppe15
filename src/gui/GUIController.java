@@ -113,6 +113,7 @@ public class GUIController {
 	@FXML
 	public void register(ActionEvent event) { // når man trykker på "registrer" knappen
 		if (/*username does not exist*/ true && regPasswordField.getText().equals(regPasswordFieldConfirmation.getText())) {
+			
 			System.out.println("success!!");
 			logOut(event);
 		}
@@ -136,6 +137,7 @@ public class GUIController {
 		try {
 			if (rs.next()) {
 				if (rs.getString(1).equals(usernameField.getText()) && rs.getString(2).equals(passwordField.getText())) {
+					feilLoginInfo.setVisible(false);
 					admin = new Admin(usernameField.getText());
 					welcomeName.setText("Velkommen, " + usernameField.getText());
 					root.setLeft(koieListe);
