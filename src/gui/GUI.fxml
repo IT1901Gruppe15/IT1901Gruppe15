@@ -166,16 +166,9 @@
 
 	<fx:define>
 		<Pane fx:id="welcomePane">
-			<Label text="NTNUI koiesystem" layoutX="15">
-				<font>
-					<Font size="30" />
-				</font>
-			</Label>
-			<Text fx:id="welcomeName" layoutX="15" layoutY="100">
-				<font>
-					<Font size="20" />
-				</font>
-			</Text>
+			<Label text="NTNUI koiesystem" layoutX="15" style="-fx-font-size: 30px" />
+			<Text fx:id="welcomeName" layoutX="15" layoutY="100"
+				style="-fx-font-size: 20px" />
 		</Pane>
 	</fx:define>
 
@@ -258,26 +251,16 @@
 
 	<fx:define>
 		<Pane fx:id="koiePane">
-			<Text fx:id="activeKoieName" layoutX="15" layoutY="20">
-				<font>
-					<Font size="20" />
-				</font>
-			</Text>
+			<Text fx:id="activeKoieName" layoutX="15" layoutY="20"
+				style="-fx-font-size: 20px" />
 		</Pane>
 	</fx:define>
 
 	<fx:define>
 		<Pane fx:id="reportPane">
-			<Label text="Rapport" layoutX="15">
-				<font>
-					<Font size="30" />
-				</font>
-			</Label>
-			<Text text="Koie: koieID.getName()" layoutX="15" layoutY="70">
-				<font>
-					<Font size="20" />
-				</font>
-			</Text>
+			<Label text="Rapport" layoutX="15" style="-fx-font-size: 30px" />
+			<Text text="Koie: koieID.getName()" layoutX="15" layoutY="70"
+				style="-fx-font-size: 20px" />
 			<Label text="Ødelagte ting" layoutX="15" layoutY="90" />
 			<TextArea
 				text="gjreagrjk&#10;agklragmerl&#10;mtrklshm&#10;gmrklgsmrs&#10;grgajkerg&#10;jgeralgr&#10;grjkslg&#10;jkljnlk&#10;lkjnlknjm&#10;nlknlk&#10;mlkklnm"

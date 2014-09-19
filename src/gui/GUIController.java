@@ -47,7 +47,8 @@ public class GUIController {
 
 	public void initialize() { //basically konstruktør
 		feilLoginInfo.setVisible(false);
-		mapBtn = new Button(); 
+		root.setCenter(loginScreen);
+		mapBtn = new Button();
 		mapBtn.setFocusTraversable(false); //gjør at man ikke kan "hoppe" til knappen ved å trykke på tab
 		mapBtn.setOnAction(new EventHandler<ActionEvent>() { //når man trykker på knappen
 			public void handle(ActionEvent event) {
@@ -55,10 +56,9 @@ public class GUIController {
 				root.setCenter(koiePane);
 			}
 		});
-		root.setCenter(loginScreen);
 		mapPane.setOnMousePressed(new EventHandler<MouseEvent>() {  // logikk for å håndtere trykking
 			public void handle(MouseEvent me) {						// på knapper på kartet
-				if (me.getButton() == MouseButton.PRIMARY) {		// hvis venstre museklikk
+				if (me.getButton() == MouseButton.PRIMARY) { // hvis venstre museklikk
 					activeKoie = ((Node) me.getTarget()).getId();
 					if (activeKoie == null || activeKoie == mapPane.getId()) {  // hvis man ikke trykka på
 						mapPane.getChildren().remove(mapBtn);					// en koie
@@ -132,10 +132,11 @@ public class GUIController {
 
 	@FXML
 	public void logIn(ActionEvent event) { // når man trykker på "logg inn" knappen
-		ResultSet rs = connection.login(usernameField.getText());
+		ResultSet dbUserInfo = connection.login(usernameField.getText());
 		try {
-			if (rs.next()) {
-				if (rs.getString(1).equals(usernameField.getText()) && rs.getString(2).equals(passwordField.getText())) {
+			if (dbUserInfo.next()) {
+				if (dbUserInfo.getString(1).equals(usernameField.getText()) && dbUserInfo.getString(2).equals(passwordField.getText())) {
+					feilLoginInfo.setVisible(false);
 					admin = new Admin(usernameField.getText());
 					welcomeName.setText("Velkommen, " + usernameField.getText());
 					root.setLeft(koieListe);
