@@ -8,47 +8,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rapport {
-	private String koieID;
-	private List<String> odelagtUtstyr, gjenglemteTing;
-	private int vedstatus;
+	private static String koieID;
+	private static List<String> odelagtUtstyr;
+	private static List<String> gjenglemteTing;
+	private static int vedstatus;
+	DBConnection connection = new DBConnection();
 	
 	//får input fra tekstfil i følgende format:
-	//"KoieID"
-	//koieID
-	//Vedstatus
-	//35
-	//"Odelagt"
-	//odelagt1
-	//odelagt2
-	//odelagt3
-	//"Gjenglemt"
-	//glemt1
-	//glemt2
+	//koieID¤35¤odelagt1;odelagt2;odelagt3¤glemt1;glemt2
 	
-	public void lesRapport(Reader input) throws IOException {
+	public static void lesRapport(Reader input) throws IOException {
 		try{
 			BufferedReader reader = new BufferedReader(input);
-			
+			int index = 0;
 			String line = null;
+			String[] ord;
+			String[] odelagt;
+			String[] gjenglemt;
 			odelagtUtstyr = new ArrayList<String>();
 			gjenglemteTing = new ArrayList<String>();
 			
-			while((line = reader.readLine())!=null){//kjøres så lenge det finnes en neste linje i input-filen
-				if(line.equals("KoieID")){
-					line = reader.readLine();//hopper over nåværende linje
-					koieID=line;//setter koieID til linje 2 i input
-				}else if(line.equals("Vedstatus")){
-					line = reader.readLine();//hopper over overskrift
-					vedstatus = Integer.parseInt(line);//setter ny vedstatus for koien 
-				}else if(line.equals("Odelagt")){
-					while(!(line = reader.readLine()).equals("Gjenglemt")){
-					//sjekker at den neste linja ikke er strengen samtidig som den setter den linja til variabelen
-						odelagtUtstyr.add(line);
-					}
-					while((line = reader.readLine()) != null){
-					//kjører til det ikke finnes flere linjer siden det er siste overskrift
-					//kjøres her inne slik at ikke de første variablene lagres her også
-						gjenglemteTing.add(line);
+			while((line = reader.readLine())!=null){
+				ord = line.split("¤");
+				for(int i=0;i<ord.length;i++){
+					switch(i){
+					case 0:
+						koieID = ord[0];
+						break;
+					case 1:
+						vedstatus = Integer.parseInt(ord[1]);
+						break;
+					case 2:
+						odelagt = ord[2].split(";");
+						for(int j=0;j<odelagt.length;j++){
+							odelagtUtstyr.add(odelagt[j]);
+						}
+						break;
+					case 3:
+						gjenglemt = ord[3].split(";");
+						for(int k=0;k<gjenglemt.length;k++){
+							gjenglemteTing.add(gjenglemt[k]);
+						}
+						break;
 					}
 				}
 			}			
@@ -63,6 +64,12 @@ public class Rapport {
 		}
 	}
 	public void endreUtstyrStatus(){
+		int k = odelagtUtstyr.size();
+		int id = 0; 
+		for(int i=0;i<k;i++){
+			id = ((Number) connection.getUtstyrID(odelagtUtstyr.get(i), koieID)).intValue();
+			connection.oppdaterUtstyr(id,0);
+		}
 		//TODO: finne utstyr fra database utifra odelagtUtstyr liste
 		//TODO: endre utstyrstatus til ødelagt 
 		
@@ -79,9 +86,9 @@ public class Rapport {
 
 	public static void main(String[] args) throws IOException {
 		//kjører testfil
-		Rapport test = new Rapport();
-		String filename = "test.txt";
-		FileReader file = new FileReader(filename);
-		test.lesRapport(file);
+//		Rapport test = new Rapport();
+//		String filename = "test.txt";
+//		FileReader file = new FileReader(filename);
+//		test.lesRapport(file);
 	}
 }
