@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -28,6 +29,9 @@ public class GUIController {
 	@FXML private BorderPane root; // øverste element i gui-hierarkiet
 	@FXML private TextField usernameField; // tekstfeltene for login og registrering
 	@FXML private PasswordField passwordField;
+	@FXML private TextField regFullNameField;
+	@FXML private TextField regTlfField;
+	@FXML private TextField regEpostField;
 	@FXML private TextField regUsernameField;
 	@FXML private PasswordField regPasswordField;
 	@FXML private PasswordField regPasswordFieldConfirmation;
@@ -42,29 +46,26 @@ public class GUIController {
 	@FXML private Text welcomeName; // overskriften på welcome-panelet
 	@FXML private Text activeKoieName; // overskriften på koie-panelet
 	@FXML private Label feilLoginInfo; // skrift som dukker opp når man prøver å logge inn med feil info
-	@FXML private Text registreringsFeil; // skrift som dukker opp når man får feil ved registrering
+	@FXML private Label registreringsFeil; // skrift som dukker opp når man får feil ved registrering
 	private String activeKoie; // holder styr på aktiv koie (skal alltid være lik activeKoieName.getText())
 	private Button mapBtn; //knappen som dukker opp når man trykker på en koie på kartet
 	private Admin admin;
 	private DBConnection connection;
-	LocalDate ld;
-	DatePicker dp;
+	@FXML DatePicker kalender; // kalenderen i koie-panelet
+	LocalDate ld; // aktiv dato i kalenderen
+	@FXML ComboBox rapportDropDown;
 
 	public void initialize() { //basically konstruktør
+		rapportDropDown.getItems().addAll("test1234", "test12345" ,"test123");
 		connection = new DBConnection();
 		ld = LocalDate.now();
-		dp = new DatePicker(ld);
-		dp.setEditable(false);
-		dp.setOnAction(new EventHandler<ActionEvent>() {
+		kalender.setValue(ld);
+		kalender.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent evet) {
-				ld = dp.getValue();
-				System.out.println("Date selected " + ld);
+				ld = kalender.getValue();
+				System.out.println("dd-mm-yyyy " + ld.getDayOfMonth() + "-" + ld.getMonth().getValue() + "-" + ld.getYear());
 			}
 		});
-		root.setRight(dp);
-		
-
-
 		feilLoginInfo.setVisible(false);
 		registreringsFeil.setVisible(false);
 		root.setCenter(loginScreen);
@@ -134,15 +135,15 @@ public class GUIController {
 	public void register(ActionEvent event) { // når man trykker på "registrer" knappen
 		ResultSet rs = connection.login(regUsernameField.getText());
 		try {
-			if (regUsernameField.getText().equals("") || regPasswordField.getText().equals("")) {
-				registreringsFeil.setText("Brukernavn eller passord mangler");
+			if (regUsernameField.getText().equals("") || regPasswordField.getText().equals("") || regFullNameField.getText().equals("") || regTlfField.getText().equals("") || regEpostField.getText().equals("")) {
+				registreringsFeil.setText("Ingen felter kan være tomme");
 				registreringsFeil.setVisible(true);
 			}
 			else if (rs.next()) {
 				registreringsFeil.setText("Brukernavn er allerede i bruk");
 				registreringsFeil.setVisible(true);
 			} else if (regPasswordField.getText().equals(regPasswordFieldConfirmation.getText())) {
-				connection.registrerBruker(regUsernameField.getText(), regPasswordField.getText());
+				connection.registrerBruker(regUsernameField.getText(), regPasswordField.getText(), regFullNameField.getText(), regTlfField.getText(), regEpostField.getText());
 				System.out.println("Bruker er registrert");
 				logOut(event);
 			} else {
@@ -161,6 +162,9 @@ public class GUIController {
 		registreringsFeil.setVisible(false);
 		usernameField.clear();
 		passwordField.clear();
+		regFullNameField.clear();
+		regTlfField.clear();
+		regEpostField.clear();
 		regUsernameField.clear();
 		regPasswordField.clear();
 		regPasswordFieldConfirmation.clear();
@@ -170,11 +174,6 @@ public class GUIController {
 
 	@FXML
 	public void logIn(ActionEvent event) { // når man trykker på "logg inn" knappen
-		
-		System.out.println("test dd-mm-yyyy " + ld.getDayOfMonth() + "-" + ld.getMonth().getValue() + "-" + ld.getYear());
-		
-		
-		
 		ResultSet dbUserInfo = connection.login(usernameField.getText());
 		try {
 			if (dbUserInfo.next()) {

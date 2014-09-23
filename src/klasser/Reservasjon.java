@@ -1,9 +1,6 @@
 package klasser;
 
 import java.io.BufferedReader;
-
-import filer.*;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileReader;
