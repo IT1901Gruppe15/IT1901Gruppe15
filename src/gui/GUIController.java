@@ -44,9 +44,10 @@ public class GUIController {
 	private String activeKoie; // holder styr på aktiv koie (skal alltid være lik activeKoieName.getText())
 	private Button mapBtn; //knappen som dukker opp når man trykker på en koie på kartet
 	private Admin admin;
-	private DBConnection connection = new DBConnection();
+	private DBConnection connection;
 
 	public void initialize() { //basically konstruktør
+		connection = new DBConnection();
 		feilLoginInfo.setVisible(false);
 		registreringsFeil.setVisible(false);
 		root.setCenter(loginScreen);

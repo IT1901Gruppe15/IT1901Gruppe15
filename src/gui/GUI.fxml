@@ -254,14 +254,6 @@
 		<Pane fx:id="koiePane">
 			<Text fx:id="activeKoieName" layoutX="15" layoutY="20"
 				style="-fx-font-size: 20px" />
-		</Pane>
-	</fx:define>
-
-	<fx:define>
-		<Pane fx:id="reportPane">
-			<Label text="Rapport" layoutX="15" style="-fx-font-size: 30px" />
-			<Text text="Koie: koieID.getName()" layoutX="15" layoutY="70"
-				style="-fx-font-size: 20px" />
 			<Label text="Ødelagte ting" layoutX="15" layoutY="90" />
 			<TextArea
 				text="gjreagrjk&#10;agklragmerl&#10;mtrklshm&#10;gmrklgsmrs&#10;grgajkerg&#10;jgeralgr&#10;grjkslg&#10;jkljnlk&#10;lkjnlknjm&#10;nlknlk&#10;mlkklnm"
@@ -276,6 +268,14 @@
 			<Label text="Kommentarfelt" layoutX="15" layoutY="280" />
 			<TextArea text="fdkagjrkag gjkralg jdfakl gfal kgfa lkgfmad lgfm adlkg"
 				editable="false" focusTraversable="false" layoutX="15" layoutY="300" />
+		</Pane>
+	</fx:define>
+
+	<fx:define>
+		<Pane fx:id="reportPane">
+			<Label text="Rapport" layoutX="15" style="-fx-font-size: 30px" />
+			<Text text="Koie: koieID.getName()" layoutX="15" layoutY="70"
+				style="-fx-font-size: 20px" />
 		</Pane>
 	</fx:define>
 
