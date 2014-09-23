@@ -2,12 +2,14 @@ package gui;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -45,8 +47,24 @@ public class GUIController {
 	private Button mapBtn; //knappen som dukker opp når man trykker på en koie på kartet
 	private Admin admin;
 	private DBConnection connection = new DBConnection();
+	LocalDate ld;
+	DatePicker dp;
+
 
 	public void initialize() { //basically konstruktør
+		ld = LocalDate.now();
+		dp = new DatePicker(ld);
+		dp.setEditable(false);
+		dp.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent evet) {
+				ld = dp.getValue();
+				System.out.println("Date selected " + ld);
+			}
+		});
+		root.setRight(dp);
+		
+
+
 		feilLoginInfo.setVisible(false);
 		registreringsFeil.setVisible(false);
 		root.setCenter(loginScreen);
@@ -134,7 +152,7 @@ public class GUIController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
+	} 
 
 	@FXML
 	public void logOut(ActionEvent event) { // når man trykker på "logg ut"  eller "tilbake" knappen
@@ -152,6 +170,11 @@ public class GUIController {
 
 	@FXML
 	public void logIn(ActionEvent event) { // når man trykker på "logg inn" knappen
+		
+		System.out.println("test dd-mm-yyyy " + ld.getDayOfMonth() + "-" + ld.getMonth().getValue() + "-" + ld.getYear());
+		
+		
+		
 		ResultSet dbUserInfo = connection.login(usernameField.getText());
 		try {
 			if (dbUserInfo.next()) {
