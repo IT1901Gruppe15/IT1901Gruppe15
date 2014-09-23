@@ -2,7 +2,7 @@ package klasser;
 
 import java.io.BufferedReader;
 
-import filer.*;
+
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -11,16 +11,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import textfiles.*;
 
 public class Reservasjon {
 	String koieID;
 	private String epost,start_dato,slutt_dato;
-	
+	DBConnection db = new DBConnection();
+	public void dateIsValid(){
+		
+	}
 	public void lesReservasjon(){
 		BufferedReader reader=null; 
 		
 		try{		
-		InputStream inputStream = Reservasjon.class.getResourceAsStream("testinput.txt");
+		InputStream inputStream = Reservasjon.class.getResourceAsStream("testinput");
 
 		reader=new BufferedReader(new InputStreamReader(inputStream));
 		String line = null;	
@@ -51,13 +55,30 @@ public class Reservasjon {
 			
 		
 	}
+	public void update(){
+		db.settinnReservasjon(getEpost(), getStart_dato(), getSlutt_dato(), getKoieID());
+		
+	}
 
+	public String getKoieID() {
+		return koieID;
+	}
+	public String getEpost() {
+		return epost;
+	}
+	public String getStart_dato() {
+		return start_dato;
+	}
+	public String getSlutt_dato() {
+		return slutt_dato;
+	}
 	public static void main(String[] args) {
 		Reservasjon res = new Reservasjon();
 		res.lesReservasjon();
+		res.update();
 		System.out.println(res.koieID + res.epost+res.start_dato + res.slutt_dato);
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }
