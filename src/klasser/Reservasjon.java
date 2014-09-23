@@ -1,12 +1,6 @@
 package klasser;
 
 import java.io.BufferedReader;
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> origin/master
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileReader;
