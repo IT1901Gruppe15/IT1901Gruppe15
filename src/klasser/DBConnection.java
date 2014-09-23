@@ -83,6 +83,14 @@ public class DBConnection {
 
 		db.oppdaterDB(q);
 	}
+	
+	// Få utstyrsID
+	public ResultSet getUtstyrID(String navn, String koie) {
+		
+		String q = ("select UtstyrsID from Utstyr where Navn = '" + navn + "' and FraktesTilID = '" + koie + "';");
+		
+		return db.sporDB(q);
+	}
 
 	// Returner alt ødelagt utstyr
 	public ResultSet getOdelagtUtstyr() {
