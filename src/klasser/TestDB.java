@@ -7,20 +7,20 @@ import database.DB;
 
 public class TestDB {
 
-	public static void main(String[] args) {
-		DBConnection connection = new DBConnection();
-		ResultSet rs = connection.getUtstyrID("baat","Flaakoia");
-		try {
-			while(rs.next()){
-				//les kolonne1
-				System.out.println(rs.getString(1));
-				//les kolonne2
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		DBConnection connection = new DBConnection();
+//		ResultSet rs = connection.getUtstyrID("baat","Flaakoia");
+//		try {
+//			while(rs.next()){
+//				//les kolonne1
+//				System.out.println(rs.getString(1));
+//				//les kolonne2
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 	
 
 	
