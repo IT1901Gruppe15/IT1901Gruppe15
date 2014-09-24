@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rapport {
-	private static String koieID;
-	private static List<String> odelagtUtstyr;
-	private static List<String> gjenglemteTing;
-	private static int vedstatus;
+	private String koieID;
+	private List<String> odelagtUtstyr;
+	private List<String> gjenglemteTing;
+	private int vedstatus;
 	DBConnection connection = new DBConnection();
 	
 	//får input fra tekstfil i følgende format:
 	//koieID¤35¤odelagt1;odelagt2;odelagt3¤glemt1;glemt2
 	
-	public static void lesRapport(Reader input) throws IOException {
+	public void lesRapport(Reader input) throws IOException {
 		try{
 			BufferedReader reader = new BufferedReader(input);
 			int index = 0;
@@ -52,6 +52,8 @@ public class Rapport {
 						break;
 					}
 				}
+				connection.settinnRapport("tekst?","gjenglemt er ikke en streng, det er en liste",vedstatus,koieID);
+				endreUtstyrStatus();
 			}			
 		}catch (Exception e){
 			System.err.println(e.getStackTrace());
@@ -64,24 +66,20 @@ public class Rapport {
 		}
 	}
 	public void endreUtstyrStatus(){
-		int k = odelagtUtstyr.size();
-		int id = 0; 
-		for(int i=0;i<k;i++){
-			id = ((Number) connection.getUtstyrID(odelagtUtstyr.get(i), koieID)).intValue();
-			connection.oppdaterUtstyr(id,0);
+		for(int i = 0; i<odelagtUtstyr.size(); i++){
+			connection.oppdaterUtstyr(((Number) connection.getUtstyrID(odelagtUtstyr.get(i), koieID)).intValue(),0);
 		}
-		//TODO: finne utstyr fra database utifra odelagtUtstyr liste
-		//TODO: endre utstyrstatus til ødelagt 
-		
 	}
+	
 	public void oppdaterVedStatus(){
-		//TODO: skaff tidligere vedstatus fra database
-		//TODO: skaff antall dager (fra database? fra reservasjonsklasse?)
-		//TODO: lag utregning med (gammel_vedstatus - ny_vedstatus)/antall_dager 
+//		int r = (connection.hentVedStatus(koieID)-vedstatus); Hvis jeg skal regne ut hvor lenge det er til neste gang det trengs veddugnad
+		connection.oppdaterVedstatus(koieID,vedstatus);
 	}
+	
 	public void oppdaterGjenglemt(){
-		//TODO: finne Koie fra koieID
-		//TODO: legge gjenglemteTing-lista inn i gjenglemt-lista som befinner seg i det objektet
+		for(int j = 0; j<gjenglemteTing.size(); j++){
+			connection.leggInnGjenglemteUtstyr(koieID,gjenglemteTing.get(j));
+		}
 	}
 
 	public static void main(String[] args) throws IOException {
