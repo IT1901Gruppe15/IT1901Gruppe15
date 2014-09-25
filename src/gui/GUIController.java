@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import klasser.Admin;
+import klasser.Bruker;
 import klasser.DBConnection;
 
 public class GUIController {
@@ -39,24 +39,29 @@ public class GUIController {
 	@FXML private Pane registerScreen;
 	@FXML private Pane koieListe;
 	@FXML private Pane toolbar;
+	@FXML private Pane brukerToolbar;
 	@FXML private Pane mapPane;
 	@FXML private Pane welcomePane;
 	@FXML private Pane koiePane;
+	@FXML private Pane reservasjonsPane;
 	@FXML private Pane reportPane;
 	@FXML private Text welcomeName; // overskriften på welcome-panelet
-	@FXML private Text activeKoieName; // overskriften på koie-panelet
+	@FXML private Text koieReservasjonsName; // overskriften på reservasjons-panelet
+	@FXML private Text koieStatusName; // overskriften på koie-panelet
 	@FXML private Label feilLoginInfo; // skrift som dukker opp når man prøver å logge inn med feil info
 	@FXML private Label registreringsFeil; // skrift som dukker opp når man får feil ved registrering
-	private String activeKoie; // holder styr på aktiv koie (skal alltid være lik activeKoieName.getText())
+	private String activeKoie; // holder styr på aktiv koie
 	private Button mapBtn; //knappen som dukker opp når man trykker på en koie på kartet
-	private Admin admin;
+	private Bruker admin;
 	private DBConnection connection;
 	@FXML DatePicker kalender; // kalenderen i koie-panelet
+	@FXML DatePicker reservasjonFra; // kalenderen i koie-panelet
+	@FXML DatePicker reservasjonTil; // kalenderen i koie-panelet
 	LocalDate ld; // aktiv dato i kalenderen
-	@FXML ComboBox rapportDropDown;
+	@FXML ComboBox<String> rapportDropDown;
 
 	public void initialize() { //basically konstruktør
-		rapportDropDown.getItems().addAll("test1234", "test12345" ,"test123");
+		rapportDropDown.getItems().addAll("Flåkoia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsåkoia", "Holvassgamma", "Iglbu", "Kamtjønna", "Kråkilkåten", "Kvernmovollen", "Kåsen", "Lynhøgen", "Mortenskåten", "Nicokoia", "Rindasløa", "Selbukåten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessætra", "Øvensenget"	);
 		connection = new DBConnection();
 		ld = LocalDate.now();
 		kalender.setValue(ld);
@@ -73,8 +78,13 @@ public class GUIController {
 		mapBtn.setFocusTraversable(false); //gjør at man ikke kan "hoppe" til knappen ved å trykke på tab
 		mapBtn.setOnAction(new EventHandler<ActionEvent>() { //når man trykker på knappen
 			public void handle(ActionEvent event) {
-				activeKoieName.setText(activeKoie.substring(0, activeKoie.length() - 3));
-				root.setCenter(koiePane);
+				if (admin.getAdminStatus()) {
+					koieStatusName.setText(activeKoie.substring(0, activeKoie.length() - 3));
+					root.setCenter(koiePane);
+				} else {
+					koieReservasjonsName.setText(activeKoie.substring(0, activeKoie.length() - 3));
+					root.setCenter(reservasjonsPane);
+				}
 			}
 		});
 		mapPane.setOnMousePressed(new EventHandler<MouseEvent>() {  // logikk for å håndtere trykking
@@ -106,8 +116,13 @@ public class GUIController {
 	public void koieClicked(ActionEvent event) { // når man trykker på koie i lista
 		((Hyperlink) event.getSource()).setVisited(false);
 		activeKoie = ((Hyperlink) event.getSource()).getText();
-		activeKoieName.setText(activeKoie);
-		root.setCenter(koiePane);
+		if (admin.getAdminStatus()) {
+			koieStatusName.setText(activeKoie);
+			root.setCenter(koiePane);			
+		} else {
+			koieReservasjonsName.setText(activeKoie);
+			root.setCenter(reservasjonsPane);
+		}
 	}
 
 	@FXML
@@ -124,6 +139,11 @@ public class GUIController {
 	@FXML
 	public void openReport(ActionEvent event) { // når man trykker på rapport-knappen
 		root.setCenter(reportPane);
+	}
+	
+	@FXML
+	public void openReservasjon(ActionEvent event) {
+		root.setCenter(reservasjonsPane);
 	}
 
 	@FXML
@@ -178,11 +198,17 @@ public class GUIController {
 		try {
 			if (dbUserInfo.next()) {
 				if (dbUserInfo.getString(1).equals(usernameField.getText()) && dbUserInfo.getString(2).equals(passwordField.getText())) {
-					admin = new Admin(usernameField.getText());
+					admin = new Bruker(usernameField.getText(), dbUserInfo.getString(3), dbUserInfo.getString(4), dbUserInfo.getString(5), dbUserInfo.getString(6));
 					welcomeName.setText("Velkommen, " + usernameField.getText());
-					root.setLeft(koieListe);
-					root.setCenter(welcomePane);
-					root.setTop(toolbar);
+					if (admin.getAdminStatus()) {
+						root.setLeft(koieListe);
+						root.setCenter(welcomePane);
+						root.setTop(toolbar);
+					} else {
+						root.setLeft(koieListe);
+						root.setCenter(welcomePane);
+						root.setTop(brukerToolbar);
+					}
 				} else {
 					feilLoginInfo.setVisible(true);
 				}

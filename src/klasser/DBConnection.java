@@ -14,7 +14,7 @@ public class DBConnection {
 	// Returnerer ResultSet med kolonne1 = brukernavn og kolonne2 = passord
 	public ResultSet login(String brukernavn) {
 		
-		String q = ("select Brukernavn, Passord, Navn, Tlf, Epost from Admin where Brukernavn = '"
+		String q = ("select Brukernavn, Passord, Navn, Tlf, Epost, isAdmin from Admin where Brukernavn = '"
 				+ brukernavn + "';");
 
 		return db.sporDB(q);
@@ -23,7 +23,7 @@ public class DBConnection {
 	// Registrere ny bruker
 	public void registrerBruker(String brukernavn, String passord, String navn, String tlf, String epost) {
 		
-		String q = ("insert into Admin (Brukernavn, Passord, Navn, Tlf, Epost) values ('"
+		String q = ("insert into Admin (Brukernavn, Passord, Navn, Tlf, Epost, isAdmin) values ('"
 				+ brukernavn
 				+ "','"
 				+ passord
@@ -33,6 +33,8 @@ public class DBConnection {
 				+ tlf
 				+ "','"
 				+ epost
+				+ "','"
+				+ "0" // vanlig bruker (ikke admin)
 				+ "');");
 		
 		db.oppdaterDB(q);

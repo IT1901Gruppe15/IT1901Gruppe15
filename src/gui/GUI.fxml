@@ -146,6 +146,53 @@
 						</ImageView>
 					</graphic>
 				</Button>
+				<Button text="Logg ut" prefHeight="60" prefWidth="60"
+					onAction="#logOut" contentDisplay="top" focusTraversable="false">
+					<graphic>
+						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+							preserveRatio="true">
+							<Image url="logoutIkon.png" />
+						</ImageView>
+					</graphic>
+				</Button>
+			</HBox>
+			<Separator orientation="horizontal" layoutY="70" prefWidth="9999" />
+		</Pane>
+	</fx:define>
+
+	<fx:define>
+		<Pane fx:id="brukerToolbar" prefHeight="70">
+			<HBox spacing="10" layoutX="5" layoutY="5">
+				<Button text="Hjem" prefHeight="60" prefWidth="60" onAction="#openWelcome"
+					contentDisplay="top" cancelButton="true" focusTraversable="false">
+					<graphic>
+						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+							preserveRatio="true">
+							<Image url="hjemIkon.png" />
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button text="Kart" prefHeight="60" prefWidth="60" onAction="#openMap"
+					contentDisplay="top" focusTraversable="false">
+					<graphic>
+						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+							preserveRatio="true">
+							<Image url="kartIkon.png" />
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button text="Reservasjon" prefHeight="60" prefWidth="60"
+					onAction="#openReservasjon" contentDisplay="top" focusTraversable="false">
+					<font>
+						<Font size="8" />
+					</font>
+					<graphic>
+						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+							preserveRatio="true">
+							<Image url="reservasjonIkon.png" />
+						</ImageView>
+					</graphic>
+				</Button>
 				<Button text="Rapport" prefHeight="60" prefWidth="60"
 					onAction="#openReport" contentDisplay="top" focusTraversable="false">
 					<graphic>
@@ -155,14 +202,6 @@
 						</ImageView>
 					</graphic>
 				</Button>
-				<Button text="Action3" prefHeight="60" prefWidth="60"
-					focusTraversable="false" />
-				<Button text="Action4" prefHeight="60" prefWidth="60"
-					focusTraversable="false" />
-				<Button text="Action5" prefHeight="60" prefWidth="60"
-					focusTraversable="false" />
-				<Button text="Action6" prefHeight="60" prefWidth="60"
-					focusTraversable="false" />
 				<Button text="Logg ut" prefHeight="60" prefWidth="60"
 					onAction="#logOut" contentDisplay="top" focusTraversable="false">
 					<graphic>
@@ -264,7 +303,7 @@
 
 	<fx:define>
 		<Pane fx:id="koiePane">
-			<Text fx:id="activeKoieName" layoutX="15" layoutY="20"
+			<Text fx:id="koieStatusName" layoutX="15" layoutY="20"
 				style="-fx-font-size: 20px" />
 			<Label text="Ødelagte ting" layoutX="15" layoutY="50" />
 			<TextArea
@@ -282,18 +321,40 @@
 				focusTraversable="false" />
 			<Text text="Antall sengeplasser: xx" layoutX="400" layoutY="120" />
 			<Text text="Ledige sengeplasser: xx" layoutX="400" layoutY="140" />
-			<Label text="Kommentarfelt" layoutX="15" layoutY="240" />
-			<TextArea text="fdkagjrkag gjkralg jdfakl gfal kgfa lkgfmad lgfm adlkg"
-				editable="false" focusTraversable="false" layoutX="15" layoutY="260" />
+		</Pane>
+	</fx:define>
+
+	<fx:define>
+		<Pane fx:id="reservasjonsPane">
+			<Text fx:id="koieReservasjonsName" layoutX="15" layoutY="20"
+				style="-fx-font-size: 20px" />
+			<Label text="Dato fra" layoutX="15" layoutY="50" />
+			<DatePicker fx:id="reservasjonFra" layoutX="15" layoutY="70"
+				focusTraversable="false" />
+			<Label text="Dato til" layoutX="200" layoutY="50" />
+			<DatePicker fx:id="reservasjonTil" layoutX="200" layoutY="70"
+				focusTraversable="false" />
+			<Text text="Antall sengeplasser: xx" layoutX="400" layoutY="120" />
+			<Text text="Ledige sengeplasser: xx" layoutX="400" layoutY="140" />
 		</Pane>
 	</fx:define>
 
 	<fx:define>
 		<Pane fx:id="reportPane">
 			<Label text="Rapport" layoutX="15" style="-fx-font-size: 30px" />
-			<Text text="Koie: koieID.getName()" layoutX="15" layoutY="70"
-				style="-fx-font-size: 20px" />
-			<ComboBox fx:id="rapportDropDown" layoutX="15" layoutY="100" value="test123"/>
+			<ComboBox fx:id="rapportDropDown" layoutX="15" layoutY="50"
+				value="Velg en koie" focusTraversable="false" />
+			<Label text="Vedstatus" layoutX="160" layoutY="55" />
+			<TextField layoutX="225" layoutY="50" focusTraversable="false" />
+			<Label text="Ødelagte ting" layoutX="15" layoutY="100" />
+			<TextArea focusTraversable="false" layoutX="15" layoutY="120"
+				prefWidth="125" prefHeight="150" />
+			<Label text="Gjenglemte ting" layoutX="150" layoutY="100" />
+			<TextArea focusTraversable="false" layoutX="150" layoutY="120"
+				prefWidth="125" prefHeight="150" />
+			<Label text="(En ting per linje)" layoutX="285" layoutY="100" />
+			<Button text="Send rapport" layoutX="15" layoutY="300"
+				focusTraversable="false" />
 		</Pane>
 	</fx:define>
 
