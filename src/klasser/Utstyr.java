@@ -4,14 +4,14 @@ public class Utstyr {
 		int utstyrsID;
 		int koieID;
 		String type;
-		String innkjÃ¸psdato;
+		String innkjøpsdato;
 		boolean status;
 		
-		private Utstyr(int utstyrsID, int koieID, String type, String innkjÃ¸psdato, boolean status){
+		private Utstyr(int utstyrsID, int koieID, String type, String innkjøpsdato, boolean status){
 			this.utstyrsID = utstyrsID;
 			this.koieID = koieID;
 			this.type = type;
-			this.innkjÃ¸psdato = innkjÃ¸psdato;
+			this.innkjøpsdato = innkjøpsdato;
 			this.status = status;
 		}
 		
@@ -39,12 +39,12 @@ public class Utstyr {
 			this.type = type;
 		}
 		
-		public String getInnkjÃ¸psdato(){
-			return this.innkjÃ¸psdato;
+		public String getInnkjøpsdato(){
+			return this.innkjøpsdato;
 		}
 		
-		public void setInnkjÃ¸psdato(String innkjÃ¸psdato){
-			this.innkjÃ¸psdato = innkjÃ¸psdato;
+		public void setInnkjøpsdato(String innkjøpsdato){
+			this.innkjøpsdato = innkjøpsdato;
 		}
 		
 		public boolean getStatus(){
