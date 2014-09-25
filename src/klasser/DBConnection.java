@@ -97,6 +97,14 @@ public class DBConnection {
 		
 		return db.sporDB(q);
 	}
+	
+	// Få rapportID
+		public ResultSet getrapportID(String tekst, String gjenglemt, int vedstatus) {
+			
+			String q = ("select RapportID from Rapport where Tekst = '" + tekst + "' and Gjenglemt = '" + gjenglemt + "' and Vedstatus = '" + vedstatus + "';");
+			
+			return db.sporDB(q);
+		}
 
 	// Returner alt ødelagt utstyr
 	public ResultSet getOdelagtUtstyr() {
