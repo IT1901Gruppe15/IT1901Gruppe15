@@ -37,6 +37,18 @@
 			<VBox layoutX="525" layoutY="200" spacing="8">
 				<Text text="Registrer ny konto" />
 				<HBox>
+					<Label text="Fullt navn" prefWidth="80" />
+					<TextField fx:id="regFullNameField" prefWidth="150" />
+				</HBox>
+				<HBox>
+					<Label text="Telefon" prefWidth="80" />
+					<TextField fx:id="regTlfField" prefWidth="150" />
+				</HBox>
+				<HBox>
+					<Label text="Epost" prefWidth="80" />
+					<TextField fx:id="regEpostField" prefWidth="150" />
+				</HBox>
+				<HBox>
 					<Label text="Brukernavn" prefWidth="80" />
 					<TextField fx:id="regUsernameField" prefWidth="150" />
 				</HBox>
@@ -54,8 +66,8 @@
 					<Button text="Registrer" onAction="#register" prefWidth="130" />
 				</HBox>
 			</VBox>
-			<Text fx:id="registreringsFeil" style="-fx-font-size: 14px; -fx-text-fill: #ff0000"
-				layoutX="550" layoutY="380" />
+			<Label fx:id="registreringsFeil" style="-fx-font-size: 14px; -fx-text-fill: #ff0000"
+				layoutX="550" layoutY="475" />
 		</Pane>
 	</fx:define>
 
@@ -254,20 +266,25 @@
 		<Pane fx:id="koiePane">
 			<Text fx:id="activeKoieName" layoutX="15" layoutY="20"
 				style="-fx-font-size: 20px" />
-			<Label text="Ødelagte ting" layoutX="15" layoutY="90" />
+			<Label text="Ødelagte ting" layoutX="15" layoutY="50" />
 			<TextArea
 				text="gjreagrjk&#10;agklragmerl&#10;mtrklshm&#10;gmrklgsmrs&#10;grgajkerg&#10;jgeralgr&#10;grjkslg&#10;jkljnlk&#10;lkjnlknjm&#10;nlknlk&#10;mlkklnm"
-				editable="false" focusTraversable="false" layoutX="15" layoutY="110"
+				editable="false" focusTraversable="false" layoutX="15" layoutY="70"
 				prefWidth="125" prefHeight="150" />
-			<Label text="Gjenglemte ting" layoutX="150" layoutY="90" />
+			<Label text="Gjenglemte ting" layoutX="150" layoutY="50" />
 			<TextArea
 				text="gjreagrjk&#10;agklragmerl&#10;mtrklshm&#10;gmrklgsmrs&#10;grgajkerg&#10;jgeralgr&#10;grjkslg&#10;klnlknlk&#10;nklnlk&#10;nklnlk&#10;nkljk"
-				editable="false" focusTraversable="false" layoutX="150" layoutY="110"
+				editable="false" focusTraversable="false" layoutX="150" layoutY="70"
 				prefWidth="125" prefHeight="150" />
-			<Text text="Vedstatus:" layoutX="300" layoutY="110" />
-			<Label text="Kommentarfelt" layoutX="15" layoutY="280" />
+			<Label text="Vedstatus:" layoutX="300" layoutY="50" />
+			<Label text="Kalender" layoutX="400" layoutY="50" />
+			<DatePicker fx:id="kalender" layoutX="400" layoutY="70"
+				focusTraversable="false" />
+			<Text text="Antall sengeplasser: xx" layoutX="400" layoutY="120" />
+			<Text text="Ledige sengeplasser: xx" layoutX="400" layoutY="140" />
+			<Label text="Kommentarfelt" layoutX="15" layoutY="240" />
 			<TextArea text="fdkagjrkag gjkralg jdfakl gfal kgfa lkgfmad lgfm adlkg"
-				editable="false" focusTraversable="false" layoutX="15" layoutY="300" />
+				editable="false" focusTraversable="false" layoutX="15" layoutY="260" />
 		</Pane>
 	</fx:define>
 
@@ -276,6 +293,7 @@
 			<Label text="Rapport" layoutX="15" style="-fx-font-size: 30px" />
 			<Text text="Koie: koieID.getName()" layoutX="15" layoutY="70"
 				style="-fx-font-size: 20px" />
+			<ComboBox fx:id="rapportDropDown" layoutX="15" layoutY="100" value="test123"/>
 		</Pane>
 	</fx:define>
 

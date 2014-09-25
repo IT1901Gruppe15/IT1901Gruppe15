@@ -14,19 +14,25 @@ public class DBConnection {
 	// Returnerer ResultSet med kolonne1 = brukernavn og kolonne2 = passord
 	public ResultSet login(String brukernavn) {
 		
-		String q = ("select Brukernavn, Passord from Admin where Brukernavn = '"
+		String q = ("select Brukernavn, Passord, Navn, Tlf, Epost from Admin where Brukernavn = '"
 				+ brukernavn + "';");
 
 		return db.sporDB(q);
 	}
 	
 	// Registrere ny bruker
-	public void registrerBruker(String brukernavn, String passord) {
+	public void registrerBruker(String brukernavn, String passord, String navn, String tlf, String epost) {
 		
-		String q = ("insert into Admin (Brukernavn, Passord) values ('"
+		String q = ("insert into Admin (Brukernavn, Passord, Navn, Tlf, Epost) values ('"
 				+ brukernavn
 				+ "','"
 				+ passord
+				+ "','"
+				+ navn
+				+ "','"
+				+ tlf
+				+ "','"
+				+ epost
 				+ "');");
 		
 		db.oppdaterDB(q);
@@ -91,6 +97,14 @@ public class DBConnection {
 		
 		return db.sporDB(q);
 	}
+	
+	// Få rapportID
+		public ResultSet getrapportID(String tekst, String gjenglemt, int vedstatus) {
+			
+			String q = ("select RapportID from Rapport where Tekst = '" + tekst + "' and Gjenglemt = '" + gjenglemt + "' and Vedstatus = '" + vedstatus + "';");
+			
+			return db.sporDB(q);
+		}
 
 	// Returner alt ødelagt utstyr
 	public ResultSet getOdelagtUtstyr() {

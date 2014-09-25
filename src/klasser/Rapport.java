@@ -3,85 +3,78 @@ package klasser;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Rapport {
-	private String koieID;
-	private List<String> odelagtUtstyr, gjenglemteTing;
-	private int vedstatus;
+	static String koieID;
+	static List<String> odelagtUtstyr;
+	static int vedstatus;
+	static DBConnection connection = new DBConnection();
 	
 	//får input fra tekstfil i følgende format:
-	//"KoieID"
-	//koieID
-	//Vedstatus
-	//35
-	//"Odelagt"
-	//odelagt1
-	//odelagt2
-	//odelagt3
-	//"Gjenglemt"
-	//glemt1
-	//glemt2
+	//koieID¤35¤odelagt1;odelagt2;odelagt3¤glemt1;glemt2
 	
-	public void lesRapport(Reader input) throws IOException {
+	public static void lesRapport(Reader input) throws IOException {
 		try{
 			BufferedReader reader = new BufferedReader(input);
-			
 			String line = null;
-			odelagtUtstyr = new ArrayList<String>();
-			gjenglemteTing = new ArrayList<String>();
+			String[] ord;
+			String[] odelagt;
+			String utstyrOdelagt = null;
 			
-			while((line = reader.readLine())!=null){//kjøres så lenge det finnes en neste linje i input-filen
-				if(line.equals("KoieID")){
-					line = reader.readLine();//hopper over nåværende linje
-					koieID=line;//setter koieID til linje 2 i input
-				}else if(line.equals("Vedstatus")){
-					line = reader.readLine();//hopper over overskrift
-					vedstatus = Integer.parseInt(line);//setter ny vedstatus for koien 
-				}else if(line.equals("Odelagt")){
-					while(!(line = reader.readLine()).equals("Gjenglemt")){
-					//sjekker at den neste linja ikke er strengen samtidig som den setter den linja til variabelen
-						odelagtUtstyr.add(line);
-					}
-					while((line = reader.readLine()) != null){
-					//kjører til det ikke finnes flere linjer siden det er siste overskrift
-					//kjøres her inne slik at ikke de første variablene lagres her også
-						gjenglemteTing.add(line);
+			while((line = reader.readLine())!=null){
+				odelagtUtstyr = new ArrayList<String>();
+				ord = line.split("¤");
+				for(int i=0;i<ord.length;i++){
+					switch(i){
+					case 0:
+						koieID = ord[0];
+						break;
+					case 1:
+						vedstatus = Integer.parseInt(ord[1]);
+						break;
+					case 2:
+						utstyrOdelagt = ord[2];
+						odelagt = ord[2].split(";");
+						for(int j=0;j<odelagt.length;j++){
+							odelagtUtstyr.add(odelagt[j]);
+						}
+						break;
 					}
 				}
+				connection.settinnRapport(utstyrOdelagt,ord[3],vedstatus,koieID);
+				endreUtstyrStatus();
+				oppdaterVedStatus();
 			}			
 		}catch (Exception e){
 			System.err.println(e.getStackTrace());
 			
 		}finally {
-			System.out.println(koieID);
-			System.out.println(vedstatus);
-			System.out.println(odelagtUtstyr);
-			System.out.println(gjenglemteTing);
+			PrintWriter writer = new PrintWriter("rapportTest.txt");
+			writer.print("koie1¤35¤odelagt1.1;odelagt1.2;odelagt1.3¤glemt1.1;glemt1.2"+"\r\n"
+						+"koie2¤27¤odelagt2.1;odelagt2.2;odelagt2.3¤glemt2.1;glemt2.2"+"\r\n"
+						+"koie3¤16¤odelagt3.1;odelagt3.2;odelagt3.3¤glemt3.1;glemt3.2"+"\r\n"
+						+"koie4¤57¤odelagt4.1;odelagt4.2;odelagt4.3¤glemt4.1;glemt4.2");
+			writer.close();
 		}
 	}
-	public void endreUtstyrStatus(){
-		//TODO: finne utstyr fra database utifra odelagtUtstyr liste
-		//TODO: endre utstyrstatus til ødelagt 
-		
+	public static void endreUtstyrStatus(){
+		for(int i = 0; i<odelagtUtstyr.size(); i++){
+			connection.oppdaterUtstyr(((Number) connection.getUtstyrID(odelagtUtstyr.get(i), koieID)).intValue(),0);
+		}
 	}
-	public void oppdaterVedStatus(){
-		//TODO: skaff tidligere vedstatus fra database
-		//TODO: skaff antall dager (fra database? fra reservasjonsklasse?)
-		//TODO: lag utregning med (gammel_vedstatus - ny_vedstatus)/antall_dager 
+	
+	public static void oppdaterVedStatus(){
+		connection.oppdaterVedstatus(koieID,vedstatus);
 	}
-	public void oppdaterGjenglemt(){
-		//TODO: finne Koie fra koieID
-		//TODO: legge gjenglemteTing-lista inn i gjenglemt-lista som befinner seg i det objektet
-	}
-
+	
 	public static void main(String[] args) throws IOException {
 		//kjører testfil
-		Rapport test = new Rapport();
-		String filename = "test.txt";
+		String filename = "rapportTest.txt";
 		FileReader file = new FileReader(filename);
-		test.lesRapport(file);
+		lesRapport(file);
 	}
 }
