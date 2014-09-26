@@ -14,6 +14,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -35,6 +36,9 @@ public class GUIController {
 	@FXML private TextField regUsernameField;
 	@FXML private PasswordField regPasswordField;
 	@FXML private PasswordField regPasswordFieldConfirmation;
+	@FXML private TextField vedstatusField;
+	@FXML private TextArea ødelagteTingField;
+	@FXML private TextArea gjenglemteTingField;
 	@FXML private Pane loginScreen; // root fylles av Panes
 	@FXML private Pane registerScreen;
 	@FXML private Pane koieListe;
@@ -149,6 +153,14 @@ public class GUIController {
 	@FXML
 	public void newUser(ActionEvent event) { // når man trykker på "ny bruker" knappen
 		root.setCenter(registerScreen);
+	}
+	
+	@FXML
+	public void sendRapport(ActionEvent event) {
+		if (rapportDropDown.getValue().equals("Velg en koie")) {
+			return;
+		}
+		connection.settinnRapport(ødelagteTingField.getText(), gjenglemteTingField.getText(), Integer.parseInt(vedstatusField.getText()), rapportDropDown.getValue());
 	}
 
 	@FXML

@@ -345,15 +345,15 @@
 			<ComboBox fx:id="rapportDropDown" layoutX="15" layoutY="50"
 				value="Velg en koie" focusTraversable="false" />
 			<Label text="Vedstatus" layoutX="160" layoutY="55" />
-			<TextField layoutX="225" layoutY="50" focusTraversable="false" />
+			<TextField fx:id="vedstatusField" layoutX="225" layoutY="50" focusTraversable="false" />
 			<Label text="Ødelagte ting" layoutX="15" layoutY="100" />
-			<TextArea focusTraversable="false" layoutX="15" layoutY="120"
+			<TextArea fx:id="ødelagteTingField" focusTraversable="false" layoutX="15" layoutY="120"
 				prefWidth="125" prefHeight="150" />
 			<Label text="Gjenglemte ting" layoutX="150" layoutY="100" />
-			<TextArea focusTraversable="false" layoutX="150" layoutY="120"
+			<TextArea fx:id="gjenglemteTingField" focusTraversable="false" layoutX="150" layoutY="120"
 				prefWidth="125" prefHeight="150" />
 			<Label text="(En ting per linje)" layoutX="285" layoutY="100" />
-			<Button text="Send rapport" layoutX="15" layoutY="300"
+			<Button onAction="#sendRapport" text="Send rapport" layoutX="15" layoutY="300"
 				focusTraversable="false" />
 		</Pane>
 	</fx:define>
