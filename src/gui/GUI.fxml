@@ -315,7 +315,7 @@
 				text="gjreagrjk&#10;agklragmerl&#10;mtrklshm&#10;gmrklgsmrs&#10;grgajkerg&#10;jgeralgr&#10;grjkslg&#10;klnlknlk&#10;nklnlk&#10;nklnlk&#10;nkljk"
 				editable="false" focusTraversable="false" layoutX="150" layoutY="70"
 				prefWidth="125" prefHeight="150" />
-			<Label text="Vedstatus:" layoutX="300" layoutY="50" />
+			<Label text="Vedstatus" layoutX="300" layoutY="50" />
 			<Label text="Kalender" layoutX="400" layoutY="50" />
 			<DatePicker fx:id="kalender" layoutX="400" layoutY="70"
 				focusTraversable="false" />
