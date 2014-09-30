@@ -8,23 +8,23 @@ import database.DB;
 public class DBConnection {
 
 	private DB db;
-	
+
 	public DBConnection(){
 		db = new DB();
 	}
-	
+
 	// Returnerer ResultSet med kolonne1 = brukernavn og kolonne2 = passord
 	public ResultSet login(String brukernavn) {
-		
+
 		String q = ("select Brukernavn, Passord, Navn, Tlf, Epost, isAdmin from Admin where Brukernavn = '"
 				+ brukernavn + "';");
 
 		return db.sporDB(q);
 	}
-	
+
 	// Registrere ny bruker
 	public void registrerBruker(String brukernavn, String passord, String navn, String tlf, String epost) {
-		
+
 		String q = ("insert into Admin (Brukernavn, Passord, Navn, Tlf, Epost, isAdmin) values ('"
 				+ brukernavn
 				+ "','"
@@ -38,14 +38,14 @@ public class DBConnection {
 				+ "','"
 				+ "0" // vanlig bruker (ikke admin)
 				+ "');");
-		
+
 		db.oppdaterDB(q);
 	}
 
 	//Sett inn rapport i DB
 	public void settinnRapport(String tekst, String gjenglemt, int vedstatus,
 			String koienavn) {
-		
+
 		String q = ("insert into Rapport (tekst, gjenglemt, vedstatus, koierapportID) values ('"
 				+ tekst
 				+ "','"
@@ -55,16 +55,16 @@ public class DBConnection {
 
 		db.oppdaterDB(q);
 	}
-	
+
 	//Sett inn reservasjon i DB
 	public void settinnReservasjon(String epost, String datoFra, String datoTil, String koienavn){
-		
+
 		String q = ("insert into Reservasjon (epost,datoFra,datoTil,reservertkoieid) values ('"
 				+ epost + "','" + datoFra + "','" + datoTil + "','" + koienavn + "');");
 
 		db.oppdaterDB(q);
 	}
-	
+
 	// Oppdater en koies vedstatus
 	public void oppdaterVedstatus(String koienavn, int vedstatus) {
 
@@ -93,7 +93,7 @@ public class DBConnection {
 		
 		db.oppdaterDB(q);
 	}
-	
+
 	// Få utstyrsID
 	public String getUtstyrID(String navn, String koie) throws SQLException {
 		
@@ -105,9 +105,18 @@ public class DBConnection {
 		}
 		return null;
 	}
-	
+
+
+	// Returnerer liste over alle medlemmer
+	public ResultSet getMembers() {
+		
+		String q = ("select Navn, Tlf, Epost, isAdmin from Admin");
+		
+		return db.sporDB(q);
+	}
+
 	// Få rapportID
-		public String getrapportID(String tekst, String gjenglemt, int vedstatus) throws SQLException {
+	public String getrapportID(String tekst, String gjenglemt, int vedstatus) throws SQLException {
 			
 			String q = ("select RapportID from Rapport where Tekst = '" + tekst + "' and Gjenglemt = '" + gjenglemt + "' and Vedstatus = '" + vedstatus + "';");
 			
@@ -128,10 +137,10 @@ public class DBConnection {
 
 	// Legge inn nytt utstyr (STATUS 1 eller 0!)
 	public void registrerUtstyr(String navn, String dato, int status, String adminID, String koie){
-		
+
 		String q = ("insert into Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID) VALUES ('" + navn + "','" + dato + "','" + (new String("" + status)) + "','" + adminID + "','" + koie + "');");
-		
+
 		db.oppdaterDB(q);
 	}
-	
+
 }
