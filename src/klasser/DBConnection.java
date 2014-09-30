@@ -142,5 +142,24 @@ public class DBConnection {
 
 		db.oppdaterDB(q);
 	}
+	
+	// Spør om laveste vedsatus fra en bestemt Koie en bestemt Dato
+	public ResultSet getVedstatusRapport(String koieID, String dato) {
+
+		String q = ("select min(Vedstatus) from Rapport where Dato = '" + dato + "' and KoieRapportID = '" + koieID + "';");
+
+		return db.sporDB(q);
+	}
+	
+	// Spør om gjenglemt og ødelagt utstyr fra en bestemt koie
+		public ResultSet getOdelagtGjenglemtKoie(String koieID) {
+
+			String q = ("select Tekst, Gjenglemt from Rapport where KoieRapportID = '" + koieID + "';");
+
+			return db.sporDB(q);
+		}
+	
+	
+	
 
 }

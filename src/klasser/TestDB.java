@@ -9,7 +9,7 @@ public class TestDB {
 
 //	public static void main(String[] args) {
 //		DBConnection connection = new DBConnection();
-//		ResultSet rs = connection.getUtstyrID("baat","Flaakoia");
+//		ResultSet rs = connection.getVedstatusRapport("Flaakoia", "2014-09-25");
 //		try {
 //			while(rs.next()){
 //				//les kolonne1
