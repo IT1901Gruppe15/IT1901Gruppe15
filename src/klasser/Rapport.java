@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class Rapport {
 					}
 				}
 				connection.settinnRapport(utstyrOdelagt,ord[3],vedstatus,koieID);
-				endreUtstyrStatus();
+				endreUtstyrStatus(utstyrOdelagt, ord[3]);
 				oppdaterVedStatus();
 			}			
 		}catch (Exception e){
@@ -54,16 +55,20 @@ public class Rapport {
 			
 		}finally {
 			PrintWriter writer = new PrintWriter("rapportTest.txt");
-			writer.print("koie1¤35¤odelagt1.1;odelagt1.2;odelagt1.3¤glemt1.1;glemt1.2"+"\r\n"
-						+"koie2¤27¤odelagt2.1;odelagt2.2;odelagt2.3¤glemt2.1;glemt2.2"+"\r\n"
-						+"koie3¤16¤odelagt3.1;odelagt3.2;odelagt3.3¤glemt3.1;glemt3.2"+"\r\n"
-						+"koie4¤57¤odelagt4.1;odelagt4.2;odelagt4.3¤glemt4.1;glemt4.2");
+			writer.print("Flaakoia¤35¤baat¤glemt1.1;glemt1.2");
 			writer.close();
 		}
 	}
-	public static void endreUtstyrStatus(){
+	public static void endreUtstyrStatus(String utstyrOdelagt, String gjenglemt){
 		for(int i = 0; i<odelagtUtstyr.size(); i++){
-			connection.oppdaterUtstyr(((Number) connection.getUtstyrID(odelagtUtstyr.get(i), koieID)).intValue(),0);
+			try {
+				int utstyrID = Integer.parseInt(connection.getUtstyrID(odelagtUtstyr.get(i), koieID));
+				int rapportID = Integer.parseInt(connection.getrapportID(utstyrOdelagt, gjenglemt, vedstatus));
+				connection.oppdaterUtstyr(utstyrID,0);
+				connection.leggInnOdelagtUtstyr(utstyrID, rapportID);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

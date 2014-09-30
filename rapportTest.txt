@@ -1,4 +1,1 @@
-koie1¤35¤odelagt1.1;odelagt1.2;odelagt1.3¤glemt1.1;glemt1.2
-koie2¤27¤odelagt2.1;odelagt2.2;odelagt2.3¤glemt2.1;glemt2.2
-koie3¤16¤odelagt3.1;odelagt3.2;odelagt3.3¤glemt3.1;glemt3.2
-koie4¤57¤odelagt4.1;odelagt4.2;odelagt4.3¤glemt4.1;glemt4.2
+Flaakoia¤35¤baat¤glemt1.1;glemt1.2

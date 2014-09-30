@@ -1,6 +1,8 @@
 package klasser;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import database.DB;
 
 public class DBConnection {
@@ -78,35 +80,32 @@ public class DBConnection {
 
 		String q = ("update Utstyr set stat = '" + (new String("" + status))
 				+ "' where UtstyrsID = '" + (new String("" + utstyrsID)) + "';");
-
+		
 		db.oppdaterDB(q);
 	}
 
 	// Legg inn ødelagt Utstyr
 	public void leggInnOdelagtUtstyr(int utstyrsID, int rapportID) {
-
+		
 		String q = ("insert into ErOdelagt values ('"
 				+ (new String("" + utstyrsID)) + "','"
 				+ (new String("" + rapportID)) + "');");
-
+		
 		db.oppdaterDB(q);
 	}
 
 	// Få utstyrsID
-	public ResultSet getUtstyrID(String navn, String koie) {
-
+	public String getUtstyrID(String navn, String koie) throws SQLException {
+		
 		String q = ("select UtstyrsID from Utstyr where Navn = '" + navn + "' and FraktesTilID = '" + koie + "';");
-
-		return db.sporDB(q);
+		
+		ResultSet k=db.sporDB(q);
+		if (k.next()){
+			return k.getString(1);
+		}
+		return null;
 	}
 
-	// Få rapportID
-	public ResultSet getrapportID(String tekst, String gjenglemt, int vedstatus) {
-
-		String q = ("select RapportID from Rapport where Tekst = '" + tekst + "' and Gjenglemt = '" + gjenglemt + "' and Vedstatus = '" + vedstatus + "';");
-
-		return db.sporDB(q);
-	}
 
 	// Returnerer liste over alle medlemmer
 	public ResultSet getMembers() {
@@ -115,6 +114,18 @@ public class DBConnection {
 		
 		return db.sporDB(q);
 	}
+
+	// Få rapportID
+	public String getrapportID(String tekst, String gjenglemt, int vedstatus) throws SQLException {
+			
+			String q = ("select RapportID from Rapport where Tekst = '" + tekst + "' and Gjenglemt = '" + gjenglemt + "' and Vedstatus = '" + vedstatus + "';");
+			
+			ResultSet k=db.sporDB(q);
+			if (k.next()){
+				return k.getString(1);
+			}
+			return null;
+		}
 
 	// Returner alt ødelagt utstyr
 	public ResultSet getOdelagtUtstyr() {
