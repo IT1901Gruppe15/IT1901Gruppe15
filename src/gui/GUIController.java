@@ -20,10 +20,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import klasser.Bruker;
 import klasser.DBConnection;
+import klasser.Rapport;
 
 public class GUIController {
 
@@ -49,6 +52,9 @@ public class GUIController {
 	@FXML private Pane koiePane;
 	@FXML private Pane reservasjonsPane;
 	@FXML private Pane reportPane;
+	@FXML private Pane medlemPane;
+	@FXML private VBox medlemListe;
+	@FXML private HBox medlemListeOverskrift;
 	@FXML private Text welcomeName; // overskriften på welcome-panelet
 	@FXML private Text koieReservasjonsName; // overskriften på reservasjons-panelet
 	@FXML private Text koieStatusName; // overskriften på koie-panelet
@@ -156,11 +162,39 @@ public class GUIController {
 	}
 	
 	@FXML
-	public void sendRapport(ActionEvent event) {
+	public void sendRapport(ActionEvent event) { 
 		if (rapportDropDown.getValue().equals("Velg en koie")) {
 			return;
 		}
-		connection.settinnRapport(ødelagteTingField.getText(), gjenglemteTingField.getText(), Integer.parseInt(vedstatusField.getText()), rapportDropDown.getValue());
+		String ødelagt = Rapport.formaterTekst(ødelagteTingField.getText(), "\n");
+		String gjenglemt = Rapport.formaterTekst(gjenglemteTingField.getText(), "\n");
+		int vedstatus = Integer.parseInt(vedstatusField.getText());
+		connection.settinnRapport(ødelagt, gjenglemt, vedstatus, rapportDropDown.getValue());
+	}
+	
+	@FXML
+	public void fyllMedlemListe() {
+		medlemListe.getChildren().clear();
+		medlemListe.getChildren().add(medlemListeOverskrift);
+		ResultSet rs = connection.getMembers();  // Brukernavn, Navn, Tlf, Epost, isAdmin
+		try {
+			while (rs.next()) {
+				HBox hbox = new HBox();
+				for (int i = 1; i < 5; i++) {
+					Label text = new Label(rs.getString(i));
+					if (i == 3) {
+						text.setPrefWidth(200);
+					} else {
+						text.setPrefWidth(100);
+					}
+					hbox.getChildren().add(text);
+				}
+				medlemListe.getChildren().add(hbox);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		root.setCenter(medlemPane);
 	}
 
 	@FXML

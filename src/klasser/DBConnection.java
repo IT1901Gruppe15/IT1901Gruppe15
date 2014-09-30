@@ -110,7 +110,7 @@ public class DBConnection {
 	// Returnerer liste over alle medlemmer
 	public ResultSet getMembers() {
 		
-		String q = ("select Brukernavn, Navn, Tlf, Epost, isAdmin from Admin");
+		String q = ("select Navn, Tlf, Epost, isAdmin from Admin");
 		
 		return db.sporDB(q);
 	}

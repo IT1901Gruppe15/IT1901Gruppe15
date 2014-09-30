@@ -182,7 +182,7 @@
 					</graphic>
 				</Button>
 				<Button text="Reservasjon" prefHeight="60" prefWidth="60"
-					onAction="#openReservasjon" contentDisplay="top" focusTraversable="false">
+					onAction="#fyllMedlemListe" contentDisplay="top" focusTraversable="false">
 					<font>
 						<Font size="8" />
 					</font>
@@ -355,6 +355,21 @@
 			<Label text="(En ting per linje)" layoutX="285" layoutY="100" />
 			<Button onAction="#sendRapport" text="Send rapport" layoutX="15" layoutY="300"
 				focusTraversable="false" />
+		</Pane>
+	</fx:define>
+	
+	<fx:define>
+		<Pane fx:id="medlemPane">
+			<VBox fx:id="medlemListe">
+				<fx:define>
+					<HBox fx:id="medlemListeOverskrift">
+						<Label text="Navn" style="-fx-font-size: 14px" prefWidth="100"/>
+						<Label text="Tlf" style="-fx-font-size: 14px" prefWidth="100"/>
+						<Label text="Epost" style="-fx-font-size: 14px" prefWidth="200"/>
+						<Label text="Admin status" style="-fx-font-size: 14px" prefWidth="100"/>
+					</HBox>
+				</fx:define>
+			</VBox>
 		</Pane>
 	</fx:define>
 
