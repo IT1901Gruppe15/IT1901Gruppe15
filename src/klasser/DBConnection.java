@@ -119,9 +119,9 @@ public class DBConnection {
 		}
 
 	// Returner alt ødelagt utstyr
-	public ResultSet getOdelagtUtstyr() {
+	public ResultSet getOdelagtUtstyr(String koieID) {
 
-		String q = ("select * from ErOdelagt;");
+		String q = ("select * from ErOdelagt where koieID = '" + koieID + "';");
 
 		return db.sporDB(q);
 	}

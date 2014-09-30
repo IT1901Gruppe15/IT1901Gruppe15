@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,18 @@ public class Rapport {
 	
 	public static void oppdaterVedStatus(){
 		connection.oppdaterVedstatus(koieID,vedstatus);
+	}
+	
+	public static String getUtstyr(String koieID) throws SQLException{
+		ResultSet ou;
+		String odelagt = null;
+		
+		ou = connection.getOdelagtUtstyr(koieID);
+		while(ou.next()){
+			odelagt += ou.getString(1) + ";";
+		}
+		
+		return odelagt;
 	}
 	
 	public static void main(String[] args) throws IOException {
