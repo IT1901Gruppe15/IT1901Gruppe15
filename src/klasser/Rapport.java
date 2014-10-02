@@ -28,6 +28,7 @@ public class Rapport {
 			String utstyrOdelagt = null;
 
 			while((line = reader.readLine())!=null){
+				System.out.println("begynner på ny linje");
 				odelagtUtstyr = new ArrayList<String>();
 				ord = line.split("¤");
 				for(int i=0;i<ord.length;i++){
@@ -49,24 +50,36 @@ public class Rapport {
 						break;
 					}
 				}
+				System.out.println("error i settinnRapport?");
 				connection.settinnRapport(utstyrOdelagt,ord[4],vedstatus,koieID,dato);
+				System.out.println("nei");
+				System.out.println("error i endreutstyrstatus?");
 				endreUtstyrStatus(utstyrOdelagt, ord[4]);
+				System.out.println("nei");
+				System.out.println("error i oppdatervedstatus?");
 				oppdaterVedStatus();
 			}			
 		}catch (Exception e){
 			System.err.println(e.getStackTrace());
 
 		}finally {
-			PrintWriter writer = new PrintWriter("rapportTest.txt");
-			writer.print("Flaakoia¤35¤baat¤glemt1.1;glemt1.2");
-			writer.close();
+//			PrintWriter writer = new PrintWriter("rapportTest.txt");
+//			writer.print("Flaakoia¤17¤2015-01-25¤¤15kgpoteter;toogethalvtparsokker");
+//			writer.close();
 		}
 	}
 	public static void endreUtstyrStatus(String utstyrOdelagt, String gjenglemt){
 		for(int i = 0; i<odelagtUtstyr.size(); i++){
 			try {
-				int utstyrID = Integer.parseInt(connection.getUtstyrID(odelagtUtstyr.get(i), koieID));
-				int rapportID = Integer.parseInt(connection.getrapportID(utstyrOdelagt, gjenglemt, vedstatus));
+				ResultSet rid, uid;
+				System.out.println(utstyrOdelagt);
+				System.out.println(gjenglemt);
+				rid = connection.getrapportID(utstyrOdelagt, gjenglemt, vedstatus);
+				String rids = rid.getString(1);
+				uid = connection.getUtstyrID(odelagtUtstyr.get(i), koieID);
+				String uids = uid.getString(1);
+				int utstyrID = Integer.parseInt(uids);
+				int rapportID = Integer.parseInt(rids);
 				connection.oppdaterUtstyr(utstyrID,0);
 				connection.leggInnOdelagtUtstyr(utstyrID, rapportID);
 			} catch (SQLException e) {

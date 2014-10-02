@@ -95,15 +95,11 @@ public class DBConnection {
 	}
 
 	// Få utstyrsID
-	public String getUtstyrID(String navn, String koie) throws SQLException {
+	public ResultSet getUtstyrID(String navn, String koie) throws SQLException {
 		
 		String q = ("select UtstyrsID from Utstyr where Navn = '" + navn + "' and FraktesTilID = '" + koie + "';");
 		
-		ResultSet k=db.sporDB(q);
-		if (k.next()){
-			return k.getString(1);
-		}
-		return null;
+		return db.sporDB(q);
 	}
 
 
@@ -116,15 +112,11 @@ public class DBConnection {
 	}
 
 	// Få rapportID
-	public String getrapportID(String odelagt, String gjenglemt, int vedstatus) throws SQLException {
+	public ResultSet getrapportID(String odelagt, String gjenglemt, int vedstatus) throws SQLException {
 			
 			String q = ("select RapportID from Rapport where Tekst = '" + odelagt + "' and Gjenglemt = '" + gjenglemt + "' and Vedstatus = '" + vedstatus + "';");
 			
-			ResultSet k=db.sporDB(q);
-			if (k.next()){
-				return k.getString(1);
-			}
-			return null;
+			return db.sporDB(q);
 		}
 
 	// Returner alt ødelagt utstyr
