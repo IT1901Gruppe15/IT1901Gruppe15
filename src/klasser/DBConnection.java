@@ -159,7 +159,20 @@ public class DBConnection {
 			return db.sporDB(q);
 		}
 	
+	// Få reserverte sengeplasser for en dag
+		public ResultSet getReservertePlasser(String koieID, String dato){
+			
+			String q = ("select count(*) from Reservasjon where ReservertKoieID = '" + koieID + "' and Dato = '" + dato + "';");
+			
+			return db.sporDB(q);
+		}
 	
-	
+	// Få antall sengeplasser på koie
+	public ResultSet getSengeplasser(String koieID) {
+
+		String q = ("select Storrelse from Koie where KoieID = '" + koieID + "';");
+
+		return db.sporDB(q);
+	}
 
 }
