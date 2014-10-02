@@ -43,11 +43,11 @@ public class DBConnection {
 	}
 
 	//Sett inn rapport i DB
-	public void settinnRapport(String tekst, String gjenglemt, int vedstatus,
+	public void settinnRapport(String odelagt, String gjenglemt, int vedstatus,
 			String koienavn, String dato) {
 
-		String q = ("insert into Rapport (tekst, gjenglemt, vedstatus, koierapportID, dato) values ('"
-				+ tekst
+		String q = ("insert into Rapport (odelagt, gjenglemt, vedstatus, koierapportID, dato) values ('"
+				+ odelagt
 				+ "','"
 				+ gjenglemt
 				+ "','"
@@ -116,9 +116,9 @@ public class DBConnection {
 	}
 
 	// Få rapportID
-	public String getrapportID(String tekst, String gjenglemt, int vedstatus) throws SQLException {
+	public String getrapportID(String odelagt, String gjenglemt, int vedstatus) throws SQLException {
 			
-			String q = ("select RapportID from Rapport where Tekst = '" + tekst + "' and Gjenglemt = '" + gjenglemt + "' and Vedstatus = '" + vedstatus + "';");
+			String q = ("select RapportID from Rapport where Tekst = '" + odelagt + "' and Gjenglemt = '" + gjenglemt + "' and Vedstatus = '" + vedstatus + "';");
 			
 			ResultSet k=db.sporDB(q);
 			if (k.next()){
@@ -154,7 +154,7 @@ public class DBConnection {
 	// Spør om gjenglemt og ødelagt utstyr fra en bestemt koie
 		public ResultSet getOdelagtGjenglemtKoie(String koieID) {
 
-			String q = ("select Tekst, Gjenglemt from Rapport where KoieRapportID = '" + koieID + "';");
+			String q = ("select Odelagt, Gjenglemt from Rapport where KoieRapportID = '" + koieID + "';");
 
 			return db.sporDB(q);
 		}
