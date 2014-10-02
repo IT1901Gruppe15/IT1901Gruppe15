@@ -112,12 +112,15 @@ public class DBConnection {
 	}
 
 	// Få rapportID
-	public ResultSet getrapportID(String odelagt, String gjenglemt, int vedstatus) throws SQLException {
-			
-			String q = ("select RapportID from Rapport where Tekst = '" + odelagt + "' and Gjenglemt = '" + gjenglemt + "' and Vedstatus = '" + vedstatus + "';");
-			
-			return db.sporDB(q);
-		}
+	public ResultSet getrapportID(String odelagt, String gjenglemt,
+			int vedstatus) throws SQLException {
+
+		String q = ("select RapportID from Rapport where Odelagt = '" + odelagt
+				+ "' and Gjenglemt = '" + gjenglemt + "' and Vedstatus = '"
+				+ vedstatus + "';");
+
+		return db.sporDB(q);
+	}
 
 	// Returner alt ødelagt utstyr
 	public ResultSet getOdelagtUtstyr(String koieID) {
