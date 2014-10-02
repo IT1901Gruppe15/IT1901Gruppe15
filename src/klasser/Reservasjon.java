@@ -91,7 +91,7 @@ public class Reservasjon {
 					isThisDateValid(list[2], "yyyy-MM-dd");
 					start_dato = list[2];
 
-					break;
+					//break;
 //				case 3:
 //					isThisDateValid(list[3], "yyyy-MM-dd");
 //					slutt_dato = list[3];
@@ -130,17 +130,15 @@ public class Reservasjon {
 		return start_dato;
 	}
 
-	public String getSlutt_dato() {
-		return slutt_dato;
-	}
+
 
 	public static void main(String[] args) {
 		Reservasjon res = new Reservasjon();
 		res.lesReservasjon();
+		res.updateDB();
 
-		// res.update();
 		System.out.println(res.koieID + res.epost + res.start_dato
-				+ res.slutt_dato);
+				);
 		// TODO Auto-generated method stub
 
 	}
