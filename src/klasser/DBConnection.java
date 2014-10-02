@@ -110,7 +110,7 @@ public class DBConnection {
 	// Returnerer liste over alle medlemmer
 	public ResultSet getMembers() {
 		
-		String q = ("select Brukernavn, Navn, Tlf, Epost, isAdmin from Admin");
+		String q = ("select Navn, Tlf, Epost, isAdmin from Admin");
 		
 		return db.sporDB(q);
 	}
@@ -128,9 +128,9 @@ public class DBConnection {
 		}
 
 	// Returner alt ødelagt utstyr
-	public ResultSet getOdelagtUtstyr() {
+	public ResultSet getOdelagtUtstyr(String koieID) {
 
-		String q = ("select * from ErOdelagt;");
+		String q = ("select * from ErOdelagt where koieID = '" + koieID + "';");
 
 		return db.sporDB(q);
 	}
@@ -142,5 +142,24 @@ public class DBConnection {
 
 		db.oppdaterDB(q);
 	}
+	
+	// Spør om laveste vedsatus fra en bestemt Koie en bestemt Dato
+	public ResultSet getVedstatusRapport(String koieID, String dato) {
+
+		String q = ("select min(Vedstatus) from Rapport where Dato = '" + dato + "' and KoieRapportID = '" + koieID + "';");
+
+		return db.sporDB(q);
+	}
+	
+	// Spør om gjenglemt og ødelagt utstyr fra en bestemt koie
+		public ResultSet getOdelagtGjenglemtKoie(String koieID) {
+
+			String q = ("select Tekst, Gjenglemt from Rapport where KoieRapportID = '" + koieID + "';");
+
+			return db.sporDB(q);
+		}
+	
+	
+	
 
 }
