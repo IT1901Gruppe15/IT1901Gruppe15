@@ -26,6 +26,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import klasser.Bruker;
 import klasser.DBConnection;
+import klasser.Koie;
 import klasser.Rapport;
 
 public class GUIController {
@@ -40,7 +41,7 @@ public class GUIController {
 	@FXML private PasswordField regPasswordField;
 	@FXML private PasswordField regPasswordFieldConfirmation;
 	@FXML private TextField vedstatusField;
-	@FXML private TextArea Ã¸delagteTingField;
+	@FXML private TextArea ødelagteTingField;
 	@FXML private TextArea gjenglemteTingField;
 	@FXML private Pane loginScreen; // root fylles av Panes
 	@FXML private Pane registerScreen;
@@ -52,7 +53,6 @@ public class GUIController {
 	@FXML private Pane koiePane;
 	@FXML private Pane reservasjonsPane;
 	@FXML private Pane reportPane;
-<<<<<<< HEAD
 	@FXML private Text welcomeName; // overskriften pï¿½ welcome-panelet
 	@FXML private Text koieReservasjonsName; // overskriften pï¿½ reservasjons-panelet
 	@FXML private Text koieStatusName; // overskriften pï¿½ koie-panelet
@@ -60,18 +60,9 @@ public class GUIController {
 	@FXML private Label registreringsFeil; // skrift som dukker opp nï¿½r man fï¿½r feil ved registrering
 	private String activeKoie; // holder styr pï¿½ aktiv koie
 	private Button mapBtn; //knappen som dukker opp nï¿½r man trykker pï¿½ en koie pï¿½ kartet
-=======
 	@FXML private Pane medlemPane;
 	@FXML private VBox medlemListe;
 	@FXML private HBox medlemListeOverskrift;
-	@FXML private Text welcomeName; // overskriften på welcome-panelet
-	@FXML private Text koieReservasjonsName; // overskriften på reservasjons-panelet
-	@FXML private Text koieStatusName; // overskriften på koie-panelet
-	@FXML private Label feilLoginInfo; // skrift som dukker opp når man prøver å logge inn med feil info
-	@FXML private Label registreringsFeil; // skrift som dukker opp når man får feil ved registrering
-	private String activeKoie; // holder styr på aktiv koie
-	private Button mapBtn; //knappen som dukker opp når man trykker på en koie på kartet
->>>>>>> FETCH_HEAD
 	private Bruker admin;
 	private DBConnection connection;
 	@FXML DatePicker kalender; // kalenderen i koie-panelet
@@ -117,7 +108,7 @@ public class GUIController {
 					}
 					double koieX = ((ImageView) me.getTarget()).getLayoutX(); // plasserer knappen pï¿½ kartet
 					double koieY = ((ImageView) me.getTarget()).getLayoutY();
-					mapBtn.setText("ï¿½pne " + activeKoie.substring(0, activeKoie.length() - 3));
+					mapBtn.setText("Åpne " + activeKoie.substring(0, activeKoie.length() - 3));
 					mapBtn.setLayoutX(koieX + 25);
 					mapBtn.setLayoutY(koieY - 25);
 					mapPane.getChildren().remove(mapBtn);
@@ -138,10 +129,28 @@ public class GUIController {
 		activeKoie = ((Hyperlink) event.getSource()).getText();
 		if (admin.getAdminStatus()) {
 			koieStatusName.setText(activeKoie);
-			root.setCenter(koiePane);			
+			root.setCenter(koiePane);
+			fyllKoiePane();
 		} else {
 			koieReservasjonsName.setText(activeKoie);
 			root.setCenter(reservasjonsPane);
+		}
+	}
+	
+	private void fyllKoiePane() {
+		System.out.println("hei");
+		System.out.println(activeKoie);
+		System.out.println(Koie.formaterKoieNavn(activeKoie));
+		System.out.println(Koie.formaterKoieNavn(activeKoie).length());
+		ResultSet rs = connection.getOdelagtGjenglemtKoie(Koie.formaterKoieNavn(activeKoie));
+		try {
+			System.out.println(rs);
+			while (rs.next()) {
+				System.out.println("hei2");
+				System.out.println(rs.getString(1) + " " + rs.getString(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -176,9 +185,7 @@ public class GUIController {
 		if (rapportDropDown.getValue().equals("Velg en koie")) {
 			return;
 		}
-<<<<<<< HEAD
-		connection.settinnRapport(ï¿½delagteTingField.getText(), gjenglemteTingField.getText(), Integer.parseInt(vedstatusField.getText()), rapportDropDown.getValue());
-=======
+		connection.settinnRapport(ødelagteTingField.getText(), gjenglemteTingField.getText(), Integer.parseInt(vedstatusField.getText()), rapportDropDown.getValue());
 		String ødelagt = Rapport.formaterTekst(ødelagteTingField.getText(), "\n");
 		String gjenglemt = Rapport.formaterTekst(gjenglemteTingField.getText(), "\n");
 		int vedstatus = Integer.parseInt(vedstatusField.getText());
@@ -208,7 +215,6 @@ public class GUIController {
 			e.printStackTrace();
 		}
 		root.setCenter(medlemPane);
->>>>>>> FETCH_HEAD
 	}
 
 	@FXML
