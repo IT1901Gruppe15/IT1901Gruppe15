@@ -72,14 +72,19 @@ public class Rapport {
 		for(int i = 0; i<odelagtUtstyr.size(); i++){
 			try {
 				ResultSet rid, uid;
-				System.out.println(utstyrOdelagt);
-				System.out.println(gjenglemt);
+				int utstyrID, rapportID;
+				utstyrID = 0;
+				rapportID = 0;
 				rid = connection.getrapportID(utstyrOdelagt, gjenglemt, vedstatus);
-				String rids = rid.getString(1);
+				while(rid.next()){
+					String rids = rid.getString(1);
+					rapportID = Integer.parseInt(rids);
+				}
 				uid = connection.getUtstyrID(odelagtUtstyr.get(i), koieID);
-				String uids = uid.getString(1);
-				int utstyrID = Integer.parseInt(uids);
-				int rapportID = Integer.parseInt(rids);
+				while(uid.next()){
+					String uids = uid.getString(1);
+					utstyrID = Integer.parseInt(uids);
+				}
 				connection.oppdaterUtstyr(utstyrID,0);
 				connection.leggInnOdelagtUtstyr(utstyrID, rapportID);
 			} catch (SQLException e) {
