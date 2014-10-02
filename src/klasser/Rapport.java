@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rapport {
-	static String koieID;
+	static String koieID, dato;
 	static List<String> odelagtUtstyr;
 	static int vedstatus;
 	static DBConnection connection = new DBConnection();
 
 	//får input fra tekstfil i følgende format:
-	//koieID¤35¤odelagt1;odelagt2;odelagt3¤glemt1;glemt2
+	//koieID¤35¤yyyy-mm-dd¤odelagt1;odelagt2;odelagt3¤glemt1;glemt2
 
 	public static void lesRapport(Reader input) throws IOException {
 		try{
@@ -39,16 +39,18 @@ public class Rapport {
 						vedstatus = Integer.parseInt(ord[1]);
 						break;
 					case 2:
-						utstyrOdelagt = ord[2];
-						odelagt = ord[2].split(";");
+						dato = ord[2];
+					case 3:
+						utstyrOdelagt = ord[3];
+						odelagt = ord[3].split(";");
 						for(int j=0;j<odelagt.length;j++){
 							odelagtUtstyr.add(odelagt[j]);
 						}
 						break;
 					}
 				}
-				connection.settinnRapport(utstyrOdelagt,ord[3],vedstatus,koieID);
-				endreUtstyrStatus(utstyrOdelagt, ord[3]);
+				connection.settinnRapport(utstyrOdelagt,ord[4],vedstatus,koieID,dato);
+				endreUtstyrStatus(utstyrOdelagt, ord[4]);
 				oppdaterVedStatus();
 			}			
 		}catch (Exception e){
