@@ -44,23 +44,23 @@ public class DBConnection {
 
 	//Sett inn rapport i DB
 	public void settinnRapport(String tekst, String gjenglemt, int vedstatus,
-			String koienavn) {
+			String koienavn, String dato) {
 
-		String q = ("insert into Rapport (tekst, gjenglemt, vedstatus, koierapportID) values ('"
+		String q = ("insert into Rapport (tekst, gjenglemt, vedstatus, koierapportID, dato) values ('"
 				+ tekst
 				+ "','"
 				+ gjenglemt
 				+ "','"
-				+ (new String("" + vedstatus)) + "','" + koienavn + "');");
+				+ (new String("" + vedstatus)) + "','" + koienavn + "','" + dato + "');");
 
 		db.oppdaterDB(q);
 	}
 
 	//Sett inn reservasjon i DB
-	public void settinnReservasjon(String epost, String datoFra, String datoTil, String koienavn){
+	public void settinnReservasjon(String epost, String dato, String koienavn){
 
-		String q = ("insert into Reservasjon (epost,datoFra,datoTil,reservertkoieid) values ('"
-				+ epost + "','" + datoFra + "','" + datoTil + "','" + koienavn + "');");
+		String q = ("insert into Reservasjon (epost,dato,reservertkoieid) values ('"
+				+ epost + "','" + dato + "','" + koienavn + "');");
 
 		db.oppdaterDB(q);
 	}
