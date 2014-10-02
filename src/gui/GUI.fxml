@@ -318,21 +318,17 @@
 			<Text fx:id="koieStatusName" layoutX="15" layoutY="20"
 				style="-fx-font-size: 20px" />
 			<Label text="Ødelagte ting" layoutX="15" layoutY="50" />
-			<TextArea
-				text="gjreagrjk&#10;agklragmerl&#10;mtrklshm&#10;gmrklgsmrs&#10;grgajkerg&#10;jgeralgr&#10;grjkslg&#10;jkljnlk&#10;lkjnlknjm&#10;nlknlk&#10;mlkklnm"
-				editable="false" focusTraversable="false" layoutX="15" layoutY="70"
-				prefWidth="125" prefHeight="150" />
+			<TextArea fx:id="ødelagteTingField" editable="false" focusTraversable="false" layoutX="15"
+				layoutY="70" prefWidth="125" prefHeight="150" />
 			<Label text="Gjenglemte ting" layoutX="150" layoutY="50" />
-			<TextArea
-				text="gjreagrjk&#10;agklragmerl&#10;mtrklshm&#10;gmrklgsmrs&#10;grgajkerg&#10;jgeralgr&#10;grjkslg&#10;klnlknlk&#10;nklnlk&#10;nklnlk&#10;nkljk"
-				editable="false" focusTraversable="false" layoutX="150" layoutY="70"
-				prefWidth="125" prefHeight="150" />
+			<TextArea fx:id="gjenglemteTingField" editable="false" focusTraversable="false" layoutX="150"
+				layoutY="70" prefWidth="125" prefHeight="150" />
 			<Label text="Vedstatus" layoutX="300" layoutY="50" />
 			<Label text="Kalender" layoutX="400" layoutY="50" />
 			<DatePicker fx:id="kalender" layoutX="400" layoutY="70"
 				focusTraversable="false" />
-			<Text text="Antall sengeplasser: xx" layoutX="400" layoutY="120" />
-			<Text text="Ledige sengeplasser: xx" layoutX="400" layoutY="140" />
+			<Text fx:id="antallSengeplasserText" text="Antall sengeplasser: xx" layoutX="400" layoutY="120" />
+			<Text fx:id="ledigeSengeplasserText" text="Ledige sengeplasser: xx" layoutX="400" layoutY="140" />
 		</Pane>
 	</fx:define>
 
@@ -360,10 +356,10 @@
 			<TextField fx:id="vedstatusField" layoutX="225" layoutY="50"
 				focusTraversable="false" />
 			<Label text="Ødelagte ting" layoutX="15" layoutY="100" />
-			<TextArea fx:id="ødelagteTingField" focusTraversable="false"
+			<TextArea fx:id="rapportødelagteTingField" focusTraversable="false"
 				layoutX="15" layoutY="120" prefWidth="125" prefHeight="150" />
 			<Label text="Gjenglemte ting" layoutX="150" layoutY="100" />
-			<TextArea fx:id="gjenglemteTingField" focusTraversable="false"
+			<TextArea fx:id="rapportGjenglemteTingField" focusTraversable="false"
 				layoutX="150" layoutY="120" prefWidth="125" prefHeight="150" />
 			<Label text="(En ting per linje)" layoutX="285" layoutY="100" />
 			<Button onAction="#sendRapport" text="Send rapport" layoutX="15"

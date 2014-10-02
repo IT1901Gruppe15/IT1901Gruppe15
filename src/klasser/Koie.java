@@ -21,22 +21,18 @@ public class Koie {
 			} else if (koie.charAt(i) == 'ø' || koie.charAt(i) == 'Ø') {
 				formatertTekst += 'o';
 			} else if (koie.charAt(i) == 'å' || koie.charAt(i) == 'Å') {
-				formatertTekst += 'a';
+				formatertTekst += "aa";
 			} else {
 				formatertTekst += koie.charAt(i);
 			}
-			if (i == 0) {
-				formatertTekst = formatertTekst.toUpperCase();
-			}
+			String forsteBokstav = formatertTekst.substring(0, 1).toUpperCase();
+			formatertTekst = forsteBokstav + formatertTekst.substring(1);
 		}
 		return formatertTekst;
 	}
 	
 
 	public static void main(String[] args) {
-		System.out.println(		formaterKoieNavn("test"));
-		System.out.println(		formaterKoieNavn("høyåtttæ"));
-		System.out.println(		formaterKoieNavn("Åle"));
 
 	}
 

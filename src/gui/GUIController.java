@@ -31,7 +31,7 @@ import klasser.Rapport;
 
 public class GUIController {
 
-	@FXML private BorderPane root; // ï¿½verste element i gui-hierarkiet
+	@FXML private BorderPane root; // åverste element i gui-hierarkiet
 	@FXML private TextField usernameField; // tekstfeltene for login og registrering
 	@FXML private PasswordField passwordField;
 	@FXML private TextField regFullNameField;
@@ -43,6 +43,8 @@ public class GUIController {
 	@FXML private TextField vedstatusField;
 	@FXML private TextArea ødelagteTingField;
 	@FXML private TextArea gjenglemteTingField;
+	@FXML private TextArea rapportødelagteTingField;
+	@FXML private TextArea rapportGjenglemteTingField;
 	@FXML private Pane loginScreen; // root fylles av Panes
 	@FXML private Pane registerScreen;
 	@FXML private Pane koieListe;
@@ -53,13 +55,15 @@ public class GUIController {
 	@FXML private Pane koiePane;
 	@FXML private Pane reservasjonsPane;
 	@FXML private Pane reportPane;
-	@FXML private Text welcomeName; // overskriften pï¿½ welcome-panelet
-	@FXML private Text koieReservasjonsName; // overskriften pï¿½ reservasjons-panelet
-	@FXML private Text koieStatusName; // overskriften pï¿½ koie-panelet
-	@FXML private Label feilLoginInfo; // skrift som dukker opp nï¿½r man prï¿½ver ï¿½ logge inn med feil info
-	@FXML private Label registreringsFeil; // skrift som dukker opp nï¿½r man fï¿½r feil ved registrering
-	private String activeKoie; // holder styr pï¿½ aktiv koie
-	private Button mapBtn; //knappen som dukker opp nï¿½r man trykker pï¿½ en koie pï¿½ kartet
+	@FXML private Text welcomeName; // overskriften på welcome-panelet
+	@FXML private Text koieReservasjonsName; // overskriften på reservasjons-panelet
+	@FXML private Text koieStatusName; // overskriften på koie-panelet
+	@FXML private Text antallSengeplasserText; // overskriften på koie-panelet
+	@FXML private Text ledigeSengeplasserText; // overskriften på koie-panelet
+	@FXML private Label feilLoginInfo; // skrift som dukker opp når man pråver å logge inn med feil info
+	@FXML private Label registreringsFeil; // skrift som dukker opp når man får feil ved registrering
+	private String activeKoie; // holder styr på aktiv koie
+	private Button mapBtn; //knappen som dukker opp når man trykker på en koie på kartet
 	@FXML private Pane medlemPane;
 	@FXML private VBox medlemListe;
 	@FXML private HBox medlemListeOverskrift;
@@ -71,44 +75,47 @@ public class GUIController {
 	LocalDate ld; // aktiv dato i kalenderen
 	@FXML ComboBox<String> rapportDropDown;
 
-	public void initialize() { //basically konstruktï¿½r
-		rapportDropDown.getItems().addAll("Flï¿½koia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsï¿½koia", "Holvassgamma", "Iglbu", "Kamtjï¿½nna", "Krï¿½kilkï¿½ten", "Kvernmovollen", "Kï¿½sen", "Lynhï¿½gen", "Mortenskï¿½ten", "Nicokoia", "Rindaslï¿½a", "Selbukï¿½ten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessï¿½tra", "ï¿½vensenget"	);
+	public void initialize() { //basically konstruktår
+		rapportDropDown.getItems().addAll("Flåkoia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsåkoia", "Holvassgamma", "Iglbu", "Kamtjønna", "Kråkilkåten", "Kvernmovollen", "Kåsen", "Lynhøgen", "Mortenskåten", "Nicokoia", "Rindasløa", "Selbukåten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessåtra", "Øvensenget"	);
 		connection = new DBConnection();
 		ld = LocalDate.now();
 		kalender.setValue(ld);
 		kalender.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent evet) {
 				ld = kalender.getValue();
-				System.out.println("dd-mm-yyyy " + ld.getDayOfMonth() + "-" + ld.getMonth().getValue() + "-" + ld.getYear());
+				oppdaterSengeplasser();
 			}
 		});
 		feilLoginInfo.setVisible(false);
 		registreringsFeil.setVisible(false);
 		root.setCenter(loginScreen);
 		mapBtn = new Button();
-		mapBtn.setFocusTraversable(false); //gjï¿½r at man ikke kan "hoppe" til knappen ved ï¿½ trykke pï¿½ tab
-		mapBtn.setOnAction(new EventHandler<ActionEvent>() { //nï¿½r man trykker pï¿½ knappen
+		mapBtn.setFocusTraversable(false); //gjår at man ikke kan "hoppe" til knappen ved å trykke på tab
+		mapBtn.setOnAction(new EventHandler<ActionEvent>() { //når man trykker på knappen
 			public void handle(ActionEvent event) {
 				if (admin.getAdminStatus()) {
-					koieStatusName.setText(activeKoie.substring(0, activeKoie.length() - 3));
+					koieStatusName.setText(activeKoie);
+					System.out.println(activeKoie);
+					fyllKoiePane();
 					root.setCenter(koiePane);
 				} else {
-					koieReservasjonsName.setText(activeKoie.substring(0, activeKoie.length() - 3));
+					koieReservasjonsName.setText(activeKoie);
 					root.setCenter(reservasjonsPane);
 				}
 			}
 		});
-		mapPane.setOnMousePressed(new EventHandler<MouseEvent>() {  // logikk for ï¿½ hï¿½ndtere trykking
-			public void handle(MouseEvent me) {						// pï¿½ knapper pï¿½ kartet
+		mapPane.setOnMousePressed(new EventHandler<MouseEvent>() {  // logikk for å håndtere trykking
+			public void handle(MouseEvent me) {						// på knapper på kartet
 				if (me.getButton() == MouseButton.PRIMARY) { // hvis venstre museklikk
 					activeKoie = ((Node) me.getTarget()).getId();
-					if (activeKoie == null || activeKoie == mapPane.getId()) {  // hvis man ikke trykka pï¿½
+					activeKoie = activeKoie.substring(0, activeKoie.length() - 3);
+					if (activeKoie == null || activeKoie == mapPane.getId()) {  // hvis man ikke trykka på
 						mapPane.getChildren().remove(mapBtn);					// en koie
 						return;
 					}
-					double koieX = ((ImageView) me.getTarget()).getLayoutX(); // plasserer knappen pï¿½ kartet
+					double koieX = ((ImageView) me.getTarget()).getLayoutX(); // plasserer knappen på kartet
 					double koieY = ((ImageView) me.getTarget()).getLayoutY();
-					mapBtn.setText("Åpne " + activeKoie.substring(0, activeKoie.length() - 3));
+					mapBtn.setText("Åpne " + activeKoie);
 					mapBtn.setLayoutX(koieX + 25);
 					mapBtn.setLayoutY(koieY - 25);
 					mapPane.getChildren().remove(mapBtn);
@@ -124,30 +131,60 @@ public class GUIController {
 	}
 
 	@FXML
-	public void koieClicked(ActionEvent event) { // nï¿½r man trykker pï¿½ koie i lista
+	public void koieClicked(ActionEvent event) { // når man trykker på koie i lista
 		((Hyperlink) event.getSource()).setVisited(false);
 		activeKoie = ((Hyperlink) event.getSource()).getText();
 		if (admin.getAdminStatus()) {
 			koieStatusName.setText(activeKoie);
-			root.setCenter(koiePane);
 			fyllKoiePane();
+			root.setCenter(koiePane);
 		} else {
 			koieReservasjonsName.setText(activeKoie);
 			root.setCenter(reservasjonsPane);
 		}
 	}
-	
+
 	private void fyllKoiePane() {
-		System.out.println("hei");
-		System.out.println(activeKoie);
-		System.out.println(Koie.formaterKoieNavn(activeKoie));
-		System.out.println(Koie.formaterKoieNavn(activeKoie).length());
+		ødelagteTingField.clear();
+		gjenglemteTingField.clear();
 		ResultSet rs = connection.getOdelagtGjenglemtKoie(Koie.formaterKoieNavn(activeKoie));
 		try {
-			System.out.println(rs);
+			String ødelagt = "";
+			String gjenglemt = "";
 			while (rs.next()) {
-				System.out.println("hei2");
-				System.out.println(rs.getString(1) + " " + rs.getString(2));
+				ødelagt += ";" + rs.getString(1);
+				gjenglemt += ";" + rs.getString(2);
+			}
+			if (ødelagt.length() > 0) {				
+				ødelagt = ødelagt.substring(1);
+				String[] ødelagtListe = ødelagt.split(";");
+				for (int i = 0; i < ødelagtListe.length; i++) {
+					ødelagteTingField.setText(ødelagteTingField.getText() + ødelagtListe[i] + "\n");
+				}
+			}
+			if (gjenglemt.length() > 0) {
+				gjenglemt = gjenglemt.substring(1);				
+				String[] gjenglemtListe = gjenglemt.split(";");
+				for (int i = 0; i < gjenglemtListe.length; i++) {
+					gjenglemteTingField.setText(gjenglemteTingField.getText() + gjenglemtListe[i] + "\n");
+				}
+			}
+			oppdaterSengeplasser();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void oppdaterSengeplasser() {
+		try {
+			ResultSet antallSengeplasser = connection.getSengeplasser(Koie.formaterKoieNavn(activeKoie));
+			if (antallSengeplasser.next()) {
+				antallSengeplasserText.setText("Antall sengeplasser: " + antallSengeplasser.getString(1));
+			}
+			ResultSet reserverteSengeplasser = connection.getReservertePlasser(Koie.formaterKoieNavn(activeKoie), kalender.getValue().toString());
+			if (reserverteSengeplasser.next()) {
+				int ledigeSengeplasser = Integer.parseInt(antallSengeplasser.getString(1).toString()) - Integer.parseInt(reserverteSengeplasser.getString(1).toString());
+				ledigeSengeplasserText.setText("Ledige sengeplasser: " + ledigeSengeplasser);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -155,43 +192,43 @@ public class GUIController {
 	}
 
 	@FXML
-	public void openWelcome(ActionEvent event) { // nï¿½r man trykker pï¿½ hjem-knappen
+	public void openWelcome(ActionEvent event) { // når man trykker på hjem-knappen
 		root.setCenter(welcomePane);
 	}
 
 	@FXML
-	public void openMap(ActionEvent event) { // nï¿½r man trykker pï¿½ kart-knappen
+	public void openMap(ActionEvent event) { // når man trykker på kart-knappen
 		mapPane.getChildren().remove(mapBtn);
 		root.setCenter(mapPane);
 	}
 
 	@FXML
-	public void openReport(ActionEvent event) { // nï¿½r man trykker pï¿½ rapport-knappen
+	public void openReport(ActionEvent event) { // når man trykker på rapport-knappen
 		root.setCenter(reportPane);
 	}
-	
+
 	@FXML
 	public void openReservasjon(ActionEvent event) {
 		root.setCenter(reservasjonsPane);
 	}
 
 	@FXML
-	public void newUser(ActionEvent event) { // nï¿½r man trykker pï¿½ "ny bruker" knappen
+	public void newUser(ActionEvent event) { // når man trykker på "ny bruker" knappen
 		root.setCenter(registerScreen);
 	}
-	
+
 	@FXML
 	public void sendRapport(ActionEvent event) { 
 		if (rapportDropDown.getValue().equals("Velg en koie")) {
 			return;
 		}
-		connection.settinnRapport(ødelagteTingField.getText(), gjenglemteTingField.getText(), Integer.parseInt(vedstatusField.getText()), rapportDropDown.getValue());
-		String ødelagt = Rapport.formaterTekst(ødelagteTingField.getText(), "\n");
-		String gjenglemt = Rapport.formaterTekst(gjenglemteTingField.getText(), "\n");
+		connection.settinnRapport(rapportødelagteTingField.getText(), rapportGjenglemteTingField.getText(), Integer.parseInt(vedstatusField.getText()), rapportDropDown.getValue(), LocalDate.now().toString());
+		String ødelagt = Rapport.formaterTekst(rapportødelagteTingField.getText(), "\n");
+		String gjenglemt = Rapport.formaterTekst(rapportGjenglemteTingField.getText(), "\n");
 		int vedstatus = Integer.parseInt(vedstatusField.getText());
-		connection.settinnRapport(ødelagt, gjenglemt, vedstatus, rapportDropDown.getValue());
+		connection.settinnRapport(ødelagt, gjenglemt, vedstatus, rapportDropDown.getValue(), LocalDate.now().toString());
 	}
-	
+
 	@FXML
 	public void fyllMedlemListe() {
 		medlemListe.getChildren().clear();
@@ -218,11 +255,11 @@ public class GUIController {
 	}
 
 	@FXML
-	public void register(ActionEvent event) { // nï¿½r man trykker pï¿½ "registrer" knappen
+	public void register(ActionEvent event) { // når man trykker på "registrer" knappen
 		ResultSet rs = connection.login(regUsernameField.getText());
 		try {
 			if (regUsernameField.getText().equals("") || regPasswordField.getText().equals("") || regFullNameField.getText().equals("") || regTlfField.getText().equals("") || regEpostField.getText().equals("")) {
-				registreringsFeil.setText("Ingen felter kan vï¿½re tomme");
+				registreringsFeil.setText("Ingen felter kan våre tomme");
 				registreringsFeil.setVisible(true);
 			}
 			else if (rs.next()) {
@@ -242,7 +279,7 @@ public class GUIController {
 	} 
 
 	@FXML
-	public void logOut(ActionEvent event) { // nï¿½r man trykker pï¿½ "logg ut"  eller "tilbake" knappen
+	public void logOut(ActionEvent event) { // når man trykker på "logg ut"  eller "tilbake" knappen
 		admin = null;
 		feilLoginInfo.setVisible(false);
 		registreringsFeil.setVisible(false);
@@ -259,7 +296,7 @@ public class GUIController {
 	}
 
 	@FXML
-	public void logIn(ActionEvent event) { // nï¿½r man trykker pï¿½ "logg inn" knappen
+	public void logIn(ActionEvent event) { // når man trykker på "logg inn" knappen
 		ResultSet dbUserInfo = connection.login(usernameField.getText());
 		try {
 			if (dbUserInfo.next()) {
