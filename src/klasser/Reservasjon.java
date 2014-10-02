@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class Reservasjon {
 	String koieID;
-	private String epost, start_dato, slutt_dato;
+	private String epost, start_dato;
 	DBConnection db = new DBConnection();
 	private Pattern pattern;
 	private Matcher matcher;
@@ -92,15 +92,15 @@ public class Reservasjon {
 					start_dato = list[2];
 
 					break;
-				case 3:
-					isThisDateValid(list[3], "yyyy-MM-dd");
-					slutt_dato = list[3];
-					if (asDate(slutt_dato, "yyyy-MM-dd").compareTo(
-							asDate(start_dato, "yyyy-MM-dd")) <= 0) {
-						throw new IllegalArgumentException(
-								"Start dato kan ikke være etter slutt dato!");
-
-					}
+//				case 3:
+//					isThisDateValid(list[3], "yyyy-MM-dd");
+//					slutt_dato = list[3];
+//					if (asDate(slutt_dato, "yyyy-MM-dd").compareTo(
+//							asDate(start_dato, "yyyy-MM-dd")) <= 0) {
+//						throw new IllegalArgumentException(
+//								"Start dato kan ikke være etter slutt dato!");
+//
+//					}
 
 				}
 			}
@@ -113,7 +113,7 @@ public class Reservasjon {
 	}
 
 	public void updateDB() {
-		db.settinnReservasjon(getEpost(), getStart_dato(), getSlutt_dato(),
+		db.settinnReservasjon(getEpost(), getStart_dato(),
 				getKoieID());
 
 	}

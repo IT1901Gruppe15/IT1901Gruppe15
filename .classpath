@@ -4,5 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.32-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/morten/Downloads/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/morten/Downloads/jaf-1_1_1/jaf-1.1.1/activation.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
