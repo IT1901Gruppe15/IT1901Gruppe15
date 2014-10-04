@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rapport {
-	static String koieID, dato;
+	static String koieID, dato, gjenglemteTing;
 	static List<String> odelagtUtstyr;
 	static int vedstatus;
 	static DBConnection connection = new DBConnection();
@@ -26,11 +26,13 @@ public class Rapport {
 			String[] ord;
 			String[] odelagt;
 			String utstyrOdelagt = null;
+			gjenglemteTing = null;
 
 			while((line = reader.readLine())!=null){
 				System.out.println("begynner på ny linje");
 				odelagtUtstyr = new ArrayList<String>();
 				ord = line.split("¤");
+				odelagt = null;
 				for(int i=0;i<ord.length;i++){
 					switch(i){
 					case 0:
@@ -41,6 +43,7 @@ public class Rapport {
 						break;
 					case 2:
 						dato = ord[2];
+						break;
 					case 3:
 						utstyrOdelagt = ord[3];
 						odelagt = ord[3].split(";");
@@ -48,13 +51,16 @@ public class Rapport {
 							odelagtUtstyr.add(odelagt[j]);
 						}
 						break;
+					case 4:
+						gjenglemteTing = ord[4];
+						break;
 					}
 				}
 				System.out.println("error i settinnRapport?");
-				connection.settinnRapport(utstyrOdelagt,ord[4],vedstatus,koieID,dato);
+				connection.settinnRapport(utstyrOdelagt,gjenglemteTing,vedstatus,koieID,dato);
 				System.out.println("nei");
 				System.out.println("error i endreutstyrstatus?");
-				endreUtstyrStatus(utstyrOdelagt, ord[4]);
+				endreUtstyrStatus(odelagt);
 				System.out.println("nei");
 				System.out.println("error i oppdatervedstatus?");
 				oppdaterVedStatus();
@@ -68,14 +74,14 @@ public class Rapport {
 //			writer.close();
 		}
 	}
-	public static void endreUtstyrStatus(String utstyrOdelagt, String gjenglemt){
-		for(int i = 0; i<odelagtUtstyr.size(); i++){
+	public static void endreUtstyrStatus(String[] utstyrO){
+		for(int i = 0; i<utstyrO.length; i++){
 			try {
+				System.out.println((i+1)+"/"+utstyrO.length);
 				ResultSet rid, uid;
-				int utstyrID, rapportID;
-				utstyrID = 0;
-				rapportID = 0;
-				rid = connection.getrapportID(utstyrOdelagt, gjenglemt, vedstatus);
+				int utstyrID = 0, rapportID = 0;
+				System.out.println("listen i i: "+utstyrO[i]);
+				rid = connection.getrapportID(utstyrO[i], gjenglemteTing, vedstatus);
 				while(rid.next()){
 					String rids = rid.getString(1);
 					rapportID = Integer.parseInt(rids);
