@@ -41,9 +41,9 @@ public class GUIController {
 	@FXML private PasswordField regPasswordField;
 	@FXML private PasswordField regPasswordFieldConfirmation;
 	@FXML private TextField vedstatusField;
-	@FXML private TextArea Ã¸delagteTingField;
+	@FXML private TextArea ødelagteTingField;
 	@FXML private TextArea gjenglemteTingField;
-	@FXML private TextArea rapportÃ¸delagteTingField;
+	@FXML private TextArea rapportødelagteTingField;
 	@FXML private TextArea rapportGjenglemteTingField;
 	@FXML private Pane loginScreen; // root fylles av Panes
 	@FXML private Pane registerScreen;
@@ -52,7 +52,8 @@ public class GUIController {
 	@FXML private Pane brukerToolbar;
 	@FXML private Pane mapPane;
 	@FXML private Pane welcomePane;
-	@FXML private Pane koiePane;
+	@FXML private Pane adminKoiePane;
+	@FXML private Pane brukerKoiePane;
 	@FXML private Pane reservasjonsPane;
 	@FXML private Pane reportPane;
 	@FXML private Text welcomeName; // overskriften pï¿½ welcome-panelet
@@ -97,7 +98,7 @@ public class GUIController {
 					koieStatusName.setText(activeKoie);
 					System.out.println(activeKoie);
 					fyllKoiePane();
-					root.setCenter(koiePane);
+					root.setCenter(adminKoiePane);
 				} else {
 					koieReservasjonsName.setText(activeKoie);
 					root.setCenter(reservasjonsPane);
@@ -137,7 +138,7 @@ public class GUIController {
 		if (admin.getAdminStatus()) {
 			koieStatusName.setText(activeKoie);
 			fyllKoiePane();
-			root.setCenter(koiePane);
+			root.setCenter(adminKoiePane);
 		} else {
 			koieReservasjonsName.setText(activeKoie);
 			root.setCenter(reservasjonsPane);
@@ -145,21 +146,21 @@ public class GUIController {
 	}
 
 	private void fyllKoiePane() {
-		Ã¸delagteTingField.clear();
+		ødelagteTingField.clear();
 		gjenglemteTingField.clear();
 		ResultSet rs = connection.getOdelagtGjenglemtKoie(Koie.formaterKoieNavn(activeKoie));
 		try {
-			String Ã¸delagt = "";
+			String ødelagt = "";
 			String gjenglemt = "";
 			while (rs.next()) {
-				Ã¸delagt += ";" + rs.getString(1);
+				ødelagt += ";" + rs.getString(1);
 				gjenglemt += ";" + rs.getString(2);
 			}
-			if (Ã¸delagt.length() > 0) {				
-				Ã¸delagt = Ã¸delagt.substring(1);
-				String[] Ã¸delagtListe = Ã¸delagt.split(";");
-				for (int i = 0; i < Ã¸delagtListe.length; i++) {
-					Ã¸delagteTingField.setText(Ã¸delagteTingField.getText() + Ã¸delagtListe[i] + "\n");
+			if (ødelagt.length() > 0) {				
+				ødelagt = ødelagt.substring(1);
+				String[] ødelagtListe = ødelagt.split(";");
+				for (int i = 0; i < ødelagtListe.length; i++) {
+					ødelagteTingField.setText(ødelagteTingField.getText() + ødelagtListe[i] + "\n");
 				}
 			}
 			if (gjenglemt.length() > 0) {
@@ -222,11 +223,11 @@ public class GUIController {
 		if (rapportDropDown.getValue().equals("Velg en koie")) {
 			return;
 		}
-		connection.settinnRapport(rapportÃ¸delagteTingField.getText(), rapportGjenglemteTingField.getText(), Integer.parseInt(vedstatusField.getText()), rapportDropDown.getValue(), LocalDate.now().toString());
-		String Ã¸delagt = Rapport.formaterTekst(rapportÃ¸delagteTingField.getText(), "\n");
+		connection.settinnRapport(rapportødelagteTingField.getText(), rapportGjenglemteTingField.getText(), Integer.parseInt(vedstatusField.getText()), rapportDropDown.getValue(), LocalDate.now().toString());
+		String ødelagt = Rapport.formaterTekst(rapportødelagteTingField.getText(), "\n");
 		String gjenglemt = Rapport.formaterTekst(rapportGjenglemteTingField.getText(), "\n");
 		int vedstatus = Integer.parseInt(vedstatusField.getText());
-		connection.settinnRapport(Ã¸delagt, gjenglemt, vedstatus, rapportDropDown.getValue(), LocalDate.now().toString());
+		connection.settinnRapport(ødelagt, gjenglemt, vedstatus, rapportDropDown.getValue(), LocalDate.now().toString());
 	}
 
 	@FXML
