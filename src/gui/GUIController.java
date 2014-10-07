@@ -30,189 +30,190 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class GUIController {
-	
-	//root
-	@FXML private BorderPane root; // ï¿½verste element i gui-hierarkiet
-	
-	//admin toolbar
-	@FXML private Pane toolbar;
-	
-	//bruker toolbar
-	@FXML private Pane brukerToolbar;
-	
-	//koie liste
-	@FXML private Pane koieListe;
-	
-	//welcome pane
-	@FXML private Pane welcomePane;
-	@FXML private Text welcomeName; // overskriften pï¿½ welcome-panelet
-	
-	//map pane
-	@FXML private Pane mapPane;
-	private Button mapBtn; //knappen som dukker opp nï¿½r man trykker pï¿½ en koie pï¿½ kartet
-	
-	//login pane
-	@FXML private Pane loginScreen;
-	@FXML private TextField usernameField; // tekstfeltene for login og registrering
-	@FXML private PasswordField passwordField;
-	@FXML private Label feilLoginInfo; // skrift som dukker opp nï¿½r man prï¿½ver ï¿½ logge inn med feil info
-	
-	//register pane
-	@FXML private Pane registerScreen;
-	@FXML private TextField regFullNameField;
-	@FXML private TextField regTlfField;
-	@FXML private TextField regEpostField;
-	@FXML private TextField regUsernameField;
-	@FXML private PasswordField regPasswordField;
-	@FXML private PasswordField regPasswordFieldConfirmation;
-	@FXML private Label registreringsFeil; // skrift som dukker opp nï¿½r man fï¿½r feil ved registrering
-	
-	//report pane
-	@FXML private Pane reportPane;
-	@FXML ComboBox<String> rapportDropDown;
-	@FXML private TextField vedstatusField;
-	@FXML private TextArea rapportødelagteTingField;
-	@FXML private TextArea rapportGjenglemteTingField;
-	
-	@FXML private TextArea adminØdelagteTingField;
-	@FXML private TextArea adminGjenglemteTingField;
-	@FXML private TextArea brukerØdelagteTingField;
-	@FXML private TextArea brukerGjenglemteTingField;
-	@FXML private Pane adminKoiePane;
-	@FXML private Pane brukerKoiePane;
-	@FXML private Pane reservasjonsPane;
-	@FXML private Text adminKoieStatusName; // overskriften pï¿½ koie-panelet
-	@FXML private Text brukerKoieStatusName; // overskriften pï¿½ koie-panelet
-	@FXML private Text adminAntallSengeplasserText; // overskriften pï¿½ koie-panelet
-	@FXML private Text adminLedigeSengeplasserText; // overskriften pï¿½ koie-panelet
-	@FXML private Text brukerAntallSengeplasserText; // overskriften pï¿½ koie-panelet
-	@FXML private Text brukerLedigeSengeplasserText; // overskriften pï¿½ koie-panelet
-	private String activeKoie; // holder styr pï¿½ aktiv koie
-	@FXML private Pane medlemPane;
-	@FXML private VBox medlemListe;
-	@FXML private HBox medlemListeOverskrift;
-	private Bruker admin;
-	private DBConnection connection;
-	@FXML DatePicker adminKalender; // kalenderen i koie-panelet
-	@FXML DatePicker brukerKalender; // kalenderen i koie-panelet
-	LocalDate ld; // aktiv dato i kalenderen
 
-	public void initialize() { //basically konstruktï¿½r
-		rapportDropDown.getItems().addAll("Flï¿½koia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsï¿½koia", "Holvassgamma", "Iglbu", "Kamtjï¿½nna", "Krï¿½kilkï¿½ten", "Kvernmovollen", "Kï¿½sen", "Lynhï¿½gen", "Mortenskï¿½ten", "Nicokoia", "Rindaslï¿½a", "Selbukï¿½ten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessï¿½tra", "ï¿½vensenget"	);
+	//root
+	@FXML private BorderPane root; // øverste element i gui-hierarkiet
+
+	//admin toolbar
+	@FXML private Pane adminToolbar; // knapper for admin
+
+	//bruker toolbar
+	@FXML private Pane brukerToolbar; // knapper for bruker
+
+	//koie liste
+	@FXML private Pane koieListe; // liste over koiene
+
+	//welcome pane
+	@FXML private Pane welcomePane; // velkomst panelet (default når man logger inn)
+	@FXML private Text welcomeName; // overskriften på welcome-panelet
+
+	//map pane
+	@FXML private Pane mapPane; // kart over koiene
+	private Button mapBtn; //knappen som dukker opp når man trykker på en koie på kartet
+
+	//login pane
+	@FXML private Pane loginScreen; // login skjerm
+	@FXML private TextField usernameField; // tekstfelt for brukernavn i login
+	@FXML private PasswordField passwordField; // tekstfelt for passord i login
+	@FXML private Label invalidLoginInfo; // skrift som dukker opp når man får feil ved login
+
+	//register pane
+	@FXML private Pane registerScreen; // registrerings skjerm
+	@FXML private TextField regFullNameField; // tekstfelt for navn i registrering
+	@FXML private TextField regTlfField; // tekstfelt for telefonnummer i registrering
+	@FXML private TextField regEpostField; // tekstfelt for epost i registrering
+	@FXML private TextField regUsernameField; // tekstfelt for brukernavn i registrering
+	@FXML private PasswordField regPasswordField; // tekstfelt for passord i registrering
+	@FXML private PasswordField regPasswordFieldConfirmation; // tekstfelt for gjentagelse av passord i registrering
+	@FXML private Label registreringsFeil; // skrift som dukker opp når man får feil ved registrering
+
+	//report pane
+	@FXML private Pane reportPane; // rapport panel
+	@FXML private ComboBox<String> rapportDropDown; // drop-down meny med alle koiene i rapport-panelet
+	@FXML private TextField vedstatusField; // tekstfelt for å angi vedstatus i rapport-panelet
+	@FXML private TextArea rapportOdelagteTingField; // tekstfelt for å angi ødelagte gjenstander i rapport-panelet
+	@FXML private TextArea rapportGjenglemteTingField; // tekstfelt for å angi gjenglemte gjenstander i rapport-panelet
+
+	//admin koie info pane
+	@FXML private Pane adminKoiePane; // koie status panel for admin
+	@FXML private Text adminKoieStatusName; // overskriften på koie-panelet for admin
+	@FXML private TextArea adminOdelagteTingField; // tekstfelt for ødelagte gjenstander i koie-panelet for admin
+	@FXML private TextArea adminGjenglemteTingField; // tekstfelt for gjenglemte gjenstander i koie-panelet for admin
+	@FXML private DatePicker adminKalender; // kalenderen i koie-panelet for admin
+	@FXML private Text adminAntallSengeplasserText; // overskriften på koie-panelet for admin
+	@FXML private Text adminLedigeSengeplasserText; // overskriften på koie-panelet for admin
+
+	//bruker koie info pane
+	@FXML private Pane brukerKoiePane; // koie status panel for bruker
+	@FXML private Text brukerKoieStatusName; // overskriften på koie-panelet for bruker
+	@FXML private TextArea brukerOdelagteTingField; // tekstfelt for ødelagte gjenstander i koie-panelet for bruker
+	@FXML private TextArea brukerGjenglemteTingField; // tekstfelt for gjenglemte gjenstander i koie-panelet for bruker
+	@FXML private DatePicker brukerKalender; // kalenderen i koie-panelet for bruker
+	@FXML private Text brukerAntallSengeplasserText; // overskriften på koie-panelet for bruker
+	@FXML private Text brukerLedigeSengeplasserText; // overskriften på koie-panelet for bruker
+
+	//medlem liste pane
+	@FXML private Pane medlemPane; // panel med liste over registrerte brukere i systemet
+	@FXML private VBox medlemListe; // liste over medlemmer
+	@FXML private HBox medlemListeOverskrift; // overskriften i tabellen (Navn, Tlf, Epost osv...)
+
+	private String activeKoie; // holder styr på aktiv koie
+	private Bruker bruker; // innlogget bruker i systemet
+	private DBConnection connection; // håndterer alt av database ting
+
+	public void initialize() { //basically konstruktår
+		rapportDropDown.getItems().addAll("Flåkoia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsåkoia", "Holvassgamma", "Iglbu", "Kamtjønna", "Kråkilkåten", "Kvernmovollen", "Kåsen", "Lynhøgen", "Mortenskåten", "Nicokoia", "Rindasløa", "Selbukåten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessætra", "Øvensenget"	);
 		connection = new DBConnection();
-		ld = LocalDate.now();
-		adminKalender.setValue(ld);
-		adminKalender.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent evet) {
-				ld = adminKalender.getValue();
-				oppdaterSengeplasser(true, adminKalender);
-			}
-		});
-		brukerKalender.setValue(ld);
-		brukerKalender.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent evet) {
-				ld = brukerKalender.getValue();
-				oppdaterSengeplasser(false, brukerKalender);
-			}
-		});
-		feilLoginInfo.setVisible(false);
-		registreringsFeil.setVisible(false);
-		root.setCenter(loginScreen);
-		mapBtn = new Button();
-		mapBtn.setFocusTraversable(false); //gjï¿½r at man ikke kan "hoppe" til knappen ved ï¿½ trykke pï¿½ tab
-		mapBtn.setOnAction(new EventHandler<ActionEvent>() { //nï¿½r man trykker pï¿½ knappen
+		adminKalender.setValue(LocalDate.now()); // setter default dato til idag
+		adminKalender.setOnAction(new EventHandler<ActionEvent>() { // når man endrer dato
 			public void handle(ActionEvent event) {
-				fyllKoiePane();
-				if (admin.getAdminStatus()) {
-					root.setCenter(adminKoiePane);
+				oppdaterSengeplasser(true, adminKalender.getValue()); // oppdaterer info om sengeplasser i koie-panelet for admin
+			}
+		});
+		brukerKalender.setValue(LocalDate.now());  // setter default dato til idag
+		brukerKalender.setOnAction(new EventHandler<ActionEvent>() { // når man endrer dato
+			public void handle(ActionEvent event) {
+				oppdaterSengeplasser(false, brukerKalender.getValue()); // oppdaterer info om sengeplasser i koie-panelet for bruker
+			}
+		});
+		invalidLoginInfo.setVisible(false); // setter default synlighet for teksten som dukker opp ved feil ved login til false
+		registreringsFeil.setVisible(false); // setter default synlighet for teksten som dukker opp ved feil ved registrering til false
+		root.setCenter(loginScreen); // setter default panel til login skjermen
+		mapBtn = new Button();
+		mapBtn.setFocusTraversable(false); // gjør at man ikke kan "hoppe" til knappen ved å trykke på tab
+		mapBtn.setOnAction(new EventHandler<ActionEvent>() { // når man trykker på knappen
+			public void handle(ActionEvent event) {
+				fyllKoiePane(); // finner all informasjon som skal vises i koie-panelet
+				if (bruker.isAdmin()) { // hvis bruker er admin
+					root.setCenter(adminKoiePane); // viser koie-informasjon for admin
 				} else {
-					root.setCenter(brukerKoiePane);
+					root.setCenter(brukerKoiePane); // viser koie-informasjon for bruker
 				}
 			}
 		});
-		mapPane.setOnMousePressed(new EventHandler<MouseEvent>() {  // logikk for ï¿½ hï¿½ndtere trykking
-			public void handle(MouseEvent me) {						// pï¿½ knapper pï¿½ kartet
+		mapPane.setOnMousePressed(new EventHandler<MouseEvent>() {  // logikk for å håndtere trykking på knapper på kartet
+			public void handle(MouseEvent me) {
 				if (me.getButton() == MouseButton.PRIMARY) { // hvis venstre museklikk
-					activeKoie = ((Node) me.getTarget()).getId();
-					activeKoie = activeKoie.substring(0, activeKoie.length() - 3);
-					if (activeKoie == null || activeKoie == mapPane.getId()) {  // hvis man ikke trykka pï¿½
-						mapPane.getChildren().remove(mapBtn);					// en koie
+					activeKoie = ((Node) me.getTarget()).getId(); // finner hvilken koie man trykket på
+					if (activeKoie == null || activeKoie == mapPane.getId()) {  // hvis man ikke trykket på en koie
+						mapPane.getChildren().remove(mapBtn); // skjuler knappen
 						return;
 					}
-					double koieX = ((ImageView) me.getTarget()).getLayoutX(); // plasserer knappen pï¿½ kartet
-					double koieY = ((ImageView) me.getTarget()).getLayoutY();
-					mapBtn.setText("ï¿½pne " + activeKoie);
-					mapBtn.setLayoutX(koieX + 25);
+					activeKoie = activeKoie.substring(0, activeKoie.length() - 3); // activeKoie er her f.eks. FosenkoiaMap, fjerner "Map"
+					double koieX = ((ImageView) me.getTarget()).getLayoutX(); // finner x-posisjonen til koia pan trykket på
+					double koieY = ((ImageView) me.getTarget()).getLayoutY(); // finner x-posisjonen til koia pan trykket på
+					mapBtn.setText("Åpne " + activeKoie); // setter teksten på knappen til f.eks "Åpne FosenKoia"
+					mapBtn.setLayoutX(koieX + 25); // plasserer knappen på kartet
 					mapBtn.setLayoutY(koieY - 25);
-					mapPane.getChildren().remove(mapBtn);
-					mapPane.getChildren().add(mapBtn);
+					mapPane.getChildren().remove(mapBtn); // hvis knappen allerede er på skjermen, så fjernes den (gjøres for å forhindre error)
+					mapPane.getChildren().add(mapBtn); // viser knappen
 				}
 			}
 		});
 	}
 
+	/**
+	 * Finner ut hvilken koie man trykket på i lista og åpner koie-panelet for denne koia 
+	 * 
+	 * @param event Eventen som kalte denne metoden
+	 */
 	@FXML
-	public void test(ActionEvent event) { // test-metode please ignore
-		System.out.println("test " + event);
-	}
-
-	@FXML
-	public void koieClicked(ActionEvent event) { // nï¿½r man trykker pï¿½ koie i lista
-		((Hyperlink) event.getSource()).setVisited(false);
-		activeKoie = ((Hyperlink) event.getSource()).getText();
-		fyllKoiePane();
-		if (admin.getAdminStatus()) {
-			root.setCenter(adminKoiePane);
+	public void koieClicked(ActionEvent event) { // når man trykker på koie i lista
+		((Hyperlink) event.getSource()).setVisited(false); // gjør at linkene i koia-lista ikke for strek under seg når man trykker på de
+		activeKoie = ((Hyperlink) event.getSource()).getText(); // setter aktivKoie til koia man trykket på
+		fyllKoiePane(); // finner all informasjon som skal vises i koie-panelet
+		if (bruker.isAdmin()) { // hvis bruker er admin
+			root.setCenter(adminKoiePane); // viser koie-informasjon for admin
 		} else {
-			root.setCenter(brukerKoiePane);
+			root.setCenter(brukerKoiePane); // viser koie-informasjon for bruker
 		}
 	}
 
-	private void fyllKoiePane() {
-		ResultSet rs = connection.getOdelagtGjenglemtKoie(Koie.formaterKoieNavn(activeKoie));
+	private void fyllKoiePane() { // finner all informasjon som skal vises i koie-panelet
+		ResultSet rs = connection.getOdelagtGjenglemtKoie(Koie.formaterKoieNavn(activeKoie)); // får alle ødelagte og gjenglemte gjenstander fra databasen
 		try {
-			String ødelagt = "";
-			String gjenglemt = "";
-			while (rs.next()) {
-				ødelagt += ";" + rs.getString(1);
-				gjenglemt += ";" + rs.getString(2);
+			String ødelagt = ""; // string som fylles med alle ødelagte gjenstander
+			String gjenglemt = ""; // string som fylles med alle gjenglemte gjenstander
+			while (rs.next()) { // mens det finnes flere elementer i databasen
+				ødelagt += ";" + rs.getString(1); // ;ødelagt1;ødelagt2;ødelagt3
+				gjenglemt += ";" + rs.getString(2); // ;gjenglemt1;gjenglemt2;gjenglemt3
 			}
-			String ferdigØdelagt = "";
-			if (ødelagt.length() > 0) {				
-				ødelagt = ødelagt.substring(1);
-				String[] ødelagtListe = ødelagt.split(";");
-				for (int i = 0; i < ødelagtListe.length; i++) {
-					ferdigØdelagt += ødelagtListe[i] + "\n";
+			String ferdigØdelagt = ""; // string som skal settes inn i tekstfeltet for ødelagte gjenstander
+			if (ødelagt.length() > 0) { // hvis det finnes minst en ødelagt gjenstand
+				ødelagt = ødelagt.substring(1); // fjerner den første semikoloen
+				String[] ødelagtListe = ødelagt.split(";"); // splitter stringen
+				for (int i = 0; i < ødelagtListe.length; i++) { // for alle elementer i lista
+					ferdigØdelagt += ødelagtListe[i] + "\n"; // setter alle elementene i en string med "\n" mellom de
 				}
 			}
-			String ferdigGjenglemt = "";
-			if (gjenglemt.length() > 0) {
-				gjenglemt = gjenglemt.substring(1);				
-				String[] gjenglemtListe = gjenglemt.split(";");
-				for (int i = 0; i < gjenglemtListe.length; i++) {
-					ferdigGjenglemt += gjenglemtListe[i] + "\n";
+			String ferdigGjenglemt = ""; // string som skal settes inn i tekstfeltet for gjenglemte gjenstander
+			if (gjenglemt.length() > 0) { // hvis det finnes minst en gjenglemt gjenstand
+				gjenglemt = gjenglemt.substring(1); // fjerner den første semikoloen
+				String[] gjenglemtListe = gjenglemt.split(";"); // splitter stringen
+				for (int i = 0; i < gjenglemtListe.length; i++) { // for alle elementer i lista
+					ferdigGjenglemt += gjenglemtListe[i] + "\n"; // setter alle elementene i en string med "\n" mellom de
 				}
 			}
-			if (admin.getAdminStatus()) {
-				adminKoieStatusName.setText(activeKoie);
-				adminØdelagteTingField.setText(ferdigØdelagt);
+			if (bruker.isAdmin()) {
+				adminKoieStatusName.setText(activeKoie); // setter inn all informasjonen i koie-panelet
+				adminOdelagteTingField.setText(ferdigØdelagt);
 				adminGjenglemteTingField.setText(ferdigGjenglemt);
-				oppdaterSengeplasser(true, adminKalender);
+				oppdaterSengeplasser(true, adminKalender.getValue());
 			} else {
 				brukerKoieStatusName.setText(activeKoie);
-				brukerØdelagteTingField.setText(ferdigØdelagt);
+				brukerOdelagteTingField.setText(ferdigØdelagt);
 				brukerGjenglemteTingField.setText(ferdigGjenglemt);
-				oppdaterSengeplasser(false, brukerKalender);
+				oppdaterSengeplasser(false, brukerKalender.getValue());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void oppdaterSengeplasser(boolean isAdmin, DatePicker kalender) {
+	private void oppdaterSengeplasser(boolean isAdmin, LocalDate date) { // setter inn riktig antall totalt/tilgjengelige sengeplasser
 		try {
 			ResultSet antallSengeplasser = connection.getSengeplasser(Koie.formaterKoieNavn(activeKoie));
-			ResultSet reserverteSengeplasser = connection.getReservertePlasser(Koie.formaterKoieNavn(activeKoie), kalender.getValue().toString());
+			ResultSet reserverteSengeplasser = connection.getReservertePlasser(Koie.formaterKoieNavn(activeKoie), date.toString());
 			if (antallSengeplasser.next()) {
 				if (isAdmin) {					
 					adminAntallSengeplasserText.setText("Antall sengeplasser: " + antallSengeplasser.getString(1));
@@ -231,47 +232,70 @@ public class GUIController {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Åpner velkomst-panelet
+	 * 
+	 * @param event Eventen som kalte denne metoden
+	 */
 	@FXML
-	public void openWelcome(ActionEvent event) { // nï¿½r man trykker pï¿½ hjem-knappen
+	public void openWelcome(ActionEvent event) { // når man trykker på hjem-knappen
 		root.setCenter(welcomePane);
 	}
 
+	/**
+	 * Åpner kartet
+	 * 
+	 * @param event Eventen som kalte denne metoden
+	 */
 	@FXML
-	public void openMap(ActionEvent event) { // nï¿½r man trykker pï¿½ kart-knappen
+	public void openMap(ActionEvent event) { // når man trykker på kart-knappen
 		mapPane.getChildren().remove(mapBtn);
 		root.setCenter(mapPane);
 	}
 
+	/**
+	 * Åpner rapport-panelet
+	 * 
+	 * @param event Eventen som kalte denne metoden
+	 */
 	@FXML
-	public void openReport(ActionEvent event) { // nï¿½r man trykker pï¿½ rapport-knappen
+	public void openReport(ActionEvent event) { // når man trykker på rapport-knappen
 		root.setCenter(reportPane);
 	}
 
+	/**
+	 * Åpner registrerings-skjermen
+	 * 
+	 * @param event Eventen som kalte denne metoden
+	 */
 	@FXML
-	public void openReservasjon(ActionEvent event) {
-		root.setCenter(reservasjonsPane);
-	}
-
-	@FXML
-	public void newUser(ActionEvent event) { // nï¿½r man trykker pï¿½ "ny bruker" knappen
+	public void newUser(ActionEvent event) { // når man trykker på "ny bruker" knappen
 		root.setCenter(registerScreen);
 	}
 
+	/**
+	 * Sender en rapport inn i databasen
+	 * 
+	 * @param event Eventen som kalte denne metoden
+	 */
 	@FXML
 	public void sendRapport(ActionEvent event) { 
 		if (rapportDropDown.getValue().equals("Velg en koie")) {
 			return;
 		}
-		connection.settinnRapport(rapportødelagteTingField.getText(), rapportGjenglemteTingField.getText(), Integer.parseInt(vedstatusField.getText()), rapportDropDown.getValue(), LocalDate.now().toString());
-		String ødelagt = Rapport.formaterTekst(rapportødelagteTingField.getText(), "\n");
+		connection.settinnRapport(rapportOdelagteTingField.getText(), rapportGjenglemteTingField.getText(), Integer.parseInt(vedstatusField.getText()), rapportDropDown.getValue(), LocalDate.now().toString());
+		String ødelagt = Rapport.formaterTekst(rapportOdelagteTingField.getText(), "\n");
 		String gjenglemt = Rapport.formaterTekst(rapportGjenglemteTingField.getText(), "\n");
 		int vedstatus = Integer.parseInt(vedstatusField.getText());
 		connection.settinnRapport(ødelagt, gjenglemt, vedstatus, rapportDropDown.getValue(), LocalDate.now().toString());
 	}
 
+	/**
+	 * Fyller og åpner listen over alle registrerte brukere
+	 */
 	@FXML
-	public void fyllMedlemListe() {
+	public void openMedlemListe() {
 		medlemListe.getChildren().clear();
 		medlemListe.getChildren().add(medlemListeOverskrift);
 		ResultSet rs = connection.getMembers();  // Brukernavn, Navn, Tlf, Epost, isAdmin
@@ -295,12 +319,17 @@ public class GUIController {
 		root.setCenter(medlemPane);
 	}
 
+	/**
+	 * Forsøker å registrere en ny bruker i databasen
+	 * 
+	 * @param event Eventen som kalte denne metoden
+	 */
 	@FXML
-	public void register(ActionEvent event) { // nï¿½r man trykker pï¿½ "registrer" knappen
+	public void register(ActionEvent event) { // når man trykker på "registrer" knappen
 		ResultSet rs = connection.login(regUsernameField.getText());
 		try {
 			if (regUsernameField.getText().equals("") || regPasswordField.getText().equals("") || regFullNameField.getText().equals("") || regTlfField.getText().equals("") || regEpostField.getText().equals("")) {
-				registreringsFeil.setText("Ingen felter kan vï¿½re tomme");
+				registreringsFeil.setText("Ingen felter kan våre tomme");
 				registreringsFeil.setVisible(true);
 			}
 			else if (rs.next()) {
@@ -319,10 +348,15 @@ public class GUIController {
 		}
 	} 
 
+	/**
+	 * Logger ut av systemet
+	 * 
+	 * @param event Eventen som kalte denne metoden
+	 */
 	@FXML
-	public void logOut(ActionEvent event) { // nï¿½r man trykker pï¿½ "logg ut"  eller "tilbake" knappen
-		admin = null;
-		feilLoginInfo.setVisible(false);
+	public void logOut(ActionEvent event) { // når man trykker på "logg ut"  eller "tilbake" knappen
+		bruker = null;
+		invalidLoginInfo.setVisible(false);
 		registreringsFeil.setVisible(false);
 		usernameField.clear();
 		passwordField.clear();
@@ -336,28 +370,33 @@ public class GUIController {
 		root.setCenter(loginScreen);
 	}
 
+	/**
+	 * Forsøker å logge inn i systemet
+	 * 
+	 * @param event Eventen som kalte denne metoden
+	 */
 	@FXML
-	public void logIn(ActionEvent event) { // nï¿½r man trykker pï¿½ "logg inn" knappen
+	public void logIn(ActionEvent event) { // når man trykker på "logg inn" knappen
 		ResultSet dbUserInfo = connection.login(usernameField.getText());
 		try {
 			if (dbUserInfo.next()) {
 				if (dbUserInfo.getString(1).equals(usernameField.getText()) && dbUserInfo.getString(2).equals(passwordField.getText())) {
-					admin = new Bruker(usernameField.getText(), dbUserInfo.getString(3), dbUserInfo.getString(4), dbUserInfo.getString(5), dbUserInfo.getString(6));
+					bruker = new Bruker(usernameField.getText(), dbUserInfo.getString(3), dbUserInfo.getString(4), dbUserInfo.getString(5), dbUserInfo.getString(6));
 					welcomeName.setText("Velkommen, " + usernameField.getText());
-					if (admin.getAdminStatus()) {
+					if (bruker.isAdmin()) {
 						root.setLeft(koieListe);
 						root.setCenter(welcomePane);
-						root.setTop(toolbar);
+						root.setTop(adminToolbar);
 					} else {
 						root.setLeft(koieListe);
 						root.setCenter(welcomePane);
 						root.setTop(brukerToolbar);
 					}
 				} else {
-					feilLoginInfo.setVisible(true);
+					invalidLoginInfo.setVisible(true);
 				}
 			} else {
-				feilLoginInfo.setVisible(true);
+				invalidLoginInfo.setVisible(true);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

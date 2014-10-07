@@ -26,7 +26,7 @@
 						defaultButton="true" />
 				</HBox>
 			</VBox>
-			<Label fx:id="feilLoginInfo" text="Feil brukernavn og/eller passord"
+			<Label fx:id="invalidLoginInfo" text="Feil brukernavn og/eller passord"
 				style="-fx-font-size: 14px; -fx-text-fill: #ff0000" layoutX="540"
 				layoutY="350" />
 		</Pane>
@@ -126,7 +126,7 @@
 	</fx:define>
 
 	<fx:define>
-		<Pane fx:id="toolbar" prefHeight="70">
+		<Pane fx:id="adminToolbar" prefHeight="70">
 			<HBox spacing="10" layoutX="5" layoutY="5">
 				<Button text="Hjem" prefHeight="60" prefWidth="60" onAction="#openWelcome"
 					contentDisplay="top" cancelButton="true" focusTraversable="false">
@@ -147,7 +147,7 @@
 					</graphic>
 				</Button>
 				<Button text="Medlemmer" prefHeight="60" prefWidth="60"
-					onAction="#fyllMedlemListe" contentDisplay="top" focusTraversable="false">
+					onAction="#openMedlemListe" contentDisplay="top" focusTraversable="false">
 					<font>
 						<Font size="8" />
 					</font>
@@ -194,7 +194,7 @@
 					</graphic>
 				</Button>
 				<Button text="Reservasjon" prefHeight="60" prefWidth="60"
-					onAction="#fyllMedlemListe" contentDisplay="top" focusTraversable="false">
+					onAction="#openMedlemListe" contentDisplay="top" focusTraversable="false">
 					<font>
 						<Font size="8" />
 					</font>
@@ -318,7 +318,7 @@
 			<Text fx:id="adminKoieStatusName" layoutX="15" layoutY="20"
 				style="-fx-font-size: 20px" />
 			<Label text="Ødelagte ting" layoutX="15" layoutY="50" />
-			<TextArea fx:id="adminØdelagteTingField" editable="false"
+			<TextArea fx:id="adminOdelagteTingField" editable="false"
 				focusTraversable="false" layoutX="15" layoutY="70" prefWidth="125"
 				prefHeight="150" />
 			<Label text="Gjenglemte ting" layoutX="150" layoutY="50" />
@@ -341,7 +341,7 @@
 			<Text fx:id="brukerKoieStatusName" layoutX="15" layoutY="20"
 				style="-fx-font-size: 20px" />
 			<Label text="Ødelagte ting" layoutX="15" layoutY="50" />
-			<TextArea fx:id="brukerØdelagteTingField" editable="false"
+			<TextArea fx:id="brukerOdelagteTingField" editable="false"
 				focusTraversable="false" layoutX="15" layoutY="70" prefWidth="125"
 				prefHeight="150" />
 			<Label text="Gjenglemte ting" layoutX="150" layoutY="50" />
@@ -368,7 +368,7 @@
 			<TextField fx:id="vedstatusField" layoutX="225" layoutY="50"
 				focusTraversable="false" />
 			<Label text="Ødelagte ting" layoutX="15" layoutY="100" />
-			<TextArea fx:id="rapportødelagteTingField" focusTraversable="false"
+			<TextArea fx:id="rapportOdelagteTingField" focusTraversable="false"
 				layoutX="15" layoutY="120" prefWidth="125" prefHeight="150" />
 			<Label text="Gjenglemte ting" layoutX="150" layoutY="100" />
 			<TextArea fx:id="rapportGjenglemteTingField"
