@@ -1,60 +1,69 @@
 package core;
 
 public class Utstyr {
-		int utstyrsID;
-		int koieID;
-		String type;
+		String koieID;
+		String navn,admin_id,admin;
 		String innkjøpsdato;
-		boolean status;
+		int status;
 		
-		private Utstyr(int utstyrsID, int koieID, String type, String innkjøpsdato, boolean status){
-			this.utstyrsID = utstyrsID;
+		private Utstyr( String koieID, String navn, String innkjøpsdato, boolean status,String admin_id){
+			
 			this.koieID = koieID;
-			this.type = type;
+			this.navn = navn;
 			this.innkjøpsdato = innkjøpsdato;
 			this.status = status;
+			this.admin_id=admin_id;
 		}
 		
-		public int getUtstyrsID(){
-			return this.utstyrsID;
+		public void registrerUtstyrKjop(){
+			DBConnection db = new DBConnection();
+			db.registrerUtstyr(getNavn(), getInnkjøpsdato(), getStatus(), getAdmin_id(), getKoieID());
+			
+			
 		}
 		
-		public void setUtstyrsID(int utstyrsID){
-			this.utstyrsID = utstyrsID;
-		}
 		
-		public int getKoieID(){
-			return this.koieID;
-		}
 		
-		public void setKoieID(int koieID){
+
+	public String getKoieID() {
+			return koieID;
+		}
+
+		public void setKoieID(String koieID) {
 			this.koieID = koieID;
 		}
-		
-		public String getType(){
-			return this.type;
+
+		public String getNavn() {
+			return navn;
 		}
-		
-		public void setType(String type){
-			this.type = type;
+
+		public void setNavn(String navn) {
+			this.navn = navn;
 		}
-		
-		public String getInnkjøpsdato(){
-			return this.innkjøpsdato;
+
+		public String getAdmin_id() {
+			return admin_id;
 		}
-		
-		public void setInnkjøpsdato(String innkjøpsdato){
+
+		public void setAdmin_id(String admin_id) {
+			this.admin_id = admin_id;
+		}
+
+		public String getInnkjøpsdato() {
+			return innkjøpsdato;
+		}
+
+		public void setInnkjøpsdato(String innkjøpsdato) {
 			this.innkjøpsdato = innkjøpsdato;
 		}
-		
-		public boolean getStatus(){
-			return this.status;
+
+		public int getStatus() {
+			return status;
 		}
-		
-		public void setStatus(boolean status){
+
+		public void setStatus(int status) {
 			this.status = status;
 		}
-		
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
