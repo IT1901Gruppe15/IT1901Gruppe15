@@ -58,10 +58,8 @@ public class Rapport {
 				}
 				System.out.println("error i settinnRapport?");
 				connection.settinnRapport(utstyrOdelagt,gjenglemteTing,vedstatus,koieID,dato);
-				System.out.println("nei");
 				System.out.println("error i endreutstyrstatus?");
-				endreUtstyrStatus(odelagt);
-				System.out.println("nei");
+				endreUtstyrStatus();
 				System.out.println("error i oppdatervedstatus?");
 				oppdaterVedStatus();
 			}			
@@ -74,14 +72,12 @@ public class Rapport {
 //			writer.close();
 		}
 	}
-	public static void endreUtstyrStatus(String[] utstyrO){
-		for(int i = 0; i<utstyrO.length; i++){
+	public static void endreUtstyrStatus(){
+		for(int i = 0; i<odelagtUtstyr.size(); i++){
 			try {
-				System.out.println((i+1)+"/"+utstyrO.length);
 				ResultSet rid, uid;
 				int utstyrID = 0, rapportID = 0;
-				System.out.println("listen i i: "+utstyrO[i]);
-				rid = connection.getrapportID(utstyrO[i], gjenglemteTing, vedstatus);
+				rid = connection.getrapportID(odelagtUtstyr.get(i), gjenglemteTing, vedstatus);
 				while(rid.next()){
 					String rids = rid.getString(1);
 					rapportID = Integer.parseInt(rids);
