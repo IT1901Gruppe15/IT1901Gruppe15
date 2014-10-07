@@ -19,5 +19,9 @@ public class Bruker {
 	public boolean getAdminStatus() {
 		return admin;
 	}
+	
+	public String getBrukernavn() {
+		return brukernavn;
+	}
 
 }

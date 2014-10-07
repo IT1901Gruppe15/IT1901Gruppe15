@@ -30,60 +30,89 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class GUIController {
-
+	
+	//root
 	@FXML private BorderPane root; // ï¿½verste element i gui-hierarkiet
+	
+	//admin toolbar
+	@FXML private Pane toolbar;
+	
+	//bruker toolbar
+	@FXML private Pane brukerToolbar;
+	
+	//koie liste
+	@FXML private Pane koieListe;
+	
+	//welcome pane
+	@FXML private Pane welcomePane;
+	@FXML private Text welcomeName; // overskriften pï¿½ welcome-panelet
+	
+	//map pane
+	@FXML private Pane mapPane;
+	private Button mapBtn; //knappen som dukker opp nï¿½r man trykker pï¿½ en koie pï¿½ kartet
+	
+	//login pane
+	@FXML private Pane loginScreen;
 	@FXML private TextField usernameField; // tekstfeltene for login og registrering
 	@FXML private PasswordField passwordField;
+	@FXML private Label feilLoginInfo; // skrift som dukker opp nï¿½r man prï¿½ver ï¿½ logge inn med feil info
+	
+	//register pane
+	@FXML private Pane registerScreen;
 	@FXML private TextField regFullNameField;
 	@FXML private TextField regTlfField;
 	@FXML private TextField regEpostField;
 	@FXML private TextField regUsernameField;
 	@FXML private PasswordField regPasswordField;
 	@FXML private PasswordField regPasswordFieldConfirmation;
+	@FXML private Label registreringsFeil; // skrift som dukker opp nï¿½r man fï¿½r feil ved registrering
+	
+	//report pane
+	@FXML private Pane reportPane;
+	@FXML ComboBox<String> rapportDropDown;
 	@FXML private TextField vedstatusField;
-	@FXML private TextArea ødelagteTingField;
-	@FXML private TextArea gjenglemteTingField;
 	@FXML private TextArea rapportødelagteTingField;
 	@FXML private TextArea rapportGjenglemteTingField;
-	@FXML private Pane loginScreen; // root fylles av Panes
-	@FXML private Pane registerScreen;
-	@FXML private Pane koieListe;
-	@FXML private Pane toolbar;
-	@FXML private Pane brukerToolbar;
-	@FXML private Pane mapPane;
-	@FXML private Pane welcomePane;
-	@FXML private Pane koiePane;
+	
+	@FXML private TextArea adminØdelagteTingField;
+	@FXML private TextArea adminGjenglemteTingField;
+	@FXML private TextArea brukerØdelagteTingField;
+	@FXML private TextArea brukerGjenglemteTingField;
+	@FXML private Pane adminKoiePane;
+	@FXML private Pane brukerKoiePane;
 	@FXML private Pane reservasjonsPane;
-	@FXML private Pane reportPane;
-	@FXML private Text welcomeName; // overskriften pï¿½ welcome-panelet
-	@FXML private Text koieReservasjonsName; // overskriften pï¿½ reservasjons-panelet
-	@FXML private Text koieStatusName; // overskriften pï¿½ koie-panelet
-	@FXML private Text antallSengeplasserText; // overskriften pï¿½ koie-panelet
-	@FXML private Text ledigeSengeplasserText; // overskriften pï¿½ koie-panelet
-	@FXML private Label feilLoginInfo; // skrift som dukker opp nï¿½r man prï¿½ver ï¿½ logge inn med feil info
-	@FXML private Label registreringsFeil; // skrift som dukker opp nï¿½r man fï¿½r feil ved registrering
+	@FXML private Text adminKoieStatusName; // overskriften pï¿½ koie-panelet
+	@FXML private Text brukerKoieStatusName; // overskriften pï¿½ koie-panelet
+	@FXML private Text adminAntallSengeplasserText; // overskriften pï¿½ koie-panelet
+	@FXML private Text adminLedigeSengeplasserText; // overskriften pï¿½ koie-panelet
+	@FXML private Text brukerAntallSengeplasserText; // overskriften pï¿½ koie-panelet
+	@FXML private Text brukerLedigeSengeplasserText; // overskriften pï¿½ koie-panelet
 	private String activeKoie; // holder styr pï¿½ aktiv koie
-	private Button mapBtn; //knappen som dukker opp nï¿½r man trykker pï¿½ en koie pï¿½ kartet
 	@FXML private Pane medlemPane;
 	@FXML private VBox medlemListe;
 	@FXML private HBox medlemListeOverskrift;
 	private Bruker admin;
 	private DBConnection connection;
-	@FXML DatePicker kalender; // kalenderen i koie-panelet
-	@FXML DatePicker reservasjonFra; // kalenderen i koie-panelet
-	@FXML DatePicker reservasjonTil; // kalenderen i koie-panelet
+	@FXML DatePicker adminKalender; // kalenderen i koie-panelet
+	@FXML DatePicker brukerKalender; // kalenderen i koie-panelet
 	LocalDate ld; // aktiv dato i kalenderen
-	@FXML ComboBox<String> rapportDropDown;
 
 	public void initialize() { //basically konstruktï¿½r
 		rapportDropDown.getItems().addAll("Flï¿½koia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsï¿½koia", "Holvassgamma", "Iglbu", "Kamtjï¿½nna", "Krï¿½kilkï¿½ten", "Kvernmovollen", "Kï¿½sen", "Lynhï¿½gen", "Mortenskï¿½ten", "Nicokoia", "Rindaslï¿½a", "Selbukï¿½ten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessï¿½tra", "ï¿½vensenget"	);
 		connection = new DBConnection();
 		ld = LocalDate.now();
-		kalender.setValue(ld);
-		kalender.setOnAction(new EventHandler<ActionEvent>() {
+		adminKalender.setValue(ld);
+		adminKalender.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent evet) {
-				ld = kalender.getValue();
-				oppdaterSengeplasser();
+				ld = adminKalender.getValue();
+				oppdaterSengeplasser(true, adminKalender);
+			}
+		});
+		brukerKalender.setValue(ld);
+		brukerKalender.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent evet) {
+				ld = brukerKalender.getValue();
+				oppdaterSengeplasser(false, brukerKalender);
 			}
 		});
 		feilLoginInfo.setVisible(false);
@@ -93,14 +122,11 @@ public class GUIController {
 		mapBtn.setFocusTraversable(false); //gjï¿½r at man ikke kan "hoppe" til knappen ved ï¿½ trykke pï¿½ tab
 		mapBtn.setOnAction(new EventHandler<ActionEvent>() { //nï¿½r man trykker pï¿½ knappen
 			public void handle(ActionEvent event) {
+				fyllKoiePane();
 				if (admin.getAdminStatus()) {
-					koieStatusName.setText(activeKoie);
-					System.out.println(activeKoie);
-					fyllKoiePane();
-					root.setCenter(koiePane);
+					root.setCenter(adminKoiePane);
 				} else {
-					koieReservasjonsName.setText(activeKoie);
-					root.setCenter(reservasjonsPane);
+					root.setCenter(brukerKoiePane);
 				}
 			}
 		});
@@ -134,19 +160,15 @@ public class GUIController {
 	public void koieClicked(ActionEvent event) { // nï¿½r man trykker pï¿½ koie i lista
 		((Hyperlink) event.getSource()).setVisited(false);
 		activeKoie = ((Hyperlink) event.getSource()).getText();
+		fyllKoiePane();
 		if (admin.getAdminStatus()) {
-			koieStatusName.setText(activeKoie);
-			fyllKoiePane();
-			root.setCenter(koiePane);
+			root.setCenter(adminKoiePane);
 		} else {
-			koieReservasjonsName.setText(activeKoie);
-			root.setCenter(reservasjonsPane);
+			root.setCenter(brukerKoiePane);
 		}
 	}
 
 	private void fyllKoiePane() {
-		ødelagteTingField.clear();
-		gjenglemteTingField.clear();
 		ResultSet rs = connection.getOdelagtGjenglemtKoie(Koie.formaterKoieNavn(activeKoie));
 		try {
 			String ødelagt = "";
@@ -155,36 +177,55 @@ public class GUIController {
 				ødelagt += ";" + rs.getString(1);
 				gjenglemt += ";" + rs.getString(2);
 			}
+			String ferdigØdelagt = "";
 			if (ødelagt.length() > 0) {				
 				ødelagt = ødelagt.substring(1);
 				String[] ødelagtListe = ødelagt.split(";");
 				for (int i = 0; i < ødelagtListe.length; i++) {
-					ødelagteTingField.setText(ødelagteTingField.getText() + ødelagtListe[i] + "\n");
+					ferdigØdelagt += ødelagtListe[i] + "\n";
 				}
 			}
+			String ferdigGjenglemt = "";
 			if (gjenglemt.length() > 0) {
 				gjenglemt = gjenglemt.substring(1);				
 				String[] gjenglemtListe = gjenglemt.split(";");
 				for (int i = 0; i < gjenglemtListe.length; i++) {
-					gjenglemteTingField.setText(gjenglemteTingField.getText() + gjenglemtListe[i] + "\n");
+					ferdigGjenglemt += gjenglemtListe[i] + "\n";
 				}
 			}
-			oppdaterSengeplasser();
+			if (admin.getAdminStatus()) {
+				adminKoieStatusName.setText(activeKoie);
+				adminØdelagteTingField.setText(ferdigØdelagt);
+				adminGjenglemteTingField.setText(ferdigGjenglemt);
+				oppdaterSengeplasser(true, adminKalender);
+			} else {
+				brukerKoieStatusName.setText(activeKoie);
+				brukerØdelagteTingField.setText(ferdigØdelagt);
+				brukerGjenglemteTingField.setText(ferdigGjenglemt);
+				oppdaterSengeplasser(false, brukerKalender);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void oppdaterSengeplasser() {
+	private void oppdaterSengeplasser(boolean isAdmin, DatePicker kalender) {
 		try {
 			ResultSet antallSengeplasser = connection.getSengeplasser(Koie.formaterKoieNavn(activeKoie));
-			if (antallSengeplasser.next()) {
-				antallSengeplasserText.setText("Antall sengeplasser: " + antallSengeplasser.getString(1));
-			}
 			ResultSet reserverteSengeplasser = connection.getReservertePlasser(Koie.formaterKoieNavn(activeKoie), kalender.getValue().toString());
+			if (antallSengeplasser.next()) {
+				if (isAdmin) {					
+					adminAntallSengeplasserText.setText("Antall sengeplasser: " + antallSengeplasser.getString(1));
+				} else 
+					brukerAntallSengeplasserText.setText("Antall sengeplasser: " + antallSengeplasser.getString(1));					
+			}
 			if (reserverteSengeplasser.next()) {
 				int ledigeSengeplasser = Integer.parseInt(antallSengeplasser.getString(1).toString()) - Integer.parseInt(reserverteSengeplasser.getString(1).toString());
-				ledigeSengeplasserText.setText("Ledige sengeplasser: " + ledigeSengeplasser);
+				if (isAdmin) {
+					adminLedigeSengeplasserText.setText("Ledige sengeplasser: " + ledigeSengeplasser);					
+				} else {
+					brukerLedigeSengeplasserText.setText("Ledige sengeplasser: " + ledigeSengeplasser);										
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
