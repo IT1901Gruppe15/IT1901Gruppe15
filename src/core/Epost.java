@@ -9,7 +9,7 @@ public class Epost {
 	String from,host,to;
 	Session session;
 	Properties properties;
-	String user,pw;
+	String user,pw,msg,sub;
 	public Epost(){
 		user="fellesprosjekt.gruppe15@gmail.com";
 		pw="gruppe15";
@@ -39,7 +39,17 @@ public class Epost {
 		
 		
 	}
+	public void setMes(String msg){
+		this.msg=msg;
+		
+	}
+	public void setSub(String sub){
+		this.sub=sub;
+		
+		
+	}
 	public void sendMessage(String s){
+		
 		try{
 	         // Create a default MimeMessage object.
 	         MimeMessage message = new MimeMessage(session);
@@ -60,10 +70,10 @@ public class Epost {
 	         
 
 	         // Set Subject: header field
-	         message.setSubject("This is the Subject Line!");
+	         message.setSubject(sub);
 
 	         // Now set the actual message
-	         message.setText("This is actual message");
+	         message.setText("msg");
 	         System.out.println(address);
 	         // Send message
 	         Transport.send(message);
