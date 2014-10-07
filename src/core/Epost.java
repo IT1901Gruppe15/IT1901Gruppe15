@@ -1,4 +1,4 @@
-package klasser;
+package core;
 import java.util.*;
 
 import javax.mail.*;

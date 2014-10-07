@@ -1,4 +1,4 @@
-package klasser;
+package core;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

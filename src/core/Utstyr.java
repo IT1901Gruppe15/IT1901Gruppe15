@@ -1,4 +1,4 @@
-package klasser;
+package core;
 
 public class Utstyr {
 		int utstyrsID;

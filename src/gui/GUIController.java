@@ -4,6 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+import core.Bruker;
+import core.DBConnection;
+import core.Koie;
+import core.Rapport;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -24,10 +28,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import klasser.Bruker;
-import klasser.DBConnection;
-import klasser.Koie;
-import klasser.Rapport;
 
 public class GUIController {
 
