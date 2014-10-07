@@ -52,8 +52,7 @@ public class GUIController {
 	@FXML private Pane brukerToolbar;
 	@FXML private Pane mapPane;
 	@FXML private Pane welcomePane;
-	@FXML private Pane adminKoiePane;
-	@FXML private Pane brukerKoiePane;
+	@FXML private Pane koiePane;
 	@FXML private Pane reservasjonsPane;
 	@FXML private Pane reportPane;
 	@FXML private Text welcomeName; // overskriften p� welcome-panelet
@@ -98,7 +97,7 @@ public class GUIController {
 					koieStatusName.setText(activeKoie);
 					System.out.println(activeKoie);
 					fyllKoiePane();
-					root.setCenter(adminKoiePane);
+					root.setCenter(koiePane);
 				} else {
 					koieReservasjonsName.setText(activeKoie);
 					root.setCenter(reservasjonsPane);
@@ -138,7 +137,7 @@ public class GUIController {
 		if (admin.getAdminStatus()) {
 			koieStatusName.setText(activeKoie);
 			fyllKoiePane();
-			root.setCenter(adminKoiePane);
+			root.setCenter(koiePane);
 		} else {
 			koieReservasjonsName.setText(activeKoie);
 			root.setCenter(reservasjonsPane);
