@@ -1,7 +1,10 @@
 package core;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class RapportHandler {
@@ -9,19 +12,19 @@ public class RapportHandler {
 	/** 
 	 * Får input fra tekstfil i følgende format:
 	 * koieID¤vedtatus¤yyyy-mm-dd¤odelagt1;odelagt2;odelagt3¤glemt1;glemt2	
+	 * Leser rapporten(e), legger inn det som er ødelagt og tømmer fila.
 	*/
 	
-	static final String INPUT_FILE = "rapporter.txt";
+	static final String INPUT_FILE = "textfiles/rapporter.txt";
 	static Scanner infile = null;
 	static DBConnection connection = new DBConnection();
 	
 	//les alle rapporter fra tekstfil
-	public static void lesRapport() {
+	public static void lesRapport() throws FileNotFoundException {
 		
 		try {
 			infile = new Scanner(new FileReader(INPUT_FILE));
 			while (infile.hasNextLine()) {
-				
 				String koieID, dato, gjenglemteTing, odelagteTing;
 				int vedstatus;
 				String[] type = infile.nextLine().split("¤");
@@ -31,43 +34,20 @@ public class RapportHandler {
 				odelagteTing = type[3];
 				gjenglemteTing = type[4];
 
-				//sett inn rapport i DB
 				connection.settinnRapport(odelagteTing, gjenglemteTing, vedstatus, koieID, dato);
 				
-				try {
-				    Thread.sleep(1000);                 //1000 milliseconds is one second.
-				} catch(InterruptedException ex) {
-				    Thread.currentThread().interrupt();
-				}
-				
-				//oppdater ødelagt utstyr
-				//legg inn utlagt utstyr i odelagt-tabellen
 				if(odelagteTing.contains(";")){
 					String[] temp = odelagteTing.split(";");
 					for(int i = 0; i<temp.length; i++){
 						try{
-							ResultSet rsU = connection.getUtstyrID(temp[i], koieID);
-							rsU.next();
-							int utstyrsID = rsU.getInt(1);
-							ResultSet rsR = connection.getrapportID(odelagteTing, gjenglemteTing, vedstatus);
-							rsR.next();
-							int rapportID = rsR.getInt(1);
-							connection.oppdaterUtstyr(utstyrsID, 0);
-							connection.leggInnOdelagtUtstyr(utstyrsID, rapportID);
+							RapportHandler.Odelegg(temp[i], koieID, odelagteTing, gjenglemteTing, vedstatus);
 						}catch(Exception e){
 							System.out.println(e);
 						}
 					}
 				}else{
 					try{
-						ResultSet rsU = connection.getUtstyrID(odelagteTing, koieID);
-						rsU.next();
-						int utstyrsID = rsU.getInt(1);
-						ResultSet rsR = connection.getrapportID(odelagteTing, gjenglemteTing, vedstatus);
-						rsR.next();
-						int rapportID = rsR.getInt(1);
-						connection.oppdaterUtstyr(utstyrsID, 0);
-						connection.leggInnOdelagtUtstyr(utstyrsID, rapportID);
+						RapportHandler.Odelegg(odelagteTing, koieID, odelagteTing, gjenglemteTing, vedstatus); 
 					}catch(Exception e){
 						System.out.println(e);
 					}
@@ -77,24 +57,26 @@ public class RapportHandler {
 			e.printStackTrace();
 		} finally {
 			infile.close();
+			RapportHandler.wipeFile();
 		}
 	}
 	
 	//endre et utstyrs status
-	public void endreUtstyrsstatus(){
-		
-	}
-	
-	
-	//test
-	public static void main(String[] args) {
-		RapportHandler.lesRapport();
+	private static void Odelegg(String utstyrsnavn, String koieID, String odelagteTing, String gjenglemteTing, int vedstatus) throws SQLException {
+		ResultSet rsU = connection.getUtstyrID(utstyrsnavn, koieID);
+		rsU.next();
+		int utstyrsID = rsU.getInt(1);
+		ResultSet rsR = connection.getrapportID(odelagteTing, gjenglemteTing, vedstatus);
+		rsR.next();
+		int rapportID = rsR.getInt(1);
+		connection.oppdaterUtstyr(utstyrsID, 0);
+		connection.leggInnOdelagtUtstyr(utstyrsID, rapportID);
 	}
 	
 	//slett innhold i fila... IKKE SELVE FILA
-	private static void wipeFile(){
-		
+	private static void wipeFile() throws FileNotFoundException{
+		PrintWriter writer = new PrintWriter(INPUT_FILE);
+		writer.print("");
+		writer.close();
 	}
-	
-	
 }

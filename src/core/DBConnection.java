@@ -14,7 +14,7 @@ public class DBConnection {
 	}
 
 	// Returnerer ResultSet med kolonne1 = brukernavn og kolonne2 = passord
-	public ResultSet login(String brukernavn) {
+	public ResultSet login(String brukernavn) throws SQLException {
 
 		String q = ("select Brukernavn, Passord, Navn, Tlf, Epost, isAdmin from Admin where Brukernavn = '"
 				+ brukernavn + "';");
@@ -23,7 +23,7 @@ public class DBConnection {
 	}
 
 	// Registrere ny bruker
-	public void registrerBruker(String brukernavn, String passord, String navn, String tlf, String epost) {
+	public void registrerBruker(String brukernavn, String passord, String navn, String tlf, String epost) throws SQLException {
 
 		String q = ("insert into Admin (Brukernavn, Passord, Navn, Tlf, Epost, isAdmin) values ('"
 				+ brukernavn
@@ -44,7 +44,7 @@ public class DBConnection {
 
 	//Sett inn rapport i DB
 	public void settinnRapport(String odelagt, String gjenglemt, int vedstatus,
-			String koienavn, String dato) {
+			String koienavn, String dato) throws SQLException {
 
 		String q = ("insert into Rapport (odelagt, gjenglemt, vedstatus, koierapportID, dato) values ('"
 				+ odelagt
@@ -57,7 +57,7 @@ public class DBConnection {
 	}
 
 	//Sett inn reservasjon i DB
-	public void settinnReservasjon(String epost, String dato, String koienavn){
+	public void settinnReservasjon(String epost, String dato, String koienavn) throws SQLException {
 
 		String q = ("insert into Reservasjon (epost,dato,reservertkoieid) values ('"
 				+ epost + "','" + dato + "','" + koienavn + "');");
@@ -66,7 +66,7 @@ public class DBConnection {
 	}
 
 	// Oppdater en koies vedstatus
-	public void oppdaterVedstatus(String koienavn, int vedstatus) {
+	public void oppdaterVedstatus(String koienavn, int vedstatus) throws SQLException {
 
 		String q = ("update Koie set Vedstatus = '"
 				+ (new String("" + vedstatus)) + "' where KoieID = '"
@@ -76,7 +76,7 @@ public class DBConnection {
 	}
 
 	// Oppdater Utstyrsstatus 1= i live, 0= ødelagt
-	public void oppdaterUtstyr(int utstyrsID, int status) {
+	public void oppdaterUtstyr(int utstyrsID, int status) throws SQLException {
 
 		String q = ("update Utstyr set stat = '" + (new String("" + status))
 				+ "' where UtstyrsID = '" + (new String("" + utstyrsID)) + "';");
@@ -85,7 +85,7 @@ public class DBConnection {
 	}
 
 	// Legg inn ødelagt Utstyr
-	public void leggInnOdelagtUtstyr(int utstyrsID, int rapportID) {
+	public void leggInnOdelagtUtstyr(int utstyrsID, int rapportID) throws SQLException {
 		
 		String q = ("insert into ErOdelagt values ('"
 				+ (new String("" + utstyrsID)) + "','"
@@ -123,7 +123,7 @@ public class DBConnection {
 	}
 
 	// Returner alt ødelagt utstyr
-	public ResultSet getOdelagtUtstyr(String koieID) {
+	public ResultSet getOdelagtUtstyr(String koieID) throws SQLException {
 
 		String q = ("select * from ErOdelagt where koieID = '" + koieID + "';");
 
@@ -131,7 +131,7 @@ public class DBConnection {
 	}
 
 	// Legge inn nytt utstyr (STATUS 1 eller 0!)
-	public void registrerUtstyr(String navn, String dato, int status, String adminID, String koie){
+	public void registrerUtstyr(String navn, String dato, int status, String adminID, String koie) throws SQLException {
 
 		String q = ("insert into Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID) VALUES ('" + navn + "','" + dato + "','" + (new String("" + status)) + "','" + adminID + "','" + koie + "');");
 
@@ -139,7 +139,7 @@ public class DBConnection {
 	}
 	
 	// Spør om laveste vedsatus fra en bestemt Koie en bestemt Dato
-	public ResultSet getVedstatusRapport(String koieID, String dato) {
+	public ResultSet getVedstatusRapport(String koieID, String dato) throws SQLException {
 
 		String q = ("select min(Vedstatus) from Rapport where Dato = '" + dato + "' and KoieRapportID = '" + koieID + "';");
 
@@ -147,7 +147,7 @@ public class DBConnection {
 	}
 	
 	// Spør om gjenglemt og ødelagt utstyr fra en bestemt koie
-		public ResultSet getOdelagtGjenglemtKoie(String koieID) {
+		public ResultSet getOdelagtGjenglemtKoie(String koieID) throws SQLException {
 
 			String q = ("select Odelagt, Gjenglemt from Rapport where KoieRapportID = '" + koieID + "';");
 
@@ -155,7 +155,7 @@ public class DBConnection {
 		}
 	
 	// Få reserverte sengeplasser for en dag
-		public ResultSet getReservertePlasser(String koieID, String dato){
+		public ResultSet getReservertePlasser(String koieID, String dato) throws SQLException {
 			
 			String q = ("select count(*) from Reservasjon where ReservertKoieID = '" + koieID + "' and Dato = '" + dato + "';");
 			
@@ -163,7 +163,7 @@ public class DBConnection {
 		}
 	
 	// Få antall sengeplasser på koie
-	public ResultSet getSengeplasser(String koieID) {
+	public ResultSet getSengeplasser(String koieID) throws SQLException {
 
 		String q = ("select Storrelse from Koie where KoieID = '" + koieID + "';");
 
