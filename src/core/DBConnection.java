@@ -18,8 +18,9 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * 
 	 * @param brukernavn Brukernavnet til den som prøver å logge inn
 	 * @return ResultSet med en rad der col1 = brukernavn, col2 = passord, col3 = fullt navn, col4 = telefonnummer, col5 = epost, col6 = isAdmin
+	 * @throws SQLException
 	 */
-	public ResultSet login(String brukernavn) {
+	public ResultSet login(String brukernavn) throws SQLException {
 
 		String q = ("select Brukernavn, Passord, Navn, Tlf, Epost, isAdmin from Admin where Brukernavn = '"
 				+ brukernavn 
@@ -36,8 +37,9 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @param navn Fullt navn til brukeren
 	 * @param tlf Telefonnummer til brukeren
 	 * @param epost Epostadressen til brukeren
+	 * @throws SQLException
 	 */
-	public void registrerBruker(String brukernavn, String passord, String navn, String tlf, String epost) {
+	public void registrerBruker(String brukernavn, String passord, String navn, String tlf, String epost) throws SQLException {
 
 		String q = ("insert into Admin (Brukernavn, Passord, Navn, Tlf, Epost, isAdmin) values ('"
 				+ brukernavn
@@ -64,9 +66,10 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @param vedstatus Vedstatus for koie (gitt som prosent?)
 	 * @param koienavn Navnet på koie
 	 * @param dato Datoen rapporten blir satt inn
+	 * @throws SQLException
 	 */
 	public void settinnRapport(String odelagt, String gjenglemt, int vedstatus,
-			String koienavn, String dato) {
+			String koienavn, String dato) throws SQLException {
 
 		String q = ("insert into Rapport (odelagt, gjenglemt, vedstatus, koierapportID, dato) values ('"
 				+ odelagt
@@ -89,8 +92,9 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @param epost Epostadresse til den som reserverer
 	 * @param dato Dato for reservajon
 	 * @param koienavn Hvilken koie reservasjonen går til
+	 * @throws SQLException
 	 */
-	public void settinnReservasjon(String epost, String dato, String koienavn){
+	public void settinnReservasjon(String epost, String dato, String koienavn) throws SQLException {
 
 		String q = ("insert into Reservasjon (epost,dato,reservertkoieid) values ('"
 				+ epost 
@@ -108,8 +112,9 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * 
 	 * @param koienavn Navnet på koien som skal oppdateres
 	 * @param vedstatus Ny vedstatus
+	 * @throws SQLException
 	 */
-	public void oppdaterVedstatus(String koienavn, int vedstatus) {
+	public void oppdaterVedstatus(String koienavn, int vedstatus) throws SQLException {
 
 		String q = ("update Koie set Vedstatus = '"
 				+ (new String("" + vedstatus)) 
@@ -124,8 +129,9 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * 
 	 * @param utstyrsID Hvilket utstyr som skal oppdateres
 	 * @param status 0 = ødelagt, 1 = fungerer
+	 * @throws SQLException
 	 */
-	public void oppdaterUtstyr(int utstyrsID, int status) {
+	public void oppdaterUtstyr(int utstyrsID, int status) throws SQLException {
 
 		String q = ("update Utstyr set stat = '" + (new String("" + status))
 				+ "' where UtstyrsID = '" + (new String("" + utstyrsID)) + "';");
@@ -134,8 +140,8 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	}
 
 	// Legg inn ødelagt Utstyr
-	public void leggInnOdelagtUtstyr(int utstyrsID, int rapportID) {
-
+	public void leggInnOdelagtUtstyr(int utstyrsID, int rapportID) throws SQLException {
+		
 		String q = ("insert into ErOdelagt values ('"
 				+ (new String("" + utstyrsID)) + "','"
 				+ (new String("" + rapportID)) + "');");
@@ -183,8 +189,9 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * 
 	 * @param koieID Koie der man skal finne alt ødelagt utstyr
 	 * @return ResultSet med alt ødelagt utsyr i en koie
+	 * @throws SQLException
 	 */
-	public ResultSet getOdelagtUtstyr(String koieID) {
+	public ResultSet getOdelagtUtstyr(String koieID) throws SQLException {
 
 		String q = ("select * from ErOdelagt where koieID = '" 
 				+ koieID 
@@ -201,8 +208,9 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @param status 0 = ødelagt, 1 = fungerer
 	 * @param adminID ID til den innloggede brukeren
 	 * @param koie Koien utstyret skal legges til
+	 * @throws SQLException
 	 */
-	public void registrerUtstyr(String navn, String dato, int status, String adminID, String koie){
+	public void registrerUtstyr(String navn, String dato, int status, String adminID, String koie) throws SQLException {
 
 		String q = ("insert into Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID) VALUES ('" + navn + "','" + dato + "','" + (new String("" + status)) + "','" + adminID + "','" + koie + "');");
 
@@ -210,7 +218,7 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	}
 
 	// Spør om laveste vedsatus fra en bestemt Koie en bestemt Dato
-	public ResultSet getVedstatusRapport(String koieID, String dato) {
+	public ResultSet getVedstatusRapport(String koieID, String dato) throws SQLException {
 
 		String q = ("select min(Vedstatus) from Rapport where Dato = '" 
 				+ dato 
@@ -226,8 +234,9 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * 
 	 * @param koieID Koien informasjonen skal hentes fra
 	 * @return ResultSet der col1 = ødelagt utstyr, col2 = gjenglemt utstyr
+	 * @throws SQLException
 	 */
-	public ResultSet getOdelagtGjenglemtKoie(String koieID) {
+	public ResultSet getOdelagtGjenglemtKoie(String koieID) throws SQLException {
 
 		String q = ("select Odelagt, Gjenglemt from Rapport where KoieRapportID = '" 
 				+ koieID 
@@ -242,8 +251,9 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @param koieID Koien informasjonen skal hentes fra
 	 * @param dato Den aktuelle datoen
 	 * @return ResultSet med antall reservasjoner (kun et tall, ikke informasjon om reservasjonene)
+	 * @throws SQLException
 	 */
-	public ResultSet getReservertePlasser(String koieID, String dato){
+	public ResultSet getReservertePlasser(String koieID, String dato) throws SQLException {
 
 		String q = ("select count(*) from Reservasjon where ReservertKoieID = '" 
 				+ koieID 
@@ -260,7 +270,7 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @param koieID Koien informasjonen skal hentes fra
 	 * @return ResultSet med antall sengeplasser
 	 */
-	public ResultSet getSengeplasser(String koieID) {
+	public ResultSet getSengeplasser(String koieID) throws SQLException {
 
 		String q = ("select Storrelse from Koie where KoieID = '" 
 				+ koieID 
