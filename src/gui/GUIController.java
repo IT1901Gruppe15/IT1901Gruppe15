@@ -165,8 +165,8 @@ public class GUIController {
 	}
 	
 	private void fyllKoiePane() { // finner all informasjon som skal vises i koie-panelet
-		ResultSet rs = connection.getOdelagtGjenglemtKoie(Koie.formaterKoieNavn(activeKoie)); // får alle ødelagte og gjenglemte gjenstander fra databasen
 		try {
+			ResultSet rs = connection.getOdelagtGjenglemtKoie(Koie.formaterKoieNavn(activeKoie)); // får alle ødelagte og gjenglemte gjenstander fra databasen
 			String ødelagt = ""; // string som fylles med alle ødelagte gjenstander
 			String gjenglemt = ""; // string som fylles med alle gjenglemte gjenstander
 			while (rs.next()) { // mens det finnes flere elementer i databasen
@@ -257,7 +257,11 @@ public class GUIController {
 		String ødelagt = Rapport.formaterTekst(rapportOdelagteTingField.getText(), "\n");
 		String gjenglemt = Rapport.formaterTekst(rapportGjenglemteTingField.getText(), "\n");
 		int vedstatus = Integer.parseInt(vedstatusField.getText());
-		connection.settinnRapport(ødelagt, gjenglemt, vedstatus, rapportDropDown.getValue(), LocalDate.now().toString());
+		try {
+			connection.settinnRapport(ødelagt, gjenglemt, vedstatus, rapportDropDown.getValue(), LocalDate.now().toString());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -287,8 +291,8 @@ public class GUIController {
 
 	@FXML
 	private void register(ActionEvent event) { // når man trykker på "registrer" knappen
-		ResultSet rs = connection.login(regUsernameField.getText());
 		try {
+			ResultSet rs = connection.login(regUsernameField.getText());
 			if (regUsernameField.getText().equals("") || regPasswordField.getText().equals("") || regFullNameField.getText().equals("") || regTlfField.getText().equals("") || regEpostField.getText().equals("")) {
 				registreringsFeil.setText("Ingen felter kan våre tomme");
 				registreringsFeil.setVisible(true);
@@ -327,8 +331,8 @@ public class GUIController {
 
 	@FXML
 	private void logIn(ActionEvent event) { // når man trykker på "logg inn" knappen
-		ResultSet dbUserInfo = connection.login(usernameField.getText());
 		try {
+			ResultSet dbUserInfo = connection.login(usernameField.getText());
 			if (dbUserInfo.next()) { // denne if-setningen er true hvis det angitte brukernavnet finnes i databasen
 				if (dbUserInfo.getString(1).equals(usernameField.getText()) && dbUserInfo.getString(2).equals(passwordField.getText())) { // hvis brukernavn og passord stemmer overens
 					bruker = new Bruker(usernameField.getText(), dbUserInfo.getString(3), dbUserInfo.getString(4), dbUserInfo.getString(5), dbUserInfo.getString(6));

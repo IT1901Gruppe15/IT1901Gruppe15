@@ -3,7 +3,6 @@ package core;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Reader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -106,7 +105,11 @@ public class Rapport {
 	}
 
 	public static void oppdaterVedStatus(){
-		connection.oppdaterVedstatus(koieID,vedstatus);
+		try {
+			connection.oppdaterVedstatus(koieID,vedstatus);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static String getUtstyr(String koieID) throws SQLException{

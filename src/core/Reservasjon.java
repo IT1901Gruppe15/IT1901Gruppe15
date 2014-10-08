@@ -3,6 +3,7 @@ package core;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -113,9 +114,12 @@ public class Reservasjon {
 	}
 
 	public void updateDB() {
-		db.settinnReservasjon(getEpost(), getStart_dato(),
-				getKoieID());
-
+		try {
+			db.settinnReservasjon(getEpost(), getStart_dato(),
+					getKoieID());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public String getKoieID() {
@@ -129,8 +133,6 @@ public class Reservasjon {
 	public String getStart_dato() {
 		return start_dato;
 	}
-
-
 
 	public static void main(String[] args) {
 		Reservasjon res = new Reservasjon();

@@ -269,6 +269,7 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * 
 	 * @param koieID Koien informasjonen skal hentes fra
 	 * @return ResultSet med antall sengeplasser
+	 * @throws SQLException
 	 */
 	public ResultSet getSengeplasser(String koieID) throws SQLException {
 
