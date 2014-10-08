@@ -101,7 +101,7 @@ public class GUIController {
 	private Bruker bruker; // innlogget bruker i systemet
 	private DBConnection connection; // håndterer alt av database ting
 
-	public void initialize() { //basically konstruktår
+	public void initialize() { //basically konstruktør
 		rapportDropDown.getItems().addAll("Flåkoia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsåkoia", "Holvassgamma", "Iglbu", "Kamtjønna", "Kråkilkåten", "Kvernmovollen", "Kåsen", "Lynhøgen", "Mortenskåten", "Nicokoia", "Rindasløa", "Selbukåten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessætra", "Øvensenget"	);
 		connection = new DBConnection();
 		adminKalender.setValue(LocalDate.now()); // setter default dato til idag
@@ -152,23 +152,18 @@ public class GUIController {
 		});
 	}
 
-	/**
-	 * Finner ut hvilken koie man trykket på i lista og åpner koie-panelet for denne koia 
-	 * 
-	 * @param event Eventen som kalte denne metoden
-	 */
 	@FXML
-	public void koieClicked(ActionEvent event) { // når man trykker på koie i lista
+	private void koieClicked(ActionEvent event) { // når man trykker på koie i lista
 		((Hyperlink) event.getSource()).setVisited(false); // gjør at linkene i koia-lista ikke for strek under seg når man trykker på de
 		activeKoie = ((Hyperlink) event.getSource()).getText(); // setter aktivKoie til koia man trykket på
 		fyllKoiePane(); // finner all informasjon som skal vises i koie-panelet
-		if (bruker.isAdmin()) { // hvis bruker er admin
+		if (bruker.isAdmin()) {
 			root.setCenter(adminKoiePane); // viser koie-informasjon for admin
 		} else {
 			root.setCenter(brukerKoiePane); // viser koie-informasjon for bruker
 		}
 	}
-
+	
 	private void fyllKoiePane() { // finner all informasjon som skal vises i koie-panelet
 		ResultSet rs = connection.getOdelagtGjenglemtKoie(Koie.formaterKoieNavn(activeKoie)); // får alle ødelagte og gjenglemte gjenstander fra databasen
 		try {
@@ -180,18 +175,18 @@ public class GUIController {
 			}
 			String ferdigØdelagt = ""; // string som skal settes inn i tekstfeltet for ødelagte gjenstander
 			if (ødelagt.length() > 0) { // hvis det finnes minst en ødelagt gjenstand
-				ødelagt = ødelagt.substring(1); // fjerner den første semikoloen
-				String[] ødelagtListe = ødelagt.split(";"); // splitter stringen
-				for (int i = 0; i < ødelagtListe.length; i++) { // for alle elementer i lista
-					ferdigØdelagt += ødelagtListe[i] + "\n"; // setter alle elementene i en string med "\n" mellom de
+				ødelagt = ødelagt.substring(1); // fjerner den første semikolonen
+				String[] ødelagtListe = ødelagt.split(";");
+				for (int i = 0; i < ødelagtListe.length; i++) {
+					ferdigØdelagt += ødelagtListe[i] + "\n";
 				}
 			}
 			String ferdigGjenglemt = ""; // string som skal settes inn i tekstfeltet for gjenglemte gjenstander
 			if (gjenglemt.length() > 0) { // hvis det finnes minst en gjenglemt gjenstand
-				gjenglemt = gjenglemt.substring(1); // fjerner den første semikoloen
-				String[] gjenglemtListe = gjenglemt.split(";"); // splitter stringen
-				for (int i = 0; i < gjenglemtListe.length; i++) { // for alle elementer i lista
-					ferdigGjenglemt += gjenglemtListe[i] + "\n"; // setter alle elementene i en string med "\n" mellom de
+				gjenglemt = gjenglemt.substring(1); // fjerner den første semikolonen
+				String[] gjenglemtListe = gjenglemt.split(";");
+				for (int i = 0; i < gjenglemtListe.length; i++) {
+					ferdigGjenglemt += gjenglemtListe[i] + "\n";
 				}
 			}
 			if (bruker.isAdmin()) {
@@ -233,85 +228,56 @@ public class GUIController {
 		}
 	}
 	
-	/**
-	 * Åpner velkomst-panelet
-	 * 
-	 * @param event Eventen som kalte denne metoden
-	 */
 	@FXML
-	public void openWelcome(ActionEvent event) { // når man trykker på hjem-knappen
+	private void openWelcome(ActionEvent event) { // når man trykker på hjem-knappen
 		root.setCenter(welcomePane);
 	}
 
-	/**
-	 * Åpner kartet
-	 * 
-	 * @param event Eventen som kalte denne metoden
-	 */
 	@FXML
-	public void openMap(ActionEvent event) { // når man trykker på kart-knappen
+	private void openMap(ActionEvent event) { // når man trykker på kart-knappen
 		mapPane.getChildren().remove(mapBtn);
 		root.setCenter(mapPane);
 	}
 
-	/**
-	 * Åpner rapport-panelet
-	 * 
-	 * @param event Eventen som kalte denne metoden
-	 */
 	@FXML
-	public void openReport(ActionEvent event) { // når man trykker på rapport-knappen
+	private void openReport(ActionEvent event) { // når man trykker på rapport-knappen
 		root.setCenter(reportPane);
 	}
 
-	/**
-	 * Åpner registrerings-skjermen
-	 * 
-	 * @param event Eventen som kalte denne metoden
-	 */
 	@FXML
-	public void newUser(ActionEvent event) { // når man trykker på "ny bruker" knappen
+	private void newUser(ActionEvent event) { // når man trykker på "ny bruker" knappen
 		root.setCenter(registerScreen);
 	}
 
-	/**
-	 * Sender en rapport inn i databasen
-	 * 
-	 * @param event Eventen som kalte denne metoden
-	 */
 	@FXML
-	public void sendRapport(ActionEvent event) { 
-		if (rapportDropDown.getValue().equals("Velg en koie")) {
+	private void sendRapport(ActionEvent event) {  // når man trykker på "send rapport" knappen i rapport-panelet
+		if (rapportDropDown.getValue().equals("Velg en koie")) { // hvis man ikke har valgt en koie
 			return;
 		}
-		connection.settinnRapport(rapportOdelagteTingField.getText(), rapportGjenglemteTingField.getText(), Integer.parseInt(vedstatusField.getText()), rapportDropDown.getValue(), LocalDate.now().toString());
 		String ødelagt = Rapport.formaterTekst(rapportOdelagteTingField.getText(), "\n");
 		String gjenglemt = Rapport.formaterTekst(rapportGjenglemteTingField.getText(), "\n");
 		int vedstatus = Integer.parseInt(vedstatusField.getText());
 		connection.settinnRapport(ødelagt, gjenglemt, vedstatus, rapportDropDown.getValue(), LocalDate.now().toString());
 	}
 
-	/**
-	 * Fyller og åpner listen over alle registrerte brukere
-	 */
 	@FXML
-	public void openMedlemListe() {
-		medlemListe.getChildren().clear();
-		medlemListe.getChildren().add(medlemListeOverskrift);
+	private void openMedlemListe() { // når man trykker på medlemsliste-knappen
+		medlemListe.getChildren().clear(); // fjerner listen hvis den har blitt fylt før
+		medlemListe.getChildren().add(medlemListeOverskrift); // setter inn overskriftene
 		ResultSet rs = connection.getMembers();  // Brukernavn, Navn, Tlf, Epost, isAdmin
 		try {
-			while (rs.next()) {
-				HBox hbox = new HBox();
+			while (rs.next()) { // mens det er flere medlemmer
+				HBox hbox = new HBox(); // gjør masse rart...
 				for (int i = 1; i < 5; i++) {
 					Label text = new Label(rs.getString(i));
-					if (i == 3) {
+					if (i == 3) { // eposten trenger litt mer plass enn de andre feltene
 						text.setPrefWidth(200);
 					} else {
 						text.setPrefWidth(100);
 					}
 					hbox.getChildren().add(text);
 				}
-				medlemListe.getChildren().add(hbox);
+				medlemListe.getChildren().add(hbox); // ...og legg til informasjonen i lista
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -319,26 +285,20 @@ public class GUIController {
 		root.setCenter(medlemPane);
 	}
 
-	/**
-	 * Forsøker å registrere en ny bruker i databasen
-	 * 
-	 * @param event Eventen som kalte denne metoden
-	 */
 	@FXML
-	public void register(ActionEvent event) { // når man trykker på "registrer" knappen
+	private void register(ActionEvent event) { // når man trykker på "registrer" knappen
 		ResultSet rs = connection.login(regUsernameField.getText());
 		try {
 			if (regUsernameField.getText().equals("") || regPasswordField.getText().equals("") || regFullNameField.getText().equals("") || regTlfField.getText().equals("") || regEpostField.getText().equals("")) {
 				registreringsFeil.setText("Ingen felter kan våre tomme");
 				registreringsFeil.setVisible(true);
 			}
-			else if (rs.next()) {
+			else if (rs.next()) { // hvis det finnes et element i ResultSetet så finnes det allerede en bruker med det brukernavnet
 				registreringsFeil.setText("Brukernavn er allerede i bruk");
 				registreringsFeil.setVisible(true);
-			} else if (regPasswordField.getText().equals(regPasswordFieldConfirmation.getText())) {
+			} else if (regPasswordField.getText().equals(regPasswordFieldConfirmation.getText())) { // passordfeltene må være like
 				connection.registrerBruker(regUsernameField.getText(), regPasswordField.getText(), regFullNameField.getText(), regTlfField.getText(), regEpostField.getText());
-				System.out.println("Bruker er registrert");
-				logOut(event);
+				logOut(event); // sender tilbake til login-skjermen
 			} else {
 				registreringsFeil.setText("Passordene er ikke like");
 				registreringsFeil.setVisible(true);
@@ -348,13 +308,8 @@ public class GUIController {
 		}
 	} 
 
-	/**
-	 * Logger ut av systemet
-	 * 
-	 * @param event Eventen som kalte denne metoden
-	 */
 	@FXML
-	public void logOut(ActionEvent event) { // når man trykker på "logg ut"  eller "tilbake" knappen
+	private void logOut(ActionEvent event) { // når man trykker på "logg ut"  eller "tilbake" knappen
 		bruker = null;
 		invalidLoginInfo.setVisible(false);
 		registreringsFeil.setVisible(false);
@@ -370,17 +325,12 @@ public class GUIController {
 		root.setCenter(loginScreen);
 	}
 
-	/**
-	 * Forsøker å logge inn i systemet
-	 * 
-	 * @param event Eventen som kalte denne metoden
-	 */
 	@FXML
-	public void logIn(ActionEvent event) { // når man trykker på "logg inn" knappen
+	private void logIn(ActionEvent event) { // når man trykker på "logg inn" knappen
 		ResultSet dbUserInfo = connection.login(usernameField.getText());
 		try {
-			if (dbUserInfo.next()) {
-				if (dbUserInfo.getString(1).equals(usernameField.getText()) && dbUserInfo.getString(2).equals(passwordField.getText())) {
+			if (dbUserInfo.next()) { // denne if-setningen er true hvis det angitte brukernavnet finnes i databasen
+				if (dbUserInfo.getString(1).equals(usernameField.getText()) && dbUserInfo.getString(2).equals(passwordField.getText())) { // hvis brukernavn og passord stemmer overens
 					bruker = new Bruker(usernameField.getText(), dbUserInfo.getString(3), dbUserInfo.getString(4), dbUserInfo.getString(5), dbUserInfo.getString(6));
 					welcomeName.setText("Velkommen, " + usernameField.getText());
 					if (bruker.isAdmin()) {
@@ -392,10 +342,10 @@ public class GUIController {
 						root.setCenter(welcomePane);
 						root.setTop(brukerToolbar);
 					}
-				} else {
+				} else { // hvis brukernavnet fantes, men passordet var feil
 					invalidLoginInfo.setVisible(true);
 				}
-			} else {
+			} else { // hvis brukernavnet ikke fantes
 				invalidLoginInfo.setVisible(true);
 			}
 		} catch (SQLException e) {
