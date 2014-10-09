@@ -16,12 +16,24 @@ public class Bruker {
 		this.admin = (admin.equals("1"));
 	}
 
+	public String getBrukernavn() {
+		return brukernavn;
+	}
+	
+	public String getFulltNavn() {
+		return navn;
+	}
+	
+	public String getTlf() {
+		return tlf;
+	}
+	
+	public String getEpost() {
+		return epost;
+	}
+	
 	public boolean isAdmin() {
 		return admin;
 	}
 	
-	public String getBrukernavn() {
-		return brukernavn;
-	}
-
 }

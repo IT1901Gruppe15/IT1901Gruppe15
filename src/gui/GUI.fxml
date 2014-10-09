@@ -193,18 +193,6 @@
 						</ImageView>
 					</graphic>
 				</Button>
-				<Button text="Reservasjon" prefHeight="60" prefWidth="60"
-					onAction="#openMedlemListe" contentDisplay="top" focusTraversable="false">
-					<font>
-						<Font size="8" />
-					</font>
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="reservasjonIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
 				<Button text="Rapport" prefHeight="60" prefWidth="60"
 					onAction="#openReport" contentDisplay="top" focusTraversable="false">
 					<graphic>
@@ -333,6 +321,8 @@
 				layoutX="400" layoutY="120" />
 			<Text fx:id="adminLedigeSengeplasserText" text="Ledige sengeplasser: xx"
 				layoutX="400" layoutY="140" />
+			<Button text="Oppdater utstyr" onAction="#oppdaterUtstyr"
+				layoutX="200" layoutY="500" focusTraversable="false" />
 		</Pane>
 	</fx:define>
 

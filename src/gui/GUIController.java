@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import core.Bruker;
 import core.DBConnection;
 import core.Koie;
-import core.Rapport;
+import core.RapportHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -181,6 +181,23 @@ public class GUIController {
 					ferdigØdelagt += ødelagtListe[i] + "\n";
 				}
 			}
+			///
+			/*
+			ødelagt = "";
+			ferdigØdelagt = "";
+			rs = connection.getOdelagtUtstyr(Koie.formaterKoieNavn(activeKoie));
+			while (rs.next()) {
+				ødelagt += ";" + rs.getString(1);
+			}
+			if (ødelagt.length() > 0) {
+				ødelagt = ødelagt.substring(1);
+				String[] ødelagtListe2 = ødelagt.split(";");
+				for (int i = 0; i < ødelagtListe2.length; i++) {
+					ferdigØdelagt += ødelagtListe2[i] + "\n";
+				}
+			}
+			*/
+			///
 			String ferdigGjenglemt = ""; // string som skal settes inn i tekstfeltet for gjenglemte gjenstander
 			if (gjenglemt.length() > 0) { // hvis det finnes minst en gjenglemt gjenstand
 				gjenglemt = gjenglemt.substring(1); // fjerner den første semikolonen
@@ -254,8 +271,8 @@ public class GUIController {
 		if (rapportDropDown.getValue().equals("Velg en koie")) { // hvis man ikke har valgt en koie
 			return;
 		}
-		String ødelagt = Rapport.formaterTekst(rapportOdelagteTingField.getText(), "\n");
-		String gjenglemt = Rapport.formaterTekst(rapportGjenglemteTingField.getText(), "\n");
+		String ødelagt = RapportHandler.formaterTekst(rapportOdelagteTingField.getText(), "\n");
+		String gjenglemt = RapportHandler.formaterTekst(rapportGjenglemteTingField.getText(), "\n");
 		int vedstatus = Integer.parseInt(vedstatusField.getText());
 		try {
 			connection.settinnRapport(ødelagt, gjenglemt, vedstatus, rapportDropDown.getValue(), LocalDate.now().toString());
@@ -287,6 +304,19 @@ public class GUIController {
 			e.printStackTrace();
 		}
 		root.setCenter(medlemPane);
+	}
+	
+	@FXML
+	private void oppdaterUtstyr(ActionEvent event) {
+		try {
+			ResultSet rs = connection.getUtstyrID("badstue", "Flaakoia");
+			while (rs.next()) {
+				System.out.println(rs.getString(1));
+			}
+			connection.oppdaterUtstyr(1, 1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML

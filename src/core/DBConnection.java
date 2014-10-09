@@ -9,7 +9,7 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 
 	private DB db;
 
-	public DBConnection(){
+	public DBConnection() {
 		db = new DB();
 	}
 
