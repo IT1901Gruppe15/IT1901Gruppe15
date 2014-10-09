@@ -26,7 +26,7 @@
 						defaultButton="true" />
 				</HBox>
 			</VBox>
-			<Label fx:id="feilLoginInfo" text="Feil brukernavn og/eller passord"
+			<Label fx:id="invalidLoginInfo" text="Feil brukernavn og/eller passord"
 				style="-fx-font-size: 14px; -fx-text-fill: #ff0000" layoutX="540"
 				layoutY="350" />
 		</Pane>
@@ -126,7 +126,7 @@
 	</fx:define>
 
 	<fx:define>
-		<Pane fx:id="toolbar" prefHeight="70">
+		<Pane fx:id="adminToolbar" prefHeight="70">
 			<HBox spacing="10" layoutX="5" layoutY="5">
 				<Button text="Hjem" prefHeight="60" prefWidth="60" onAction="#openWelcome"
 					contentDisplay="top" cancelButton="true" focusTraversable="false">
@@ -147,7 +147,7 @@
 					</graphic>
 				</Button>
 				<Button text="Medlemmer" prefHeight="60" prefWidth="60"
-					onAction="#fyllMedlemListe" contentDisplay="top" focusTraversable="false">
+					onAction="#openMedlemListe" contentDisplay="top" focusTraversable="false">
 					<font>
 						<Font size="8" />
 					</font>
@@ -194,7 +194,7 @@
 					</graphic>
 				</Button>
 				<Button text="Reservasjon" prefHeight="60" prefWidth="60"
-					onAction="#fyllMedlemListe" contentDisplay="top" focusTraversable="false">
+					onAction="#openMedlemListe" contentDisplay="top" focusTraversable="false">
 					<font>
 						<Font size="8" />
 					</font>
@@ -314,36 +314,48 @@
 	</fx:define>
 
 	<fx:define>
-		<Pane fx:id="koiePane">
-			<Text fx:id="koieStatusName" layoutX="15" layoutY="20"
+		<Pane fx:id="adminKoiePane">
+			<Text fx:id="adminKoieStatusName" layoutX="15" layoutY="20"
 				style="-fx-font-size: 20px" />
 			<Label text="Ødelagte ting" layoutX="15" layoutY="50" />
-			<TextArea fx:id="ødelagteTingField" editable="false" focusTraversable="false" layoutX="15"
-				layoutY="70" prefWidth="125" prefHeight="150" />
+			<TextArea fx:id="adminOdelagteTingField" editable="false"
+				focusTraversable="false" layoutX="15" layoutY="70" prefWidth="125"
+				prefHeight="150" />
 			<Label text="Gjenglemte ting" layoutX="150" layoutY="50" />
-			<TextArea fx:id="gjenglemteTingField" editable="false" focusTraversable="false" layoutX="150"
-				layoutY="70" prefWidth="125" prefHeight="150" />
+			<TextArea fx:id="adminGjenglemteTingField" editable="false"
+				focusTraversable="false" layoutX="150" layoutY="70" prefWidth="125"
+				prefHeight="150" />
 			<Label text="Vedstatus" layoutX="300" layoutY="50" />
 			<Label text="Kalender" layoutX="400" layoutY="50" />
-			<DatePicker fx:id="kalender" layoutX="400" layoutY="70"
+			<DatePicker fx:id="adminKalender" layoutX="400" layoutY="70"
 				focusTraversable="false" />
-			<Text fx:id="antallSengeplasserText" text="Antall sengeplasser: xx" layoutX="400" layoutY="120" />
-			<Text fx:id="ledigeSengeplasserText" text="Ledige sengeplasser: xx" layoutX="400" layoutY="140" />
+			<Text fx:id="adminAntallSengeplasserText" text="Antall sengeplasser: xx"
+				layoutX="400" layoutY="120" />
+			<Text fx:id="adminLedigeSengeplasserText" text="Ledige sengeplasser: xx"
+				layoutX="400" layoutY="140" />
 		</Pane>
 	</fx:define>
 
 	<fx:define>
-		<Pane fx:id="reservasjonsPane">
-			<Text fx:id="koieReservasjonsName" layoutX="15" layoutY="20"
+		<Pane fx:id="brukerKoiePane">
+			<Text fx:id="brukerKoieStatusName" layoutX="15" layoutY="20"
 				style="-fx-font-size: 20px" />
-			<Label text="Dato fra" layoutX="15" layoutY="50" />
-			<DatePicker fx:id="reservasjonFra" layoutX="15" layoutY="70"
+			<Label text="Ødelagte ting" layoutX="15" layoutY="50" />
+			<TextArea fx:id="brukerOdelagteTingField" editable="false"
+				focusTraversable="false" layoutX="15" layoutY="70" prefWidth="125"
+				prefHeight="150" />
+			<Label text="Gjenglemte ting" layoutX="150" layoutY="50" />
+			<TextArea fx:id="brukerGjenglemteTingField" editable="false"
+				focusTraversable="false" layoutX="150" layoutY="70" prefWidth="125"
+				prefHeight="150" />
+			<Label text="Vedstatus" layoutX="300" layoutY="50" />
+			<Label text="Kalender" layoutX="400" layoutY="50" />
+			<DatePicker fx:id="brukerKalender" layoutX="400" layoutY="70"
 				focusTraversable="false" />
-			<Label text="Dato til" layoutX="200" layoutY="50" />
-			<DatePicker fx:id="reservasjonTil" layoutX="200" layoutY="70"
-				focusTraversable="false" />
-			<Text text="Antall sengeplasser: xx" layoutX="400" layoutY="120" />
-			<Text text="Ledige sengeplasser: xx" layoutX="400" layoutY="140" />
+			<Text fx:id="brukerAntallSengeplasserText" text="Antall sengeplasser: xx"
+				layoutX="400" layoutY="120" />
+			<Text fx:id="brukerLedigeSengeplasserText" text="Ledige sengeplasser: xx"
+				layoutX="400" layoutY="140" />
 		</Pane>
 	</fx:define>
 
@@ -356,11 +368,12 @@
 			<TextField fx:id="vedstatusField" layoutX="225" layoutY="50"
 				focusTraversable="false" />
 			<Label text="Ødelagte ting" layoutX="15" layoutY="100" />
-			<TextArea fx:id="rapportødelagteTingField" focusTraversable="false"
+			<TextArea fx:id="rapportOdelagteTingField" focusTraversable="false"
 				layoutX="15" layoutY="120" prefWidth="125" prefHeight="150" />
 			<Label text="Gjenglemte ting" layoutX="150" layoutY="100" />
-			<TextArea fx:id="rapportGjenglemteTingField" focusTraversable="false"
-				layoutX="150" layoutY="120" prefWidth="125" prefHeight="150" />
+			<TextArea fx:id="rapportGjenglemteTingField"
+				focusTraversable="false" layoutX="150" layoutY="120" prefWidth="125"
+				prefHeight="150" />
 			<Label text="(En ting per linje)" layoutX="285" layoutY="100" />
 			<Button onAction="#sendRapport" text="Send rapport" layoutX="15"
 				layoutY="300" focusTraversable="false" />

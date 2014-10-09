@@ -16,8 +16,12 @@ public class Bruker {
 		this.admin = (admin.equals("1"));
 	}
 
-	public boolean getAdminStatus() {
+	public boolean isAdmin() {
 		return admin;
+	}
+	
+	public String getBrukernavn() {
+		return brukernavn;
 	}
 
 }
