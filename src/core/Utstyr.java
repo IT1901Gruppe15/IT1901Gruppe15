@@ -26,7 +26,8 @@ public class Utstyr {
 		
 
 	public String getKoieID() {
-			return koieID;
+		return Koie.formaterKoieNavn(koieID);
+		
 		}
 
 		public void setKoieID(String koieID) {

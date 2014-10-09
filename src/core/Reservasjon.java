@@ -1,8 +1,10 @@
 package core;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -70,10 +72,10 @@ public class Reservasjon {
 		BufferedReader reader = null;
 
 		try {
-			InputStream inputStream = Reservasjon.class
-					.getResourceAsStream("testinput");
+			
+			
 
-			reader = new BufferedReader(new InputStreamReader(inputStream));
+			reader = new BufferedReader(new FileReader("textfiles/inputtext.txt"));
 			String line = null;
 			line = reader.readLine();
 			String[] list = line.split(";");
@@ -135,7 +137,6 @@ public class Reservasjon {
 	public static void main(String[] args) {
 		Reservasjon res = new Reservasjon();
 		res.lesReservasjon();
-		res.updateDB();
 
 		System.out.println(res.koieID + res.epost + res.start_dato
 				);

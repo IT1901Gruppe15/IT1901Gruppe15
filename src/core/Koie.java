@@ -30,6 +30,7 @@ public class Koie {
 		}
 		return formatertTekst;
 	}
+
 	
 
 	public static void main(String[] args) {
