@@ -185,22 +185,6 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	}
 
 	/**
-	 * Returnerer alt ødelagt utstyr for en koie
-	 * 
-	 * @param koieID Koie der man skal finne alt ødelagt utstyr
-	 * @return ResultSet med alt ødelagt utsyr i en koie
-	 * @throws SQLException
-	 */
-	public ResultSet getOdelagtUtstyr(String koieID) throws SQLException {
-
-		String q = ("select * from ErOdelagt where koieID = '" 
-				+ koieID 
-				+ "';");
-
-		return db.sporDB(q);
-	}
-
-	/**
 	 * Legger inn nytt utstyr i en koie
 	 * 
 	 * @param navn Navnet til det nye utstyret
@@ -280,13 +264,13 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 		return db.sporDB(q);
 	}
 	
-	
-	
 	public ResultSet getDatoListe(String koieID, String dato) throws SQLException {
 
-		String q = ("select Dato, min(Vedstatus) from Rapport where Dato > '" + dato + "' and KoieRapportID = '" + koieID + "' group by Dato order by Dato asc;");
+		String q = ("select Dato, min(Vedstatus) from Rapport where Dato > '" + dato + "' and KoieRapportID = '" + koieID + "' group by Dato order by Dato desc;");
 		
 		return db.sporDB(q);
 	}
+	
+	
 
 }
