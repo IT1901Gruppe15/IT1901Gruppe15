@@ -17,34 +17,29 @@ public class Vedstatus {
 		tallX = new ArrayList<Integer>();
 		tallY = new ArrayList<Integer>();
 		datoer = new ArrayList<String>();
-		ResultSet t = dbconnect.getVedstatusRapport(koieID, dato);
+		ResultSet t = dbconnect.getDatoListe(koieID, dato);
 		int s = 1;
-		System.out.println(t);
 		while(t.next() && s < 15){
-			System.out.println(datoer);
-			System.out.println(tallY);
 			datoer.add(0, t.getString(1));
-			System.out.println(datoer);
-			System.out.println(tallY);
 			tallY.add(0, t.getInt(2));
-			System.out.println(datoer);
-			System.out.println(tallY);
 			s+=1;
 		}
 		tallX.add(0);
 //		ar = Integer.parseInt((datoer.get(1)).substring(0,4));
 //		maned = Integer.parseInt((datoer.get(1)).substring(5,7));
 //		dag = Integer.parseInt((datoer.get(1)).substring(8,10));
-		for(int k = 1; k <= 13; k++){
-			if(Integer.parseInt((datoer.get(k-1)).substring(8,10)) - Integer.parseInt((datoer.get(k)).substring(8,10)) < 0){
+		System.out.println(datoer);
+		for(int k = 1; k < tallY.size(); k++){
+			System.out.println(Integer.parseInt((datoer.get(k-1)).substring(8,10)));
+			if(Integer.parseInt((datoer.get(k)).substring(8,10)) - Integer.parseInt((datoer.get(k-1)).substring(8,10)) < 0){
 				maned2 = Integer.parseInt((datoer.get(k)).substring(5,7)) - 1;
 				if(maned2==0){
 					maned2 = 12;
 				}
 				int dagerManed = finnManed(maned2);
-				tallX.add(dagerManed-(Integer.parseInt((datoer.get(k)).substring(8,10)) - Integer.parseInt((datoer.get(k-1).substring(8,10)))));
+				tallX.add(dagerManed-(Integer.parseInt((datoer.get(k-1)).substring(8,10)) - Integer.parseInt((datoer.get(k).substring(8,10)))));
 			} else {
-				tallX.add(Integer.parseInt((datoer.get(k-1)).substring(8,10)) - Integer.parseInt((datoer.get(k)).substring(8,10)));
+				tallX.add((Integer.parseInt((datoer.get(k)).substring(8,10)) - Integer.parseInt((datoer.get(k-1)).substring(8,10)))+(tallX.get(k-1)));
 			}
 //			ar2 = ar;
 //			if(dag-k <= 0){
@@ -67,7 +62,7 @@ public class Vedstatus {
 //		}
 //		finnDagerBakover();
 		
-		for(int i = 0; i < dagerBakover; i++){
+		for(int i = 0; i < tallY.size(); i++){
 //			tallX.add(i);
 			sumXY += tallX.get(i)*tallY.get(i);
 			sumXX += tallX.get(i)*tallX.get(i);
