@@ -279,5 +279,14 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 
 		return db.sporDB(q);
 	}
+	
+	
+	
+	public ResultSet getDatoListe(String koieID, String dato) throws SQLException {
+
+		String q = ("select Dato, min(Vedstatus) from Rapport where Dato > '" + dato + "' and KoieRapportID = '" + koieID + "' group by Dato order by Dato asc;");
+		
+		return db.sporDB(q);
+	}
 
 }
