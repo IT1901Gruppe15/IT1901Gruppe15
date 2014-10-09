@@ -271,10 +271,18 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 		return db.sporDB(q);
 	}
 	
-	public ResultSet getOdelagtGjenglemt(String koieID) throws SQLException {
+	public ResultSet getOdelagt(String koieID) throws SQLException {
 
-		//TODO ODELAGTGJENGLEMT
+		//TODO Marius_Odelagt
 		String q = ("select ;");
+		
+		return db.sporDB(q);
+	}
+	
+	public ResultSet getGjenglemt(String koieID) throws SQLException {
+		
+		//TODO Marius_Gjenglemt
+		String q = (";");
 		
 		return db.sporDB(q);
 	}
