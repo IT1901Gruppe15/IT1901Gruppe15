@@ -79,4 +79,14 @@ public class RapportHandler {
 		writer.print("");
 		writer.close();
 	}
+	
+	public static String formaterTekst(String tekst, String separator) { // gjør om tekst til formatet
+		String[] liste = tekst.split(separator);						 // ting1;ting2;ting3
+		String ferdigTekst = "";
+		for (int i = 0; i < liste.length; i++) {
+			ferdigTekst += liste[i] + ";";
+		}
+		ferdigTekst = ferdigTekst.substring(0, ferdigTekst.length() - 1);
+		return ferdigTekst.trim();
+	}
 }

@@ -9,7 +9,7 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 
 	private DB db;
 
-	public DBConnection(){
+	public DBConnection() {
 		db = new DB();
 	}
 
@@ -271,6 +271,20 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 		return db.sporDB(q);
 	}
 	
+	public ResultSet getOdelagtGjenglemt(String koieID) throws SQLException {
+
+		//TODO ODELAGTGJENGLEMT
+		String q = ("select ;");
+		
+		return db.sporDB(q);
+	}
 	
+	public void fixUtstyr(String koie, String tingnavn) throws SQLException {
+		String q = ("delete from ErOdelagt where UtstyrID = (select UtstyrsID from Utstyr where Navn = '" + tingnavn + "' and FraktesTilID = '" + koie + "');");
+		db.oppdaterDB(q);
+		
+		q = ("update Utstyr set status '1' where Navn = '" + tingnavn + "' and FraktesTilID = '" + koie + "';");
+		db.oppdaterDB(q);
+	}
 
 }
