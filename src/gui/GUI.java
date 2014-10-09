@@ -8,15 +8,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class GUI extends Application {  // får programmet til å dukke opp på skjermen
-										// ikke mye å se her...
+public class GUI extends Application {
+
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		Parent root = FXMLLoader.load(this.getClass().getResource("GUI.fxml"));
 		primaryStage.setScene(new Scene(root, 1280, 720));
 		primaryStage.show();
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}

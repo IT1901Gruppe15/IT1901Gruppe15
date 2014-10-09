@@ -29,6 +29,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * Kontrolleren til GUI.fxml.
+ * Håndterer all logikk for GUI i NTNUI Koiesystemet.
+ * 
+ */
 public class GUIController {
 
 	//root
@@ -101,6 +106,9 @@ public class GUIController {
 	private Bruker bruker; // innlogget bruker i systemet
 	private DBConnection connection; // håndterer alt av database ting
 
+	/**
+	 * Initialiserer GUI
+	 */
 	public void initialize() { //basically konstruktør
 		rapportDropDown.getItems().addAll("Flåkoia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsåkoia", "Holvassgamma", "Iglbu", "Kamtjønna", "Kråkilkåten", "Kvernmovollen", "Kåsen", "Lynhøgen", "Mortenskåten", "Nicokoia", "Rindasløa", "Selbukåten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessætra", "Øvensenget"	);
 		connection = new DBConnection();
