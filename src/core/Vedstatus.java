@@ -17,36 +17,58 @@ public class Vedstatus {
 		tallX = new ArrayList<Integer>();
 		tallY = new ArrayList<Integer>();
 		datoer = new ArrayList<String>();
-		ar = Integer.parseInt(dato.substring(0,4));
-		maned = Integer.parseInt(dato.substring(5,7));
-		dag = Integer.parseInt(dato.substring(8,10));
-		for(int k = dagerBakover; k >= 0; k--){
-			ar2 = ar;
-			if(dag-k <= 0){
-				maned2 = maned - 1;
+		ResultSet t = dbconnect.getVedstatusRapport(koieID, dato);
+		int s = 1;
+		System.out.println(t);
+		while(t.next() && s < 15){
+			System.out.println(datoer);
+			System.out.println(tallY);
+			datoer.add(0, t.getString(1));
+			System.out.println(datoer);
+			System.out.println(tallY);
+			tallY.add(0, t.getInt(2));
+			System.out.println(datoer);
+			System.out.println(tallY);
+			s+=1;
+		}
+		tallX.add(0);
+//		ar = Integer.parseInt((datoer.get(1)).substring(0,4));
+//		maned = Integer.parseInt((datoer.get(1)).substring(5,7));
+//		dag = Integer.parseInt((datoer.get(1)).substring(8,10));
+		for(int k = 1; k <= 13; k++){
+			if(Integer.parseInt((datoer.get(k-1)).substring(8,10)) - Integer.parseInt((datoer.get(k)).substring(8,10)) < 0){
+				maned2 = Integer.parseInt((datoer.get(k)).substring(5,7)) - 1;
 				if(maned2==0){
-					ar2 = ar - 1;
 					maned2 = 12;
 				}
 				int dagerManed = finnManed(maned2);
-				dagerManed = dagerManed-(k-dag);
-				dag2 = dagerManed;
+				tallX.add(dagerManed-(Integer.parseInt((datoer.get(k)).substring(8,10)) - Integer.parseInt((datoer.get(k-1).substring(8,10)))));
 			} else {
-				dag2 = dag - k;
-				maned2 = maned;
+				tallX.add(Integer.parseInt((datoer.get(k-1)).substring(8,10)) - Integer.parseInt((datoer.get(k)).substring(8,10)));
 			}
-			String nyDato = ar2+"-"+maned2+"-"+dag2;
-			ResultSet t = dbconnect.getVedstatusRapport(koieID, nyDato);
-			for(int s = 1; s < 15; s++){
-				tallY.add(0, Integer.parseInt(t.getString(1)));
-			}
-			String p = t.getString(1);
-			tallY.add(Integer.parseInt(p));
+//			ar2 = ar;
+//			if(dag-k <= 0){
+//				maned2 = maned - 1;
+//				if(maned2==0){
+//					ar2 = ar - 1;
+//					maned2 = 12;
+//				}
+//				int dagerManed = finnManed(maned2);
+//				dagerManed = dagerManed-(k-dag);
+//				dag2 = dagerManed;
+//			} else {
+//				dag2 = dag - k;
+//				maned2 = maned;
+//			}
+//			String nyDato = ar2+"-"+maned2+"-"+dag2;
 		}
-		finnDagerBakover();
+			//String p = t.getString(1);
+			//tallY.add(Integer.parseInt(p));
+//		}
+//		finnDagerBakover();
 		
 		for(int i = 0; i < dagerBakover; i++){
-			tallX.add(i);
+//			tallX.add(i);
 			sumXY += tallX.get(i)*tallY.get(i);
 			sumXX += tallX.get(i)*tallX.get(i);
 		}
@@ -71,23 +93,6 @@ public class Vedstatus {
 		System.out.println("estimatet: "+estimat);
 	}
 
-	private void finnDagerBakover() {
-		tallY.add(56);
-		tallY.add(52);
-		tallY.add(49);
-		tallY.add(46);
-		tallY.add(46);
-		tallY.add(45);
-		tallY.add(44);
-		tallY.add(41);
-		tallY.add(38);
-		tallY.add(34);
-		tallY.add(32);
-		tallY.add(28);
-		tallY.add(23);
-		tallY.add(19);
-	}
-
 	private int finnManed(int m) {
 		if(m==1 || m==3 || m==5 || m==7 || m==8 || m==10 || m==12){
 			return 31;
@@ -100,6 +105,6 @@ public class Vedstatus {
 
 	public static void main(String[] args) throws SQLException {
 		Vedstatus test = new Vedstatus();
-		test.lagVedEstimat(14,"Flaakoia","2015-02-10");
+		test.lagVedEstimat(14,"Flaakoia","2014-10-01");
 	}
 }
