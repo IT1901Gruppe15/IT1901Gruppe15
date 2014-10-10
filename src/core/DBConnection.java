@@ -40,7 +40,6 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @throws SQLException
 	 */
 	public void registrerBruker(String brukernavn, String passord, String navn, String tlf, String epost) throws SQLException {
-
 		String q = ("insert into Admin (Brukernavn, Passord, Navn, Tlf, Epost, isAdmin) values ('"
 				+ brukernavn
 				+ "','"
@@ -70,7 +69,6 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 */
 	public void settinnRapport(String odelagt, String gjenglemt, int vedstatus,
 			String koienavn, String dato) throws SQLException {
-
 		String q = ("insert into Rapport (odelagt, gjenglemt, vedstatus, koierapportID, dato) values ('"
 				+ odelagt
 				+ "','"
@@ -95,7 +93,6 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @throws SQLException
 	 */
 	public void settinnReservasjon(String epost, String dato, String koienavn) throws SQLException {
-
 		String q = ("insert into Reservasjon (epost,dato,reservertkoieid) values ('"
 				+ epost 
 				+ "','" 
@@ -115,7 +112,6 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @throws SQLException
 	 */
 	public void oppdaterVedstatus(String koienavn, int vedstatus) throws SQLException {
-
 		String q = ("update Koie set Vedstatus = '"
 				+ (new String("" + vedstatus)) 
 				+ "' where KoieID = '"
@@ -132,7 +128,6 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @throws SQLException
 	 */
 	public void oppdaterUtstyr(int utstyrsID, int status) throws SQLException {
-
 		String q = ("update Utstyr set stat = '" + (new String("" + status))
 				+ "' where UtstyrsID = '" + (new String("" + utstyrsID)) + "';");
 
@@ -141,17 +136,22 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 
 	// Legg inn ødelagt Utstyr
 	public void leggInnOdelagtUtstyr(int utstyrsID, int rapportID) throws SQLException {
-		
 		String q = ("insert into ErOdelagt values ('"
 				+ (new String("" + utstyrsID)) + "','"
 				+ (new String("" + rapportID)) + "');");
 
 		db.oppdaterDB(q);
 	}
+	
+	// Legg inn gjenglemte ting
+	public void leggInnGjenglemteTing(String Navn, int rapportID, String koieID) throws SQLException {
+		String q = ("insert into Gjenglemt (Navn,RapportID,KoieID) values('" + Navn + "','" + rapportID + "','" + koieID + "');");
+		
+		db.oppdaterDB(q);
+	}
 
 	// Få utstyrsID
 	public ResultSet getUtstyrID(String navn, String koie) throws SQLException {
-
 		String q = ("select UtstyrsID from Utstyr where Navn = '" + navn + "' and FraktesTilID = '" + koie + "';");
 
 		return db.sporDB(q);
@@ -163,7 +163,6 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @return ResultSet der col1 = fullt navn, col2 = telefonnummber, col3 = epostadresse, col4 = isAdmin
 	 */
 	public ResultSet getMembers() {
-
 		String q = ("select Navn, Tlf, Epost, isAdmin from Admin");
 
 		return db.sporDB(q);
@@ -172,7 +171,6 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	// Få rapportID
 	public ResultSet getrapportID(String odelagt, String gjenglemt,
 			int vedstatus) throws SQLException {
-
 		String q = ("select RapportID from Rapport where Odelagt = '" 
 				+ odelagt
 				+ "' and Gjenglemt = '" 
@@ -195,7 +193,6 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @throws SQLException
 	 */
 	public void registrerUtstyr(String navn, String dato, int status, String adminID, String koie) throws SQLException {
-
 		String q = ("insert into Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID) VALUES ('" + navn + "','" + dato + "','" + (new String("" + status)) + "','" + adminID + "','" + koie + "');");
 
 		db.oppdaterDB(q);
@@ -203,7 +200,6 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 
 	// Spør om laveste vedsatus fra en bestemt Koie en bestemt Dato
 	public ResultSet getVedstatusRapport(String koieID, String dato) throws SQLException {
-
 		String q = ("select min(Vedstatus) from Rapport where Dato = '" 
 				+ dato 
 				+ "' and KoieRapportID = '" 
@@ -221,7 +217,6 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @throws SQLException
 	 */
 	public ResultSet getOdelagtGjenglemtKoie(String koieID) throws SQLException {
-
 		String q = ("select Odelagt, Gjenglemt from Rapport where KoieRapportID = '" 
 				+ koieID 
 				+ "';");
@@ -238,7 +233,6 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @throws SQLException
 	 */
 	public ResultSet getReservertePlasser(String koieID, String dato) throws SQLException {
-
 		String q = ("select count(*) from Reservasjon where ReservertKoieID = '" 
 				+ koieID 
 				+ "' and Dato = '" 
@@ -256,7 +250,6 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @throws SQLException
 	 */
 	public ResultSet getSengeplasser(String koieID) throws SQLException {
-
 		String q = ("select Storrelse from Koie where KoieID = '" 
 				+ koieID 
 				+ "';");
@@ -264,34 +257,41 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 		return db.sporDB(q);
 	}
 	
+	//returnerer en liste med datoer med laveste vedstatus for hver dag i synkende rekkefølge etter dato, starter på innsendt dato
 	public ResultSet getDatoListe(String koieID, String dato) throws SQLException {
-
 		String q = ("select Dato, min(Vedstatus) from Rapport where Dato > '" + dato + "' and KoieRapportID = '" + koieID + "' group by Dato order by Dato desc;");
 		
 		return db.sporDB(q);
 	}
 	
+	//returnerer liste med alt ødelagt utstyr på en koie
 	public ResultSet getOdelagt(String koieID) throws SQLException {
-
-		//TODO Marius_Odelagt
-		String q = ("select ;");
+		String q = ("select Navn from Rapport as R, ErOdelagt as E, Utstyr as U where KoieRapportID = '" + koieID + "' and R.RapportID = E.RapportID and E.UtstyrsID = U.UtstyrsID;");
 		
 		return db.sporDB(q);
 	}
 	
+	//returnerer en liste med gjenglemte ting på en koie
 	public ResultSet getGjenglemt(String koieID) throws SQLException {
 		
-		//TODO Marius_Gjenglemt
-		String q = (";");
+		String q = ("select Navn from Gjenglemt where KoieID = '" + koieID + "';");
 		
 		return db.sporDB(q);
 	}
 	
+	//fix utstyr
 	public void fixUtstyr(String koie, String tingnavn) throws SQLException {
 		String q = ("delete from ErOdelagt where UtstyrID = (select UtstyrsID from Utstyr where Navn = '" + tingnavn + "' and FraktesTilID = '" + koie + "');");
 		db.oppdaterDB(q);
 		
 		q = ("update Utstyr set status '1' where Navn = '" + tingnavn + "' and FraktesTilID = '" + koie + "';");
+		db.oppdaterDB(q);
+	}
+	
+	//ting er hentet
+	public void funnetTing(String ting) throws SQLException {
+		String q = ("delete from Gjenglemt where navn = '" + ting + "';");
+		
 		db.oppdaterDB(q);
 	}
 

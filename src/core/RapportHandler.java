@@ -12,6 +12,7 @@ public class RapportHandler {
 	/** 
 	 * Får input fra tekstfil i følgende format:
 	 * koieID¤vedtatus¤yyyy-mm-dd¤odelagt1;odelagt2;odelagt3¤glemt1;glemt2	
+	 * HVIS ET FELT ER TOMT SKAL DET INNEHOLDE ETT MELLOMROM
 	 * Leser rapporten(e), legger inn det som er ødelagt og tømmer fila.
 	*/
 	
@@ -36,21 +37,30 @@ public class RapportHandler {
 
 				connection.settinnRapport(odelagteTing, gjenglemteTing, vedstatus, koieID, dato);
 				
-				if(odelagteTing.contains(";")){
-					String[] temp = odelagteTing.split(";");
-					for(int i = 0; i<temp.length; i++){
+				if(odelagteTing.length() > 1){
+					if(odelagteTing.contains(";")){
+						String[] temp = odelagteTing.split(";");
+						for(int i = 0; i<temp.length; i++){
+							try{
+								RapportHandler.Odelegg(temp[i], koieID, odelagteTing, gjenglemteTing, vedstatus);
+							}catch(Exception e){
+								System.out.println(e);
+							}
+						}
+					}else{
 						try{
-							RapportHandler.Odelegg(temp[i], koieID, odelagteTing, gjenglemteTing, vedstatus);
+							RapportHandler.Odelegg(odelagteTing, koieID, odelagteTing, gjenglemteTing, vedstatus); 
 						}catch(Exception e){
 							System.out.println(e);
 						}
 					}
-				}else{
-					try{
-						RapportHandler.Odelegg(odelagteTing, koieID, odelagteTing, gjenglemteTing, vedstatus); 
-					}catch(Exception e){
-						System.out.println(e);
-					}
+				}
+				
+				if(gjenglemteTing.length() > 1){
+					ResultSet rID = connection.getrapportID(odelagteTing, gjenglemteTing, vedstatus);
+					rID.next();
+					int rapportID = rID.getInt(1);
+					RapportHandler.glemt(gjenglemteTing, koieID, rapportID);
 				}
 			}
 		} catch (Exception e) {
@@ -73,6 +83,21 @@ public class RapportHandler {
 		connection.leggInnOdelagtUtstyr(utstyrsID, rapportID);
 	}
 	
+	//legg inn gjenglemt ting
+	private static void glemt(String gjenglemteTing, String koieID, int rapportID) throws SQLException{
+		
+		if(gjenglemteTing.contains(";")){
+			String[] split = gjenglemteTing.split(";");
+			for(int i = 0; i<split.length;i++){
+				connection.leggInnGjenglemteTing(split[i], rapportID, koieID);
+			}
+			
+		}else{
+			connection.leggInnGjenglemteTing(gjenglemteTing, rapportID, koieID);
+		}
+		
+	}
+	
 	//slett innhold i fila... IKKE SELVE FILA
 	private static void wipeFile() throws FileNotFoundException{
 		PrintWriter writer = new PrintWriter(INPUT_FILE);
@@ -88,5 +113,9 @@ public class RapportHandler {
 		}
 		ferdigTekst = ferdigTekst.substring(0, ferdigTekst.length() - 1);
 		return ferdigTekst.trim();
+	}
+	
+	public static void main(String[] args) throws FileNotFoundException {
+		RapportHandler.lesRapport();
 	}
 }
