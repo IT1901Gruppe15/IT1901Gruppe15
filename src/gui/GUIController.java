@@ -265,7 +265,8 @@ public class GUIController {
 	}
 
 	@FXML
-	private void openReport(ActionEvent event) { // når man trykker på rapport-knappen
+	private void openReport(ActionEvent event) { // når man trykker på rapport-knappe
+		System.out.println("'" + rapportOdelagteTingField.getText() + "'");
 		root.setCenter(reportPane);
 	}
 
@@ -281,7 +282,10 @@ public class GUIController {
 		}
 		String ødelagt = RapportHandler.formaterTekst(rapportOdelagteTingField.getText(), "\n");
 		String gjenglemt = RapportHandler.formaterTekst(rapportGjenglemteTingField.getText(), "\n");
-		int vedstatus = Integer.parseInt(vedstatusField.getText());
+		int vedstatus = 0;
+		if (vedstatusField.getText().length() != 0) {
+			vedstatus = Integer.parseInt(vedstatusField.getText());
+		}
 		try {
 			connection.settinnRapport(ødelagt, gjenglemt, vedstatus, rapportDropDown.getValue(), LocalDate.now().toString());
 		} catch (SQLException e) {

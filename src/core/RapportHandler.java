@@ -112,7 +112,11 @@ public class RapportHandler {
 			ferdigTekst += liste[i] + ";";
 		}
 		ferdigTekst = ferdigTekst.substring(0, ferdigTekst.length() - 1);
-		return ferdigTekst.trim();
+		ferdigTekst = ferdigTekst.trim();
+		if (ferdigTekst.length() == 0) {
+			return " ";
+		}
+		return ferdigTekst;
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException {
