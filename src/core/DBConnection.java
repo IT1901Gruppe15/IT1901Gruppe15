@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import database.DB;
 
-public class DBConnection { // noen andre får oppdatere de siste javadocene i denne klassen siden jeg vet ikke helt hva de gjør :S
+public class DBConnection { 
 
 	private DB db;
 
@@ -134,7 +134,13 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 		db.oppdaterDB(q);
 	}
 
-	// Legg inn ødelagt Utstyr
+	/**
+	 * Legg inn ødelagt Utstyr
+	 * 
+	 * @param utstyrsID Hva som er ødelagt.
+	 * @param rapportID Rapporten som sa det var ødelagt.
+	 * @throws SQLException
+	 */
 	public void leggInnOdelagtUtstyr(int utstyrsID, int rapportID) throws SQLException {
 		String q = ("insert into ErOdelagt values ('"
 				+ (new String("" + utstyrsID)) + "','"
@@ -143,14 +149,28 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 		db.oppdaterDB(q);
 	}
 	
-	// Legg inn gjenglemte ting
+	/**
+	 * Legg inn gjenglemte ting
+	 * 
+	 * @param Navn Navn på gjenglemt ting.
+	 * @param rapportID ID'en på rapporten som sa den var gjenglemt.
+	 * @param koieID Koien det gjelder.
+	 * @throws SQLException
+	 */
 	public void leggInnGjenglemteTing(String Navn, int rapportID, String koieID) throws SQLException {
 		String q = ("insert into Gjenglemt (Navn,RapportID,KoieID) values('" + Navn + "','" + rapportID + "','" + koieID + "');");
 		
 		db.oppdaterDB(q);
 	}
-
-	// Få utstyrsID
+	
+	/**
+	 * Få et utstyrsID som matcher navn og Koie.
+	 * 
+	 * @param navn Navnet på utstyret.
+	 * @param koie Navnet på koia.
+	 * @return ResultSet med tingen som stemmer med parametrene.
+	 * @throws SQLException
+	 */
 	public ResultSet getUtstyrID(String navn, String koie) throws SQLException {
 		String q = ("select UtstyrsID from Utstyr where Navn = '" + navn + "' and FraktesTilID = '" + koie + "';");
 
@@ -168,7 +188,15 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 		return db.sporDB(q);
 	}
 
-	// Få rapportID
+	/**
+	 * Få rapportID fra en rapport.
+	 * 
+	 * @param odelagt Ødelagt String.
+	 * @param gjenglemt Gjenglemt String.
+	 * @param vedstatus Veddugnad String.
+	 * @return ResultSet med rapportID til rapport som matcher parametrene.
+	 * @throws SQLException
+	 */
 	public ResultSet getrapportID(String odelagt, String gjenglemt,
 			int vedstatus) throws SQLException {
 		String q = ("select RapportID from Rapport where Odelagt = '" 
@@ -261,8 +289,8 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * Returnerer en liste med datoer med laveste vedstatus for hver dag i synkende rekkefølge etter dato, starter på innsendt dato
 	 * 
 	 * @param koieID Koien informasjon skal hentes fra.
-	 * @param dato
-	 * @return
+	 * @param dato Datoen lista skal begynne på
+	 * @return ResultSet med unike datoer etter startdato i synkende rekkefølge
 	 * @throws SQLException
 	 */
 	public ResultSet getDatoListe(String koieID, String dato) throws SQLException {
@@ -271,14 +299,26 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 		return db.sporDB(q);
 	}
 	
-	//returnerer liste med alt ødelagt utstyr på en koie
+	/**
+	 * Returnerer liste med alt ødelagt utstyr på en koie
+	 * 
+	 * @param koieID Koien det gjelder.
+	 * @return ResultSet med ødelagt utstyr på koia.
+	 * @throws SQLException
+	 */
 	public ResultSet getOdelagt(String koieID) throws SQLException {
 		String q = ("select Navn from Rapport as R, ErOdelagt as E, Utstyr as U where KoieRapportID = '" + koieID + "' and R.RapportID = E.RapportID and E.UtstyrsID = U.UtstyrsID;");
 		
 		return db.sporDB(q);
 	}
 	
-	//returnerer en liste med gjenglemte ting på en koie
+	/**
+	 * Returnerer en liste med gjenglemte ting på en koie
+	 * 
+	 * @param koieID  Koien det gjelder.
+	 * @return ResultSet med gjenglemte ting på Koien
+	 * @throws SQLException
+	 */
 	public ResultSet getGjenglemt(String koieID) throws SQLException {
 		
 		String q = ("select Navn from Gjenglemt where KoieID = '" + koieID + "';");
@@ -286,7 +326,13 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 		return db.sporDB(q);
 	}
 	
-	//fix utstyr
+	/**
+	 * Fikser et utstyr 
+	 * 
+	 * @param koie Koien det gjelder.
+	 * @param tingnavn Utstyret som skal fikses.
+	 * @throws SQLException
+	 */
 	public void fixUtstyr(String koie, String tingnavn) throws SQLException {
 		String q = ("delete from ErOdelagt where UtstyrsID = (select UtstyrsID from Utstyr where Navn = '" + tingnavn + "' and FraktesTilID = '" + koie + "');");
 		db.oppdaterDB(q);
@@ -295,31 +341,54 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 		db.oppdaterDB(q);
 	}
 	
-	//ting er hentet
+	/**
+	 * Si ifra om at en ting er blitt funnet.
+	 * 
+	 * @param ting Hvilken ting som er funnet.
+	 * @throws SQLException
+	 */
 	public void funnetTing(String ting) throws SQLException {
 		String q = ("delete from Gjenglemt where navn = '" + ting + "';");
 		
 		db.oppdaterDB(q);
 	}
 	
-	//oppdater dato for veddugnad i Koie
+	/**
+	 * Oppdater dato for veddugnad i Koie 
+	 * 
+	 * @param koie Hvilken koie det gjelder.
+	 * @param dato Hvilken dato en dugnad har vært/skal være
+	 * @throws SQLException
+	 */
 	public void datoVeddugnad(String koie, String dato) throws SQLException {
 		String q = ("update Koie set Veddugnad = '" + dato + "' where KoieID = '" + koie + "';");
 		
 		db.oppdaterDB(q);
 	}
 	
-	//get dato for veddugnad i koie
-	public void getForrigeVeddugnad(String koie) throws SQLException {
+	/**
+	 * Få dato for veddugnad fra en Koie
+	 * 
+	 * @param koie Hvilken koie det gjelder.
+	 * @return ResultSet med datoen for veddugnad.
+	 * @throws SQLException
+	 */
+	public ResultSet getForrigeVeddugnad(String koie) throws SQLException {
 		String q = ("select Veddugnad from Koie where KoieID = '" + koie + "';");
 		
-		db.sporDB(q);
+		return db.sporDB(q);
 	}
 	
-	//få alt utstyr fra ei Koie
-	public void getAltUtstyr(String koie) throws SQLException {
+	/**
+	 * Få alt utstyr fra ei Koie 
+	 * 
+	 * @param koie Koien det gjelder.
+	 * @return ResultSet med alt ødelagt utstyr på ei Koie.
+	 * @throws SQLException
+	 */
+	public ResultSet getAltUtstyr(String koie) throws SQLException {
 		String q = ("select Navn from Utstyr where FraktesTilID = '" + koie + "';");
 
-		db.sporDB(q);
+		return db.sporDB(q);
 	}
 }
