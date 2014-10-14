@@ -15,12 +15,15 @@ public class Vedstatus {
 	boolean skuddar = false;
 	
 	/**
+	 * Estimerer antall dager til neste veddugnad basert på tidligere vedstatus
+	 * 
 	 * @param koieID Identifikasjonen til koien hvor vi skal hente vedstatus
 	 * @return Integer som viser antall dager til neste veddugnad
 	 * @throws SQLException
 	 */
 	public int lagVedEstimat(String koieID) throws SQLException{
 		ResultSet p = dbconnect.getForrigeVeddugnad(koieID);
+		p.next();
 		dato = p.getString(1);
 		tallX = new ArrayList<Integer>();
 		tallY = new ArrayList<Integer>();
@@ -85,6 +88,8 @@ public class Vedstatus {
 	}
 
 	/**
+	 * Finner hvor mange dager det er i hver måned
+	 * 
 	 * @param m Hvilken måned det er ut ifra tallet i datoen
 	 * @return Integer med antall dager i m måneder
 	 */
