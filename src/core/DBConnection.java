@@ -193,7 +193,7 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @throws SQLException
 	 */
 	public void registrerUtstyr(String navn, String dato, int status, String adminID, String koie) throws SQLException {
-		String q = ("insert into Utstyr (navn, innkjopsdato, stat, adminID,fraktesTilID) VALUES ('" + navn + "','" + dato + "','" + (new String("" + status)) + "','" + adminID + "','" + koie + "');");
+		String q = ("insert into Utstyr (Navn, Innkjopsdato, stat, AdminID,FraktesTilID) VALUES ('" + navn + "','" + dato + "','" + (new String("" + status)) + "','" + adminID + "','" + koie + "');");
 
 		db.oppdaterDB(q);
 	}
@@ -257,7 +257,15 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 		return db.sporDB(q);
 	}
 	
-	//returnerer en liste med datoer med laveste vedstatus for hver dag i synkende rekkefølge etter dato, starter på innsendt dato
+	/**
+	 * returnerer en liste med datoer med laveste vedstatus for hver dag i synkende rekkefølge etter dato, starter på innsendt dato
+	 * 
+	 * @param koieID
+	 * @param dato
+	 * @return
+	 * @throws SQLException
+	 */
+	//
 	public ResultSet getDatoListe(String koieID, String dato) throws SQLException {
 		String q = ("select Dato, min(Vedstatus) from Rapport where Dato > '" + dato + "' and KoieRapportID = '" + koieID + "' group by Dato order by Dato desc;");
 		
@@ -294,5 +302,8 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 		
 		db.oppdaterDB(q);
 	}
+	
+	//oppdater dato for veddugnad i Koie
+	
 
 }
