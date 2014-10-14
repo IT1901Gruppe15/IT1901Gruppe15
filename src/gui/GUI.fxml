@@ -68,6 +68,9 @@
 			</VBox>
 			<Label fx:id="registreringsFeil" style="-fx-font-size: 14px; -fx-text-fill: #ff0000"
 				layoutX="550" layoutY="475" />
+			<Label
+				text="Brukernavn må ikke finnes fra før&#10;Passordene må matche&#10;Telefonnummeret må inneholde 8 siffer"
+				layoutX="100" layoutY="600" />
 		</Pane>
 	</fx:define>
 
@@ -321,7 +324,13 @@
 				layoutX="400" layoutY="120" />
 			<Text fx:id="adminLedigeSengeplasserText" text="Ledige sengeplasser: xx"
 				layoutX="400" layoutY="140" />
-			<Button text="Oppdater utstyr" onAction="#oppdaterUtstyr"
+			<TextField fx:id="adminKoieFunnetGjenglemtField" layoutX="15"
+				layoutY="400" />
+			<Button text="Funnet gjenglemt utstyr" onAction="#finnUtstyr"
+				layoutX="200" layoutY="400" />
+			<TextField fx:id="adminKoieFiksOdelagtField" layoutX="15"
+				layoutY="500" />
+			<Button text="Fiks ødelagt utstyr" onAction="#fiksUtstyr"
 				layoutX="200" layoutY="500" focusTraversable="false" />
 		</Pane>
 	</fx:define>
