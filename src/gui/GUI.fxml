@@ -324,6 +324,9 @@
 				layoutX="400" layoutY="120" />
 			<Text fx:id="adminLedigeSengeplasserText" text="Ledige sengeplasser: xx"
 				layoutX="400" layoutY="140" />
+			<TextField fx:id="adminKoieLeggTilUtstyrField" layoutX="15"
+				layoutY="300" />
+			<Button text="Legg til nytt utstyr" onAction="#leggTilUtstyr" layoutX="200" layoutY="300" />
 			<TextField fx:id="adminKoieFunnetGjenglemtField" layoutX="15"
 				layoutY="400" />
 			<Button text="Funnet gjenglemt utstyr" onAction="#finnUtstyr"

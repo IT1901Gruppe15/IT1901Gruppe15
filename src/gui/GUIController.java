@@ -87,6 +87,7 @@ public class GUIController {
 	@FXML private DatePicker adminKalender; // kalenderen i koie-panelet for admin
 	@FXML private Text adminAntallSengeplasserText; // overskriften på koie-panelet for admin
 	@FXML private Text adminLedigeSengeplasserText; // overskriften på koie-panelet for admin
+	@FXML private TextField adminKoieLeggTilUtstyrField;
 	@FXML private TextField adminKoieFunnetGjenglemtField;
 	@FXML private TextField adminKoieFiksOdelagtField;
 
@@ -344,7 +345,7 @@ public class GUIController {
 	@FXML
 	private void fiksUtstyr(ActionEvent event) {
 		try {
-			connection.fixUtstyr(activeKoie, adminKoieFiksOdelagtField.getText());
+			connection.fixUtstyr(Koie.formaterKoieNavn(activeKoie), adminKoieFiksOdelagtField.getText());
 			adminKoieFiksOdelagtField.setText("");
 			openKoie(activeKoie);
 		} catch (SQLException e) {
@@ -357,6 +358,17 @@ public class GUIController {
 		try {
 			connection.funnetTing(adminKoieFunnetGjenglemtField.getText());
 			adminKoieFunnetGjenglemtField.setText("");
+			openKoie(activeKoie);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	private void leggTilUtstyr(ActionEvent event) {
+		try {
+			connection.registrerUtstyr(adminKoieLeggTilUtstyrField.getText(), LocalDate.now().toString(), 1, bruker.getBrukernavn(), Koie.formaterKoieNavn(activeKoie));
+			adminKoieLeggTilUtstyrField.setText("");
 			openKoie(activeKoie);
 		} catch (SQLException e) {
 			e.printStackTrace();
