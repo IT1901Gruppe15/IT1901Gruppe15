@@ -12,6 +12,12 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 
+ * Reservasjon klassen leser fra en fil og lagrer feltene i databasen hvis de har gyldige verdier
+ * 
+ *
+ */
 public class Reservasjon {
 	String koieID;
 	private String epost, start_dato;
@@ -21,26 +27,44 @@ public class Reservasjon {
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
+	/**
+	 * Setter email pattern til EMAIL_PATTERN 
+	 * som brukes til å verifisere e-post
+	 * 
+	 *
+	 */
 	public Reservasjon() {
 		pattern = Pattern.compile(EMAIL_PATTERN);
 	}
 
-	// string til dato for validering av dato før, dato etter.
-	public Date asDate(String date, String dateFromat) throws ParseException {
-		SimpleDateFormat s = new SimpleDateFormat(dateFromat);
-		s.setLenient(false);
-		Date dat = s.parse(date);
-		return dat;
-	}
 
+	
+	// string til dato for validering av dato før, dato etter.
+//	public Date asDate(String date, String dateFromat) throws ParseException {
+//		SimpleDateFormat s = new SimpleDateFormat(dateFromat);
+//		s.setLenient(false);
+//		Date dat = s.parse(date);
+//		return dat;
+//	}
+	/**
+	 * @author morten
+	 * Valdierer en gitt dato på et gitt format
+	 * 
+	 * @param dateToValidate, dato som skal valideres
+	 * @param dateFormat, angir formatet som datoen skal være på
+	 * @return true eller false avhening om dato ble valideret som riktig eller ikke
+	 * @throws ParseException
+	 *
+	 */
 	// valider gyldig dato
-	public boolean isThisDateValid(String dateToValidate, String dateFromat) {
+	
+	public boolean isThisDateValid(String dateToValidate, String dateFormat) {
 
 		if (dateToValidate == null) {
 			return false;
 		}
 
-		SimpleDateFormat sdf = new SimpleDateFormat(dateFromat);
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
 
 		sdf.setLenient(false);
 
@@ -59,6 +83,15 @@ public class Reservasjon {
 	}
 
 	// valider epost
+	/**
+	 * @author morten
+	 * Validerer om epost er gyldig eller ikke
+	 * @param hex, epost string som skal valideres
+	 * @throws IllegalArgumentException som må håndteres av metoden som kaller på metoden
+	 * 
+	 * 
+	 *
+	 */
 	public void validate(final String hex) throws IllegalArgumentException {
 
 		matcher = pattern.matcher(hex);
@@ -68,6 +101,12 @@ public class Reservasjon {
 		}
 
 	}
+	
+	/**
+	 * @author morten
+	 * Metode for å lese reservasjon fra en tekstfil på formatet koie; epostadresse; dato.
+	 *
+	 */
 
 	public void lesReservasjon() {
 		BufferedReader reader = null;
@@ -114,7 +153,11 @@ public class Reservasjon {
 		}
 
 	}
-
+	/**
+	 * @author morten
+	 *	Metode for å oppdatere database med feltene epost
+	 */
+	
 	public void updateDB() {
 		try {
 			db.settinnReservasjon(getEpost(), getStart_dato(),

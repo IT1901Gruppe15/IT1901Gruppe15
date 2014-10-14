@@ -21,6 +21,11 @@ public class RapportHandler {
 	static DBConnection connection = new DBConnection();
 	
 	//les alle rapporter fra tekstfil
+	/**
+	 * Leser rapporter som linjer fra egen tekstfil
+	 * 
+	 * @throws FileNotFoundException
+	 */
 	public static void lesRapport() throws FileNotFoundException {
 		
 		try {
@@ -72,6 +77,16 @@ public class RapportHandler {
 	}
 	
 	//endre et utstyrs status
+	/**
+	 * Endrer verdier i databsen slik at spesifikt utstyr er ødelagt
+	 * 
+	 * @param utstyrsnavn Navnet på utstyret som har blitt ødelagt
+	 * @param koieID Identifikasjonen til koien
+	 * @param odelagteTing Streng med alle ting som har blitt ødelagt
+	 * @param gjenglemteTing Streng med alle ting som har blitt gjenglemt
+	 * @param vedstatus Status på gjenværende mengde ved i koia
+	 * @throws SQLException
+	 */
 	private static void Odelegg(String utstyrsnavn, String koieID, String odelagteTing, String gjenglemteTing, int vedstatus) throws SQLException {
 		ResultSet rsU = connection.getUtstyrID(utstyrsnavn, koieID);
 		rsU.next();
@@ -84,6 +99,14 @@ public class RapportHandler {
 	}
 	
 	//legg inn gjenglemt ting
+	/**
+	 * Legger til gjenglemte ting i koien inn i databasen
+	 * 
+	 * @param gjenglemteTing Streng med alle gjenglemte ting
+	 * @param koieID Identifikasjonen til koien
+	 * @param rapportID Vite hvilken rapport som meldte om det gjenglemte
+	 * @throws SQLException
+	 */
 	private static void glemt(String gjenglemteTing, String koieID, int rapportID) throws SQLException{
 		
 		if(gjenglemteTing.contains(";")){
@@ -99,14 +122,26 @@ public class RapportHandler {
 	}
 	
 	//slett innhold i fila... IKKE SELVE FILA
+	/**
+	 * Sletter innholdet i input filen
+	 * 
+	 * @throws FileNotFoundException
+	 */
 	private static void wipeFile() throws FileNotFoundException{
 		PrintWriter writer = new PrintWriter(INPUT_FILE);
 		writer.print("");
 		writer.close();
 	}
 	
-	public static String formaterTekst(String tekst, String separator) { // gjør om tekst til formatet
-		String[] liste = tekst.split(separator);						 // ting1;ting2;ting3
+	/**
+	 * gjør om tekst til formatet: ting1;ting2;ting3
+	 * 
+	 * @param tekst Teksten som endres
+	 * @param separator Hvilket symbol(er) som skiller tekstbitene
+	 * @return returnerer den ferdige teksten
+	 */
+	public static String formaterTekst(String tekst, String separator) {
+		String[] liste = tekst.split(separator);
 		String ferdigTekst = "";
 		for (int i = 0; i < liste.length; i++) {
 			ferdigTekst += liste[i] + ";";

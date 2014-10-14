@@ -366,6 +366,7 @@ public class DBConnection {
 		db.oppdaterDB(q);
 	}
 	
+<<<<<<< HEAD
 	/**
 	 * Få dato for veddugnad fra en Koie
 	 * 
@@ -373,12 +374,16 @@ public class DBConnection {
 	 * @return ResultSet med datoen for veddugnad.
 	 * @throws SQLException
 	 */
+=======
+	//get dato for veddugnad i koie
+>>>>>>> origin/master
 	public ResultSet getForrigeVeddugnad(String koie) throws SQLException {
 		String q = ("select Veddugnad from Koie where KoieID = '" + koie + "';");
 		
 		return db.sporDB(q);
 	}
 	
+<<<<<<< HEAD
 	/**
 	 * Få alt utstyr fra ei Koie 
 	 * 
@@ -386,6 +391,9 @@ public class DBConnection {
 	 * @return ResultSet med alt ødelagt utstyr på ei Koie.
 	 * @throws SQLException
 	 */
+=======
+	//få alt utstyr fra ei Koie
+>>>>>>> origin/master
 	public ResultSet getAltUtstyr(String koie) throws SQLException {
 		String q = ("select Navn from Utstyr where FraktesTilID = '" + koie + "';");
 

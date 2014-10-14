@@ -10,6 +10,12 @@ public class Epost {
 	Session session;
 	Properties properties;
 	String user,pw,msg,sub;
+	
+	
+	/**
+	 * Kontstrukør for å sette opp epost med server og lignende
+	 * 
+	 */
 	public Epost(){
 		user="fellesprosjekt.gruppe15@gmail.com";
 		pw="gruppe15";
@@ -35,20 +41,28 @@ public class Epost {
 	}
 		
 	
-	public void addRecipient(Address[] address)throws MessagingException{
-		
-		
-	}
+	/**
+	 * @param msg meldings innhold
+	 */
 	public void setMes(String msg){
 		this.msg=msg;
 		
 	}
+	
+	/**
+	 * @param sub emne(subject) til meldingen
+	 */
 	public void setSub(String sub){
 		this.sub=sub;
 		
 		
 	}
-	public void sendMessage(String s){
+	
+	/**
+	 *  Metode for å sende melding med muligheter for flere mottakere ved å bruke , mellom mottakere
+	 * @param mottakere setter mottakere av melding
+	 */
+	public void sendMessage(String mottakere){
 		
 		try{
 	         // Create a default MimeMessage object.
@@ -58,7 +72,7 @@ public class Epost {
 	         message.setFrom(new InternetAddress(from));
 
 	         // Set To: header field of the header.
-	         String to[] = s.split(","); //Mail id you want to send
+	         String to[] = mottakere.split(","); //Mail id you want to send
 	         InternetAddress[] address = new InternetAddress[to.length];
 	         for(int i =0; i< to.length; i++)
 	         {
