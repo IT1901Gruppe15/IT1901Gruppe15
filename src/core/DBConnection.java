@@ -237,20 +237,20 @@ public class DBConnection {
 		return db.sporDB(q);
 	}
 
-	/**
-	 * Returnerer et ResultSet med alt ødelagt og gjenglemt utsyr fra en koie
-	 * 
-	 * @param koieID Koien informasjonen skal hentes fra
-	 * @return ResultSet der col1 = ødelagt utstyr, col2 = gjenglemt utstyr
-	 * @throws SQLException
-	 */
-	public ResultSet getOdelagtGjenglemtKoie(String koieID) throws SQLException {
-		String q = ("select Odelagt, Gjenglemt from Rapport where KoieRapportID = '" 
-				+ koieID 
-				+ "';");
-
-		return db.sporDB(q);
-	}
+//	/**
+//	 * Returnerer et ResultSet med alt ødelagt og gjenglemt utsyr fra en koie
+//	 * 
+//	 * @param koieID Koien informasjonen skal hentes fra
+//	 * @return ResultSet der col1 = ødelagt utstyr, col2 = gjenglemt utstyr
+//	 * @throws SQLException
+//	 */
+//	public ResultSet getOdelagtGjenglemtKoie(String koieID) throws SQLException {
+//		String q = ("select Odelagt, Gjenglemt from Rapport where KoieRapportID = '" 
+//				+ koieID 
+//				+ "';");
+//
+//		return db.sporDB(q);
+//	}
 
 	/**
 	 * Returnerer et ResultSet som sier hvor mange reservasjoner det er på en koie på en bestemt dato
@@ -307,8 +307,8 @@ public class DBConnection {
 	 * @throws SQLException
 	 */
 	public ResultSet getOdelagt(String koieID) throws SQLException {
-		String q = ("select Navn from Rapport as R, ErOdelagt as E, Utstyr as U where KoieRapportID = '" + koieID + "' and R.RapportID = E.RapportID and E.UtstyrsID = U.UtstyrsID;");
-		
+		String q = ("select Navn from Utstyr where FraktesTilID = '" + koieID + "' and stat = '0';");
+
 		return db.sporDB(q);
 	}
 	
