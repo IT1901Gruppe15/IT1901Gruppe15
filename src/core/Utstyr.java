@@ -2,12 +2,25 @@ package core;
 
 import java.sql.SQLException;
 
+/**
+ * Holder informasjon om utstyr og metode for å kjøpe nytt utstyr som legges til database
+ *
+ */
 public class Utstyr {
 	String koieID;
 	String navn,admin_id,admin;
 	String innkjøpsdato;
 	int status;
-
+	
+	
+	/**
+	 * Konstruktør for klassen Utstyr som setter forskjellige felt
+	 * @param koieID navnet på aktuell koide
+	 * @param navn navn på utstyr
+	 * @param innkjøpsdato dato for kjøp av utstyr
+	 * @param status status om utstyrer er ødelagt eller ikke,der 0 er ødelagt og 1 er ikke ødelagt
+	 * @param admin_id navnet til adminen som legger til utstyr
+	 */
 	private Utstyr( String koieID, String navn, String innkjøpsdato, int status, String admin_id){
 
 		this.koieID = koieID;
@@ -16,7 +29,10 @@ public class Utstyr {
 		this.status = status;
 		this.admin_id=admin_id;
 	}
-
+	
+	/**
+	 * Registrerer nytt utstyrskjøp i databasen
+	 */
 	public void registrerUtstyrKjop(){
 		DBConnection db = new DBConnection();
 		try {

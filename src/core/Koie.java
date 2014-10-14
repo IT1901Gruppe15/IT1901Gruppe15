@@ -13,6 +13,12 @@ public class Koie {
 		
 	}
 	
+	
+	/**
+	 * Formaterer koie navn til gyldig format
+	 * @param koie tar inn koie navn
+	 * @return formatertTekst koie blir returnert med riktig format
+	 */
 	public static String formaterKoieNavn(String koie) {
 		String formatertTekst = "";
 		for (int i = 0; i < koie.length(); i++) {
