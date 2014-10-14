@@ -193,7 +193,7 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	 * @throws SQLException
 	 */
 	public void registrerUtstyr(String navn, String dato, int status, String adminID, String koie) throws SQLException {
-		String q = ("insert into Utstyr (Navn, Innkjopsdato, stat, AdminID,FraktesTilID) VALUES ('" + navn + "','" + dato + "','" + (new String("" + status)) + "','" + adminID + "','" + koie + "');");
+		String q = ("insert into Utstyr (Navn, Innkjopsdato, stat, AdminID, FraktesTilID) VALUES ('" + navn + "','" + dato + "','" + (new String("" + status)) + "','" + adminID + "','" + koie + "');");
 
 		db.oppdaterDB(q);
 	}
@@ -258,14 +258,13 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	}
 	
 	/**
-	 * returnerer en liste med datoer med laveste vedstatus for hver dag i synkende rekkefølge etter dato, starter på innsendt dato
+	 * Returnerer en liste med datoer med laveste vedstatus for hver dag i synkende rekkefølge etter dato, starter på innsendt dato
 	 * 
-	 * @param koieID
+	 * @param koieID Koien informasjon skal hentes fra.
 	 * @param dato
 	 * @return
 	 * @throws SQLException
 	 */
-	//
 	public ResultSet getDatoListe(String koieID, String dato) throws SQLException {
 		String q = ("select Dato, min(Vedstatus) from Rapport where Dato > '" + dato + "' and KoieRapportID = '" + koieID + "' group by Dato order by Dato desc;");
 		
@@ -304,6 +303,23 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	}
 	
 	//oppdater dato for veddugnad i Koie
+	public void datoVeddugnad(String koie, String dato) throws SQLException {
+		String q = ("update Koie set Veddugnad = '" + dato + "' where KoieID = '" + koie + "';");
+		
+		db.oppdaterDB(q);
+	}
 	
+	//get dato for veddugnad i koie
+	public void getForrigeVeddugnad(String koie) throws SQLException {
+		String q = ("select Veddugnad from Koie where KoieID = '" + koie + "';");
+		
+		db.sporDB(q);
+	}
+	
+	//få alt utstyr fra ei Koie
+	public void getAltUtstyr(String koie) throws SQLException {
+		String q = ("select Navn from Utstyr where FraktesTilID = '" + koie + "';");
 
+		db.sporDB(q);
+	}
 }
