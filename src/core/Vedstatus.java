@@ -11,6 +11,7 @@ public class Vedstatus {
 	double sumX=0, sumY=0, sumXY=0, sumXX=0, a, b;
 	int ar1, maned1, dag1, ar2, maned2, dag2, estimat, antallDager;
 	DBConnection dbconnect = new DBConnection();
+	boolean skuddar = false;
 	
 	public int lagVedEstimat(String koieID, String dato) throws SQLException{
 		tallX = new ArrayList<Integer>();
@@ -32,7 +33,12 @@ public class Vedstatus {
 			dag2 = Integer.parseInt((datoer.get(k)).substring(8,10));
 			maned2 = Integer.parseInt((datoer.get(k)).substring(5,7));
 			ar2 = Integer.parseInt((datoer.get(k)).substring(0,4));
-			antallDager = ((ar2-ar1)*365);
+			if((ar1&4) == 0 || (ar2&4) == 0){
+				skuddar = true;
+				antallDager = ((ar2-ar1)*366);
+			} else {
+				antallDager = ((ar2-ar1)*365);
+			}
 			for(int l = 1; l <= maned1; l++){
 				antallDager -= finnManed(l);
 			}
@@ -74,7 +80,11 @@ public class Vedstatus {
 		if(m==1 || m==3 || m==5 || m==7 || m==8 || m==10 || m==12){
 			return 31;
 		} else if (m==2){
-			return 28;
+			if(skuddar){
+				return 29;
+			} else {
+				return 28;
+			}
 		}else{
 			return 30;
 		}
