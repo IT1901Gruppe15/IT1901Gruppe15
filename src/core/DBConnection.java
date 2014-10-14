@@ -310,10 +310,10 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	}
 	
 	//get dato for veddugnad i koie
-	public void getForrigeVeddugnad(String koie) throws SQLException {
+	public ResultSet getForrigeVeddugnad(String koie) throws SQLException {
 		String q = ("select Veddugnad from Koie where KoieID = '" + koie + "';");
 		
-		db.sporDB(q);
+		return db.sporDB(q);
 	}
 	
 	//få alt utstyr fra ei Koie

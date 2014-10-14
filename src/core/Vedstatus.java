@@ -11,9 +11,17 @@ public class Vedstatus {
 	double sumX=0, sumY=0, sumXY=0, sumXX=0, a, b;
 	int ar1, maned1, dag1, ar2, maned2, dag2, estimat, antallDager;
 	DBConnection dbconnect = new DBConnection();
+	String dato;
 	boolean skuddar = false;
 	
-	public int lagVedEstimat(String koieID, String dato) throws SQLException{
+	/**
+	 * @param koieID Identifikasjonen til koien hvor vi skal hente vedstatus
+	 * @return Integer som viser antall dager til neste veddugnad
+	 * @throws SQLException
+	 */
+	public int lagVedEstimat(String koieID) throws SQLException{
+		ResultSet p = dbconnect.getForrigeVeddugnad(koieID);
+		dato = p.getString(1);
 		tallX = new ArrayList<Integer>();
 		tallY = new ArrayList<Integer>();
 		datoer = new ArrayList<String>();
@@ -76,6 +84,10 @@ public class Vedstatus {
 		return estimat;
 	}
 
+	/**
+	 * @param m Hvilken måned det er ut ifra tallet i datoen
+	 * @return Integer med antall dager i m måneder
+	 */
 	private int finnManed(int m) {
 		if(m==1 || m==3 || m==5 || m==7 || m==8 || m==10 || m==12){
 			return 31;
@@ -92,6 +104,6 @@ public class Vedstatus {
 
 	public static void main(String[] args) throws SQLException {
 		Vedstatus test = new Vedstatus();
-		test.lagVedEstimat("Flaakoia","2014-10-01");
+		test.lagVedEstimat("Flaakoia");
 	}
 }
