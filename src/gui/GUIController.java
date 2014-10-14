@@ -174,6 +174,17 @@ public class GUIController {
 	
 	private void fyllKoiePane() { // finner all informasjon som skal vises i koie-panelet
 		try {
+			/*
+			ResultSet odelagtDB = connection.getOdelagt(Koie.formaterKoieNavn(activeKoie));
+			ResultSet gjenglemtDB = connection.getGjenglemt(Koie.formaterKoieNavn(activeKoie));
+			while (odelagtDB.next()) { // mens det finnes flere elementer i databasen
+				ødelagt += ";" + odelagtDB.getString(1); // ;ødelagt1;ødelagt2;ødelagt3
+			}
+			while (gjenglemtDB.next()) {
+				gjenglemt += ";" + gjenglemtDB.getString(1); // ;gjenglemt1;gjenglemt2;gjenglemt3
+			}
+			*/
+			
 			ResultSet rs = connection.getOdelagtGjenglemtKoie(Koie.formaterKoieNavn(activeKoie)); // får alle ødelagte og gjenglemte gjenstander fra databasen
 			String ødelagt = ""; // string som fylles med alle ødelagte gjenstander
 			String gjenglemt = ""; // string som fylles med alle gjenglemte gjenstander
