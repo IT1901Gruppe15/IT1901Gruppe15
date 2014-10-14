@@ -87,6 +87,8 @@ public class GUIController {
 	@FXML private DatePicker adminKalender; // kalenderen i koie-panelet for admin
 	@FXML private Text adminAntallSengeplasserText; // overskriften på koie-panelet for admin
 	@FXML private Text adminLedigeSengeplasserText; // overskriften på koie-panelet for admin
+	@FXML private TextField adminKoieFunnetGjenglemtField;
+	@FXML private TextField adminKoieFiksOdelagtField;
 
 	//bruker koie info pane
 	@FXML private Pane brukerKoiePane; // koie status panel for bruker
@@ -172,26 +174,38 @@ public class GUIController {
 		}
 	}
 	
+	private void openKoie(String koie) {
+		activeKoie = koie;
+		fyllKoiePane();
+		if (bruker.isAdmin()) {
+			root.setCenter(adminKoiePane);
+		} else {
+			root.setCenter(brukerKoiePane);
+		}
+	}
+
 	private void fyllKoiePane() { // finner all informasjon som skal vises i koie-panelet
 		try {
-			/*
+
 			ResultSet odelagtDB = connection.getOdelagt(Koie.formaterKoieNavn(activeKoie));
 			ResultSet gjenglemtDB = connection.getGjenglemt(Koie.formaterKoieNavn(activeKoie));
+
+
+			//ResultSet rs = connection.getOdelagtGjenglemtKoie(Koie.formaterKoieNavn(activeKoie)); // får alle ødelagte og gjenglemte gjenstander fra databasen
+			String ødelagt = ""; // string som fylles med alle ødelagte gjenstander
+			String gjenglemt = ""; // string som fylles med alle gjenglemte gjenstander
+			/*while (rs.next()) { // mens det finnes flere elementer i databasen
+				ødelagt += ";" + rs.getString(1); // ;ødelagt1;ødelagt2;ødelagt3
+				gjenglemt += ";" + rs.getString(2); // ;gjenglemt1;gjenglemt2;gjenglemt3
+			}*/
+
 			while (odelagtDB.next()) { // mens det finnes flere elementer i databasen
 				ødelagt += ";" + odelagtDB.getString(1); // ;ødelagt1;ødelagt2;ødelagt3
 			}
 			while (gjenglemtDB.next()) {
 				gjenglemt += ";" + gjenglemtDB.getString(1); // ;gjenglemt1;gjenglemt2;gjenglemt3
 			}
-			*/
-			
-			ResultSet rs = connection.getOdelagtGjenglemtKoie(Koie.formaterKoieNavn(activeKoie)); // får alle ødelagte og gjenglemte gjenstander fra databasen
-			String ødelagt = ""; // string som fylles med alle ødelagte gjenstander
-			String gjenglemt = ""; // string som fylles med alle gjenglemte gjenstander
-			while (rs.next()) { // mens det finnes flere elementer i databasen
-				ødelagt += ";" + rs.getString(1); // ;ødelagt1;ødelagt2;ødelagt3
-				gjenglemt += ";" + rs.getString(2); // ;gjenglemt1;gjenglemt2;gjenglemt3
-			}
+
 			String ferdigØdelagt = ""; // string som skal settes inn i tekstfeltet for ødelagte gjenstander
 			if (ødelagt.length() > 0) { // hvis det finnes minst en ødelagt gjenstand
 				ødelagt = ødelagt.substring(1); // fjerner den første semikolonen
@@ -215,7 +229,7 @@ public class GUIController {
 					ferdigØdelagt += ødelagtListe2[i] + "\n";
 				}
 			}
-			*/
+			 */
 			///
 			String ferdigGjenglemt = ""; // string som skal settes inn i tekstfeltet for gjenglemte gjenstander
 			if (gjenglemt.length() > 0) { // hvis det finnes minst en gjenglemt gjenstand
@@ -263,7 +277,7 @@ public class GUIController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	private void openWelcome(ActionEvent event) { // når man trykker på hjem-knappen
 		root.setCenter(welcomePane);
@@ -298,7 +312,7 @@ public class GUIController {
 			vedstatus = Integer.parseInt(vedstatusField.getText());
 		}
 		try {
-			connection.settinnRapport(ødelagt, gjenglemt, vedstatus, rapportDropDown.getValue(), LocalDate.now().toString());
+			connection.settinnRapport(ødelagt, gjenglemt, vedstatus, Koie.formaterKoieNavn(rapportDropDown.getValue()), LocalDate.now().toString());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -328,15 +342,24 @@ public class GUIController {
 		}
 		root.setCenter(medlemPane);
 	}
-	
+
 	@FXML
-	private void oppdaterUtstyr(ActionEvent event) {
+	private void fiksUtstyr(ActionEvent event) {
 		try {
-			ResultSet rs = connection.getUtstyrID("badstue", "Flaakoia");
-			while (rs.next()) {
-				System.out.println(rs.getString(1));
-			}
-			connection.oppdaterUtstyr(1, 1);
+			connection.fixUtstyr(activeKoie, adminKoieFiksOdelagtField.getText());
+			adminKoieFiksOdelagtField.setText("");
+			openKoie(activeKoie);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	private void finnUtstyr(ActionEvent event) {
+		try {
+			connection.funnetTing(adminKoieFunnetGjenglemtField.getText());
+			adminKoieFunnetGjenglemtField.setText("");
+			openKoie(activeKoie);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
