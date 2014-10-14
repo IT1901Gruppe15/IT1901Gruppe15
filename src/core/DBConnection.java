@@ -284,7 +284,7 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 		String q = ("delete from ErOdelagt where UtstyrID = (select UtstyrsID from Utstyr where Navn = '" + tingnavn + "' and FraktesTilID = '" + koie + "');");
 		db.oppdaterDB(q);
 		
-		q = ("update Utstyr set status '1' where Navn = '" + tingnavn + "' and FraktesTilID = '" + koie + "';");
+		q = ("update Utstyr set status = '1' where Navn = '" + tingnavn + "' and FraktesTilID = '" + koie + "';");
 		db.oppdaterDB(q);
 	}
 	
