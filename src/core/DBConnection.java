@@ -317,9 +317,9 @@ public class DBConnection { // noen andre får oppdatere de siste javadocene i de
 	}
 	
 	//få alt utstyr fra ei Koie
-	public void getAltUtstyr(String koie) throws SQLException {
+	public ResultSet getAltUtstyr(String koie) throws SQLException {
 		String q = ("select Navn from Utstyr where FraktesTilID = '" + koie + "';");
 
-		db.sporDB(q);
+		return db.sporDB(q);
 	}
 }
