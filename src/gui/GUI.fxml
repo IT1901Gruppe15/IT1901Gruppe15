@@ -308,22 +308,26 @@
 		<Pane fx:id="adminKoiePane">
 			<Text fx:id="adminKoieStatusName" layoutX="15" layoutY="20"
 				style="-fx-font-size: 20px" />
-			<Label text="Ødelagte ting" layoutX="15" layoutY="50" />
-			<TextArea fx:id="adminOdelagteTingField" editable="false"
-				focusTraversable="false" layoutX="15" layoutY="70" prefWidth="125"
-				prefHeight="150" />
-			<Label text="Gjenglemte ting" layoutX="150" layoutY="50" />
-			<TextArea fx:id="adminGjenglemteTingField" editable="false"
-				focusTraversable="false" layoutX="150" layoutY="70" prefWidth="125"
-				prefHeight="150" />
-			<Label text="Vedstatus" layoutX="300" layoutY="50" />
-			<Label text="Kalender" layoutX="400" layoutY="50" />
-			<DatePicker fx:id="adminKalender" layoutX="400" layoutY="70"
+				
+				<Label text="Alt utstyr på koie" layoutX="15" layoutY="50" />
+			<TextArea fx:id="adminKoieAltUtstyrField" layoutX="15"
+				layoutY="70" prefWidth="125" prefHeight="150" />
+			<Label text="Ødelagte ting" layoutX="215" layoutY="50" />
+			<ComboBox fx:id="adminKoieOdelagteTingDropDown" editable="false"
+				focusTraversable="false" layoutX="215" layoutY="70" />
+			<ComboBox fx:id="adminKoieGjenglemteTingDropDown" editable="false"
+				focusTraversable="false" layoutX="350" layoutY="70" />
+			<Label text="Gjenglemte ting" layoutX="350" layoutY="50" />
+			<Label text="Vedstatus" layoutX="500" layoutY="50" />
+			<Label text="Kalender" layoutX="600" layoutY="50" />
+			<DatePicker fx:id="adminKalender" layoutX="600" layoutY="70"
 				focusTraversable="false" />
+				
+		
 			<Text fx:id="adminAntallSengeplasserText" text="Antall sengeplasser: xx"
-				layoutX="400" layoutY="120" />
+				layoutX="600" layoutY="120" />
 			<Text fx:id="adminLedigeSengeplasserText" text="Ledige sengeplasser: xx"
-				layoutX="400" layoutY="140" />
+				layoutX="600" layoutY="140" />
 			<TextField fx:id="adminKoieLeggTilUtstyrField" layoutX="15"
 				layoutY="300" />
 			<Button text="Legg til nytt utstyr" onAction="#leggTilUtstyr" layoutX="200" layoutY="300" />

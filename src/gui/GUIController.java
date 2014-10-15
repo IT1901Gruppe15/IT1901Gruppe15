@@ -90,6 +90,7 @@ public class GUIController {
 	@FXML private TextField adminKoieLeggTilUtstyrField;
 	@FXML private TextField adminKoieFunnetGjenglemtField;
 	@FXML private TextField adminKoieFiksOdelagtField;
+	@FXML private ComboBox<String> adminKoieOdelagteTingDropDown;
 
 	//bruker koie info pane
 	@FXML private Pane brukerKoiePane; // koie status panel for bruker
@@ -187,7 +188,7 @@ public class GUIController {
 
 	private void fyllKoiePane() { // finner all informasjon som skal vises i koie-panelet
 		try {
-
+			System.out.println(Koie.formaterKoieNavn(activeKoie));
 			ResultSet odelagtDB = connection.getOdelagt(Koie.formaterKoieNavn(activeKoie));
 			ResultSet gjenglemtDB = connection.getGjenglemt(Koie.formaterKoieNavn(activeKoie));
 
@@ -200,19 +201,27 @@ public class GUIController {
 				gjenglemt += ";" + rs.getString(2); // ;gjenglemt1;gjenglemt2;gjenglemt3
 			}*/
 			while (odelagtDB.next()) { // mens det finnes flere elementer i databasen
+				System.out.println("hei");
 				ødelagt += ";" + odelagtDB.getString(1); // ;ødelagt1;ødelagt2;ødelagt3
 			}
+			System.out.println("ødelagt" + ødelagt);
 			while (gjenglemtDB.next()) {
 				gjenglemt += ";" + gjenglemtDB.getString(1); // ;gjenglemt1;gjenglemt2;gjenglemt3
 			}
 			String ferdigØdelagt = ""; // string som skal settes inn i tekstfeltet for ødelagte gjenstander
-			if (ødelagt.length() > 0) { // hvis det finnes minst en ødelagt gjenstand
+			String[] ødelagtListe = ødelagt.split(";");
+			for (int i = 1; i < ødelagtListe.length; i++) {
+				adminKoieOdelagteTingDropDown.getItems().add(ødelagtListe[i]);
+				//ferdigØdelagt += ødelagtListe[i] + "\n";
+			}
+			
+			/*if (ødelagt.length() > 0) { // hvis det finnes minst en ødelagt gjenstand
 				ødelagt = ødelagt.substring(1); // fjerner den første semikolonen
 				String[] ødelagtListe = ødelagt.split(";");
 				for (int i = 0; i < ødelagtListe.length; i++) {
 					ferdigØdelagt += ødelagtListe[i] + "\n";
 				}
-			}
+			}*/
 			///
 			/*
 			ødelagt = "";
@@ -240,8 +249,8 @@ public class GUIController {
 			}
 			if (bruker.isAdmin()) {
 				adminKoieStatusName.setText(activeKoie); // setter inn all informasjonen i koie-panelet
-				adminOdelagteTingField.setText(ferdigØdelagt);
-				adminGjenglemteTingField.setText(ferdigGjenglemt);
+				//adminOdelagteTingField.setText(ferdigØdelagt);
+				//adminGjenglemteTingField.setText(ferdigGjenglemt);
 				oppdaterSengeplasser(true, adminKalender.getValue());
 			} else {
 				brukerKoieStatusName.setText(activeKoie);
@@ -363,7 +372,7 @@ public class GUIController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	private void leggTilUtstyr(ActionEvent event) {
 		try {
