@@ -308,10 +308,10 @@
 		<Pane fx:id="adminKoiePane">
 			<Text fx:id="adminKoieStatusName" layoutX="15" layoutY="20"
 				style="-fx-font-size: 20px" />
-				
-				<Label text="Alt utstyr på koie" layoutX="15" layoutY="50" />
-			<TextArea fx:id="adminKoieAltUtstyrField" layoutX="15"
-				layoutY="70" prefWidth="125" prefHeight="150" />
+			<Label text="Alt utstyr på koie" layoutX="15" layoutY="50" />
+			<TextArea fx:id="adminKoieAltUtstyrField" editable="false"
+				layoutX="15" layoutY="70" prefWidth="125" prefHeight="150"
+				focusTraversable="false" />
 			<Label text="Ødelagte ting" layoutX="215" layoutY="50" />
 			<ComboBox fx:id="adminKoieOdelagteTingDropDown" editable="false"
 				focusTraversable="false" layoutX="215" layoutY="70" />
@@ -322,23 +322,18 @@
 			<Label text="Kalender" layoutX="600" layoutY="50" />
 			<DatePicker fx:id="adminKalender" layoutX="600" layoutY="70"
 				focusTraversable="false" />
-				
-		
 			<Text fx:id="adminAntallSengeplasserText" text="Antall sengeplasser: xx"
 				layoutX="600" layoutY="120" />
 			<Text fx:id="adminLedigeSengeplasserText" text="Ledige sengeplasser: xx"
 				layoutX="600" layoutY="140" />
 			<TextField fx:id="adminKoieLeggTilUtstyrField" layoutX="15"
-				layoutY="300" />
-			<Button text="Legg til nytt utstyr" onAction="#leggTilUtstyr" layoutX="200" layoutY="300" />
-			<TextField fx:id="adminKoieFunnetGjenglemtField" layoutX="15"
-				layoutY="400" />
+				layoutY="300" focusTraversable="false" />
+			<Button text="Legg til nytt utstyr" onAction="#leggTilUtstyr"
+				layoutX="200" layoutY="300" focusTraversable="false" />
 			<Button text="Funnet gjenglemt utstyr" onAction="#finnUtstyr"
-				layoutX="200" layoutY="400" />
-			<TextField fx:id="adminKoieFiksOdelagtField" layoutX="15"
-				layoutY="500" />
+				layoutX="350" layoutY="125" focusTraversable="false" />
 			<Button text="Fiks ødelagt utstyr" onAction="#fiksUtstyr"
-				layoutX="200" layoutY="500" focusTraversable="false" />
+				layoutX="215" layoutY="125" focusTraversable="false" />
 		</Pane>
 	</fx:define>
 
@@ -346,22 +341,26 @@
 		<Pane fx:id="brukerKoiePane">
 			<Text fx:id="brukerKoieStatusName" layoutX="15" layoutY="20"
 				style="-fx-font-size: 20px" />
-			<Label text="Ødelagte ting" layoutX="15" layoutY="50" />
-			<TextArea fx:id="brukerOdelagteTingField" editable="false"
+			<Label text="Alt utstyr" layoutX="15" layoutY="50" />
+			<TextArea fx:id="brukerAlleTingField" editable="false"
 				focusTraversable="false" layoutX="15" layoutY="70" prefWidth="125"
 				prefHeight="150" />
-			<Label text="Gjenglemte ting" layoutX="150" layoutY="50" />
-			<TextArea fx:id="brukerGjenglemteTingField" editable="false"
+			<Label text="Ødelagte ting" layoutX="150" layoutY="50" />
+			<TextArea fx:id="brukerOdelagteTingField" editable="false"
 				focusTraversable="false" layoutX="150" layoutY="70" prefWidth="125"
 				prefHeight="150" />
-			<Label text="Vedstatus" layoutX="300" layoutY="50" />
-			<Label text="Kalender" layoutX="400" layoutY="50" />
-			<DatePicker fx:id="brukerKalender" layoutX="400" layoutY="70"
+			<Label text="Gjenglemte ting" layoutX="285" layoutY="50" />
+			<TextArea fx:id="brukerGjenglemteTingField" editable="false"
+				focusTraversable="false" layoutX="285" layoutY="70" prefWidth="125"
+				prefHeight="150" />
+			<Label text="Vedstatus" layoutX="435" layoutY="50" />
+			<Label text="Kalender" layoutX="535" layoutY="50" />
+			<DatePicker fx:id="brukerKalender" layoutX="535" layoutY="70"
 				focusTraversable="false" />
 			<Text fx:id="brukerAntallSengeplasserText" text="Antall sengeplasser: xx"
-				layoutX="400" layoutY="120" />
+				layoutX="535" layoutY="120" />
 			<Text fx:id="brukerLedigeSengeplasserText" text="Ledige sengeplasser: xx"
-				layoutX="400" layoutY="140" />
+				layoutX="535" layoutY="140" />
 		</Pane>
 	</fx:define>
 

@@ -82,19 +82,18 @@ public class GUIController {
 	//admin koie info pane
 	@FXML private Pane adminKoiePane; // koie status panel for admin
 	@FXML private Text adminKoieStatusName; // overskriften på koie-panelet for admin
-	@FXML private TextArea adminOdelagteTingField; // tekstfelt for ødelagte gjenstander i koie-panelet for admin
-	@FXML private TextArea adminGjenglemteTingField; // tekstfelt for gjenglemte gjenstander i koie-panelet for admin
+	@FXML private TextArea adminKoieAltUtstyrField;
 	@FXML private DatePicker adminKalender; // kalenderen i koie-panelet for admin
 	@FXML private Text adminAntallSengeplasserText; // overskriften på koie-panelet for admin
 	@FXML private Text adminLedigeSengeplasserText; // overskriften på koie-panelet for admin
 	@FXML private TextField adminKoieLeggTilUtstyrField;
-	@FXML private TextField adminKoieFunnetGjenglemtField;
-	@FXML private TextField adminKoieFiksOdelagtField;
 	@FXML private ComboBox<String> adminKoieOdelagteTingDropDown;
+	@FXML private ComboBox<String> adminKoieGjenglemteTingDropDown;
 
 	//bruker koie info pane
 	@FXML private Pane brukerKoiePane; // koie status panel for bruker
 	@FXML private Text brukerKoieStatusName; // overskriften på koie-panelet for bruker
+	@FXML private TextArea brukerAlleTingField;
 	@FXML private TextArea brukerOdelagteTingField; // tekstfelt for ødelagte gjenstander i koie-panelet for bruker
 	@FXML private TextArea brukerGjenglemteTingField; // tekstfelt for gjenglemte gjenstander i koie-panelet for bruker
 	@FXML private DatePicker brukerKalender; // kalenderen i koie-panelet for bruker
@@ -114,7 +113,7 @@ public class GUIController {
 	 * Initialiserer GUI
 	 */
 	public void initialize() { //basically konstruktør
-		rapportDropDown.getItems().addAll("Flåkoia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsåkoia", "Holvassgamma", "Iglbu", "Kamtjønna", "Kråkilkåten", "Kvernmovollen", "Kåsen", "Lynhøgen", "Mortenskåten", "Nicokoia", "Rindasløa", "Selbukåten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessætra", "Øvensenget"	);
+		rapportDropDown.getItems().addAll("Flåkoia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsåkoia", "Holvassgamma", "Iglbu", "Kamtjønna", "Kråkilkåten", "Kvernmovollen", "Kåsen", "Lynhøgen", "Mortenskåten", "Nicokoia", "Rindasløa", "Selbukåten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessætra", "Øvensenget");
 		connection = new DBConnection();
 		adminKalender.setValue(LocalDate.now()); // setter default dato til idag
 		adminKalender.setOnAction(new EventHandler<ActionEvent>() { // når man endrer dato
@@ -188,72 +187,50 @@ public class GUIController {
 
 	private void fyllKoiePane() { // finner all informasjon som skal vises i koie-panelet
 		try {
-			System.out.println(Koie.formaterKoieNavn(activeKoie));
+			ResultSet altDB = connection.getAltUtstyr(Koie.formaterKoieNavn(activeKoie));
 			ResultSet odelagtDB = connection.getOdelagt(Koie.formaterKoieNavn(activeKoie));
 			ResultSet gjenglemtDB = connection.getGjenglemt(Koie.formaterKoieNavn(activeKoie));
-
-
-			//ResultSet rs = connection.getOdelagtGjenglemtKoie(Koie.formaterKoieNavn(activeKoie)); // får alle ødelagte og gjenglemte gjenstander fra databasen
+			String alt = "";
 			String ødelagt = ""; // string som fylles med alle ødelagte gjenstander
 			String gjenglemt = ""; // string som fylles med alle gjenglemte gjenstander
-			/*while (rs.next()) { // mens det finnes flere elementer i databasen
-				ødelagt += ";" + rs.getString(1); // ;ødelagt1;ødelagt2;ødelagt3
-				gjenglemt += ";" + rs.getString(2); // ;gjenglemt1;gjenglemt2;gjenglemt3
-			}*/
+			while (altDB.next()) {
+				alt += ";" + altDB.getString(1);
+			}
 			while (odelagtDB.next()) { // mens det finnes flere elementer i databasen
-				System.out.println("hei");
 				ødelagt += ";" + odelagtDB.getString(1); // ;ødelagt1;ødelagt2;ødelagt3
 			}
-			System.out.println("ødelagt" + ødelagt);
 			while (gjenglemtDB.next()) {
 				gjenglemt += ";" + gjenglemtDB.getString(1); // ;gjenglemt1;gjenglemt2;gjenglemt3
 			}
+			String ferdigAlt = "";
+			String[] altListe = alt.split(";");
+			for (int i = 1; i < altListe.length; i++) {
+				ferdigAlt += altListe[i] + "\n";
+			}
+			adminKoieOdelagteTingDropDown.getItems().clear();
 			String ferdigØdelagt = ""; // string som skal settes inn i tekstfeltet for ødelagte gjenstander
 			String[] ødelagtListe = ødelagt.split(";");
 			for (int i = 1; i < ødelagtListe.length; i++) {
 				adminKoieOdelagteTingDropDown.getItems().add(ødelagtListe[i]);
-				//ferdigØdelagt += ødelagtListe[i] + "\n";
+				ferdigØdelagt += ødelagtListe[i] + "\n";
 			}
-			
-			/*if (ødelagt.length() > 0) { // hvis det finnes minst en ødelagt gjenstand
-				ødelagt = ødelagt.substring(1); // fjerner den første semikolonen
-				String[] ødelagtListe = ødelagt.split(";");
-				for (int i = 0; i < ødelagtListe.length; i++) {
-					ferdigØdelagt += ødelagtListe[i] + "\n";
-				}
-			}*/
-			///
-			/*
-			ødelagt = "";
-			ferdigØdelagt = "";
-			rs = connection.getOdelagtUtstyr(Koie.formaterKoieNavn(activeKoie));
-			while (rs.next()) {
-				ødelagt += ";" + rs.getString(1);
-			}
-			if (ødelagt.length() > 0) {
-				ødelagt = ødelagt.substring(1);
-				String[] ødelagtListe2 = ødelagt.split(";");
-				for (int i = 0; i < ødelagtListe2.length; i++) {
-					ferdigØdelagt += ødelagtListe2[i] + "\n";
-				}
-			}
-			 */
-			///
+			adminKoieGjenglemteTingDropDown.getItems().clear();
 			String ferdigGjenglemt = ""; // string som skal settes inn i tekstfeltet for gjenglemte gjenstander
 			if (gjenglemt.length() > 0) { // hvis det finnes minst en gjenglemt gjenstand
 				gjenglemt = gjenglemt.substring(1); // fjerner den første semikolonen
 				String[] gjenglemtListe = gjenglemt.split(";");
 				for (int i = 0; i < gjenglemtListe.length; i++) {
+					adminKoieGjenglemteTingDropDown.getItems().add(gjenglemtListe[i]);
 					ferdigGjenglemt += gjenglemtListe[i] + "\n";
 				}
 			}
 			if (bruker.isAdmin()) {
 				adminKoieStatusName.setText(activeKoie); // setter inn all informasjonen i koie-panelet
-				//adminOdelagteTingField.setText(ferdigØdelagt);
-				//adminGjenglemteTingField.setText(ferdigGjenglemt);
+				adminKoieAltUtstyrField.setText(ferdigAlt.trim());
 				oppdaterSengeplasser(true, adminKalender.getValue());
 			} else {
 				brukerKoieStatusName.setText(activeKoie);
+				brukerAlleTingField.setText(ferdigAlt);
 				brukerOdelagteTingField.setText(ferdigØdelagt);
 				brukerGjenglemteTingField.setText(ferdigGjenglemt);
 				oppdaterSengeplasser(false, brukerKalender.getValue());
@@ -299,7 +276,6 @@ public class GUIController {
 
 	@FXML
 	private void openReport(ActionEvent event) { // når man trykker på rapport-knappe
-		System.out.println("'" + rapportOdelagteTingField.getText() + "'");
 		root.setCenter(reportPane);
 	}
 
@@ -354,8 +330,7 @@ public class GUIController {
 	@FXML
 	private void fiksUtstyr(ActionEvent event) {
 		try {
-			connection.fixUtstyr(Koie.formaterKoieNavn(activeKoie), adminKoieFiksOdelagtField.getText());
-			adminKoieFiksOdelagtField.setText("");
+			connection.fixUtstyr(Koie.formaterKoieNavn(activeKoie), adminKoieOdelagteTingDropDown.getValue());
 			openKoie(activeKoie);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -365,8 +340,7 @@ public class GUIController {
 	@FXML
 	private void finnUtstyr(ActionEvent event) {
 		try {
-			connection.funnetTing(adminKoieFunnetGjenglemtField.getText());
-			adminKoieFunnetGjenglemtField.setText("");
+			connection.funnetTing(adminKoieGjenglemteTingDropDown.getValue());
 			openKoie(activeKoie);
 		} catch (SQLException e) {
 			e.printStackTrace();
