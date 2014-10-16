@@ -36,7 +36,6 @@ public class Vedstatus {
 			s+=1;
 		}
 		tallX.add(0);
-		System.out.println(datoer);
 		for(int k = 1; k < tallY.size(); k++){
 			dag1 = Integer.parseInt((datoer.get(k-1)).substring(8,10));
 			maned1 = Integer.parseInt((datoer.get(k-1)).substring(5,7));
@@ -75,15 +74,6 @@ public class Vedstatus {
 		b = ((tallX.size()*sumXY)-(sumX*sumY))/((tallX.size()*sumXX)-(sumX*sumX));
 		estimat = (int) Math.floor((a*(-1))/b);
 		
-		System.out.println("TallX: "+tallX);
-		System.out.println("TallY: "+tallY);
-		System.out.println("SumX: "+sumX);
-		System.out.println("SumY: "+sumY);
-		System.out.println("SumXY: "+sumXY);
-		System.out.println("SumXX: "+sumXX);
-		System.out.println("a: "+a);
-		System.out.println("b: "+b);
-		System.out.println("estimatet: "+estimat);
 		return estimat;
 	}
 
