@@ -8,6 +8,11 @@ import core.Bruker;
 import core.DBConnection;
 import core.Koie;
 import core.RapportHandler;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,9 +22,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -28,6 +36,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 
 /**
  * Kontrolleren til GUI.fxml.
@@ -76,29 +85,30 @@ public class GUIController {
 	@FXML private Pane reportPane; // rapport panel
 	@FXML private ComboBox<String> rapportDropDown; // drop-down meny med alle koiene i rapport-panelet
 	@FXML private TextField vedstatusField; // tekstfelt for å angi vedstatus i rapport-panelet
-	@FXML private TextArea rapportOdelagteTingField; // tekstfelt for å angi ødelagte gjenstander i rapport-panelet
+	@FXML private VBox rapportOdelagteTingCheckList; // checkliste for å angi ødelagte gjenstander i rapport-panelet
 	@FXML private TextArea rapportGjenglemteTingField; // tekstfelt for å angi gjenglemte gjenstander i rapport-panelet
+	final ObservableList<CheckListObject> checkListObjectList = FXCollections.observableArrayList(); // liste over ødelagte ting som brukes av rapportOdelagteTingCheckList
 
 	//admin koie info pane
 	@FXML private Pane adminKoiePane; // koie status panel for admin
 	@FXML private Text adminKoieStatusName; // overskriften på koie-panelet for admin
-	@FXML private TextArea adminKoieAltUtstyrField;
+	@FXML private TextArea adminKoieAltUtstyrField; // tekstfelt for alt utstyr i koie-panelet for admin
 	@FXML private DatePicker adminKalender; // kalenderen i koie-panelet for admin
-	@FXML private Text adminAntallSengeplasserText; // overskriften på koie-panelet for admin
-	@FXML private Text adminLedigeSengeplasserText; // overskriften på koie-panelet for admin
-	@FXML private TextField adminKoieLeggTilUtstyrField;
-	@FXML private ComboBox<String> adminKoieOdelagteTingDropDown;
-	@FXML private ComboBox<String> adminKoieGjenglemteTingDropDown;
+	@FXML private Text adminAntallSengeplasserText; // tekst med totalt antall sengeplasser i koie-panelet for admin
+	@FXML private Text adminLedigeSengeplasserText; // tekst med ledige sengeplasser i koie-panelet for admin
+	@FXML private TextField adminKoieLeggTilUtstyrField; // tekstfelt for å legge til nytt utstyr i koie-panelet for admin
+	@FXML private ComboBox<String> adminKoieOdelagteTingDropDown; // drop-down meny med ødelagte ting i koie-panelet for admin
+	@FXML private ComboBox<String> adminKoieGjenglemteTingDropDown; // drop-down meny med gjenglemte ting i koie-panelet for admin
 
 	//bruker koie info pane
 	@FXML private Pane brukerKoiePane; // koie status panel for bruker
 	@FXML private Text brukerKoieStatusName; // overskriften på koie-panelet for bruker
-	@FXML private TextArea brukerAlleTingField;
+	@FXML private TextArea brukerAlleTingField; // tekstfelt for alt utstyr i koie-panelet for bruker
 	@FXML private TextArea brukerOdelagteTingField; // tekstfelt for ødelagte gjenstander i koie-panelet for bruker
 	@FXML private TextArea brukerGjenglemteTingField; // tekstfelt for gjenglemte gjenstander i koie-panelet for bruker
 	@FXML private DatePicker brukerKalender; // kalenderen i koie-panelet for bruker
-	@FXML private Text brukerAntallSengeplasserText; // overskriften på koie-panelet for bruker
-	@FXML private Text brukerLedigeSengeplasserText; // overskriften på koie-panelet for bruker
+	@FXML private Text brukerAntallSengeplasserText; // tekst med totalt antall sengeplasser i koie-panelet for bruker
+	@FXML private Text brukerLedigeSengeplasserText; // tekst med ledige sengeplasser i koie-panelet for bruker
 
 	//medlem liste pane
 	@FXML private Pane medlemPane; // panel med liste over registrerte brukere i systemet
@@ -107,13 +117,20 @@ public class GUIController {
 
 	private String activeKoie; // holder styr på aktiv koie
 	private Bruker bruker; // innlogget bruker i systemet
-	private DBConnection connection; // håndterer alt av database ting
+	private DBConnection connection; // håndterer alt av database
 
 	/**
 	 * Initialiserer GUI
 	 */
 	public void initialize() { //basically konstruktør
 		rapportDropDown.getItems().addAll("Flåkoia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsåkoia", "Holvassgamma", "Iglbu", "Kamtjønna", "Kråkilkåten", "Kvernmovollen", "Kåsen", "Lynhøgen", "Mortenskåten", "Nicokoia", "Rindasløa", "Selbukåten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessætra", "Øvensenget");
+		rapportDropDown.valueProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable,
+					String oldValue, String newValue) {
+				openReport(null);
+			}
+		});
 		connection = new DBConnection();
 		adminKalender.setValue(LocalDate.now()); // setter default dato til idag
 		adminKalender.setOnAction(new EventHandler<ActionEvent>() { // når man endrer dato
@@ -225,6 +242,16 @@ public class GUIController {
 				}
 			}
 			if (bruker.isAdmin()) {
+				if (adminKoieOdelagteTingDropDown.getItems().size() > 0) {					
+					adminKoieOdelagteTingDropDown.setValue(adminKoieOdelagteTingDropDown.getItems().get(0));
+				} else {
+					adminKoieOdelagteTingDropDown.setValue("");
+				}
+				if (adminKoieGjenglemteTingDropDown.getItems().size() > 0) {					
+					adminKoieGjenglemteTingDropDown.setValue(adminKoieGjenglemteTingDropDown.getItems().get(0));
+				} else {
+					adminKoieGjenglemteTingDropDown.setValue("");
+				}
 				adminKoieStatusName.setText(activeKoie); // setter inn all informasjonen i koie-panelet
 				adminKoieAltUtstyrField.setText(ferdigAlt.trim());
 				oppdaterSengeplasser(true, adminKalender.getValue());
@@ -276,6 +303,35 @@ public class GUIController {
 
 	@FXML
 	private void openReport(ActionEvent event) { // når man trykker på rapport-knappe
+		if (rapportDropDown.getValue() == "Velg en koie") {
+			root.setCenter(reportPane);
+			return;
+		}
+		checkListObjectList.clear();
+		try {
+			ResultSet altUtstyr = connection.getAltUtstyr(Koie.formaterKoieNavn(rapportDropDown.getValue()));
+			while (altUtstyr.next()) {
+				checkListObjectList.add(new CheckListObject(altUtstyr.getString(1)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		final ListView<CheckListObject> listView = new ListView<CheckListObject>();
+		listView.setPrefSize(200, 250);
+		listView.setEditable(true);
+		listView.setItems(checkListObjectList);
+		Callback<CheckListObject, ObservableValue<Boolean>> getProperty = new Callback<CheckListObject, ObservableValue<Boolean>>() {
+			@Override
+			public BooleanProperty call(CheckListObject layer) {
+
+				return layer.selectedProperty();
+
+			}
+		};
+		Callback<ListView<CheckListObject>, ListCell<CheckListObject>> forListView = CheckBoxListCell.forListView(getProperty);
+		listView.setCellFactory(forListView);
+		rapportOdelagteTingCheckList.getChildren().clear();
+		rapportOdelagteTingCheckList.getChildren().addAll(listView);
 		root.setCenter(reportPane);
 	}
 
@@ -289,7 +345,15 @@ public class GUIController {
 		if (rapportDropDown.getValue().equals("Velg en koie")) { // hvis man ikke har valgt en koie
 			return;
 		}
-		String ødelagt = RapportHandler.formaterTekst(rapportOdelagteTingField.getText(), "\n");
+		String ødelagt = "";
+		for (CheckListObject odelagt : checkListObjectList) {
+			if (odelagt.getSelected()) {				
+				ødelagt += ";" + odelagt.getName();
+			}
+		}
+		if (ødelagt.length() > 0) {			
+			ødelagt = ødelagt.substring(1);
+		}
 		String gjenglemt = RapportHandler.formaterTekst(rapportGjenglemteTingField.getText(), "\n");
 		int vedstatus = 0;
 		if (vedstatusField.getText().length() != 0) {
@@ -402,7 +466,7 @@ public class GUIController {
 	private void logIn(ActionEvent event) { // når man trykker på "logg inn" knappen
 		try {
 			ResultSet dbUserInfo = connection.login(usernameField.getText());
-			if (dbUserInfo.next()) { // denne if-setningen er true hvis det angitte brukernavnet finnes i databasen
+			if (dbUserInfo.next()) { // true hvis det angitte brukernavnet finnes i databasen
 				if (dbUserInfo.getString(1).equals(usernameField.getText()) && dbUserInfo.getString(2).equals(passwordField.getText())) { // hvis brukernavn og passord stemmer overens
 					bruker = new Bruker(usernameField.getText(), dbUserInfo.getString(3), dbUserInfo.getString(4), dbUserInfo.getString(5), dbUserInfo.getString(6));
 					welcomeName.setText("Velkommen, " + usernameField.getText());

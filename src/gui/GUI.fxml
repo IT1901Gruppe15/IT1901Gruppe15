@@ -314,9 +314,9 @@
 				focusTraversable="false" />
 			<Label text="Ødelagte ting" layoutX="215" layoutY="50" />
 			<ComboBox fx:id="adminKoieOdelagteTingDropDown" editable="false"
-				focusTraversable="false" layoutX="215" layoutY="70" />
+				focusTraversable="false" layoutX="215" layoutY="70" prefWidth="100"/>
 			<ComboBox fx:id="adminKoieGjenglemteTingDropDown" editable="false"
-				focusTraversable="false" layoutX="350" layoutY="70" />
+				focusTraversable="false" layoutX="350" layoutY="70" prefWidth="100"/>
 			<Label text="Gjenglemte ting" layoutX="350" layoutY="50" />
 			<Label text="Vedstatus" layoutX="500" layoutY="50" />
 			<Label text="Kalender" layoutX="600" layoutY="50" />
@@ -330,9 +330,9 @@
 				layoutY="300" focusTraversable="false" />
 			<Button text="Legg til nytt utstyr" onAction="#leggTilUtstyr"
 				layoutX="200" layoutY="300" focusTraversable="false" />
-			<Button text="Funnet gjenglemt utstyr" onAction="#finnUtstyr"
+			<Button text="Utstyr funnet" onAction="#finnUtstyr"
 				layoutX="350" layoutY="125" focusTraversable="false" />
-			<Button text="Fiks ødelagt utstyr" onAction="#fiksUtstyr"
+			<Button text="Fiks utstyr" onAction="#fiksUtstyr"
 				layoutX="215" layoutY="125" focusTraversable="false" />
 		</Pane>
 	</fx:define>
@@ -373,13 +373,12 @@
 			<TextField fx:id="vedstatusField" layoutX="225" layoutY="50"
 				focusTraversable="false" />
 			<Label text="Ødelagte ting" layoutX="15" layoutY="100" />
-			<TextArea fx:id="rapportOdelagteTingField" focusTraversable="false"
+			<VBox fx:id="rapportOdelagteTingCheckList" focusTraversable="false"
 				layoutX="15" layoutY="120" prefWidth="125" prefHeight="150" />
-			<Label text="Gjenglemte ting" layoutX="150" layoutY="100" />
+			<Label text="Gjenglemte ting (En ting per linje)" layoutX="150" layoutY="100" />
 			<TextArea fx:id="rapportGjenglemteTingField"
 				focusTraversable="false" layoutX="150" layoutY="120" prefWidth="125"
 				prefHeight="150" />
-			<Label text="(En ting per linje)" layoutX="285" layoutY="100" />
 			<Button onAction="#sendRapport" text="Send rapport" layoutX="15"
 				layoutY="300" focusTraversable="false" />
 		</Pane>
@@ -387,7 +386,7 @@
 
 	<fx:define>
 		<Pane fx:id="medlemPane">
-			<VBox fx:id="medlemListe">
+			<VBox fx:id="medlemListe" layoutX="3" spacing="3">
 				<fx:define>
 					<HBox fx:id="medlemListeOverskrift">
 						<Label text="Navn" style="-fx-font-size: 14px" prefWidth="100" />
