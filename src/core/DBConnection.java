@@ -237,21 +237,6 @@ public class DBConnection {
 		return db.sporDB(q);
 	}
 
-//	/**
-//	 * Returnerer et ResultSet med alt ødelagt og gjenglemt utsyr fra en koie
-//	 * 
-//	 * @param koieID Koien informasjonen skal hentes fra
-//	 * @return ResultSet der col1 = ødelagt utstyr, col2 = gjenglemt utstyr
-//	 * @throws SQLException
-//	 */
-//	public ResultSet getOdelagtGjenglemtKoie(String koieID) throws SQLException {
-//		String q = ("select Odelagt, Gjenglemt from Rapport where KoieRapportID = '" 
-//				+ koieID 
-//				+ "';");
-//
-//		return db.sporDB(q);
-//	}
-
 	/**
 	 * Returnerer et ResultSet som sier hvor mange reservasjoner det er på en koie på en bestemt dato
 	 * 
