@@ -319,7 +319,7 @@ public class DBConnection {
 	 * @throws SQLException
 	 */
 	public void fixUtstyr(String koie, String tingnavn) throws SQLException {
-		String q = ("delete from ErOdelagt where UtstyrsID = (select UtstyrsID from Utstyr where Navn = '" + tingnavn + "' and FraktesTilID = '" + koie + "');");
+		String q = ("delete from ErOdelagt where UtstyrsID = (select distinct UtstyrsID from Utstyr where Navn = '" + tingnavn + "' and FraktesTilID = '" + koie + "');");
 		db.oppdaterDB(q);
 		
 		q = ("update Utstyr set stat = '1' where Navn = '" + tingnavn + "' and FraktesTilID = '" + koie + "';");
