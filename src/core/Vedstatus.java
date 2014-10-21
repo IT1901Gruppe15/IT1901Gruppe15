@@ -6,14 +6,6 @@ import java.util.ArrayList;
 
 public class Vedstatus {
 	
-	ArrayList<Integer> tallX, tallY;
-	ArrayList<String> datoer;
-	double sumX=0, sumY=0, sumXY=0, sumXX=0, a, b;
-	int ar1, maned1, dag1, ar2, maned2, dag2, estimat, antallDager;
-	DBConnection dbconnect = new DBConnection();
-	String dato;
-	boolean skuddar = false;
-	
 	/**
 	 * Estimerer antall dager til neste veddugnad basert på tidligere vedstatus
 	 * 
@@ -21,7 +13,14 @@ public class Vedstatus {
 	 * @return Integer som viser antall dager til neste veddugnad
 	 * @throws SQLException
 	 */
-	public int lagVedEstimat(String koieID) throws SQLException{
+	public static int lagVedEstimat(String koieID) throws SQLException{
+		ArrayList<Integer> tallX, tallY;
+		ArrayList<String> datoer;
+		double sumX=0, sumY=0, sumXY=0, sumXX=0, a, b;
+		int ar1, maned1, dag1, ar2, maned2, dag2, estimat, antallDager;
+		DBConnection dbconnect = new DBConnection();
+		String dato;
+		boolean skuddar = false;
 		ResultSet p = dbconnect.getForrigeVeddugnad(koieID);
 		p.next();
 		dato = p.getString(1);
@@ -50,13 +49,13 @@ public class Vedstatus {
 				antallDager = ((ar2-ar1)*365);
 			}
 			for(int l = 1; l <= maned1; l++){
-				antallDager -= finnManed(l);
+				antallDager -= finnManed(l, skuddar);
 			}
 			for(int m = 1; m <= maned2; m++){
-				antallDager += finnManed(m);
+				antallDager += finnManed(m, skuddar);
 			}
-			antallDager += (finnManed(maned1)-dag1);
-			antallDager -= (finnManed(maned2)-dag2);
+			antallDager += (finnManed(maned1, skuddar)-dag1);
+			antallDager -= (finnManed(maned2, skuddar)-dag2);
 			tallX.add(antallDager+tallX.get(k-1));
 		}
 		
@@ -83,7 +82,7 @@ public class Vedstatus {
 	 * @param m Hvilken måned det er ut ifra tallet i datoen
 	 * @return Integer med antall dager i m måneder
 	 */
-	private int finnManed(int m) {
+	private static int finnManed(int m, Boolean skuddar) {
 		if(m==1 || m==3 || m==5 || m==7 || m==8 || m==10 || m==12){
 			return 31;
 		} else if (m==2){
@@ -97,8 +96,8 @@ public class Vedstatus {
 		}
 	}
 
-	public static void main(String[] args) throws SQLException {
-		Vedstatus test = new Vedstatus();
-		test.lagVedEstimat("Flaakoia");
-	}
+//	public static void main(String[] args) throws SQLException {
+//		Vedstatus test = new Vedstatus();
+//		test.lagVedEstimat("Flaakoia");
+//	}
 }
