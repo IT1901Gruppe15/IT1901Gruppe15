@@ -385,7 +385,7 @@ public class DBConnection {
 	 * @return
 	 */
 	public ResultSet getReservasjonsEpost(String koieID, String dato){
-		String q = ("select Epost from Reservasjon where ReservertKoieID = '" + koieID + "' and Dato > '" + dato + "' order by asc;");
+		String q = ("select Epost from Reservasjon where ReservertKoieID = '" + koieID + "' and Dato > '" + dato + "' order by Dato asc;");
 		
 		return db.sporDB(q);
 	}
