@@ -171,6 +171,9 @@
 					</graphic>
 				</Button>
 			</HBox>
+			<ImageView layoutX="1100" layoutY="5">
+				<Image url="ntnuiLogo.png" />
+			</ImageView>
 			<Separator orientation="horizontal" layoutY="70" prefWidth="9999" />
 		</Pane>
 	</fx:define>
@@ -215,6 +218,9 @@
 					</graphic>
 				</Button>
 			</HBox>
+			<ImageView layoutX="1100" layoutY="5">
+				<Image url="ntnuiLogo.png" />
+			</ImageView>
 			<Separator orientation="horizontal" layoutY="70" prefWidth="9999" />
 		</Pane>
 	</fx:define>
@@ -314,11 +320,14 @@
 				focusTraversable="false" />
 			<Label text="Ødelagte ting" layoutX="215" layoutY="50" />
 			<ComboBox fx:id="adminKoieOdelagteTingDropDown" editable="false"
-				focusTraversable="false" layoutX="215" layoutY="70" prefWidth="100"/>
+				focusTraversable="false" layoutX="215" layoutY="70" prefWidth="100" />
 			<ComboBox fx:id="adminKoieGjenglemteTingDropDown" editable="false"
-				focusTraversable="false" layoutX="350" layoutY="70" prefWidth="100"/>
+				focusTraversable="false" layoutX="350" layoutY="70" prefWidth="100" />
 			<Label text="Gjenglemte ting" layoutX="350" layoutY="50" />
 			<Label text="Vedstatus" layoutX="500" layoutY="50" />
+			<Label fx:id="adminKoieVedstatusText" layoutX="500" layoutY="70" />
+			<Button text="Veddugnad utført" onAction="#veddugnadUtfort"
+				layoutX="500" layoutY="100" />
 			<Label text="Kalender" layoutX="600" layoutY="50" />
 			<DatePicker fx:id="adminKalender" layoutX="600" layoutY="70"
 				focusTraversable="false" />
@@ -330,10 +339,10 @@
 				layoutY="300" focusTraversable="false" />
 			<Button text="Legg til nytt utstyr" onAction="#leggTilUtstyr"
 				layoutX="200" layoutY="300" focusTraversable="false" />
-			<Button text="Utstyr funnet" onAction="#finnUtstyr"
-				layoutX="350" layoutY="125" focusTraversable="false" />
-			<Button text="Fiks utstyr" onAction="#fiksUtstyr"
-				layoutX="215" layoutY="125" focusTraversable="false" />
+			<Button text="Utstyr funnet" onAction="#finnUtstyr" layoutX="350"
+				layoutY="125" focusTraversable="false" />
+			<Button text="Fiks utstyr" onAction="#fiksUtstyr" layoutX="215"
+				layoutY="125" focusTraversable="false" />
 		</Pane>
 	</fx:define>
 
@@ -354,6 +363,7 @@
 				focusTraversable="false" layoutX="285" layoutY="70" prefWidth="125"
 				prefHeight="150" />
 			<Label text="Vedstatus" layoutX="435" layoutY="50" />
+			<Label fx:id="brukerKoieVedstatusText" layoutX="435" layoutY="70" />
 			<Label text="Kalender" layoutX="535" layoutY="50" />
 			<DatePicker fx:id="brukerKalender" layoutX="535" layoutY="70"
 				focusTraversable="false" />
@@ -370,12 +380,13 @@
 			<ComboBox fx:id="rapportDropDown" layoutX="15" layoutY="50"
 				value="Velg en koie" focusTraversable="false" />
 			<Label text="Vedstatus" layoutX="160" layoutY="55" />
-			<TextField fx:id="vedstatusField" layoutX="225" layoutY="50"
-				focusTraversable="false" />
+			<TextField fx:id="rapportVedstatusField" layoutX="225"
+				layoutY="50" focusTraversable="false" />
 			<Label text="Ødelagte ting" layoutX="15" layoutY="100" />
 			<VBox fx:id="rapportOdelagteTingCheckList" focusTraversable="false"
 				layoutX="15" layoutY="120" prefWidth="125" prefHeight="150" />
-			<Label text="Gjenglemte ting (En ting per linje)" layoutX="150" layoutY="100" />
+			<Label text="Gjenglemte ting (En ting per linje)" layoutX="150"
+				layoutY="100" />
 			<TextArea fx:id="rapportGjenglemteTingField"
 				focusTraversable="false" layoutX="150" layoutY="120" prefWidth="125"
 				prefHeight="150" />

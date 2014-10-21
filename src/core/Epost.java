@@ -91,7 +91,7 @@ public class Epost {
 	         message.setSubject(sub);
 
 	         // Now set the actual message
-	         message.setText("msg");
+	         message.setText(msg);
 	         System.out.println(address);
 	         // Send message
 	         Transport.send(message);

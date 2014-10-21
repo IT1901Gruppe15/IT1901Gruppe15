@@ -6,8 +6,10 @@ import java.time.LocalDate;
 
 import core.Bruker;
 import core.DBConnection;
+import core.Epost;
 import core.Koie;
 import core.RapportHandler;
+import core.Vedstatus;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -84,7 +86,7 @@ public class GUIController {
 	//report pane
 	@FXML private Pane reportPane; // rapport panel
 	@FXML private ComboBox<String> rapportDropDown; // drop-down meny med alle koiene i rapport-panelet
-	@FXML private TextField vedstatusField; // tekstfelt for å angi vedstatus i rapport-panelet
+	@FXML private TextField rapportVedstatusField; // tekstfelt for å angi vedstatus i rapport-panelet
 	@FXML private VBox rapportOdelagteTingCheckList; // checkliste for å angi ødelagte gjenstander i rapport-panelet
 	@FXML private TextArea rapportGjenglemteTingField; // tekstfelt for å angi gjenglemte gjenstander i rapport-panelet
 	final ObservableList<CheckListObject> checkListObjectList = FXCollections.observableArrayList(); // liste over ødelagte ting som brukes av rapportOdelagteTingCheckList
@@ -94,6 +96,7 @@ public class GUIController {
 	@FXML private Text adminKoieStatusName; // overskriften på koie-panelet for admin
 	@FXML private TextArea adminKoieAltUtstyrField; // tekstfelt for alt utstyr i koie-panelet for admin
 	@FXML private DatePicker adminKalender; // kalenderen i koie-panelet for admin
+	@FXML private Label adminKoieVedstatusText;
 	@FXML private Text adminAntallSengeplasserText; // tekst med totalt antall sengeplasser i koie-panelet for admin
 	@FXML private Text adminLedigeSengeplasserText; // tekst med ledige sengeplasser i koie-panelet for admin
 	@FXML private TextField adminKoieLeggTilUtstyrField; // tekstfelt for å legge til nytt utstyr i koie-panelet for admin
@@ -107,6 +110,7 @@ public class GUIController {
 	@FXML private TextArea brukerOdelagteTingField; // tekstfelt for ødelagte gjenstander i koie-panelet for bruker
 	@FXML private TextArea brukerGjenglemteTingField; // tekstfelt for gjenglemte gjenstander i koie-panelet for bruker
 	@FXML private DatePicker brukerKalender; // kalenderen i koie-panelet for bruker
+	@FXML private Label brukerKoieVedstatusText;
 	@FXML private Text brukerAntallSengeplasserText; // tekst med totalt antall sengeplasser i koie-panelet for bruker
 	@FXML private Text brukerLedigeSengeplasserText; // tekst med ledige sengeplasser i koie-panelet for bruker
 
@@ -128,6 +132,7 @@ public class GUIController {
 			@Override
 			public void changed(ObservableValue<? extends String> observable,
 					String oldValue, String newValue) {
+				activeKoie = rapportDropDown.getValue();
 				openReport(null);
 			}
 		});
@@ -254,8 +259,10 @@ public class GUIController {
 				}
 				adminKoieStatusName.setText(activeKoie); // setter inn all informasjonen i koie-panelet
 				adminKoieAltUtstyrField.setText(ferdigAlt.trim());
+				adminKoieVedstatusText.setText(Vedstatus.lagVedEstimat(Koie.formaterKoieNavn(activeKoie)) + " dager");
 				oppdaterSengeplasser(true, adminKalender.getValue());
 			} else {
+				brukerKoieVedstatusText.setText(Vedstatus.lagVedEstimat(Koie.formaterKoieNavn(activeKoie)) + " dager");
 				brukerKoieStatusName.setText(activeKoie);
 				brukerAlleTingField.setText(ferdigAlt);
 				brukerOdelagteTingField.setText(ferdigØdelagt);
@@ -356,11 +363,21 @@ public class GUIController {
 		}
 		String gjenglemt = RapportHandler.formaterTekst(rapportGjenglemteTingField.getText(), "\n");
 		int vedstatus = 0;
-		if (vedstatusField.getText().length() != 0) {
-			vedstatus = Integer.parseInt(vedstatusField.getText());
+		if (rapportVedstatusField.getText().length() != 0) {
+			vedstatus = Integer.parseInt(rapportVedstatusField.getText());
 		}
 		try {
 			connection.settinnRapport(ødelagt, gjenglemt, vedstatus, Koie.formaterKoieNavn(rapportDropDown.getValue()), LocalDate.now().toString());
+			if (ødelagt.length() > 0) {
+				String[] ødelagtListe = ødelagt.split(";");
+				for (int i = 0; i < ødelagtListe.length; i++) {
+					RapportHandler.Odelegg(ødelagtListe[i], Koie.formaterKoieNavn(activeKoie), ødelagt, gjenglemt, vedstatus);
+				}
+			}
+			ResultSet rapportID = connection.getrapportID(ødelagt, gjenglemt, vedstatus);
+			if (rapportID.next()) {
+				RapportHandler.glemt(gjenglemt, Koie.formaterKoieNavn(activeKoie), Integer.parseInt(rapportID.getString(1)));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -410,11 +427,42 @@ public class GUIController {
 			e.printStackTrace();
 		}
 	}
+	
+	@FXML
+	private void veddugnadUtfort(ActionEvent event) {
+		try {
+			connection.datoVeddugnad(Koie.formaterKoieNavn(activeKoie), LocalDate.now().toString());
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		openKoie(activeKoie);
+	}
 
 	@FXML
 	private void leggTilUtstyr(ActionEvent event) {
 		try {
+			ResultSet rs = connection.getUtstyrID(adminKoieLeggTilUtstyrField.getText(), Koie.formaterKoieNavn(activeKoie));
+			if (rs.next()) { // hvis utstyr allerede finnes
+				System.out.println("utstyr finnes allerede");
+				adminKoieLeggTilUtstyrField.setText("");
+				return;
+			}
 			connection.registrerUtstyr(adminKoieLeggTilUtstyrField.getText(), LocalDate.now().toString(), 1, bruker.getBrukernavn(), Koie.formaterKoieNavn(activeKoie));
+			String epostAdresse = "";
+			ResultSet epostDB = connection.getReservasjonsEpost(Koie.formaterKoieNavn(activeKoie), LocalDate.now().toString());
+			if (epostDB.next()) {
+				epostAdresse = epostDB.getString(1);
+			}
+			if (epostAdresse.length() != 0) {
+				Epost epost = new Epost();
+				epost.setSub("Frakting av utstyr til " + activeKoie);
+				epost.setMes("Hei, du/dere må ta med " + adminKoieLeggTilUtstyrField.getText() + " til " + activeKoie);
+				epost.sendMessage(epostAdresse);
+			} else {
+				System.out.println("ingen å sende epost til");
+			}
 			adminKoieLeggTilUtstyrField.setText("");
 			openKoie(activeKoie);
 		} catch (SQLException e) {

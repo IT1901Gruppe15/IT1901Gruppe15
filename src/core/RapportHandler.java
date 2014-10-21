@@ -87,7 +87,7 @@ public class RapportHandler {
 	 * @param vedstatus Status på gjenværende mengde ved i koia
 	 * @throws SQLException
 	 */
-	private static void Odelegg(String utstyrsnavn, String koieID, String odelagteTing, String gjenglemteTing, int vedstatus) throws SQLException {
+	public static void Odelegg(String utstyrsnavn, String koieID, String odelagteTing, String gjenglemteTing, int vedstatus) throws SQLException {
 		ResultSet rsU = connection.getUtstyrID(utstyrsnavn, koieID);
 		rsU.next();
 		int utstyrsID = rsU.getInt(1);
@@ -107,7 +107,7 @@ public class RapportHandler {
 	 * @param rapportID Vite hvilken rapport som meldte om det gjenglemte
 	 * @throws SQLException
 	 */
-	private static void glemt(String gjenglemteTing, String koieID, int rapportID) throws SQLException{
+	public static void glemt(String gjenglemteTing, String koieID, int rapportID) throws SQLException{
 		
 		if(gjenglemteTing.contains(";")){
 			String[] split = gjenglemteTing.split(";");
@@ -154,7 +154,4 @@ public class RapportHandler {
 		return ferdigTekst;
 	}
 	
-	public static void main(String[] args) throws FileNotFoundException {
-		RapportHandler.lesRapport();
-	}
 }
