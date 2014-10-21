@@ -1,10 +1,12 @@
-package core;
+package coreTest;
 
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 
 import org.junit.Test;
+
+import core.Vedstatus;
 
 public class VedstatusTest {
 	

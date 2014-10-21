@@ -1,4 +1,4 @@
-package core;
+package coreTest;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import core.RapportHandler;
+
 public class RapportHandlerTest {
 	
 	ArrayList<String> koier = new ArrayList<String>();
@@ -15,7 +17,8 @@ public class RapportHandlerTest {
 
 	@Test
 	public void testLesRapport() throws IOException {
-		FileWriter f1 = new FileWriter("textfiles/rapporter.txt"); 
+		FileWriter f1 = new FileWriter("textfiles/rapporter.txt");
+		koier.add("Flaakoia");
 		koier.add("Fosenkoia");
 		koier.add("Heinfjordstua");
 		koier.add("Hognabu");

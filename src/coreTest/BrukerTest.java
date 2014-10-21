@@ -1,8 +1,10 @@
-package core;
+package coreTest;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import core.Bruker;
 
 public class BrukerTest {
 	
