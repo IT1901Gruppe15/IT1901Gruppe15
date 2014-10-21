@@ -12,42 +12,27 @@ public class BrukerTest {
 
 	@Test
 	public void testGetBrukernavn() {
-		if(test.getBrukernavn()!=brukernavn){
-			fail("Not yet implemented");
-		}
-		System.out.println(test.getBrukernavn());
+		assertEquals(brukernavn,test.getBrukernavn());
 	}
 
 	@Test
 	public void testGetFulltNavn() {
-		if(test.getFulltNavn()!=fulltnavn){
-			fail("Not yet implemented");
-		}
-		System.out.println(test.getFulltNavn());
+		assertEquals(fulltnavn,test.getFulltNavn());
 	}
 
 	@Test
 	public void testGetTlf() {
-		if(test.getTlf()!=tlf){
-			fail("Not yet implemented");
-		}
-		System.out.println(test.getTlf());
+		assertEquals(tlf,test.getTlf());
 	}
 
 	@Test
 	public void testGetEpost() {
-		if(test.getEpost()!=epost){
-			fail("Not yet implemented");
-		}
-		System.out.println(test.getEpost());
+		assertEquals(epost,test.getEpost());
 	}
 
 	@Test
 	public void testIsAdmin() {
-		if(test.isAdmin()!=false){
-			fail("Not yet implemented");
-		}
-		System.out.println(test.isAdmin());
+		assertEquals(false,test.isAdmin());
 	}
 
 }

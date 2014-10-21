@@ -10,17 +10,17 @@ public class KoieTest {
 
 	@Test
 	public void testFormaterKoieNavn() {
-		System.out.println(Koie.formaterKoieNavn("Flåkoia"));
-		System.out.println(Koie.formaterKoieNavn("Holmsåkoia"));
-		System.out.println(Koie.formaterKoieNavn("Kamtjønnkoia"));
-		System.out.println(Koie.formaterKoieNavn("Kråklikåten"));
-		System.out.println(Koie.formaterKoieNavn("Kåsen"));
-		System.out.println(Koie.formaterKoieNavn("Lynhøgen"));
-		System.out.println(Koie.formaterKoieNavn("Mortenskåten"));
-		System.out.println(Koie.formaterKoieNavn("Rindalsløa"));
-		System.out.println(Koie.formaterKoieNavn("Selbukåten"));
-		System.out.println(Koie.formaterKoieNavn("Vekvessætra"));
-		System.out.println(Koie.formaterKoieNavn("Øvensenget"));
+		assertEquals("Flaakoia",Koie.formaterKoieNavn("Flåkoia"));
+		assertEquals("Holmsaakoia",Koie.formaterKoieNavn("Holmsåkoia"));
+		assertEquals("Kamtjonnkoia",Koie.formaterKoieNavn("Kamtjønnkoia"));
+		assertEquals("Kraaklikaaten",Koie.formaterKoieNavn("Kråklikåten"));
+		assertEquals("Kaasen",Koie.formaterKoieNavn("Kåsen"));
+		assertEquals("Lynhogen",Koie.formaterKoieNavn("Lynhøgen"));
+		assertEquals("Mortenskaaten",Koie.formaterKoieNavn("Mortenskåten"));
+		assertEquals("Rindalsloa",Koie.formaterKoieNavn("Rindalsløa"));
+		assertEquals("Selbukaaten",Koie.formaterKoieNavn("Selbukåten"));
+		assertEquals("Vekvessaetra",Koie.formaterKoieNavn("Vekvessætra"));
+		assertEquals("Ovensenget",Koie.formaterKoieNavn("Øvensenget"));
 	}
 
 }
