@@ -376,4 +376,18 @@ public class DBConnection {
 
 		return db.sporDB(q);
 	}
+	
+	/**
+	 * Returnerer en liste med eposter etter innsendt dato.
+	 * 
+	 * @param koieID Koia det gjelder.
+	 * @param dato Eposter etter denne datoen.
+	 * @return
+	 */
+	public ResultSet getReservasjonsEpost(String koieID, String dato){
+		String q = ("select Epost from Reservasjon where ReservertKoieID = '" + koieID + "' and Dato > '" + dato + "' order by asc;");
+		
+		return db.sporDB(q);
+	}
+	
 }
