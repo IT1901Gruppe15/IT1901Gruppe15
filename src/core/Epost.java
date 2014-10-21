@@ -5,6 +5,10 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import javax.activation.*;
 
+/**
+ * Klasse for å kunne sende epost
+ *
+ */
 public class Epost { 
 	String from,host,to;
 	Session session;
@@ -41,7 +45,7 @@ public class Epost {
 	}
 		
 	
-	/**
+	/**setter melding
 	 * @param msg meldings innhold
 	 */
 	public void setMes(String msg){
@@ -49,7 +53,7 @@ public class Epost {
 		
 	}
 	
-	/**
+	/**setter emne(subject) til meldingen
 	 * @param sub emne(subject) til meldingen
 	 */
 	public void setSub(String sub){
