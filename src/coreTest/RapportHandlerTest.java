@@ -18,7 +18,6 @@ public class RapportHandlerTest {
 	@Test
 	public void testLesRapport() throws IOException {
 		FileWriter f1 = new FileWriter("textfiles/rapporter.txt");
-		koier.add("Flaakoia");
 		koier.add("Fosenkoia");
 		koier.add("Heinfjordstua");
 		koier.add("Hognabu");
@@ -39,7 +38,7 @@ public class RapportHandlerTest {
 		koier.add("Stakkslettbua");
 		koier.add("Telin");
 		koier.add("Taagaabu");
-		koier.add("Vekvesssaetra");
+		koier.add("Vekvessaetra");
 		koier.add("Ovensenget");
 		for(int i = 0; i < koier.size(); i++){
 			f1.write(koier.get(i)+"¤"+(int) Math.floor((70+((((i+1)^2)*0.1)+(10/(i+1))))-i)+"¤"+"2015-02-01"+"¤"+" "+"¤"+" "+"\r\n");
@@ -62,7 +61,7 @@ public class RapportHandlerTest {
 		}
 		f1.close(); 
 		
-//		RapportHandler.lesRapport();
+		RapportHandler.lesRapport();
 		
 		
 	}
