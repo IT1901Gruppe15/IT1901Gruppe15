@@ -16,7 +16,7 @@ public class VedstatusTest {
 	@Test
 	public void testLagVedEstimat() throws SQLException {
 		test.datoVeddugnad("Flaakoia", "2015-01-01");
-		test.datoVeddugnad("Fosenkoia", "2015-01-01");
+		test.datoVeddugnad("Fosenkoia", "2015-03-15");
 		test.datoVeddugnad("Heinfjordstua", "2015-01-01");
 		test.datoVeddugnad("Hognabu", "2015-01-01");
 		test.datoVeddugnad("Holmsaakoia", "2015-01-01");
