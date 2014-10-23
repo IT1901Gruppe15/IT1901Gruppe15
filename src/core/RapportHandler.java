@@ -16,9 +16,9 @@ public class RapportHandler {
 	 * Leser rapporten(e), legger inn det som er ødelagt og tømmer fila.
 	*/
 	
-	static final String INPUT_FILE = "textfiles/rapporter.txt";
-	static Scanner infile = null;
-	static DBConnection connection = new DBConnection();
+	private static final String INPUT_FILE = "textfiles/rapporter.txt";
+	private static Scanner infile = null;
+	private static DBConnection connection = new DBConnection();
 	
 	//les alle rapporter fra tekstfil
 	/**
