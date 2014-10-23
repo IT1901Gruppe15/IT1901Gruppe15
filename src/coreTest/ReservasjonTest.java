@@ -1,4 +1,4 @@
-package core;
+package coreTest;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,8 @@ import java.text.ParseException;
 
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import core.Reservasjon;
 
 public class ReservasjonTest {
 	Reservasjon res = new Reservasjon();
