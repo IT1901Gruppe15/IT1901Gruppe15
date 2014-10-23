@@ -19,15 +19,13 @@ public class Vedstatus {
 		double sumX=0, sumY=0, sumXY=0, sumXX=0, a, b;
 		int ar1, maned1, dag1, ar2, maned2, dag2, estimat, antallDager;
 		DBConnection dbconnect = new DBConnection();
-		String dato;
 		boolean skuddar = false;
 		ResultSet p = dbconnect.getForrigeVeddugnad(koieID);
 		p.next();
-		dato = p.getString(1);
 		tallX = new ArrayList<Integer>();
 		tallY = new ArrayList<Integer>();
 		datoer = new ArrayList<String>();
-		ResultSet t = dbconnect.getDatoListe(koieID, dato);
+		ResultSet t = dbconnect.getDatoListe(koieID, p.getString(1));
 		int s = 1;
 		while(t.next() && s < 15){
 			datoer.add(0, t.getString(1));
