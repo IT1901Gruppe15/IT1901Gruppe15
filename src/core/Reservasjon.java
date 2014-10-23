@@ -19,9 +19,9 @@ import java.util.regex.Pattern;
  *
  */
 public class Reservasjon {
-	String koieID;
+	private String koieID;
 	private String epost, start_dato;
-	DBConnection db = new DBConnection();
+	private DBConnection db = new DBConnection();
 	private Pattern pattern;
 	private Matcher matcher;
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -122,16 +122,16 @@ public class Reservasjon {
 			for (int i = 0; i < list.length; i++) {
 				switch (i) {
 				case 0:
-					koieID = list[0];// sjekke om koieid er gyldig?
+					koieID = list[0].trim();// sjekke om koieid er gyldig?
 					break;
 				case 1:
 					validate(list[1].trim());
-					epost = list[1];
+					epost = list[1].trim();
 
 					break;
 				case 2:
 					isThisDateValid(list[2], "yyyy-MM-dd");
-					start_dato = list[2];
+					start_dato = list[2].trim();
 
 					//break;
 //				case 3:
@@ -146,6 +146,7 @@ public class Reservasjon {
 
 				}
 			}
+			updateDB();
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -185,6 +186,7 @@ public class Reservasjon {
 
 		System.out.println(res.koieID + res.epost + res.start_dato
 				);
+		System.out.println(res.getEpost());
 		// TODO Auto-generated method stub
 
 	}
