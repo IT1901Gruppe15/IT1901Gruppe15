@@ -230,11 +230,13 @@
 			<Label text="NTNUI koiesystem" layoutX="15" style="-fx-font-size: 30px" />
 			<Text fx:id="welcomeName" layoutX="15" layoutY="100"
 				style="-fx-font-size: 20px" />
-			<VBox fx:id="koieVedstatusListe" layoutX="15" layoutY="150" spacing="3">
+			<VBox fx:id="koieVedstatusListe" layoutX="15" layoutY="150"
+				spacing="3">
 				<fx:define>
 					<HBox fx:id="koieVedstatusListeOverskrift">
 						<Label text="Koie" style="-fx-font-size: 14px" prefWidth="100" />
-						<Label text="Vedstatus" style="-fx-font-size: 14px" prefWidth="100" />
+						<Label text="Vedstatus" style="-fx-font-size: 14px"
+							prefWidth="100" />
 					</HBox>
 				</fx:define>
 			</VBox>
@@ -335,7 +337,8 @@
 			<Label text="Vedstatus" layoutX="500" layoutY="50" />
 			<Label fx:id="adminKoieVedstatusText" layoutX="500" layoutY="70" />
 			<Button text="Veddugnad utført" onAction="#veddugnadUtfort"
-				layoutX="500" layoutY="100" />
+				focusTraversable="false" layoutX="500" layoutY="100"
+				style="-fx-font-size: 10px;" />
 			<Label text="Kalender" layoutX="600" layoutY="50" />
 			<DatePicker fx:id="adminKalender" layoutX="600" layoutY="70"
 				focusTraversable="false" />
@@ -344,13 +347,16 @@
 			<Text fx:id="adminLedigeSengeplasserText" text="Ledige sengeplasser: xx"
 				layoutX="600" layoutY="140" />
 			<TextField fx:id="adminKoieLeggTilUtstyrField" layoutX="15"
-				layoutY="300" focusTraversable="false" />
+				layoutY="250" focusTraversable="false" />
 			<Button text="Legg til nytt utstyr" onAction="#leggTilUtstyr"
-				layoutX="200" layoutY="300" focusTraversable="false" />
+				layoutX="200" layoutY="250" focusTraversable="false" />
 			<Button text="Utstyr funnet" onAction="#finnUtstyr" layoutX="350"
 				layoutY="125" focusTraversable="false" />
 			<Button text="Fiks utstyr" onAction="#fiksUtstyr" layoutX="215"
 				layoutY="125" focusTraversable="false" />
+			<Hyperlink text="Åpne nettside" onAction="#openURL"
+				layoutX="15" layoutY="300" focusTraversable="false"
+				style="-fx-text-fill: black; -fx-font-size: 14px;" />
 		</Pane>
 	</fx:define>
 
@@ -379,6 +385,9 @@
 				layoutX="535" layoutY="120" />
 			<Text fx:id="brukerLedigeSengeplasserText" text="Ledige sengeplasser: xx"
 				layoutX="535" layoutY="140" />
+			<Hyperlink text="Åpne nettside" onAction="#openURL"
+				layoutX="15" layoutY="300" focusTraversable="false"
+				style="-fx-text-fill: black; -fx-font-size: 14px;" />
 		</Pane>
 	</fx:define>
 
@@ -411,8 +420,7 @@
 						<Label text="Navn" style="-fx-font-size: 14px" prefWidth="100" />
 						<Label text="Tlf" style="-fx-font-size: 14px" prefWidth="100" />
 						<Label text="Epost" style="-fx-font-size: 14px" prefWidth="200" />
-						<Label text="Admin status" style="-fx-font-size: 14px"
-							prefWidth="100" />
+						<Label text="Admin" style="-fx-font-size: 14px" prefWidth="100" />
 					</HBox>
 				</fx:define>
 			</VBox>

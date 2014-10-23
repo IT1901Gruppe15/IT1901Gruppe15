@@ -1,5 +1,9 @@
 package gui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -130,7 +134,7 @@ public class GUIController {
 	 * Initialiserer GUI
 	 */
 	public void initialize() { //basically konstruktør
-		rapportDropDown.getItems().addAll("Flåkoia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsåkoia", "Holvassgamma", "Iglbu", "Kamtjønna", "Kråkilkåten", "Kvernmovollen", "Kåsen", "Lynhøgen", "Mortenskåten", "Nicokoia", "Rindasløa", "Selbukåten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessætra", "Øvensenget");
+		rapportDropDown.getItems().addAll("Flåkoia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsåkoia", "Holvassgamma", "Iglbu", "Kamtjønnkoia", "Kråklikåten", "Kvernmovollen", "Kåsen", "Lynhøgen", "Mortenskåten", "Nicokoia", "Rindalsløa", "Selbukåten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessætra", "Øvensenget");
 		rapportDropDown.valueProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable,
@@ -311,8 +315,20 @@ public class GUIController {
 	}
 
 	@FXML
+	private void openURL(ActionEvent event) {
+		Desktop desktop = Desktop.getDesktop();
+		try {
+			URI url = new URI("http://org.ntnu.no/koiene/koiene/koiene.php?k=" + (TheFormator.formaterKoieNavn(activeKoie)).toLowerCase());
+			desktop.browse(url);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
 	private void openWelcome(ActionEvent event) { // når man trykker på hjem-knappen
-		System.out.println("hei");
 		koieVedstatusListe.getChildren().clear(); // fjerner listen hvis den har blitt fylt før
 		koieVedstatusListe.getChildren().add(koieVedstatusListeOverskrift); // setter inn overskriftene
 		for (int i = 0; i < rapportDropDown.getItems().size(); i++) {
@@ -325,6 +341,9 @@ public class GUIController {
 				Label vedstatus = new Label("" + vedEstimat);
 				if (vedEstimat < 20) {
 					vedstatus.setStyle("-fx-text-fill: RED");
+					if (vedEstimat == -1) {
+						vedstatus.setText("Utilstrekkelig data");
+					}
 				}
 				hbox.getChildren().addAll(koieNavn, vedstatus);
 				koieVedstatusListe.getChildren().add(hbox);
@@ -430,6 +449,13 @@ public class GUIController {
 						text.setPrefWidth(200);
 					} else {
 						text.setPrefWidth(100);
+					}
+					if (i == 4) {
+						if(rs.getString(i).equals("0")) {
+							text.setText("Nei");
+						} else {
+							text.setText("Ja");
+						}
 					}
 					hbox.getChildren().add(text);
 				}
@@ -550,7 +576,7 @@ public class GUIController {
 			if (dbUserInfo.next()) { // true hvis det angitte brukernavnet finnes i databasen
 				if (dbUserInfo.getString(1).equals(usernameField.getText()) && dbUserInfo.getString(2).equals(passwordField.getText())) { // hvis brukernavn og passord stemmer overens
 					bruker = new Bruker(usernameField.getText(), dbUserInfo.getString(3), dbUserInfo.getString(4), dbUserInfo.getString(5), dbUserInfo.getString(6));
-					welcomeName.setText("Velkommen, " + usernameField.getText());
+					welcomeName.setText("Velkommen, " + dbUserInfo.getString(3));
 					if (bruker.isAdmin()) {
 						root.setLeft(koieListe);
 						openWelcome(null);
