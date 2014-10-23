@@ -22,7 +22,7 @@ public class Vedstatus {
 		String dato;
 		boolean skuddar = false;
 		ResultSet p = dbconnect.getForrigeVeddugnad(koieID);
-		if(!p.next()){
+		if(p.next()==false){
 			return -1;
 		}
 		dato = p.getString(1);
