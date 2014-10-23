@@ -43,7 +43,7 @@ public class Utstyr {
 	}
 
 	public String getKoieID() {
-		return Koie.formaterKoieNavn(koieID);
+		return TheFormator.formaterKoieNavn(koieID);
 		
 		}
 	
