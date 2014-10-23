@@ -4,23 +4,23 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import core.Koie;
+import core.TheFormator;
 
 public class KoieTest {
 
 	@Test
 	public void testFormaterKoieNavn() {
-		assertEquals("Flaakoia",Koie.formaterKoieNavn("Flåkoia"));
-		assertEquals("Holmsaakoia",Koie.formaterKoieNavn("Holmsåkoia"));
-		assertEquals("Kamtjonnkoia",Koie.formaterKoieNavn("Kamtjønnkoia"));
-		assertEquals("Kraaklikaaten",Koie.formaterKoieNavn("Kråklikåten"));
-		assertEquals("Kaasen",Koie.formaterKoieNavn("Kåsen"));
-		assertEquals("Lynhogen",Koie.formaterKoieNavn("Lynhøgen"));
-		assertEquals("Mortenskaaten",Koie.formaterKoieNavn("Mortenskåten"));
-		assertEquals("Rindalsloa",Koie.formaterKoieNavn("Rindalsløa"));
-		assertEquals("Selbukaaten",Koie.formaterKoieNavn("Selbukåten"));
-		assertEquals("Vekvessaetra",Koie.formaterKoieNavn("Vekvessætra"));
-		assertEquals("Ovensenget",Koie.formaterKoieNavn("Øvensenget"));
+		assertEquals("Flaakoia",TheFormator.formaterKoieNavn("Flåkoia"));
+		assertEquals("Holmsaakoia",TheFormator.formaterKoieNavn("Holmsåkoia"));
+		assertEquals("Kamtjonnkoia",TheFormator.formaterKoieNavn("Kamtjønnkoia"));
+		assertEquals("Kraaklikaaten",TheFormator.formaterKoieNavn("Kråklikåten"));
+		assertEquals("Kaasen",TheFormator.formaterKoieNavn("Kåsen"));
+		assertEquals("Lynhogen",TheFormator.formaterKoieNavn("Lynhøgen"));
+		assertEquals("Mortenskaaten",TheFormator.formaterKoieNavn("Mortenskåten"));
+		assertEquals("Rindalsloa",TheFormator.formaterKoieNavn("Rindalsløa"));
+		assertEquals("Selbukaaten",TheFormator.formaterKoieNavn("Selbukåten"));
+		assertEquals("Vekvessaetra",TheFormator.formaterKoieNavn("Vekvessætra"));
+		assertEquals("Ovensenget",TheFormator.formaterKoieNavn("Øvensenget"));
 	}
 
 }

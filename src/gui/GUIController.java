@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import core.Bruker;
 import core.DBConnection;
 import core.Epost;
-import core.Koie;
+import core.TheFormator;
 import core.RapportHandler;
 import core.Vedstatus;
 import javafx.beans.property.BooleanProperty;
@@ -209,9 +209,9 @@ public class GUIController {
 
 	private void fyllKoiePane() { // finner all informasjon som skal vises i koie-panelet
 		try {
-			ResultSet altDB = connection.getAltUtstyr(Koie.formaterKoieNavn(activeKoie));
-			ResultSet odelagtDB = connection.getOdelagt(Koie.formaterKoieNavn(activeKoie));
-			ResultSet gjenglemtDB = connection.getGjenglemt(Koie.formaterKoieNavn(activeKoie));
+			ResultSet altDB = connection.getAltUtstyr(TheFormator.formaterKoieNavn(activeKoie));
+			ResultSet odelagtDB = connection.getOdelagt(TheFormator.formaterKoieNavn(activeKoie));
+			ResultSet gjenglemtDB = connection.getGjenglemt(TheFormator.formaterKoieNavn(activeKoie));
 			String alt = "";
 			String ødelagt = ""; // string som fylles med alle ødelagte gjenstander
 			String gjenglemt = ""; // string som fylles med alle gjenglemte gjenstander
@@ -259,10 +259,10 @@ public class GUIController {
 				}
 				adminKoieStatusName.setText(activeKoie); // setter inn all informasjonen i koie-panelet
 				adminKoieAltUtstyrField.setText(ferdigAlt.trim());
-				adminKoieVedstatusText.setText(Vedstatus.lagVedEstimat(Koie.formaterKoieNavn(activeKoie)) + " dager");
+				adminKoieVedstatusText.setText(Vedstatus.lagVedEstimat(TheFormator.formaterKoieNavn(activeKoie)) + " dager");
 				oppdaterSengeplasser(true, adminKalender.getValue());
 			} else {
-				brukerKoieVedstatusText.setText(Vedstatus.lagVedEstimat(Koie.formaterKoieNavn(activeKoie)) + " dager");
+				brukerKoieVedstatusText.setText(Vedstatus.lagVedEstimat(TheFormator.formaterKoieNavn(activeKoie)) + " dager");
 				brukerKoieStatusName.setText(activeKoie);
 				brukerAlleTingField.setText(ferdigAlt);
 				brukerOdelagteTingField.setText(ferdigØdelagt);
@@ -276,8 +276,8 @@ public class GUIController {
 
 	private void oppdaterSengeplasser(boolean isAdmin, LocalDate date) { // setter inn riktig antall totalt/tilgjengelige sengeplasser
 		try {
-			ResultSet antallSengeplasser = connection.getSengeplasser(Koie.formaterKoieNavn(activeKoie));
-			ResultSet reserverteSengeplasser = connection.getReservertePlasser(Koie.formaterKoieNavn(activeKoie), date.toString());
+			ResultSet antallSengeplasser = connection.getSengeplasser(TheFormator.formaterKoieNavn(activeKoie));
+			ResultSet reserverteSengeplasser = connection.getReservertePlasser(TheFormator.formaterKoieNavn(activeKoie), date.toString());
 			if (antallSengeplasser.next()) {
 				if (isAdmin) {					
 					adminAntallSengeplasserText.setText("Antall sengeplasser: " + antallSengeplasser.getString(1));
@@ -316,7 +316,7 @@ public class GUIController {
 		}
 		checkListObjectList.clear();
 		try {
-			ResultSet altUtstyr = connection.getAltUtstyr(Koie.formaterKoieNavn(rapportDropDown.getValue()));
+			ResultSet altUtstyr = connection.getAltUtstyr(TheFormator.formaterKoieNavn(rapportDropDown.getValue()));
 			while (altUtstyr.next()) {
 				checkListObjectList.add(new CheckListObject(altUtstyr.getString(1)));
 			}
@@ -367,16 +367,16 @@ public class GUIController {
 			vedstatus = Integer.parseInt(rapportVedstatusField.getText());
 		}
 		try {
-			connection.settinnRapport(ødelagt, gjenglemt, vedstatus, Koie.formaterKoieNavn(rapportDropDown.getValue()), LocalDate.now().toString());
+			connection.settinnRapport(ødelagt, gjenglemt, vedstatus, TheFormator.formaterKoieNavn(rapportDropDown.getValue()), LocalDate.now().toString());
 			if (ødelagt.length() > 0) {
 				String[] ødelagtListe = ødelagt.split(";");
 				for (int i = 0; i < ødelagtListe.length; i++) {
-					RapportHandler.Odelegg(ødelagtListe[i], Koie.formaterKoieNavn(activeKoie), ødelagt, gjenglemt, vedstatus);
+					RapportHandler.Odelegg(ødelagtListe[i], TheFormator.formaterKoieNavn(activeKoie), ødelagt, gjenglemt, vedstatus);
 				}
 			}
 			ResultSet rapportID = connection.getrapportID(ødelagt, gjenglemt, vedstatus);
 			if (rapportID.next()) {
-				RapportHandler.glemt(gjenglemt, Koie.formaterKoieNavn(activeKoie), Integer.parseInt(rapportID.getString(1)));
+				RapportHandler.glemt(gjenglemt, TheFormator.formaterKoieNavn(activeKoie), Integer.parseInt(rapportID.getString(1)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -411,7 +411,7 @@ public class GUIController {
 	@FXML
 	private void fiksUtstyr(ActionEvent event) {
 		try {
-			connection.fixUtstyr(Koie.formaterKoieNavn(activeKoie), adminKoieOdelagteTingDropDown.getValue());
+			connection.fixUtstyr(TheFormator.formaterKoieNavn(activeKoie), adminKoieOdelagteTingDropDown.getValue());
 			openKoie(activeKoie);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -431,7 +431,7 @@ public class GUIController {
 	@FXML
 	private void veddugnadUtfort(ActionEvent event) {
 		try {
-			connection.datoVeddugnad(Koie.formaterKoieNavn(activeKoie), LocalDate.now().toString());
+			connection.datoVeddugnad(TheFormator.formaterKoieNavn(activeKoie), LocalDate.now().toString());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -443,15 +443,15 @@ public class GUIController {
 	@FXML
 	private void leggTilUtstyr(ActionEvent event) {
 		try {
-			ResultSet rs = connection.getUtstyrID(adminKoieLeggTilUtstyrField.getText(), Koie.formaterKoieNavn(activeKoie));
+			ResultSet rs = connection.getUtstyrID(adminKoieLeggTilUtstyrField.getText(), TheFormator.formaterKoieNavn(activeKoie));
 			if (rs.next()) { // hvis utstyr allerede finnes
 				System.out.println("utstyr finnes allerede");
 				adminKoieLeggTilUtstyrField.setText("");
 				return;
 			}
-			connection.registrerUtstyr(adminKoieLeggTilUtstyrField.getText(), LocalDate.now().toString(), 1, bruker.getBrukernavn(), Koie.formaterKoieNavn(activeKoie));
+			connection.registrerUtstyr(adminKoieLeggTilUtstyrField.getText(), LocalDate.now().toString(), 1, bruker.getBrukernavn(), TheFormator.formaterKoieNavn(activeKoie));
 			String epostAdresse = "";
-			ResultSet epostDB = connection.getReservasjonsEpost(Koie.formaterKoieNavn(activeKoie), LocalDate.now().toString());
+			ResultSet epostDB = connection.getReservasjonsEpost(TheFormator.formaterKoieNavn(activeKoie), LocalDate.now().toString());
 			if (epostDB.next()) {
 				epostAdresse = epostDB.getString(1);
 			}

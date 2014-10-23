@@ -1,18 +1,6 @@
 package core;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Koie {
-	String KoieID,navn,adresse;
-	int sengeplasser,vedstatus;
-	List<Utstyr> utstyr = new ArrayList<Utstyr>();
-	List<String> gjenglemteTing = new ArrayList<String>();
-	
-	public void bergenVedStatus(){
-		
-	}
-	
+public class TheFormator {
 	
 	/**
 	 * Formaterer koie navn til gyldig format
@@ -36,11 +24,25 @@ public class Koie {
 		}
 		return formatertTekst;
 	}
-
 	
-
-	public static void main(String[] args) {
-
+	/**
+	 * gjør om tekst til formatet: ting1;ting2;ting3
+	 * 
+	 * @param tekst Teksten som endres
+	 * @param separator Hvilket symbol(er) som skiller tekstbitene
+	 * @return returnerer den ferdige teksten
+	 */
+	public static String formaterTekst(String tekst, String separator) {
+		String[] liste = tekst.split(separator);
+		String ferdigTekst = "";
+		for (int i = 0; i < liste.length; i++) {
+			ferdigTekst += liste[i] + ";";
+		}
+		ferdigTekst = ferdigTekst.substring(0, ferdigTekst.length() - 1);
+		ferdigTekst = ferdigTekst.trim();
+		if (ferdigTekst.length() == 0) {
+			return " ";
+		}
+		return ferdigTekst;
 	}
-
 }
