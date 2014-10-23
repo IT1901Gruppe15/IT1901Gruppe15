@@ -407,7 +407,7 @@ public class GUIController {
 					RapportHandler.Odelegg(ødelagtListe[i], TheFormator.formaterKoieNavn(activeKoie), ødelagt, gjenglemt, vedstatus);
 				}
 			}
-			ResultSet rapportID = connection.getrapportID(ødelagt, gjenglemt, vedstatus);
+			ResultSet rapportID = connection.getRapportID(ødelagt, gjenglemt, vedstatus);
 			if (rapportID.next()) {
 				RapportHandler.glemt(gjenglemt, TheFormator.formaterKoieNavn(activeKoie), Integer.parseInt(rapportID.getString(1)));
 			}

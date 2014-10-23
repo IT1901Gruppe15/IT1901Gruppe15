@@ -62,7 +62,7 @@ public class RapportHandler {
 				}
 				
 				if(gjenglemteTing.length() > 1){
-					ResultSet rID = connection.getrapportID(odelagteTing, gjenglemteTing, vedstatus);
+					ResultSet rID = connection.getRapportID(odelagteTing, gjenglemteTing, vedstatus);
 					rID.next();
 					int rapportID = rID.getInt(1);
 					RapportHandler.glemt(gjenglemteTing, koieID, rapportID);
@@ -91,7 +91,7 @@ public class RapportHandler {
 		ResultSet rsU = connection.getUtstyrID(utstyrsnavn, koieID);
 		rsU.next();
 		int utstyrsID = rsU.getInt(1);
-		ResultSet rsR = connection.getrapportID(odelagteTing, gjenglemteTing, vedstatus);
+		ResultSet rsR = connection.getRapportID(odelagteTing, gjenglemteTing, vedstatus);
 		rsR.next();
 		int rapportID = rsR.getInt(1);
 		connection.oppdaterUtstyr(utstyrsID, 0);

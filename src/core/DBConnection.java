@@ -197,7 +197,7 @@ public class DBConnection {
 	 * @return ResultSet med rapportID til rapport som matcher parametrene.
 	 * @throws SQLException
 	 */
-	public ResultSet getrapportID(String odelagt, String gjenglemt,
+	public ResultSet getRapportID(String odelagt, String gjenglemt,
 			int vedstatus) throws SQLException {
 		String q = ("select RapportID from Rapport where Odelagt = '" 
 				+ odelagt
