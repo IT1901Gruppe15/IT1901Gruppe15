@@ -34,6 +34,9 @@ public class Vedstatus {
 			tallY.add(0, t.getInt(2));
 			s+=1;
 		}
+		if(s<=2){
+			return -1;
+		}
 		tallX.add(0);
 		for(int k = 1; k < tallY.size(); k++){
 			dag1 = Integer.parseInt((datoer.get(k-1)).substring(8,10));
