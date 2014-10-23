@@ -230,6 +230,14 @@
 			<Label text="NTNUI koiesystem" layoutX="15" style="-fx-font-size: 30px" />
 			<Text fx:id="welcomeName" layoutX="15" layoutY="100"
 				style="-fx-font-size: 20px" />
+			<VBox fx:id="koieVedstatusListe" layoutX="15" layoutY="150" spacing="3">
+				<fx:define>
+					<HBox fx:id="koieVedstatusListeOverskrift">
+						<Label text="Koie" style="-fx-font-size: 14px" prefWidth="100" />
+						<Label text="Vedstatus" style="-fx-font-size: 14px" prefWidth="100" />
+					</HBox>
+				</fx:define>
+			</VBox>
 		</Pane>
 	</fx:define>
 

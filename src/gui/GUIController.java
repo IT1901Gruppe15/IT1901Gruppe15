@@ -62,6 +62,9 @@ public class GUIController {
 	//welcome pane
 	@FXML private Pane welcomePane; // velkomst panelet (default når man logger inn)
 	@FXML private Text welcomeName; // overskriften på welcome-panelet
+	@FXML private VBox koieVedstatusListe;
+	@FXML private HBox koieVedstatusListeOverskrift;
+
 
 	//map pane
 	@FXML private Pane mapPane; // kart over koiene
@@ -246,6 +249,7 @@ public class GUIController {
 					ferdigGjenglemt += gjenglemtListe[i] + "\n";
 				}
 			}
+			int vedEstimat = Vedstatus.lagVedEstimat(Koie.formaterKoieNavn(activeKoie));
 			if (bruker.isAdmin()) {
 				if (adminKoieOdelagteTingDropDown.getItems().size() > 0) {					
 					adminKoieOdelagteTingDropDown.setValue(adminKoieOdelagteTingDropDown.getItems().get(0));
@@ -259,7 +263,11 @@ public class GUIController {
 				}
 				adminKoieStatusName.setText(activeKoie); // setter inn all informasjonen i koie-panelet
 				adminKoieAltUtstyrField.setText(ferdigAlt.trim());
-				adminKoieVedstatusText.setText(Vedstatus.lagVedEstimat(Koie.formaterKoieNavn(activeKoie)) + " dager");
+				if (vedEstimat == -1) {
+					adminKoieVedstatusText.setText("Utilstrekkelig data");
+				} else {
+					adminKoieVedstatusText.setText(vedEstimat + " dager");
+				}
 				oppdaterSengeplasser(true, adminKalender.getValue());
 			} else {
 				brukerKoieVedstatusText.setText(Vedstatus.lagVedEstimat(Koie.formaterKoieNavn(activeKoie)) + " dager");
@@ -267,6 +275,11 @@ public class GUIController {
 				brukerAlleTingField.setText(ferdigAlt);
 				brukerOdelagteTingField.setText(ferdigØdelagt);
 				brukerGjenglemteTingField.setText(ferdigGjenglemt);
+				if (vedEstimat == -1) {
+					brukerKoieVedstatusText.setText("Utilstrekkelig data");
+				} else {
+					brukerKoieVedstatusText.setText(vedEstimat + " dager");
+				}
 				oppdaterSengeplasser(false, brukerKalender.getValue());
 			}
 		} catch (SQLException e) {
@@ -299,6 +312,26 @@ public class GUIController {
 
 	@FXML
 	private void openWelcome(ActionEvent event) { // når man trykker på hjem-knappen
+		System.out.println("hei");
+		koieVedstatusListe.getChildren().clear(); // fjerner listen hvis den har blitt fylt før
+		koieVedstatusListe.getChildren().add(koieVedstatusListeOverskrift); // setter inn overskriftene
+		for (int i = 0; i < rapportDropDown.getItems().size(); i++) {
+			int vedEstimat;
+			try {
+				vedEstimat = Vedstatus.lagVedEstimat(Koie.formaterKoieNavn(rapportDropDown.getItems().get(i)));
+				HBox hbox = new HBox();
+				Label koieNavn = new Label(rapportDropDown.getItems().get(i));
+				koieNavn.setPrefWidth(100);
+				Label vedstatus = new Label("" + vedEstimat);
+				if (vedEstimat < 20) {
+					vedstatus.setStyle("-fx-text-fill: RED");
+				}
+				hbox.getChildren().addAll(koieNavn, vedstatus);
+				koieVedstatusListe.getChildren().add(hbox);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		root.setCenter(welcomePane);
 	}
 
@@ -427,7 +460,7 @@ public class GUIController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	private void veddugnadUtfort(ActionEvent event) {
 		try {
@@ -520,11 +553,11 @@ public class GUIController {
 					welcomeName.setText("Velkommen, " + usernameField.getText());
 					if (bruker.isAdmin()) {
 						root.setLeft(koieListe);
-						root.setCenter(welcomePane);
+						openWelcome(null);
 						root.setTop(adminToolbar);
 					} else {
 						root.setLeft(koieListe);
-						root.setCenter(welcomePane);
+						openWelcome(null);
 						root.setTop(brukerToolbar);
 					}
 				} else { // hvis brukernavnet fantes, men passordet var feil
