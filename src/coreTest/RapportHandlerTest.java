@@ -66,10 +66,4 @@ public class RapportHandlerTest {
 		
 	}
 
-	@Test
-	public void testFormaterTekst() {
-		
-		System.out.println(RapportHandler.formaterTekst("del1~del2~del3", "~"));
-	}
-
 }

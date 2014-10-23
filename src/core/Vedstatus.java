@@ -22,9 +22,7 @@ public class Vedstatus {
 		String dato;
 		boolean skuddar = false;
 		ResultSet p = dbconnect.getForrigeVeddugnad(koieID);
-		if(p.next()==false){
-			return -1;
-		}
+		p.next();
 		dato = p.getString(1);
 		tallX = new ArrayList<Integer>();
 		tallY = new ArrayList<Integer>();
