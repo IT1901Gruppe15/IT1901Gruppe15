@@ -9,8 +9,9 @@ import java.sql.SQLException;
 public class Utstyr {
 	String koieID;
 	String navn,admin_id,admin;
-	String innkjøpsdato;
+	String innkjÃ¸psdato;
 	int status;
+<<<<<<< Updated upstream
 	
 	
 	/**
@@ -22,10 +23,14 @@ public class Utstyr {
 	 * @param admin_id navnet til adminen som legger til utstyr
 	 */
 	private Utstyr( String koieID, String navn, String innkjøpsdato, int status, String admin_id){
+=======
+
+	private Utstyr( String koieID, String navn, String innkjÃ¸psdato, int status, String admin_id){
+>>>>>>> Stashed changes
 
 		this.koieID = koieID;
 		this.navn = navn;
-		this.innkjøpsdato = innkjøpsdato;
+		this.innkjÃ¸psdato = innkjÃ¸psdato;
 		this.status = status;
 		this.admin_id=admin_id;
 	}
@@ -36,7 +41,7 @@ public class Utstyr {
 	public void registrerUtstyrKjop(){
 		DBConnection db = new DBConnection();
 		try {
-			db.registrerUtstyr(getNavn(), getInnkjøpsdato(), getStatus(), getAdmin_id(), getKoieID());
+			db.registrerUtstyr(getNavn(), getInnkjÃ¸psdato(), getStatus(), getAdmin_id(), getKoieID());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -68,12 +73,12 @@ public class Utstyr {
 		this.admin_id = admin_id;
 	}
 
-	public String getInnkjøpsdato() {
-		return innkjøpsdato;
+	public String getInnkjÃ¸psdato() {
+		return innkjÃ¸psdato;
 	}
 
-	public void setInnkjøpsdato(String innkjøpsdato) {
-		this.innkjøpsdato = innkjøpsdato;
+	public void setInnkjÃ¸psdato(String innkjÃ¸psdato) {
+		this.innkjÃ¸psdato = innkjÃ¸psdato;
 	}
 
 	public int getStatus() {
