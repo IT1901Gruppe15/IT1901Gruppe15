@@ -10,10 +10,10 @@ import javax.activation.*;
  *
  */
 public class Epost { 
-	private String from,host,to;
-	private Session session;
-	private Properties properties;
-	private String user,pw,msg,sub;
+	String from,host,to;
+	Session session;
+	Properties properties;
+	String user,pw,msg,sub;
 	
 	
 	/**
