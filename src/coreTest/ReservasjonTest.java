@@ -45,7 +45,7 @@ public class ReservasjonTest {
 		
 		res.lesReservasjon();
 		
-		assertEquals("feil","Telin", res.getKoieID());
+		assertEquals("Skulle vært Telin men var "+ res.getKoieID(),"Telin", res.getKoieID());
 		
 
 		
