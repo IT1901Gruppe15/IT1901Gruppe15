@@ -192,6 +192,11 @@ public class GUIController {
 		});
 	}
 
+	/**
+	 * Når man trykker på en koie i lista til ventstre
+	 * 
+	 * @param event Hendelsen som kalte metoden
+	 */
 	@FXML
 	private void koieClicked(ActionEvent event) { // når man trykker på koie i lista
 		((Hyperlink) event.getSource()).setVisited(false); // gjør at linkene i koia-lista ikke for strek under seg når man trykker på de
@@ -204,6 +209,11 @@ public class GUIController {
 		}
 	}
 
+	/**
+	 * Åpner koie-panelet for angitt koie
+	 * 
+	 * @param koie Angitt koie
+	 */
 	private void openKoie(String koie) {
 		activeKoie = koie;
 		fyllKoiePane();
@@ -214,6 +224,9 @@ public class GUIController {
 		}
 	}
 
+	/**
+	 * Hjelpemetode for å fylle koie-panelet med informasjon
+	 */
 	private void fyllKoiePane() { // finner all informasjon som skal vises i koie-panelet
 		try {
 			ResultSet altDB = connection.getAltUtstyr(TheFormator.formaterKoieNavn(activeKoie));
@@ -291,6 +304,12 @@ public class GUIController {
 		}
 	}
 
+	/**
+	 * Hjelpemetode for å finne ledige sengeplasser på en koie
+	 * 
+	 * @param isAdmin Om brukeren er admin
+	 * @param date Datoen man skal finne ledige sengeplasser for
+	 */
 	private void oppdaterSengeplasser(boolean isAdmin, LocalDate date) { // setter inn riktig antall totalt/tilgjengelige sengeplasser
 		try {
 			ResultSet antallSengeplasser = connection.getSengeplasser(TheFormator.formaterKoieNavn(activeKoie));
@@ -314,12 +333,16 @@ public class GUIController {
 		}
 	}
 
+	/**
+	 * Åpner link i nettleser
+	 * 
+	 * @param event Hendelsen som kalte metoden
+	 */
 	@FXML
 	private void openURL(ActionEvent event) {
-		Desktop desktop = Desktop.getDesktop();
 		try {
 			URI url = new URI("http://org.ntnu.no/koiene/koiene/koiene.php?k=" + (TheFormator.formaterKoieNavn(activeKoie)).toLowerCase());
-			desktop.browse(url);
+			Desktop.getDesktop().browse(url);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -327,6 +350,11 @@ public class GUIController {
 		}
 	}
 
+	/**
+	 * Åpner og fyller velkomst-panelet
+	 * 
+	 * @param event Hendelsen som kalte metoden
+	 */
 	@FXML
 	private void openWelcome(ActionEvent event) { // når man trykker på hjem-knappen
 		koieVedstatusListe.getChildren().clear(); // fjerner listen hvis den har blitt fylt før
@@ -354,12 +382,22 @@ public class GUIController {
 		root.setCenter(welcomePane);
 	}
 
+	/**
+	 * Åpner kartet
+	 * 
+	 * @param event  Hendelsen som kalte metoden
+	 */
 	@FXML
 	private void openMap(ActionEvent event) { // når man trykker på kart-knappen
 		mapPane.getChildren().remove(mapBtn);
 		root.setCenter(mapPane);
 	}
 
+	/**
+	 * Åpner rapport-panelet
+	 * 
+	 * @param event Hendelsen som kalte metoden
+	 */
 	@FXML
 	private void openReport(ActionEvent event) { // når man trykker på rapport-knappe
 		if (rapportDropDown.getValue() == "Velg en koie") {
@@ -394,11 +432,21 @@ public class GUIController {
 		root.setCenter(reportPane);
 	}
 
+	/**
+	 * Åpner panelet for registrering av ny bruker
+	 * 
+	 * @param event Hendelsen som kalte metoden
+	 */
 	@FXML
 	private void newUser(ActionEvent event) { // når man trykker på "ny bruker" knappen
 		root.setCenter(registerScreen);
 	}
 
+	/**
+	 * Sender en rapport til databasen
+	 * 
+	 * @param event Hendelsen som kalte metoden
+	 */
 	@FXML
 	private void sendRapport(ActionEvent event) {  // når man trykker på "send rapport" knappen i rapport-panelet
 		if (rapportDropDown.getValue().equals("Velg en koie")) { // hvis man ikke har valgt en koie
@@ -435,6 +483,9 @@ public class GUIController {
 		}
 	}
 
+	/**
+	 * Åpner panelet med liste over medlemmer
+	 */
 	@FXML
 	private void openMedlemListe() { // når man trykker på medlemsliste-knappen
 		medlemListe.getChildren().clear(); // fjerner listen hvis den har blitt fylt før
@@ -467,6 +518,11 @@ public class GUIController {
 		root.setCenter(medlemPane);
 	}
 
+	/**
+	 * Setter status for et ødelagt utstyr i databasen til fikset
+	 * 
+	 * @param event Hendelsen som kalte metoden
+	 */
 	@FXML
 	private void fiksUtstyr(ActionEvent event) {
 		try {
@@ -477,6 +533,11 @@ public class GUIController {
 		}
 	}
 
+	/**
+	 * Setter status for et gjenglemt utstyr i databasen til funnet
+	 * 
+	 * @param event Hendelsen som kalte metoden
+	 */
 	@FXML
 	private void finnUtstyr(ActionEvent event) {
 		try {
@@ -487,6 +548,11 @@ public class GUIController {
 		}
 	}
 
+	/**
+	 * Setter dato for siste veddugnad til en koie i databasen til i dag
+	 * 
+	 * @param event Hendelsen som kalte metoden
+	 */
 	@FXML
 	private void veddugnadUtfort(ActionEvent event) {
 		try {
@@ -529,6 +595,11 @@ public class GUIController {
 		}
 	}
 
+	/**
+	 * Registrerer en ny bruker
+	 * 
+	 * @param event Hendelsen som kalte metoden
+	 */
 	@FXML
 	private void register(ActionEvent event) { // når man trykker på "registrer" knappen
 		try {
@@ -552,6 +623,11 @@ public class GUIController {
 		}
 	} 
 
+	/**
+	 * Logger ut av systemet
+	 * 
+	 * @param event Hendelsen som kalte metoden
+	 */
 	@FXML
 	private void logOut(ActionEvent event) { // når man trykker på "logg ut"  eller "tilbake" knappen
 		bruker = null;
@@ -569,6 +645,11 @@ public class GUIController {
 		root.setCenter(loginScreen);
 	}
 
+	/**
+	 * Logger inn i systemet
+	 * 
+	 * @param event Hendelsen som kalte metoden
+	 */
 	@FXML
 	private void logIn(ActionEvent event) { // når man trykker på "logg inn" knappen
 		try {
