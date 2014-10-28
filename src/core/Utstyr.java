@@ -7,10 +7,10 @@ import java.sql.SQLException;
  *
  */
 public class Utstyr {
-	String koieID;
-	String navn,admin_id,admin;
-	String innkjøpsdato;
-	int status;
+	private String koieID;
+	private String navn,admin_id,admin;
+	private String innkjopsdato;
+	private int status;
 	
 	
 	/**
@@ -21,11 +21,11 @@ public class Utstyr {
 	 * @param status status om utstyrer er ødelagt eller ikke,der 0 er ødelagt og 1 er ikke ødelagt
 	 * @param admin_id navnet til adminen som legger til utstyr
 	 */
-	private Utstyr( String koieID, String navn, String innkjøpsdato, int status, String admin_id){
+	private Utstyr( String koieID, String navn, String innkjopsdato, int status, String admin_id){
 
 		this.koieID = koieID;
 		this.navn = navn;
-		this.innkjøpsdato = innkjøpsdato;
+		this.innkjopsdato = innkjopsdato;
 		this.status = status;
 		this.admin_id=admin_id;
 	}
@@ -69,11 +69,11 @@ public class Utstyr {
 	}
 
 	public String getInnkjøpsdato() {
-		return innkjøpsdato;
+		return innkjopsdato;
 	}
 
 	public void setInnkjøpsdato(String innkjøpsdato) {
-		this.innkjøpsdato = innkjøpsdato;
+		this.innkjopsdato = innkjøpsdato;
 	}
 
 	public int getStatus() {
