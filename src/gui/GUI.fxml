@@ -235,7 +235,7 @@
 				<fx:define>
 					<HBox fx:id="koieVedstatusListeOverskrift">
 						<Label text="Koie" style="-fx-font-size: 14px" prefWidth="100" />
-						<Label text="Vedstatus" style="-fx-font-size: 14px"
+						<Label text="Dager til veddugnad" style="-fx-font-size: 14px"
 							prefWidth="100" />
 					</HBox>
 				</fx:define>
@@ -350,7 +350,7 @@
 				layoutY="250" focusTraversable="false" />
 			<Button text="Legg til nytt utstyr" onAction="#leggTilUtstyr"
 				layoutX="200" layoutY="250" focusTraversable="false" />
-			<Button text="Utstyr funnet" onAction="#finnUtstyr" layoutX="350"
+			<Button text="Ting funnet" onAction="#finnUtstyr" layoutX="350"
 				layoutY="125" focusTraversable="false" />
 			<Button text="Fiks utstyr" onAction="#fiksUtstyr" layoutX="215"
 				layoutY="125" focusTraversable="false" />
