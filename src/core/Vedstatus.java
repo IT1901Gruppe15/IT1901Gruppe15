@@ -79,7 +79,7 @@ public class Vedstatus {
 		if(negativMengde){
 			ResultSet q = dbconnect.getDatoListe(koieID, dato);
 			while(q.next()){
-				b=q.getInt(2);
+				a=q.getInt(2);
 			}
 		}
 		estimat = (int) Math.floor((a*(-1))/b);
