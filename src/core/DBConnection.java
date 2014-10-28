@@ -279,7 +279,7 @@ public class DBConnection {
 	 * @throws SQLException
 	 */
 	public ResultSet getDatoListe(String koieID, String dato) throws SQLException {
-		String q = ("select Dato, min(Vedstatus) from Rapport where Dato >= '" + dato + "' and KoieRapportID = '" + koieID + "' group by Dato order by Dato desc;");
+		String q = ("select Dato, min(Vedstatus) from Rapport where Dato > '" + dato + "' and KoieRapportID = '" + koieID + "' group by Dato order by Dato desc;");
 		
 		return db.sporDB(q);
 	}
