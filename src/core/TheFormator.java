@@ -1,5 +1,9 @@
 package core;
 
+/**
+ * Formatterer strenger til ו passe i DB og konverterer זרו
+ */
+
 public class TheFormator {
 	
 	/**

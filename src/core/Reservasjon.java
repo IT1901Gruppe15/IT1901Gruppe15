@@ -13,10 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 
  * Reservasjon klassen leser fra en fil og lagrer feltene i databasen hvis de har gyldige verdier
- * 
- *
  */
 public class Reservasjon {
 	private String koieID;

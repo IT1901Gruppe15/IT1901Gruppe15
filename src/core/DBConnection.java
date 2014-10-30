@@ -5,6 +5,10 @@ import java.sql.SQLException;
 
 import database.DB;
 
+/**
+ * Sender ferdige spørringer til DB-klassen som håndterer kommunikajson med DB
+ */
+
 public class DBConnection { 
 
 	private DB db;
@@ -271,7 +275,7 @@ public class DBConnection {
 	}
 	
 	/**
-	 * Returnerer en liste med datoer med laveste vedstatus for hver dag i synkende rekkefølge etter dato, starter på innsendt dato
+	 * Returnerer en liste med datoer med laveste vedstatus for hver dag i synkende rekkefølge etter dato, starter etter innsendt dato
 	 * 
 	 * @param koieID Koien informasjon skal hentes fra.
 	 * @param dato Datoen lista skal begynne på

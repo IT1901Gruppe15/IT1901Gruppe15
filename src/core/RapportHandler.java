@@ -7,15 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+/** 
+ * Får input fra tekstfil i følgende format:
+ * koieID¤vedtatus¤yyyy-mm-dd¤odelagt1;odelagt2;odelagt3¤glemt1;glemt2	
+ * HVIS ET FELT ER TOMT SKAL DET INNEHOLDE ETT MELLOMROM
+ * Leser rapporten(e), legger inn det som er ødelagt og tømmer fila.
+ */
+
 public class RapportHandler {
 
-	/** 
-	 * Får input fra tekstfil i følgende format:
-	 * koieID¤vedtatus¤yyyy-mm-dd¤odelagt1;odelagt2;odelagt3¤glemt1;glemt2	
-	 * HVIS ET FELT ER TOMT SKAL DET INNEHOLDE ETT MELLOMROM
-	 * Leser rapporten(e), legger inn det som er ødelagt og tømmer fila.
-	*/
-	
 	private static final String INPUT_FILE = "textfiles/rapporter.txt";
 	private static Scanner infile = null;
 	private static DBConnection connection = new DBConnection();
