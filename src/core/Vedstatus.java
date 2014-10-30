@@ -5,6 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Estimerer antall dager til neste veddugnad basert på tidligere vedstatus
+ */
 public class Vedstatus {
 	
 	private static ArrayList<Integer> tallX, tallY, alleEstimat;
@@ -56,9 +59,10 @@ public class Vedstatus {
 		    totalRows = t.getRow();
 		    t.beforeFirst();
 		}
+		
 		while(t.next() && s < 15){
 			int l = t.getInt(2);
-			if(l<=tallY.get(0)){
+			if(l<=tallY.get(0) || tallY==null){
 				datoer.add(0, t.getString(1));
 				tallY.add(0, l);
 			}
