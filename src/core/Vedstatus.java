@@ -12,7 +12,7 @@ public class Vedstatus {
 	private static String[] koie = new String[] {"Flaakoia","Fosenkoia","Heinfjordstua","Hognabu","Holmsaakoia","Holvassgamma","Iglbu","Kamtjonnkoia","Kraaklikaaten","Kvermovollen","Lynhogen","Mortenskaaten","Nicokoia","Rindalsloa","Selbukaaten","Sonvasskoia","Stabburet","Stakkslettbua","Telin","Taagaabu","Vekvessaetra","Ovensenget"};
 	private static String dato;
 	private static double sumX=0, sumY=0, sumXY=0, sumXX=0, a, b;
-	private static int ar1, maned1, dag1, ar2, maned2, dag2, estimat, antallDager;
+	private static int ar1, maned1, dag1, ar2, maned2, dag2, estimat, antallDager, totalRows;
 	private static DBConnection dbconnect = new DBConnection();
 	private static boolean skuddar = false, negativMengde = false;
 	
@@ -30,7 +30,10 @@ public class Vedstatus {
 		int s = 1;
 		
 		ResultSet t = dbconnect.getDatoListe(koieID, dato);
-		while(t.getRow()<=3){
+		t.last();
+	    totalRows = t.getRow();
+	    t.beforeFirst();
+		while(totalRows<=3){
 			int bak1dag = Integer.parseInt((dato.substring(8,10)));
 			bak1dag-=1;
 			if(bak1dag<=0){
@@ -49,12 +52,15 @@ public class Vedstatus {
 				dato = dato.substring(0,8)+""+bak1dag;
 			}
 			t = dbconnect.getDatoListe(koieID, dato);
+			t.last();
+		    totalRows = t.getRow();
+		    t.beforeFirst();
 		}
 		while(t.next() && s < 15){
 			int l = t.getInt(2);
 			if(l<=tallY.get(0)){
 				datoer.add(0, t.getString(1));
-				tallY.add(0, t.getInt(2));
+				tallY.add(0, l);
 			}
 			s+=1;
 		}
