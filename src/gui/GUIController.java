@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import core.Bruker;
 import core.DBConnection;
@@ -266,7 +267,9 @@ public class GUIController {
 					ferdigGjenglemt += gjenglemtListe[i] + "\n";
 				}
 			}
-			int vedEstimat = Vedstatus.lagVedEstimat(TheFormator.formaterKoieNavn(activeKoie));
+			ResultSet forrigeVeddugnad = connection.getForrigeVeddugnad(TheFormator.formaterKoieNavn(activeKoie));
+			forrigeVeddugnad.next();
+			int vedEstimat = Vedstatus.lagVedEstimat(TheFormator.formaterKoieNavn(activeKoie), forrigeVeddugnad.getString(1));
 			if (bruker.isAdmin()) {
 				if (adminKoieOdelagteTingDropDown.getItems().size() > 0) {					
 					adminKoieOdelagteTingDropDown.setValue(adminKoieOdelagteTingDropDown.getItems().get(0));
@@ -287,7 +290,8 @@ public class GUIController {
 				}
 				oppdaterSengeplasser(true, adminKalender.getValue());
 			} else {
-				brukerKoieVedstatusText.setText(Vedstatus.lagVedEstimat(TheFormator.formaterKoieNavn(activeKoie)) + " dager");
+				
+				brukerKoieVedstatusText.setText(Vedstatus.lagVedEstimat(TheFormator.formaterKoieNavn(activeKoie), forrigeVeddugnad.getString(1)) + " dager");
 				brukerKoieStatusName.setText(activeKoie);
 				brukerAlleTingField.setText(ferdigAlt);
 				brukerOdelagteTingField.setText(ferdigØdelagt);
@@ -359,27 +363,27 @@ public class GUIController {
 	private void openWelcome(ActionEvent event) { // når man trykker på hjem-knappen
 		koieVedstatusListe.getChildren().clear(); // fjerner listen hvis den har blitt fylt før
 		koieVedstatusListe.getChildren().add(koieVedstatusListeOverskrift); // setter inn overskriftene
-		for (int i = 0; i < rapportDropDown.getItems().size(); i++) {
-			int vedEstimat;
-			try {
-				vedEstimat = Vedstatus.lagVedEstimat(TheFormator.formaterKoieNavn(rapportDropDown.getItems().get(i)));
+		root.setCenter(welcomePane);
+		ArrayList<Integer> vedEstimat;
+		try {
+			vedEstimat = Vedstatus.getEstimates();
+			for (int i = 0; i < rapportDropDown.getItems().size(); i++) {
 				HBox hbox = new HBox();
 				Label koieNavn = new Label(rapportDropDown.getItems().get(i));
 				koieNavn.setPrefWidth(100);
 				Label vedstatus = new Label("" + vedEstimat);
-				if (vedEstimat < 20) {
+				if (vedEstimat.get(i) < 20) {
 					vedstatus.setStyle("-fx-text-fill: RED");
-					if (vedEstimat == -1) {
+					if (vedEstimat.get(i) == -1) {
 						vedstatus.setText("Utilstrekkelig data");
 					}
 				}
 				hbox.getChildren().addAll(koieNavn, vedstatus);
 				koieVedstatusListe.getChildren().add(hbox);
-			} catch (SQLException e) {
-				e.printStackTrace();
 			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 		}
-		root.setCenter(welcomePane);
 	}
 
 	/**
@@ -420,9 +424,7 @@ public class GUIController {
 		Callback<CheckListObject, ObservableValue<Boolean>> getProperty = new Callback<CheckListObject, ObservableValue<Boolean>>() {
 			@Override
 			public BooleanProperty call(CheckListObject layer) {
-
 				return layer.selectedProperty();
-
 			}
 		};
 		Callback<ListView<CheckListObject>, ListCell<CheckListObject>> forListView = CheckBoxListCell.forListView(getProperty);
@@ -481,6 +483,9 @@ public class GUIController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		rapportGjenglemteTingField.setText("");
+		rapportVedstatusField.setText("");
+		openReport(null);
 	}
 
 	/**
@@ -660,12 +665,12 @@ public class GUIController {
 					welcomeName.setText("Velkommen, " + dbUserInfo.getString(3));
 					if (bruker.isAdmin()) {
 						root.setLeft(koieListe);
-						openWelcome(null);
 						root.setTop(adminToolbar);
+						openWelcome(null);
 					} else {
 						root.setLeft(koieListe);
-						openWelcome(null);
 						root.setTop(brukerToolbar);
+						openWelcome(null);
 					}
 				} else { // hvis brukernavnet fantes, men passordet var feil
 					invalidLoginInfo.setVisible(true);
