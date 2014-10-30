@@ -29,8 +29,10 @@ public class Vedstatus {
 		tallY = new ArrayList<Integer>();
 		datoer = new ArrayList<String>();
 		ResultSet p = dbconnect.getForrigeVeddugnad(koieID);
-		p.next();
-		dato=p.getString(1);
+		p.beforeFirst();
+		if(p.next()){
+			dato=p.getString(1);
+		}
 		
 		ResultSet t = dbconnect.getDatoListe(koieID,dato);
 		t.last();
