@@ -62,7 +62,9 @@ public class GUIController {
 	@FXML private Pane brukerToolbar; // knapper for bruker
 
 	//koie liste
-	@FXML private Pane koieListe; // liste over koiene
+	@FXML private Pane koieListePane; // liste over koiene
+	final ObservableList<String> koieListeListe = FXCollections.observableArrayList();
+	@FXML private VBox koieListe;
 
 	//welcome pane
 	@FXML private Pane welcomePane; // velkomst panelet (default når man logger inn)
@@ -290,7 +292,7 @@ public class GUIController {
 				}
 				oppdaterSengeplasser(true, adminKalender.getValue());
 			} else {
-				
+
 				brukerKoieVedstatusText.setText(Vedstatus.lagVedEstimat(TheFormator.formaterKoieNavn(activeKoie), forrigeVeddugnad.getString(1)) + " dager");
 				brukerKoieStatusName.setText(activeKoie);
 				brukerAlleTingField.setText(ferdigAlt);
@@ -384,6 +386,28 @@ public class GUIController {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+	}
+
+	private void openKoieListe() {
+		koieListeListe.clear();
+		for (int i = 0; i < rapportDropDown.getItems().size(); i++) {
+			koieListeListe.add(rapportDropDown.getItems().get(i));
+		}
+		final ListView<String> listView = new ListView<String>();
+		listView.setPrefWidth(100);
+		listView.setEditable(true);
+		listView.setItems(koieListeListe);
+		/*Callback<CheckListObject, ObservableValue<Boolean>> getProperty = new Callback<CheckListObject, ObservableValue<Boolean>>() {
+				@Override
+				public BooleanProperty call(CheckListObject layer) {
+					return layer.selectedProperty();
+				}
+			};*/
+		//Callback<ListView<CheckListObject>, ListCell<CheckListObject>> forListView = CheckBoxListCell.forListView(getProperty);
+		//listView.setCellFactory(forListView);
+		koieListe.getChildren().clear();
+		koieListe.getChildren().addAll(listView);
+		root.setLeft(koieListePane);
 	}
 
 	/**
@@ -664,11 +688,11 @@ public class GUIController {
 					bruker = new Bruker(usernameField.getText(), dbUserInfo.getString(3), dbUserInfo.getString(4), dbUserInfo.getString(5), dbUserInfo.getString(6));
 					welcomeName.setText("Velkommen, " + dbUserInfo.getString(3));
 					if (bruker.isAdmin()) {
-						root.setLeft(koieListe);
+						openKoieListe();
 						root.setTop(adminToolbar);
 						openWelcome(null);
 					} else {
-						root.setLeft(koieListe);
+						openKoieListe();
 						root.setTop(brukerToolbar);
 						openWelcome(null);
 					}
