@@ -33,11 +33,11 @@ public class Vedstatus {
 		if(p.next()){
 			dato=p.getString(1);
 		}
-		
 		ResultSet t = dbconnect.getDatoListe(koieID,dato);
 		t.last();
 	    totalRows = t.getRow();
 	    t.beforeFirst();
+	    System.out.println(totalRows);
 		while(totalRows<=3){
 			int bak1dag = Integer.parseInt((dato.substring(8,10)));
 			bak1dag-=14;
@@ -65,7 +65,7 @@ public class Vedstatus {
 		
 		while(t.next() && t.getRow() < 15){
 			int l = t.getInt(2);
-			if(tallY==null || l<=tallY.get(0)){
+			if(tallY.isEmpty() || l<=tallY.get(0)){
 				datoer.add(0, t.getString(1));
 				tallY.add(0, l);
 			}
@@ -107,6 +107,7 @@ public class Vedstatus {
 		
 		a = ((sumY*sumXX)-(sumX*sumXY))/((tallX.size()*sumXX)-(sumX*sumX));
 		b = ((tallX.size()*sumXY)-(sumX*sumY))/((tallX.size()*sumXX)-(sumX*sumX));
+		System.out.println((int) Math.floor((a*(-1))/b));
 		if(negativMengde){
 			ResultSet q = dbconnect.getDatoListe(koieID, dato);
 			while(q.next()){
@@ -114,7 +115,7 @@ public class Vedstatus {
 			}
 		}
 		estimat = (int) Math.floor((a*(-1))/b);
-		
+		System.out.println((int) Math.floor((a*(-1))/b));
 		return estimat;
 	}
 	/**

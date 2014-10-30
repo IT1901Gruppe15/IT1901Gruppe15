@@ -76,7 +76,9 @@
 
 	<fx:define>
 		<Pane fx:id="koieListePane" prefWidth="120">
-			<VBox fx:id="koieListe" spacing="2" layoutY="5"/>
+			<VBox fx:id="koieListe" spacing="2" layoutY="5"
+				focusTraversable="false"
+				style="-fx-focus-color: -fx-control-inner-background ; -fx-faint-focus-color: -fx-control-inner-background ;" />
 			<Separator orientation="vertical" layoutX="120" prefHeight="9999" />
 		</Pane>
 	</fx:define>
