@@ -3,7 +3,6 @@ package core;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Estimerer antall dager til neste veddugnad basert på tidligere vedstatus
@@ -11,15 +10,12 @@ import java.util.Arrays;
 public class Vedstatus {
 	
 	private static ArrayList<Integer> tallX, tallY;
-	private static ArrayList<Integer> alleEstimat = new ArrayList<Integer>();
-	private static ArrayList<String> datoer, koiene = new ArrayList<String>();
-	private static String[] koie = new String[] {"Flaakoia","Fosenkoia","Heinfjordstua","Hognabu","Holmsaakoia","Holvassgamma","Iglbu","Kamtjonnkoia","Kraaklikaaten","Kvermovollen","Lynhogen","Mortenskaaten","Nicokoia","Rindalsloa","Selbukaaten","Sonvasskoia","Stabburet","Stakkslettbua","Telin","Taagaabu","Vekvessaetra","Ovensenget"};
+	private static ArrayList<String> datoer;
 	private static String dato;
 	private static double sumX=0, sumY=0, sumXY=0, sumXX=0, a, b;
 	private static int ar1, maned1, dag1, ar2, maned2, dag2, estimat, antallDager, totalRows;
 	private static DBConnection dbconnect = new DBConnection();
 	private static boolean skuddar = false, negativMengde = false;
-	
 	
 	/**
 	 * Estimerer antall dager til neste veddugnad basert på tidligere vedstatus
@@ -28,23 +24,25 @@ public class Vedstatus {
 	 * @return Integer som viser antall dager til neste veddugnad
 	 * @throws SQLException
 	 */
-	public static int lagVedEstimat(String koieID, String dato) throws SQLException{
+	public static int lagVedEstimat(String koieID) throws SQLException{
 		tallX = new ArrayList<Integer>();
 		tallY = new ArrayList<Integer>();
 		datoer = new ArrayList<String>();
-		int s = 1;
+		ResultSet p = dbconnect.getForrigeVeddugnad(koieID);
+		p.next();
+		dato=p.getString(1);
 		
-		ResultSet t = dbconnect.getDatoListe(koieID, dato);
+		ResultSet t = dbconnect.getDatoListe(koieID,dato);
 		t.last();
 	    totalRows = t.getRow();
 	    t.beforeFirst();
 		while(totalRows<=3){
 			int bak1dag = Integer.parseInt((dato.substring(8,10)));
-			bak1dag-=1;
+			bak1dag-=14;
 			if(bak1dag<=0){
 				int bak1maned = Integer.parseInt(dato.substring(5,7));
 				bak1maned-=1;
-				bak1dag = finnManed(bak1maned,false);
+				bak1dag = finnManed(bak1maned,false)+bak1dag;
 				if(bak1maned<10){
 					dato = dato.substring(0,5)+"0"+bak1maned+dato.substring(7);
 				} else {
@@ -60,24 +58,16 @@ public class Vedstatus {
 			t.last();
 		    totalRows = t.getRow();
 		    t.beforeFirst();
+		    negativMengde = true;
 		}
 		
-		while(t.next() && s < 15){
+		while(t.next() && t.getRow() < 15){
 			int l = t.getInt(2);
-			if(tallY.isEmpty() || l<=tallY.get(0) ){
+			if(tallY==null || l<=tallY.get(0)){
 				datoer.add(0, t.getString(1));
 				tallY.add(0, l);
 			}
-			s+=1;
 		}
-//		if(s<=2){
-//			int bak1dag = Integer.parseInt((dato.substring(8,10)));
-//			bak1dag-=1;
-//			dato+=""+bak1dag;
-//			negativMengde = true;
-//			ikkeTilstrekkelig(koieID, dato);
-//			return -1;
-//		}
 		tallX.add(0);
 		for(int k = 1; k < tallY.size(); k++){
 			dag1 = Integer.parseInt((datoer.get(k-1)).substring(8,10));
@@ -125,14 +115,6 @@ public class Vedstatus {
 		
 		return estimat;
 	}
-
-//	private static void ikkeTilstrekkelig(String koieID, String dato) throws SQLException {
-//		int bak1dag = Integer.parseInt((dato.substring(8,10)));
-//		bak1dag-=1;
-//		dato+=""+bak1dag;
-//		System.out.println(lagVedEstimat(koieID,dato));
-//	}
-
 	/**
 	 * Finner hvor mange dager det er i hver måned
 	 * 
@@ -152,31 +134,4 @@ public class Vedstatus {
 			return 30;
 		}
 	}
-	
-//	public static ArrayList<Double> endreVeddugnad(String koieID) throws SQLException{
-//		lagVedEstimat(koieID);
-//		formel.add(a);
-//		formel.add(b);
-//		return formel;
-//	}
-	
-	public static ArrayList<Integer> getEstimates() throws SQLException{
-		koiene.addAll(Arrays.asList(koie));
-		for(int t = 0; t < koiene.size(); t++){
-			ResultSet p = dbconnect.getForrigeVeddugnad(koiene.get(t));
-			p.next();
-			dato = p.getString(1);
-			System.out.println(koiene.size() + " " + t);
-			System.out.println(koiene.get(t));
-			System.out.println(dato);
-			System.out.println(alleEstimat);
-			alleEstimat.add(lagVedEstimat(koiene.get(t),dato));
-		}
-		return alleEstimat;
-	}
-
-//	public static void main(String[] args) throws SQLException {
-//		Vedstatus test = new Vedstatus();
-//		test.lagVedEstimat("Flaakoia");
-//	}
 }
