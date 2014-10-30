@@ -27,18 +27,45 @@ public class Vedstatus {
 		tallX = new ArrayList<Integer>();
 		tallY = new ArrayList<Integer>();
 		datoer = new ArrayList<String>();
-		ResultSet t = dbconnect.getDatoListe(koieID, dato);
 		int s = 1;
+		
+		ResultSet t = dbconnect.getDatoListe(koieID, dato);
+		while(t.getRow()<=3){
+			int bak1dag = Integer.parseInt((dato.substring(8,10)));
+			bak1dag-=1;
+			if(bak1dag<=0){
+				int bak1maned = Integer.parseInt(dato.substring(5,7));
+				bak1maned-=1;
+				bak1dag = finnManed(bak1maned,false);
+				if(bak1maned<10){
+					dato = dato.substring(0,5)+"0"+bak1maned+dato.substring(7);
+				} else {
+					dato = dato.substring(0,5)+bak1maned+dato.substring(7);
+				}
+			}
+			if(bak1dag<10){
+				dato = dato.substring(0,8)+"0"+bak1dag;
+			} else {
+				dato = dato.substring(0,8)+""+bak1dag;
+			}
+			t = dbconnect.getDatoListe(koieID, dato);
+		}
 		while(t.next() && s < 15){
-			datoer.add(0, t.getString(1));
-			tallY.add(0, t.getInt(2));
+			int l = t.getInt(2);
+			if(l<=tallY.get(0)){
+				datoer.add(0, t.getString(1));
+				tallY.add(0, t.getInt(2));
+			}
 			s+=1;
 		}
-		if(s<=2){
-			negativMengde = true;
-			ikkeTilstrekkelig(koieID, dato);
+//		if(s<=2){
+//			int bak1dag = Integer.parseInt((dato.substring(8,10)));
+//			bak1dag-=1;
+//			dato+=""+bak1dag;
+//			negativMengde = true;
+//			ikkeTilstrekkelig(koieID, dato);
 //			return -1;
-		}
+//		}
 		tallX.add(0);
 		for(int k = 1; k < tallY.size(); k++){
 			dag1 = Integer.parseInt((datoer.get(k-1)).substring(8,10));
@@ -87,12 +114,12 @@ public class Vedstatus {
 		return estimat;
 	}
 
-	private static void ikkeTilstrekkelig(String koieID, String dato) throws SQLException {
-		int bak1dag = Integer.parseInt((dato.substring(8,10)));
-		bak1dag-=1;
-		dato+=""+bak1dag;
-		System.out.println(lagVedEstimat(koieID,dato));
-	}
+//	private static void ikkeTilstrekkelig(String koieID, String dato) throws SQLException {
+//		int bak1dag = Integer.parseInt((dato.substring(8,10)));
+//		bak1dag-=1;
+//		dato+=""+bak1dag;
+//		System.out.println(lagVedEstimat(koieID,dato));
+//	}
 
 	/**
 	 * Finner hvor mange dager det er i hver måned
