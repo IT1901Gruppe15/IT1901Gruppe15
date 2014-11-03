@@ -62,8 +62,6 @@ public class GUIController {
 
 	//koie liste
 	@FXML private Pane koieListePane; // liste over koiene
-	final ObservableList<String> koieListeListe = FXCollections.observableArrayList();
-	@FXML private VBox koieListe;
 
 	//welcome pane
 	@FXML private Pane welcomePane; // velkomst panelet (default når man logger inn)
@@ -385,31 +383,7 @@ public class GUIController {
 		}*/
 	}
 
-	private void openKoieListe() {
-		koieListeListe.clear();
-		for (int i = 0; i < rapportDropDown.getItems().size(); i++) {
-			koieListeListe.add(rapportDropDown.getItems().get(i));
-		}
-		final ListView<String> listView = new ListView<String>();
-		listView.setPrefSize(120, 9000);
-		listView.setItems(koieListeListe);
-		System.out.println("test " + listView.getSelectionModel().getSelectedIndices());
-		listView.getSelectionModel().select(1);
-		listView.getSelectionModel().selectAll();
-		System.out.println("test " + listView.getSelectionModel().getSelectedIndices());
-		//listView.getSelectionModel().clearSelection(1);
-		System.out.println("test " + listView.getSelectionModel().getSelectedIndices());
-		listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(final MouseEvent mouseEvent) {
-				openKoie(listView.getSelectionModel().getSelectedItem());
-				listView.getSelectionModel().clearSelection(listView.getSelectionModel().getSelectedIndex());
-			}
-		});
-		koieListe.getChildren().clear();
-		koieListe.getChildren().add(listView);
-		root.setLeft(koieListe);
-	}
+
 
 	/**
 	 * Åpner kartet
@@ -690,11 +664,11 @@ public class GUIController {
 					bruker = new Bruker(usernameField.getText(), dbUserInfo.getString(3), dbUserInfo.getString(4), dbUserInfo.getString(5), dbUserInfo.getString(6));
 					welcomeName.setText("Velkommen, " + dbUserInfo.getString(3));
 					if (bruker.isAdmin()) {
-						openKoieListe();
+						root.setLeft(koieListePane);
 						root.setTop(adminToolbar);
 						openWelcome(null);
 					} else {
-						openKoieListe();
+						root.setLeft(koieListePane);
 						root.setTop(brukerToolbar);
 						openWelcome(null);
 					}
