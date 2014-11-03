@@ -1,0 +1,29 @@
+root { 
+    display: block;
+}
+
+.text-field {
+    -fx-focus-color: -fx-control-inner-background ;
+    -fx-faint-focus-color: -fx-control-inner-background ;
+} 
+
+/*.root {
+	-fx-focus-color: #000000;
+}*/
+
+/*#welcome-text {
+   -fx-font-size: 32px;
+   -fx-font-family: "Arial Black";
+   -fx-fill: #818181;
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+} */
+
+/*#actiontarget {
+  -fx-fill: FIREBRICK;
+  -fx-font-weight: bold;
+  -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );  
+} */
+
+/*.text-area .scroll-bar:horizontal:disabled {
+    -fx-opacity: 0;
+} */

@@ -4,9 +4,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
+<?import java.net.*?>
 
 <BorderPane fx:id="root" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="gui.GUIController">
+
+	<stylesheets>
+		<URL value="@gui.css" />
+	</stylesheets>
 
 	<fx:define>
 		<Pane fx:id="loginScreen">
@@ -228,15 +233,15 @@
 	<fx:define>
 		<Pane fx:id="welcomePane">
 			<Label text="NTNUI koiesystem" layoutX="15" style="-fx-font-size: 30px" />
-			<Text fx:id="welcomeName" layoutX="15" layoutY="100"
+			<Text fx:id="welcomeName" layoutX="15" layoutY="75"
 				style="-fx-font-size: 20px" />
-			<VBox fx:id="koieVedstatusListe" layoutX="15" layoutY="150"
+			<VBox fx:id="koieVedstatusListe" layoutX="15" layoutY="100"
 				spacing="3">
 				<fx:define>
 					<HBox fx:id="koieVedstatusListeOverskrift">
 						<Label text="Koie" style="-fx-font-size: 14px" prefWidth="100" />
 						<Label text="Dager til veddugnad" style="-fx-font-size: 14px"
-							prefWidth="100" />
+							prefWidth="150" />
 					</HBox>
 				</fx:define>
 			</VBox>
@@ -350,13 +355,16 @@
 				layoutY="250" focusTraversable="false" />
 			<Button text="Legg til nytt utstyr" onAction="#leggTilUtstyr"
 				layoutX="200" layoutY="250" focusTraversable="false" />
+			<Text id="welcome-text"
+				text="Epost om frakting av utstyr vil &#10;bli sendt til neste person som &#10;har reservert sengeplass på koia"
+				layoutX="200" layoutY="300" />
+			<Text fx:id="adminKoieNyttUtstyrMelding" layoutX="15" layoutY="300" />
 			<Button text="Ting funnet" onAction="#finnUtstyr" layoutX="350"
 				layoutY="125" focusTraversable="false" />
 			<Button text="Fiks utstyr" onAction="#fiksUtstyr" layoutX="215"
 				layoutY="125" focusTraversable="false" />
-			<Hyperlink text="Åpne nettside" onAction="#openURL"
-				layoutX="15" layoutY="300" focusTraversable="false"
-				style="-fx-text-fill: black; -fx-font-size: 14px;" />
+			<Button text="Åpne nettside" onAction="#openURL" layoutX="15"
+				layoutY="325" focusTraversable="false" style="-fx-font-size: 14px;" />
 		</Pane>
 	</fx:define>
 
@@ -385,9 +393,8 @@
 				layoutX="535" layoutY="120" />
 			<Text fx:id="brukerLedigeSengeplasserText" text="Ledige sengeplasser: xx"
 				layoutX="535" layoutY="140" />
-			<Hyperlink text="Åpne nettside" onAction="#openURL"
-				layoutX="15" layoutY="300" focusTraversable="false"
-				style="-fx-text-fill: black; -fx-font-size: 14px;" />
+			<Button text="Åpne nettside" onAction="#openURL" layoutX="15"
+				layoutY="250" focusTraversable="false" style="-fx-font-size: 14px;" />
 		</Pane>
 	</fx:define>
 

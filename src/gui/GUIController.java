@@ -69,7 +69,6 @@ public class GUIController {
 	@FXML private VBox koieVedstatusListe;
 	@FXML private HBox koieVedstatusListeOverskrift;
 
-
 	//map pane
 	@FXML private Pane mapPane; // kart over koiene
 	private Button mapBtn; //knappen som dukker opp når man trykker på en koie på kartet
@@ -109,6 +108,7 @@ public class GUIController {
 	@FXML private TextField adminKoieLeggTilUtstyrField; // tekstfelt for å legge til nytt utstyr i koie-panelet for admin
 	@FXML private ComboBox<String> adminKoieOdelagteTingDropDown; // drop-down meny med ødelagte ting i koie-panelet for admin
 	@FXML private ComboBox<String> adminKoieGjenglemteTingDropDown; // drop-down meny med gjenglemte ting i koie-panelet for admin
+	@FXML private Text adminKoieNyttUtstyrMelding; 
 
 	//bruker koie info pane
 	@FXML private Pane brukerKoiePane; // koie status panel for bruker
@@ -267,7 +267,6 @@ public class GUIController {
 				}
 			}
 			int vedEstimat = Vedstatus.lagVedEstimat(TheFormator.formaterKoieNavn(activeKoie));
-			//int vedEstimat = 50;
 			if (bruker.isAdmin()) {
 				if (adminKoieOdelagteTingDropDown.getItems().size() > 0) {					
 					adminKoieOdelagteTingDropDown.setValue(adminKoieOdelagteTingDropDown.getItems().get(0));
@@ -287,6 +286,7 @@ public class GUIController {
 					adminKoieVedstatusText.setText(vedEstimat + " dager");
 				}
 				oppdaterSengeplasser(true, adminKalender.getValue());
+				adminKoieLeggTilUtstyrField.setText("");
 			} else {
 
 				brukerKoieStatusName.setText(activeKoie);
@@ -360,11 +360,11 @@ public class GUIController {
 	private void openWelcome(ActionEvent event) { // når man trykker på hjem-knappen
 		koieVedstatusListe.getChildren().clear(); // fjerner listen hvis den har blitt fylt før
 		koieVedstatusListe.getChildren().add(koieVedstatusListeOverskrift); // setter inn overskriftene
-		
+
 		root.setCenter(welcomePane);
-		/*try {
+		try {
 			for (int i = 0; i < rapportDropDown.getItems().size(); i++) {
-				int vedEstimat = Vedstatus.lagVedEstimat(rapportDropDown.getItems().get(i));
+				int vedEstimat = Vedstatus.lagVedEstimat(TheFormator.formaterKoieNavn(rapportDropDown.getItems().get(i)));
 				HBox hbox = new HBox();
 				Label koieNavn = new Label(rapportDropDown.getItems().get(i));
 				koieNavn.setPrefWidth(100);
@@ -380,7 +380,7 @@ public class GUIController {
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-		}*/
+		}
 	}
 
 
@@ -423,7 +423,6 @@ public class GUIController {
 		Callback<CheckListObject, ObservableValue<Boolean>> getProperty = new Callback<CheckListObject, ObservableValue<Boolean>>() {
 			@Override
 			public BooleanProperty call(CheckListObject layer) {
-				System.out.println(layer);
 				return layer.selectedProperty();
 			}
 		};
@@ -572,11 +571,15 @@ public class GUIController {
 
 	@FXML
 	private void leggTilUtstyr(ActionEvent event) {
+		if (adminKoieLeggTilUtstyrField.getText().equals("")) {
+			adminKoieNyttUtstyrMelding.setText("Tomt input-felt");
+			return;
+		}
 		try {
 			ResultSet rs = connection.getUtstyrID(adminKoieLeggTilUtstyrField.getText(), TheFormator.formaterKoieNavn(activeKoie));
 			if (rs.next()) { // hvis utstyr allerede finnes
-				System.out.println("utstyr finnes allerede");
-				adminKoieLeggTilUtstyrField.setText("");
+				this.adminKoieLeggTilUtstyrField.setText("");
+				adminKoieNyttUtstyrMelding.setText("Utstyr finnes alllerede på koie");
 				return;
 			}
 			connection.registrerUtstyr(adminKoieLeggTilUtstyrField.getText(), LocalDate.now().toString(), 1, bruker.getBrukernavn(), TheFormator.formaterKoieNavn(activeKoie));
@@ -590,11 +593,12 @@ public class GUIController {
 				epost.setSub("Frakting av utstyr til " + activeKoie);
 				epost.setMes("Hei, du/dere må ta med " + adminKoieLeggTilUtstyrField.getText() + " til " + activeKoie);
 				epost.sendMessage(epostAdresse);
+				openKoie(activeKoie);
+				adminKoieNyttUtstyrMelding.setText("Epost sendt til " + epostAdresse);
 			} else {
-				System.out.println("ingen å sende epost til");
+				openKoie(activeKoie);
+				adminKoieNyttUtstyrMelding.setText("Ingen å sende epost til");
 			}
-			adminKoieLeggTilUtstyrField.setText("");
-			openKoie(activeKoie);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

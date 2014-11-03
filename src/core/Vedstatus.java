@@ -37,7 +37,6 @@ public class Vedstatus {
 		t.last();
 	    totalRows = t.getRow();
 	    t.beforeFirst();
-	    System.out.println(totalRows);
 		while(totalRows<=3){
 			int bak1dag = Integer.parseInt((dato.substring(8,10)));
 			bak1dag-=14;
@@ -107,7 +106,6 @@ public class Vedstatus {
 		
 		a = ((sumY*sumXX)-(sumX*sumXY))/((tallX.size()*sumXX)-(sumX*sumX));
 		b = ((tallX.size()*sumXY)-(sumX*sumY))/((tallX.size()*sumXX)-(sumX*sumX));
-		System.out.println((int) Math.floor((a*(-1))/b));
 		if(negativMengde){
 			ResultSet q = dbconnect.getDatoListe(koieID, dato);
 			while(q.next()){
@@ -115,7 +113,6 @@ public class Vedstatus {
 			}
 		}
 		estimat = (int) Math.floor((a*(-1))/b);
-		System.out.println((int) Math.floor((a*(-1))/b));
 		return estimat;
 	}
 	/**
