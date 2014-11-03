@@ -393,15 +393,19 @@ public class GUIController {
 		final ListView<String> listView = new ListView<String>();
 		listView.setPrefSize(120, 9000);
 		listView.setItems(koieListeListe);
-		//listView.getSelectionModel().select(25);;
-		System.out.println("sel " + listView.getSelectionModel().getSelectedIndices());
-		/*listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		System.out.println("test " + listView.getSelectionModel().getSelectedIndices());
+		listView.getSelectionModel().select(1);
+		listView.getSelectionModel().selectAll();
+		System.out.println("test " + listView.getSelectionModel().getSelectedIndices());
+		//listView.getSelectionModel().clearSelection(1);
+		System.out.println("test " + listView.getSelectionModel().getSelectedIndices());
+		listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(final MouseEvent mouseEvent) {
 				openKoie(listView.getSelectionModel().getSelectedItem());
 				listView.getSelectionModel().clearSelection(listView.getSelectionModel().getSelectedIndex());
 			}
-		});*/
+		});
 		koieListe.getChildren().clear();
 		koieListe.getChildren().add(listView);
 		root.setLeft(koieListe);
