@@ -134,100 +134,124 @@
 	</fx:define>
 
 	<fx:define>
-		<Pane fx:id="adminToolbar" prefHeight="70">
-			<HBox spacing="10" layoutX="5" layoutY="5">
-				<Button text="Hjem" prefHeight="60" prefWidth="60" onAction="#openWelcome"
-					contentDisplay="top" cancelButton="true" focusTraversable="false">
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="hjemIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
-				<Button text="Kart" prefHeight="60" prefWidth="60" onAction="#openMap"
-					contentDisplay="top" focusTraversable="false">
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="kartIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
-				<Button text="Medlemmer" prefHeight="60" prefWidth="60"
-					onAction="#openMedlemListe" contentDisplay="top" focusTraversable="false">
-					<font>
-						<Font size="8" />
-					</font>
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="medlemIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
-				<Button text="Logg ut" prefHeight="60" prefWidth="60"
-					onAction="#logOut" contentDisplay="top" focusTraversable="false">
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="logoutIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
-			</HBox>
-			<ImageView layoutX="1100" layoutY="5">
-				<Image url="ntnuiLogo.png" />
-			</ImageView>
-			<Separator orientation="horizontal" layoutY="70" prefWidth="9999" />
-		</Pane>
+		<BorderPane fx:id="adminToolbar" prefHeight="70">
+			<left>
+				<Pane>
+					<HBox spacing="10" layoutX="5" layoutY="5">
+						<Button text="Hjem" prefHeight="60" prefWidth="60"
+							onAction="#openWelcome" contentDisplay="top" cancelButton="true"
+							focusTraversable="false">
+							<graphic>
+								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+									preserveRatio="true">
+									<Image url="hjemIkon.png" />
+								</ImageView>
+							</graphic>
+						</Button>
+						<Button text="Kart" prefHeight="60" prefWidth="60"
+							onAction="#openMap" contentDisplay="top" focusTraversable="false">
+							<graphic>
+								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+									preserveRatio="true">
+									<Image url="kartIkon.png" />
+								</ImageView>
+							</graphic>
+						</Button>
+						<Button text="Medlemmer" prefHeight="60" prefWidth="60"
+							onAction="#openMedlemListe" contentDisplay="top"
+							focusTraversable="false">
+							<font>
+								<Font size="8" />
+							</font>
+							<graphic>
+								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+									preserveRatio="true">
+									<Image url="medlemIkon.png" />
+								</ImageView>
+							</graphic>
+						</Button>
+						<Button text="Logg ut" prefHeight="60" prefWidth="60"
+							onAction="#logOut" contentDisplay="top" focusTraversable="false">
+							<graphic>
+								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+									preserveRatio="true">
+									<Image url="logoutIkon.png" />
+								</ImageView>
+							</graphic>
+						</Button>
+					</HBox>
+				</Pane>
+			</left>
+			<right>
+				<Pane>
+					<ImageView layoutX="-5" layoutY="5">
+						<Image url="ntnuiLogo.png" />
+					</ImageView>
+				</Pane>
+			</right>
+			<bottom>
+				<Pane>
+					<Separator orientation="horizontal" layoutY="70"
+						prefWidth="9999" />
+				</Pane>
+			</bottom>
+		</BorderPane>
 	</fx:define>
 
 	<fx:define>
-		<Pane fx:id="brukerToolbar" prefHeight="70">
-			<HBox spacing="10" layoutX="5" layoutY="5">
-				<Button text="Hjem" prefHeight="60" prefWidth="60" onAction="#openWelcome"
-					contentDisplay="top" cancelButton="true" focusTraversable="false">
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="hjemIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
-				<Button text="Kart" prefHeight="60" prefWidth="60" onAction="#openMap"
-					contentDisplay="top" focusTraversable="false">
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="kartIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
-				<Button text="Rapport" prefHeight="60" prefWidth="60"
-					onAction="#openReport" contentDisplay="top" focusTraversable="false">
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="rapportIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
-				<Button text="Logg ut" prefHeight="60" prefWidth="60"
-					onAction="#logOut" contentDisplay="top" focusTraversable="false">
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="logoutIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
-			</HBox>
-			<ImageView layoutX="1100" layoutY="5">
-				<Image url="ntnuiLogo.png" />
-			</ImageView>
-			<Separator orientation="horizontal" layoutY="70" prefWidth="9999" />
-		</Pane>
+		<BorderPane fx:id="brukerToolbar" prefHeight="70">
+			<left>
+				<Pane>
+					<HBox spacing="10" layoutX="5" layoutY="5">
+						<Button text="Hjem" prefHeight="60" prefWidth="60"
+							onAction="#openWelcome" contentDisplay="top" cancelButton="true"
+							focusTraversable="false">
+							<graphic>
+								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+									preserveRatio="true">
+									<Image url="hjemIkon.png" />
+								</ImageView>
+							</graphic>
+						</Button>
+						<Button text="Kart" prefHeight="60" prefWidth="60"
+							onAction="#openMap" contentDisplay="top" focusTraversable="false">
+							<graphic>
+								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+									preserveRatio="true">
+									<Image url="kartIkon.png" />
+								</ImageView>
+							</graphic>
+						</Button>
+						<Button text="Rapport" prefHeight="60" prefWidth="60"
+							onAction="#openReport" contentDisplay="top" focusTraversable="false">
+							<graphic>
+								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+									preserveRatio="true">
+									<Image url="rapportIkon.png" />
+								</ImageView>
+							</graphic>
+						</Button>
+						<Button text="Logg ut" prefHeight="60" prefWidth="60"
+							onAction="#logOut" contentDisplay="top" focusTraversable="false">
+							<graphic>
+								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+									preserveRatio="true">
+									<Image url="logoutIkon.png" />
+								</ImageView>
+							</graphic>
+						</Button>
+					</HBox>
+				</Pane>
+			</left>
+			<right>
+				<ImageView>
+					<Image url="ntnuiLogo.png" />
+				</ImageView>
+			</right>
+			<bottom>
+				<Separator orientation="horizontal" prefWidth="9999" />
+			</bottom>
+		</BorderPane>
 	</fx:define>
 
 	<fx:define>

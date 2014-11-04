@@ -56,7 +56,7 @@ public class GUIController {
 	@FXML private BorderPane root; // øverste element i gui-hierarkiet
 
 	//admin toolbar
-	@FXML private Pane adminToolbar; // knapper for admin
+	@FXML private BorderPane adminToolbar; // knapper for admin
 
 	//bruker toolbar
 	@FXML private Pane brukerToolbar; // knapper for bruker
@@ -139,7 +139,6 @@ public class GUIController {
 		res.lesReservasjon();
 		rapportDropDown.getItems().addAll("Flåkoia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsåkoia", "Holvassgamma", "Iglbu", "Kamtjønnkoia", "Kråklikåten", "Kvernmovollen", "Kåsen", "Lynhøgen", "Mortenskåten", "Nicokoia", "Rindalsløa", "Selbukåten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessætra", "Øvensenget");
 		rapportDropDown.valueProperty().addListener(new ChangeListener<String>() {
-			@Override
 			public void changed(ObservableValue<? extends String> observable,
 					String oldValue, String newValue) {
 				activeKoie = rapportDropDown.getValue();
@@ -424,7 +423,6 @@ public class GUIController {
 		listView.setEditable(true);
 		listView.setItems(checkListObjectList);
 		Callback<CheckListObject, ObservableValue<Boolean>> getProperty = new Callback<CheckListObject, ObservableValue<Boolean>>() {
-			@Override
 			public BooleanProperty call(CheckListObject layer) {
 				return layer.selectedProperty();
 			}
@@ -564,7 +562,7 @@ public class GUIController {
 	private void veddugnadUtfort(ActionEvent event) {
 		try {
 			connection.datoVeddugnad(TheFormator.formaterKoieNavn(activeKoie), LocalDate.now().toString());
-			connection.settinnRapport("", "", 80, activeKoie, LocalDate.now().toString());
+			connection.settinnRapport("", "", 80, TheFormator.formaterKoieNavn(activeKoie), LocalDate.now().toString());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
