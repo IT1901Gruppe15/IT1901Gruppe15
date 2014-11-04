@@ -63,12 +63,10 @@ public class Vedstatus {
 		}
 		t.next();
 		int s=1;
-		while(t.next() && s<totalRows){
+		while(t.next() && s<=totalRows){
 			int l = t.getInt(2);
-			if(tallY.isEmpty() || l>=tallY.get(0)){
-				datoer.add(0, t.getString(1));
-				tallY.add(0, l);
-			}
+			datoer.add(0, t.getString(1));
+			tallY.add(0, l);
 			s+=1;
 		}
 		tallX.add(0);
@@ -108,16 +106,6 @@ public class Vedstatus {
 		
 		a = ((sumY*sumXX)-(sumX*sumXY))/((tallX.size()*sumXX)-(sumX*sumX));
 		b = ((tallX.size()*sumXY)-(sumX*sumY))/((tallX.size()*sumXX)-(sumX*sumX));
-		System.out.println("tallX: "+tallX);
-		System.out.println("tallY: "+tallY);
-		System.out.println("datoer: "+datoer);
-		System.out.println("dato: "+dato);
-		System.out.println("sumX: "+sumX);
-		System.out.println("sumY: "+sumY);
-		System.out.println("sumXX: "+sumXX);
-		System.out.println("sumXY: "+sumXY);
-		System.out.println("a: "+a);
-		System.out.println("b: "+b);
 		if(negativMengde){
 			ResultSet q = dbconnect.getDatoListe(koieID, dato);
 			while(q.next()){
@@ -127,9 +115,6 @@ public class Vedstatus {
 			}
 		}
 		estimat = (int) Math.floor((a*(-1))/b);
-		System.out.println("a: "+a);
-		System.out.println("b: "+b);
-		System.out.println("estimat: "+estimat);
 		return estimat;
 	}
 	/**
