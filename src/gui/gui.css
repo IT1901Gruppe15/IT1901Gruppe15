@@ -2,10 +2,10 @@ root {
     display: block;
 }
 
-.text-field {
+/*.text-field {
     -fx-focus-color: -fx-control-inner-background ;
     -fx-faint-focus-color: -fx-control-inner-background ;
-} 
+} */
 
 /*.root {
 	-fx-focus-color: #000000;
