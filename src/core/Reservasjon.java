@@ -1,9 +1,11 @@
 package core;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -111,26 +113,27 @@ public class Reservasjon {
 		try {
 			
 			
-
 			reader = new BufferedReader(new FileReader("textfiles/inputtext.txt"));
 			String line = null;
-			line = reader.readLine();
-			String[] list = line.split(";");
-			for (int i = 0; i < list.length; i++) {
-				switch (i) {
-				case 0:
-					koieID = list[0].trim();// sjekke om koieid er gyldig?
-					break;
-				case 1:
-					validate(list[1].trim());
-					epost = list[1].trim();
-
-					break;
-				case 2:
-					isThisDateValid(list[2], "yyyy-MM-dd");
-					start_dato = list[2].trim();
-
-					//break;
+			while(( line=reader.readLine() )!=null){
+				
+				
+				String[] list = line.split(";");
+				for (int i = 0; i < list.length; i++) {
+					switch (i) {
+					case 0:
+						koieID = list[0].trim();// sjekke om koieid er gyldig?
+						break;
+					case 1:
+						validate(list[1].trim());
+						epost = list[1].trim();
+						
+						break;
+					case 2:
+						isThisDateValid(list[2], "yyyy-MM-dd");
+						start_dato = list[2].trim();
+						
+						//break;
 //				case 3:
 //					isThisDateValid(list[3], "yyyy-MM-dd");
 //					slutt_dato = list[3];
@@ -140,21 +143,29 @@ public class Reservasjon {
 //								"Start dato kan ikke være etter slutt dato!");
 //
 //					}
-
+						
+					}
 				}
+				updateDB();
 			}
-			updateDB();
+			wipeFile();
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 
 		}
+	
 
 	}
 	/**
 	 * @author morten
 	 *	Metode for å oppdatere database med feltene epost
 	 */
+	private void wipeFile() throws FileNotFoundException{
+		PrintWriter writer = new PrintWriter("textfiles/inputtext.txt");
+		writer.print("");
+		writer.close();
+	}
 	
 	public void updateDB() {
 		try {
@@ -183,7 +194,6 @@ public class Reservasjon {
 
 		System.out.println(res.koieID + res.epost + res.start_dato
 				);
-		System.out.println(res.getEpost());
 		// TODO Auto-generated method stub
 
 	}
