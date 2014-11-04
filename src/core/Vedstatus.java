@@ -65,11 +65,7 @@ public class Vedstatus {
 		
 		while(t.next() && t.getRow() < 15){
 			int l = t.getInt(2);
-<<<<<<< HEAD
 			if(tallY.isEmpty() || l>=tallY.get(0)){
-=======
-			if(tallY.isEmpty() || l<=tallY.get(0)){
->>>>>>> origin/master
 				datoer.add(0, t.getString(1));
 				tallY.add(0, l);
 			}
@@ -111,11 +107,6 @@ public class Vedstatus {
 		
 		a = ((sumY*sumXX)-(sumX*sumXY))/((tallX.size()*sumXX)-(sumX*sumX));
 		b = ((tallX.size()*sumXY)-(sumX*sumY))/((tallX.size()*sumXX)-(sumX*sumX));
-<<<<<<< HEAD
-
-=======
-		System.out.println((int) Math.floor((a*(-1))/b));
->>>>>>> origin/master
 		if(negativMengde){
 			ResultSet q = dbconnect.getDatoListe(koieID, dato);
 			while(q.next()){
