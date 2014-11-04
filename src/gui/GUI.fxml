@@ -416,6 +416,9 @@
 				prefHeight="150" />
 			<Button onAction="#sendRapport" text="Send rapport" layoutX="15"
 				layoutY="300" focusTraversable="false" />
+			<Label
+				text="Vedstatus er et ansalg på antall &#10;vedkubber som er igjen på koia"
+				layoutX="375" layoutY="50" />
 		</Pane>
 	</fx:define>
 

@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import core.Bruker;
 import core.DBConnection;
 import core.Epost;
+import core.Reservasjon;
 import core.TheFormator;
 import core.RapportHandler;
 import core.Vedstatus;
@@ -134,6 +135,8 @@ public class GUIController {
 	 * Initialiserer GUI
 	 */
 	public void initialize() { //basically konstruktør
+		Reservasjon res = new Reservasjon();
+		res.lesReservasjon();
 		rapportDropDown.getItems().addAll("Flåkoia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsåkoia", "Holvassgamma", "Iglbu", "Kamtjønnkoia", "Kråklikåten", "Kvernmovollen", "Kåsen", "Lynhøgen", "Mortenskåten", "Nicokoia", "Rindalsløa", "Selbukåten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessætra", "Øvensenget");
 		rapportDropDown.valueProperty().addListener(new ChangeListener<String>() {
 			@Override
@@ -561,6 +564,7 @@ public class GUIController {
 	private void veddugnadUtfort(ActionEvent event) {
 		try {
 			connection.datoVeddugnad(TheFormator.formaterKoieNavn(activeKoie), LocalDate.now().toString());
+			connection.settinnRapport("", "", 80, activeKoie, LocalDate.now().toString());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
