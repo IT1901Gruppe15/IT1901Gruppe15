@@ -9,14 +9,6 @@ import java.util.ArrayList;
  */
 public class Vedstatus {
 	
-	private static ArrayList<Integer> tallX, tallY;
-	private static ArrayList<String> datoer;
-	private static String dato;
-	private static double sumX=0, sumY=0, sumXY=0, sumXX=0, a, b;
-	private static int ar1, maned1, dag1, ar2, maned2, dag2, estimat, antallDager, totalRows;
-	private static DBConnection dbconnect = new DBConnection();
-	private static boolean skuddar = false, negativMengde = false;
-	
 	/**
 	 * Estimerer antall dager til neste veddugnad basert på tidligere vedstatus
 	 * 
@@ -25,6 +17,14 @@ public class Vedstatus {
 	 * @throws SQLException
 	 */
 	public static int lagVedEstimat(String koieID) throws SQLException{
+		System.out.println(koieID);
+		ArrayList<Integer> tallX, tallY;
+		ArrayList<String> datoer;
+		String dato=null;
+		double sumX=0, sumY=0, sumXY=0, sumXX=0, a, b;
+		int estimat, antallDager, totalRows;
+		DBConnection dbconnect = new DBConnection();
+		boolean skuddar = false, negativMengde = false;
 		tallX = new ArrayList<Integer>();
 		tallY = new ArrayList<Integer>();
 		datoer = new ArrayList<String>();
@@ -71,12 +71,12 @@ public class Vedstatus {
 		}
 		tallX.add(0);
 		for(int k = 1; k < tallY.size(); k++){
-			dag1 = Integer.parseInt((datoer.get(k-1)).substring(8,10));
-			maned1 = Integer.parseInt((datoer.get(k-1)).substring(5,7));
-			ar1 = Integer.parseInt((datoer.get(k-1)).substring(0,4));
-			dag2 = Integer.parseInt((datoer.get(k)).substring(8,10));
-			maned2 = Integer.parseInt((datoer.get(k)).substring(5,7));
-			ar2 = Integer.parseInt((datoer.get(k)).substring(0,4));
+			int dag1 = Integer.parseInt((datoer.get(k-1)).substring(8,10));
+			int maned1 = Integer.parseInt((datoer.get(k-1)).substring(5,7));
+			int ar1 = Integer.parseInt((datoer.get(k-1)).substring(0,4));
+			int dag2 = Integer.parseInt((datoer.get(k)).substring(8,10));
+			int maned2 = Integer.parseInt((datoer.get(k)).substring(5,7));
+			int ar2 = Integer.parseInt((datoer.get(k)).substring(0,4));
 			if((ar1&4) == 0 || (ar2&4) == 0){
 				skuddar = true;
 				antallDager = ((ar2-ar1)*366);
@@ -106,6 +106,16 @@ public class Vedstatus {
 		
 		a = ((sumY*sumXX)-(sumX*sumXY))/((tallX.size()*sumXX)-(sumX*sumX));
 		b = ((tallX.size()*sumXY)-(sumX*sumY))/((tallX.size()*sumXX)-(sumX*sumX));
+		System.out.println("tallX: "+tallX);
+		System.out.println("tallY: "+tallY);
+		System.out.println("datoer: "+datoer);
+		System.out.println("dato: "+dato);
+		System.out.println("sumX: "+sumX);
+		System.out.println("sumY: "+sumY);
+		System.out.println("sumXX: "+sumXX);
+		System.out.println("sumXY: "+sumXY);
+		System.out.println("a: "+a);
+		System.out.println("b: "+b);
 		if(negativMengde){
 			ResultSet q = dbconnect.getDatoListe(koieID, dato);
 			while(q.next()){
@@ -113,6 +123,9 @@ public class Vedstatus {
 			}
 		}
 		estimat = (int) Math.floor((a*(-1))/b);
+		System.out.println("a: "+a);
+		System.out.println("b: "+b);
+		System.out.println("estimat: "+estimat);
 		return estimat;
 	}
 	/**
@@ -133,5 +146,9 @@ public class Vedstatus {
 		}else{
 			return 30;
 		}
+	}
+	
+	public static void main(String[] args) throws SQLException {
+		System.out.println("løsning: " + Vedstatus.lagVedEstimat("Flaakoia"));
 	}
 }
