@@ -37,7 +37,6 @@ public class Vedstatus {
 		t.last();
 	    totalRows = t.getRow();
 	    t.beforeFirst();
-	    System.out.println(totalRows);
 		while(totalRows<=3){
 			int bak1dag = Integer.parseInt((dato.substring(8,10)));
 			bak1dag-=14;
@@ -114,7 +113,6 @@ public class Vedstatus {
 			}
 		}
 		estimat = (int) Math.floor((a*(-1))/b);
-		System.out.println((int) Math.floor((a*(-1))/b));
 		return estimat;
 	}
 	/**

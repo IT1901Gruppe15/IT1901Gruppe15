@@ -62,15 +62,12 @@ public class GUIController {
 
 	//koie liste
 	@FXML private Pane koieListePane; // liste over koiene
-	final ObservableList<String> koieListeListe = FXCollections.observableArrayList();
-	@FXML private VBox koieListe;
 
 	//welcome pane
 	@FXML private Pane welcomePane; // velkomst panelet (default når man logger inn)
 	@FXML private Text welcomeName; // overskriften på welcome-panelet
 	@FXML private VBox koieVedstatusListe;
 	@FXML private HBox koieVedstatusListeOverskrift;
-
 
 	//map pane
 	@FXML private Pane mapPane; // kart over koiene
@@ -111,6 +108,7 @@ public class GUIController {
 	@FXML private TextField adminKoieLeggTilUtstyrField; // tekstfelt for å legge til nytt utstyr i koie-panelet for admin
 	@FXML private ComboBox<String> adminKoieOdelagteTingDropDown; // drop-down meny med ødelagte ting i koie-panelet for admin
 	@FXML private ComboBox<String> adminKoieGjenglemteTingDropDown; // drop-down meny med gjenglemte ting i koie-panelet for admin
+	@FXML private Text adminKoieNyttUtstyrMelding; 
 
 	//bruker koie info pane
 	@FXML private Pane brukerKoiePane; // koie status panel for bruker
@@ -269,7 +267,6 @@ public class GUIController {
 				}
 			}
 			int vedEstimat = Vedstatus.lagVedEstimat(TheFormator.formaterKoieNavn(activeKoie));
-			//int vedEstimat = 50;
 			if (bruker.isAdmin()) {
 				if (adminKoieOdelagteTingDropDown.getItems().size() > 0) {					
 					adminKoieOdelagteTingDropDown.setValue(adminKoieOdelagteTingDropDown.getItems().get(0));
@@ -289,6 +286,7 @@ public class GUIController {
 					adminKoieVedstatusText.setText(vedEstimat + " dager");
 				}
 				oppdaterSengeplasser(true, adminKalender.getValue());
+				adminKoieLeggTilUtstyrField.setText("");
 			} else {
 
 				brukerKoieStatusName.setText(activeKoie);
@@ -362,11 +360,11 @@ public class GUIController {
 	private void openWelcome(ActionEvent event) { // når man trykker på hjem-knappen
 		koieVedstatusListe.getChildren().clear(); // fjerner listen hvis den har blitt fylt før
 		koieVedstatusListe.getChildren().add(koieVedstatusListeOverskrift); // setter inn overskriftene
-		
+
 		root.setCenter(welcomePane);
-		/*try {
+		try {
 			for (int i = 0; i < rapportDropDown.getItems().size(); i++) {
-				int vedEstimat = Vedstatus.lagVedEstimat(rapportDropDown.getItems().get(i));
+				int vedEstimat = Vedstatus.lagVedEstimat(TheFormator.formaterKoieNavn(rapportDropDown.getItems().get(i)));
 				HBox hbox = new HBox();
 				Label koieNavn = new Label(rapportDropDown.getItems().get(i));
 				koieNavn.setPrefWidth(100);
@@ -382,30 +380,10 @@ public class GUIController {
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-		}*/
+		}
 	}
 
-	private void openKoieListe() {
-		koieListeListe.clear();
-		for (int i = 0; i < rapportDropDown.getItems().size(); i++) {
-			koieListeListe.add(rapportDropDown.getItems().get(i));
-		}
-		final ListView<String> listView = new ListView<String>();
-		listView.setPrefSize(120, 9000);
-		listView.setItems(koieListeListe);
-		//listView.getSelectionModel().select(25);;
-		System.out.println("sel " + listView.getSelectionModel().getSelectedIndices());
-		/*listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(final MouseEvent mouseEvent) {
-				openKoie(listView.getSelectionModel().getSelectedItem());
-				listView.getSelectionModel().clearSelection(listView.getSelectionModel().getSelectedIndex());
-			}
-		});*/
-		koieListe.getChildren().clear();
-		koieListe.getChildren().add(listView);
-		root.setLeft(koieListe);
-	}
+
 
 	/**
 	 * Åpner kartet
@@ -445,7 +423,6 @@ public class GUIController {
 		Callback<CheckListObject, ObservableValue<Boolean>> getProperty = new Callback<CheckListObject, ObservableValue<Boolean>>() {
 			@Override
 			public BooleanProperty call(CheckListObject layer) {
-				System.out.println(layer);
 				return layer.selectedProperty();
 			}
 		};
@@ -594,11 +571,15 @@ public class GUIController {
 
 	@FXML
 	private void leggTilUtstyr(ActionEvent event) {
+		if (adminKoieLeggTilUtstyrField.getText().equals("")) {
+			adminKoieNyttUtstyrMelding.setText("Tomt input-felt");
+			return;
+		}
 		try {
 			ResultSet rs = connection.getUtstyrID(adminKoieLeggTilUtstyrField.getText(), TheFormator.formaterKoieNavn(activeKoie));
 			if (rs.next()) { // hvis utstyr allerede finnes
-				System.out.println("utstyr finnes allerede");
-				adminKoieLeggTilUtstyrField.setText("");
+				this.adminKoieLeggTilUtstyrField.setText("");
+				adminKoieNyttUtstyrMelding.setText("Utstyr finnes alllerede på koie");
 				return;
 			}
 			connection.registrerUtstyr(adminKoieLeggTilUtstyrField.getText(), LocalDate.now().toString(), 1, bruker.getBrukernavn(), TheFormator.formaterKoieNavn(activeKoie));
@@ -612,11 +593,12 @@ public class GUIController {
 				epost.setSub("Frakting av utstyr til " + activeKoie);
 				epost.setMes("Hei, du/dere må ta med " + adminKoieLeggTilUtstyrField.getText() + " til " + activeKoie);
 				epost.sendMessage(epostAdresse);
+				openKoie(activeKoie);
+				adminKoieNyttUtstyrMelding.setText("Epost sendt til " + epostAdresse);
 			} else {
-				System.out.println("ingen å sende epost til");
+				openKoie(activeKoie);
+				adminKoieNyttUtstyrMelding.setText("Ingen å sende epost til");
 			}
-			adminKoieLeggTilUtstyrField.setText("");
-			openKoie(activeKoie);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -686,11 +668,11 @@ public class GUIController {
 					bruker = new Bruker(usernameField.getText(), dbUserInfo.getString(3), dbUserInfo.getString(4), dbUserInfo.getString(5), dbUserInfo.getString(6));
 					welcomeName.setText("Velkommen, " + dbUserInfo.getString(3));
 					if (bruker.isAdmin()) {
-						openKoieListe();
+						root.setLeft(koieListePane);
 						root.setTop(adminToolbar);
 						openWelcome(null);
 					} else {
-						openKoieListe();
+						root.setLeft(koieListePane);
 						root.setTop(brukerToolbar);
 						openWelcome(null);
 					}
