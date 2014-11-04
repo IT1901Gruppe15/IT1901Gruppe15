@@ -37,7 +37,7 @@ public class Vedstatus {
 		t.last();
 	    totalRows = t.getRow();
 	    t.beforeFirst();
-		while(totalRows<=3){
+		while(totalRows<=13){
 			int bak1dag = Integer.parseInt((dato.substring(8,10)));
 			bak1dag-=14;
 			if(bak1dag<=0){
@@ -150,9 +150,5 @@ public class Vedstatus {
 		}else{
 			return 30;
 		}
-	}
-	
-	public static void main(String[] args) throws SQLException {
-		System.out.println("løsning: " + Vedstatus.lagVedEstimat("Mortenskaaten"));
 	}
 }
