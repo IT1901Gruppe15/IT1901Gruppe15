@@ -16,6 +16,7 @@ public class GUI extends Application {
 		Parent root = FXMLLoader.load(this.getClass().getResource("GUI.fxml"));
 		primaryStage.getIcons().add(new Image(GUI.class.getResourceAsStream("ntnuiIkon.png")));
 		primaryStage.setTitle("NTNUI Koiesystem");
+		primaryStage.setMaximized(true);
 		primaryStage.setScene(new Scene(root, 1280, 720));
 		primaryStage.show();
 	}
