@@ -61,13 +61,14 @@ public class Vedstatus {
 		    t.beforeFirst();
 		    negativMengde = true;
 		}
-		
-		while(t.next() && t.getRow() < 15){
+		int s=1;
+		while(t.next() && s<totalRows){
 			int l = t.getInt(2);
 			if(tallY.isEmpty() || l>=tallY.get(0)){
 				datoer.add(0, t.getString(1));
 				tallY.add(0, l);
 			}
+			s+=1;
 		}
 		tallX.add(0);
 		for(int k = 1; k < tallY.size(); k++){
