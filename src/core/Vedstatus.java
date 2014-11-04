@@ -61,6 +61,7 @@ public class Vedstatus {
 		    t.beforeFirst();
 		    negativMengde = true;
 		}
+		t.next();
 		int s=1;
 		while(t.next() && s<totalRows){
 			int l = t.getInt(2);
@@ -120,7 +121,9 @@ public class Vedstatus {
 		if(negativMengde){
 			ResultSet q = dbconnect.getDatoListe(koieID, dato);
 			while(q.next()){
-				a=q.getInt(2);
+				if(a<q.getInt(2)){
+					a=q.getInt(2);
+				}
 			}
 		}
 		estimat = (int) Math.floor((a*(-1))/b);
@@ -150,6 +153,6 @@ public class Vedstatus {
 	}
 	
 	public static void main(String[] args) throws SQLException {
-		System.out.println("løsning: " + Vedstatus.lagVedEstimat("Flaakoia"));
+		System.out.println("løsning: " + Vedstatus.lagVedEstimat("Mortenskaaten"));
 	}
 }
