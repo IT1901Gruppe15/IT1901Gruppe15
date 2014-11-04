@@ -134,7 +134,7 @@
 	</fx:define>
 
 	<fx:define>
-		<BorderPane fx:id="adminToolbar" prefHeight="70">
+		<BorderPane fx:id="adminToolbar">
 			<left>
 				<Pane>
 					<HBox spacing="10" layoutX="5" layoutY="5">
@@ -191,7 +191,7 @@
 			</right>
 			<bottom>
 				<Pane>
-					<Separator orientation="horizontal" layoutY="70"
+					<Separator orientation="horizontal" layoutY="5"
 						prefWidth="9999" />
 				</Pane>
 			</bottom>
@@ -199,7 +199,7 @@
 	</fx:define>
 
 	<fx:define>
-		<BorderPane fx:id="brukerToolbar" prefHeight="70">
+		<BorderPane fx:id="brukerToolbar">
 			<left>
 				<Pane>
 					<HBox spacing="10" layoutX="5" layoutY="5">
@@ -244,12 +244,17 @@
 				</Pane>
 			</left>
 			<right>
-				<ImageView>
-					<Image url="ntnuiLogo.png" />
-				</ImageView>
+				<Pane>
+					<ImageView layoutX="-5" layoutY="5">
+						<Image url="ntnuiLogo.png" />
+					</ImageView>
+				</Pane>
 			</right>
 			<bottom>
-				<Separator orientation="horizontal" prefWidth="9999" />
+				<Pane>
+					<Separator orientation="horizontal" prefWidth="9999"
+						layoutY="5" />
+				</Pane>
 			</bottom>
 		</BorderPane>
 	</fx:define>
