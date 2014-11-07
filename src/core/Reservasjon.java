@@ -123,6 +123,7 @@ public class Reservasjon {
 					switch (i) {
 					case 0:
 						koieID = list[0].trim();// sjekke om koieid er gyldig?
+						koieID=TheFormator.formaterKoieNavn(koieID);
 						break;
 					case 1:
 						validate(list[1].trim());
