@@ -1,7 +1,5 @@
 package coreTest;
 
-import static org.junit.Assert.*;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,7 +11,6 @@ import core.RapportHandler;
 public class RapportHandlerTest {
 	
 	ArrayList<String> koier = new ArrayList<String>();
-//	RapportHandler test = new RapportHandler();
 
 	@Test
 	public void testLesRapport() throws IOException {
@@ -62,8 +59,6 @@ public class RapportHandlerTest {
 		f1.close(); 
 		
 		RapportHandler.lesRapport();
-		
-		
 	}
 
 }

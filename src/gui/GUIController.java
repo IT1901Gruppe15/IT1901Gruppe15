@@ -43,6 +43,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 /**
@@ -135,6 +137,12 @@ public class GUIController {
 	 * Initialiserer GUI
 	 */
 	public void initialize() { //basically konstruktør
+		//Stage stage = (Stage) root.getScene().getRoot().getWindow();
+		/*stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+	          public void handle(WindowEvent we) {
+	              System.out.println("Stage is closing");
+	          }
+	      });*/
 		Reservasjon res = new Reservasjon();
 		res.lesReservasjon();
 		rapportDropDown.getItems().addAll("Flåkoia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsåkoia", "Holvassgamma", "Iglbu", "Kamtjønnkoia", "Kråklikåten", "Kvernmovollen", "Kåsen", "Lynhøgen", "Mortenskåten", "Nicokoia", "Rindalsløa", "Selbukåten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessætra", "Øvensenget");
@@ -192,6 +200,19 @@ public class GUIController {
 				}
 			}
 		});
+	}
+	
+	/**
+	 * Lager en lytter på primaryStage som stenger databasen når programmet lukkes
+	 * 
+	 * @param stage primaryStage i GUI
+	 */
+	public void initStengDBListener(final Stage stage) {
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+	          public void handle(WindowEvent we) {
+	              connection.getDB().stengDB();
+	          }
+	      });
 	}
 
 	/**
@@ -362,7 +383,6 @@ public class GUIController {
 	private void openWelcome(ActionEvent event) { // når man trykker på hjem-knappen
 		koieVedstatusListe.getChildren().clear(); // fjerner listen hvis den har blitt fylt før
 		koieVedstatusListe.getChildren().add(koieVedstatusListeOverskrift); // setter inn overskriftene
-
 		root.setCenter(welcomePane);
 		try {
 			for (int i = 0; i < rapportDropDown.getItems().size(); i++) {
@@ -384,8 +404,6 @@ public class GUIController {
 			e1.printStackTrace();
 		}
 	}
-
-
 
 	/**
 	 * Åpner kartet

@@ -13,10 +13,12 @@ public class GUI extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		Parent root = FXMLLoader.load(this.getClass().getResource("GUI.fxml"));
+		final FXMLLoader loader = new FXMLLoader(this.getClass().getResource("GUI.fxml"));
+		Parent root = loader.load();
+		final GUIController controller = loader.getController();
+		controller.initStengDBListener(primaryStage);
 		primaryStage.getIcons().add(new Image("file:res/ntnuiIkon.png"));
 		primaryStage.setTitle("NTNUI Koiesystem");
-		//primaryStage.setMaximized(true);
 		primaryStage.setMinWidth(950);
 		primaryStage.setMinHeight(750);
 		primaryStage.setScene(new Scene(root, 1280, 720));

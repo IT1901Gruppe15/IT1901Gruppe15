@@ -8,7 +8,7 @@ import java.sql.SQLException;
  */
 public class Utstyr {
 	private String koieID;
-	private String navn,admin_id,admin;
+	private String navn,admin_id;
 	private String innkjopsdato;
 	private int status;
 	
@@ -42,6 +42,11 @@ public class Utstyr {
 		}
 	}
 
+	/**
+	 * Finner og returnerer koieID (navn på koie) der å=aa, ø=o osv
+	 * 
+	 * @return Formatert koienavn
+	 */
 	public String getKoieID() {
 		return TheFormator.formaterKoieNavn(koieID);
 		
@@ -83,10 +88,4 @@ public class Utstyr {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

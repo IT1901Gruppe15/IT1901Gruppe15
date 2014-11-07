@@ -3,8 +3,7 @@ package core;
 /**
  * Formatterer strenger til ו passe i DB og konverterer זרו
  */
-
-public class TheFormator {
+public class TheFormator { // Come with me if you want to format
 	
 	/**
 	 * Formaterer koie navn til gyldig format
@@ -12,6 +11,9 @@ public class TheFormator {
 	 * @return formatertTekst koie blir returnert med riktig format
 	 */
 	public static String formaterKoieNavn(String koie) {
+		//Listen. Understand. That Formator is out there. It can't be reasoned with,
+		//it can't be bargained with. It doesn't feel pity of remorse or fear and it
+		//absolutely will not stop. Ever. Until you have been formatted.
 		String formatertTekst = "";
 		for (int i = 0; i < koie.length(); i++) {
 			if (koie.charAt(i) == 'ז' || koie.charAt(i) == 'ֶ') {
@@ -36,7 +38,7 @@ public class TheFormator {
 	 * @param separator Hvilket symbol(er) som skiller tekstbitene
 	 * @return returnerer den ferdige teksten
 	 */
-	public static String formaterTekst(String tekst, String separator) {
+	public static String formaterTekst(String tekst, String separator) { // YOU ARE FORMATTED
 		String[] liste = tekst.split(separator);
 		String ferdigTekst = "";
 		for (int i = 0; i < liste.length; i++) {

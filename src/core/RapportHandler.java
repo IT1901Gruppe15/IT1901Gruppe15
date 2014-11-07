@@ -20,7 +20,6 @@ public class RapportHandler {
 	private static Scanner infile = null;
 	private static DBConnection connection = new DBConnection();
 	
-	//les alle rapporter fra tekstfil
 	/**
 	 * Leser rapporter som linjer fra egen tekstfil
 	 * 
@@ -76,7 +75,6 @@ public class RapportHandler {
 		}
 	}
 	
-	//endre et utstyrs status
 	/**
 	 * Endrer verdier i databsen slik at spesifikt utstyr er ødelagt
 	 * 
@@ -98,7 +96,6 @@ public class RapportHandler {
 		connection.leggInnOdelagtUtstyr(utstyrsID, rapportID);
 	}
 	
-	//legg inn gjenglemt ting
 	/**
 	 * Legger til gjenglemte ting i koien inn i databasen
 	 * 
@@ -118,10 +115,8 @@ public class RapportHandler {
 		}else{
 			connection.leggInnGjenglemteTing(gjenglemteTing, rapportID, koieID);
 		}
-		
 	}
 	
-	//slett innhold i fila... IKKE SELVE FILA
 	/**
 	 * Sletter innholdet i input filen
 	 * 

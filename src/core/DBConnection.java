@@ -6,15 +6,21 @@ import java.sql.SQLException;
 import database.DB;
 
 /**
- * Sender ferdige spørringer til DB-klassen som håndterer kommunikajson med DB
+ * Sender ferdige spørringer til DB-klassen
  */
-
 public class DBConnection { 
 
 	private DB db;
 
+	/**
+	 * Initialiserer DBConnection
+	 */
 	public DBConnection() {
 		db = new DB();
+	}
+	
+	public DB getDB() {
+		return db;
 	}
 
 	/**
@@ -228,17 +234,6 @@ public class DBConnection {
 		String q = ("insert into Utstyr (Navn, Innkjopsdato, stat, AdminID, FraktesTilID) VALUES ('" + navn + "','" + dato + "','" + (new String("" + status)) + "','" + adminID + "','" + koie + "');");
 
 		db.oppdaterDB(q);
-	}
-
-	// Spør om laveste vedsatus fra en bestemt Koie en bestemt Dato
-	public ResultSet getVedstatusRapport(String koieID, String dato) throws SQLException {
-		String q = ("select min(Vedstatus) from Rapport where Dato = '" 
-				+ dato 
-				+ "' and KoieRapportID = '" 
-				+ koieID 
-				+ "';");
-
-		return db.sporDB(q);
 	}
 
 	/**
