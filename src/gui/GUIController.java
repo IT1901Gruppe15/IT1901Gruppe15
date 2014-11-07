@@ -56,7 +56,7 @@ public class GUIController {
 	@FXML private BorderPane root; // øverste element i gui-hierarkiet
 
 	//admin toolbar
-	@FXML private Pane adminToolbar; // knapper for admin
+	@FXML private BorderPane adminToolbar; // knapper for admin
 
 	//bruker toolbar
 	@FXML private Pane brukerToolbar; // knapper for bruker
@@ -67,8 +67,8 @@ public class GUIController {
 	//welcome pane
 	@FXML private Pane welcomePane; // velkomst panelet (default når man logger inn)
 	@FXML private Text welcomeName; // overskriften på welcome-panelet
-	@FXML private VBox koieVedstatusListe;
-	@FXML private HBox koieVedstatusListeOverskrift;
+	@FXML private VBox koieVedstatusListe; // liste over vedstatus på koier
+	@FXML private HBox koieVedstatusListeOverskrift; // overskrift i tabellen (koienavn, dager til veddugnad)
 
 	//map pane
 	@FXML private Pane mapPane; // kart over koiene
@@ -103,13 +103,13 @@ public class GUIController {
 	@FXML private Text adminKoieStatusName; // overskriften på koie-panelet for admin
 	@FXML private TextArea adminKoieAltUtstyrField; // tekstfelt for alt utstyr i koie-panelet for admin
 	@FXML private DatePicker adminKalender; // kalenderen i koie-panelet for admin
-	@FXML private Label adminKoieVedstatusText;
+	@FXML private Label adminKoieVedstatusText; // tekst med antall dager til neste veddugnad i koie-panelet for admin
 	@FXML private Text adminAntallSengeplasserText; // tekst med totalt antall sengeplasser i koie-panelet for admin
 	@FXML private Text adminLedigeSengeplasserText; // tekst med ledige sengeplasser i koie-panelet for admin
 	@FXML private TextField adminKoieLeggTilUtstyrField; // tekstfelt for å legge til nytt utstyr i koie-panelet for admin
 	@FXML private ComboBox<String> adminKoieOdelagteTingDropDown; // drop-down meny med ødelagte ting i koie-panelet for admin
 	@FXML private ComboBox<String> adminKoieGjenglemteTingDropDown; // drop-down meny med gjenglemte ting i koie-panelet for admin
-	@FXML private Text adminKoieNyttUtstyrMelding; 
+	@FXML private Text adminKoieNyttUtstyrMelding; // tekst som sier hvem som får mail for nytt utstyr i koie-panelet for admin
 
 	//bruker koie info pane
 	@FXML private Pane brukerKoiePane; // koie status panel for bruker
@@ -118,7 +118,7 @@ public class GUIController {
 	@FXML private TextArea brukerOdelagteTingField; // tekstfelt for ødelagte gjenstander i koie-panelet for bruker
 	@FXML private TextArea brukerGjenglemteTingField; // tekstfelt for gjenglemte gjenstander i koie-panelet for bruker
 	@FXML private DatePicker brukerKalender; // kalenderen i koie-panelet for bruker
-	@FXML private Label brukerKoieVedstatusText;
+	@FXML private Label brukerKoieVedstatusText; // tekst med antall dager til neste veddugnad i koie-panelet for bruker
 	@FXML private Text brukerAntallSengeplasserText; // tekst med totalt antall sengeplasser i koie-panelet for bruker
 	@FXML private Text brukerLedigeSengeplasserText; // tekst med ledige sengeplasser i koie-panelet for bruker
 
@@ -139,7 +139,6 @@ public class GUIController {
 		res.lesReservasjon();
 		rapportDropDown.getItems().addAll("Flåkoia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsåkoia", "Holvassgamma", "Iglbu", "Kamtjønnkoia", "Kråklikåten", "Kvernmovollen", "Kåsen", "Lynhøgen", "Mortenskåten", "Nicokoia", "Rindalsløa", "Selbukåten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessætra", "Øvensenget");
 		rapportDropDown.valueProperty().addListener(new ChangeListener<String>() {
-			@Override
 			public void changed(ObservableValue<? extends String> observable,
 					String oldValue, String newValue) {
 				activeKoie = rapportDropDown.getValue();
@@ -424,7 +423,6 @@ public class GUIController {
 		listView.setEditable(true);
 		listView.setItems(checkListObjectList);
 		Callback<CheckListObject, ObservableValue<Boolean>> getProperty = new Callback<CheckListObject, ObservableValue<Boolean>>() {
-			@Override
 			public BooleanProperty call(CheckListObject layer) {
 				return layer.selectedProperty();
 			}
@@ -564,7 +562,7 @@ public class GUIController {
 	private void veddugnadUtfort(ActionEvent event) {
 		try {
 			connection.datoVeddugnad(TheFormator.formaterKoieNavn(activeKoie), LocalDate.now().toString());
-			connection.settinnRapport("", "", 80, activeKoie, LocalDate.now().toString());
+			connection.settinnRapport("", "", 80, TheFormator.formaterKoieNavn(activeKoie), LocalDate.now().toString());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -573,6 +571,11 @@ public class GUIController {
 		openKoie(activeKoie);
 	}
 
+	/**
+	 * Legger til nytt utstyr til en koie i databasen
+	 * 
+	 * @param eventHendelsen som kalte metoden
+	 */
 	@FXML
 	private void leggTilUtstyr(ActionEvent event) {
 		if (adminKoieLeggTilUtstyrField.getText().equals("")) {

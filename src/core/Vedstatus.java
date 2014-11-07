@@ -37,7 +37,7 @@ public class Vedstatus {
 		t.last();
 	    totalRows = t.getRow();
 	    t.beforeFirst();
-		while(totalRows<=3){
+		while(totalRows<=13){
 			int bak1dag = Integer.parseInt((dato.substring(8,10)));
 			bak1dag-=14;
 			if(bak1dag<=0){
@@ -61,13 +61,12 @@ public class Vedstatus {
 		    t.beforeFirst();
 		    negativMengde = true;
 		}
+		t.next();
 		int s=1;
-		while(t.next() && s<totalRows){
+		while(t.next() && s<=totalRows){
 			int l = t.getInt(2);
-			if(tallY.isEmpty() || l>=tallY.get(0)){
-				datoer.add(0, t.getString(1));
-				tallY.add(0, l);
-			}
+			datoer.add(0, t.getString(1));
+			tallY.add(0, l);
 			s+=1;
 		}
 		tallX.add(0);
@@ -107,26 +106,15 @@ public class Vedstatus {
 		
 		a = ((sumY*sumXX)-(sumX*sumXY))/((tallX.size()*sumXX)-(sumX*sumX));
 		b = ((tallX.size()*sumXY)-(sumX*sumY))/((tallX.size()*sumXX)-(sumX*sumX));
-		System.out.println("tallX: "+tallX);
-		System.out.println("tallY: "+tallY);
-		System.out.println("datoer: "+datoer);
-		System.out.println("dato: "+dato);
-		System.out.println("sumX: "+sumX);
-		System.out.println("sumY: "+sumY);
-		System.out.println("sumXX: "+sumXX);
-		System.out.println("sumXY: "+sumXY);
-		System.out.println("a: "+a);
-		System.out.println("b: "+b);
 		if(negativMengde){
 			ResultSet q = dbconnect.getDatoListe(koieID, dato);
 			while(q.next()){
-				a=q.getInt(2);
+				if(a<q.getInt(2)){
+					a=q.getInt(2);
+				}
 			}
 		}
 		estimat = (int) Math.floor((a*(-1))/b);
-		System.out.println("a: "+a);
-		System.out.println("b: "+b);
-		System.out.println("estimat: "+estimat);
 		return estimat;
 	}
 	/**
@@ -147,9 +135,5 @@ public class Vedstatus {
 		}else{
 			return 30;
 		}
-	}
-	
-	public static void main(String[] args) throws SQLException {
-		System.out.println("løsning: " + Vedstatus.lagVedEstimat("Flaakoia"));
 	}
 }

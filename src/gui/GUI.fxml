@@ -134,100 +134,129 @@
 	</fx:define>
 
 	<fx:define>
-		<Pane fx:id="adminToolbar" prefHeight="70">
-			<HBox spacing="10" layoutX="5" layoutY="5">
-				<Button text="Hjem" prefHeight="60" prefWidth="60" onAction="#openWelcome"
-					contentDisplay="top" cancelButton="true" focusTraversable="false">
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="hjemIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
-				<Button text="Kart" prefHeight="60" prefWidth="60" onAction="#openMap"
-					contentDisplay="top" focusTraversable="false">
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="kartIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
-				<Button text="Medlemmer" prefHeight="60" prefWidth="60"
-					onAction="#openMedlemListe" contentDisplay="top" focusTraversable="false">
-					<font>
-						<Font size="8" />
-					</font>
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="medlemIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
-				<Button text="Logg ut" prefHeight="60" prefWidth="60"
-					onAction="#logOut" contentDisplay="top" focusTraversable="false">
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="logoutIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
-			</HBox>
-			<ImageView layoutX="1100" layoutY="5">
-				<Image url="ntnuiLogo.png" />
-			</ImageView>
-			<Separator orientation="horizontal" layoutY="70" prefWidth="9999" />
-		</Pane>
+		<BorderPane fx:id="adminToolbar">
+			<left>
+				<Pane>
+					<HBox spacing="10" layoutX="5" layoutY="5">
+						<Button text="Hjem" prefHeight="60" prefWidth="60"
+							onAction="#openWelcome" contentDisplay="top" cancelButton="true"
+							focusTraversable="false">
+							<graphic>
+								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+									preserveRatio="true">
+									<Image url="file:res/hjemIkon.png" />
+								</ImageView>
+							</graphic>
+						</Button>
+						<Button text="Kart" prefHeight="60" prefWidth="60"
+							onAction="#openMap" contentDisplay="top" focusTraversable="false">
+							<graphic>
+								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+									preserveRatio="true">
+									<Image url="file:res/kartIkon.png" />
+								</ImageView>
+							</graphic>
+						</Button>
+						<Button text="Medlemmer" prefHeight="60" prefWidth="60"
+							onAction="#openMedlemListe" contentDisplay="top"
+							focusTraversable="false">
+							<font>
+								<Font size="8" />
+							</font>
+							<graphic>
+								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+									preserveRatio="true">
+									<Image url="file:res/medlemIkon.png" />
+								</ImageView>
+							</graphic>
+						</Button>
+						<Button text="Logg ut" prefHeight="60" prefWidth="60"
+							onAction="#logOut" contentDisplay="top" focusTraversable="false">
+							<graphic>
+								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+									preserveRatio="true">
+									<Image url="file:res/logoutIkon.png" />
+								</ImageView>
+							</graphic>
+						</Button>
+					</HBox>
+				</Pane>
+			</left>
+			<right>
+				<Pane>
+					<ImageView layoutX="-5" layoutY="5">
+						<Image url="file:res/ntnuiLogo.png" />
+					</ImageView>
+				</Pane>
+			</right>
+			<bottom>
+				<Pane>
+					<Separator orientation="horizontal" layoutY="5"
+						prefWidth="9999" />
+				</Pane>
+			</bottom>
+		</BorderPane>
 	</fx:define>
 
 	<fx:define>
-		<Pane fx:id="brukerToolbar" prefHeight="70">
-			<HBox spacing="10" layoutX="5" layoutY="5">
-				<Button text="Hjem" prefHeight="60" prefWidth="60" onAction="#openWelcome"
-					contentDisplay="top" cancelButton="true" focusTraversable="false">
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="hjemIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
-				<Button text="Kart" prefHeight="60" prefWidth="60" onAction="#openMap"
-					contentDisplay="top" focusTraversable="false">
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="kartIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
-				<Button text="Rapport" prefHeight="60" prefWidth="60"
-					onAction="#openReport" contentDisplay="top" focusTraversable="false">
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="rapportIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
-				<Button text="Logg ut" prefHeight="60" prefWidth="60"
-					onAction="#logOut" contentDisplay="top" focusTraversable="false">
-					<graphic>
-						<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
-							preserveRatio="true">
-							<Image url="logoutIkon.png" />
-						</ImageView>
-					</graphic>
-				</Button>
-			</HBox>
-			<ImageView layoutX="1100" layoutY="5">
-				<Image url="ntnuiLogo.png" />
-			</ImageView>
-			<Separator orientation="horizontal" layoutY="70" prefWidth="9999" />
-		</Pane>
+		<BorderPane fx:id="brukerToolbar">
+			<left>
+				<Pane>
+					<HBox spacing="10" layoutX="5" layoutY="5">
+						<Button text="Hjem" prefHeight="60" prefWidth="60"
+							onAction="#openWelcome" contentDisplay="top" cancelButton="true"
+							focusTraversable="false">
+							<graphic>
+								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+									preserveRatio="true">
+									<Image url="file:res/hjemIkon.png" />
+								</ImageView>
+							</graphic>
+						</Button>
+						<Button text="Kart" prefHeight="60" prefWidth="60"
+							onAction="#openMap" contentDisplay="top" focusTraversable="false">
+							<graphic>
+								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+									preserveRatio="true">
+									<Image url="file:res/kartIkon.png" />
+								</ImageView>
+							</graphic>
+						</Button>
+						<Button text="Rapport" prefHeight="60" prefWidth="60"
+							onAction="#openReport" contentDisplay="top" focusTraversable="false">
+							<graphic>
+								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+									preserveRatio="true">
+									<Image url="file:res/rapportIkon.png" />
+								</ImageView>
+							</graphic>
+						</Button>
+						<Button text="Logg ut" prefHeight="60" prefWidth="60"
+							onAction="#logOut" contentDisplay="top" focusTraversable="false">
+							<graphic>
+								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
+									preserveRatio="true">
+									<Image url="file:res/logoutIkon.png" />
+								</ImageView>
+							</graphic>
+						</Button>
+					</HBox>
+				</Pane>
+			</left>
+			<right>
+				<Pane>
+					<ImageView layoutX="-5" layoutY="5">
+						<Image url="file:res/ntnuiLogo.png" />
+					</ImageView>
+				</Pane>
+			</right>
+			<bottom>
+				<Pane>
+					<Separator orientation="horizontal" prefWidth="9999"
+						layoutY="5" />
+				</Pane>
+			</bottom>
+		</BorderPane>
 	</fx:define>
 
 	<fx:define>
@@ -251,76 +280,76 @@
 	<fx:define>
 		<Pane fx:id="mapPane">
 			<ImageView layoutX="2" layoutY="1">
-				<Image url="kart.png" />
+				<Image url="file:res/kart.png" />
 			</ImageView>
 			<ImageView fx:id="FlåkoiaMap" layoutX="310" layoutY="305">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="FosenkoiaMap" layoutX="290" layoutY="130">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="HeinfjordstuaMap" layoutX="375" layoutY="230">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="HognabuMap" layoutX="530" layoutY="320">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="HolmsåkoiaMap" layoutX="550" layoutY="330">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="HolvassgammaMap" layoutX="300" layoutY="30">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="IglbuMap" layoutX="270" layoutY="370">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="KamtjønnkoiaMap" layoutX="105" layoutY="445">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="KråklikåtenMap" layoutX="350" layoutY="320">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="KvernmovollenMap" layoutX="420" layoutY="380">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="KåsenMap" layoutX="145" layoutY="300">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="LynhøgenMap" layoutX="360" layoutY="280">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="MortenskåtenMap" layoutX="410" layoutY="350">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="NicokoiaMap" layoutX="340" layoutY="300">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="RindasløaMap" layoutX="100" layoutY="335">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="SelbukåtenMap" layoutX="430" layoutY="225">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="SonvasskoiaMap" layoutX="500" layoutY="205">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="StabburetMap" layoutX="570" layoutY="305">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="StakkslettbuaMap" layoutX="85" layoutY="285">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="TelinMap" layoutX="200" layoutY="405">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="TaagaabuMap" layoutX="360" layoutY="410">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="VekvessætraMap" layoutX="210" layoutY="475">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 			<ImageView fx:id="ØvensengetMap" layoutX="450" layoutY="580">
-				<Image url="koieIkon.png" />
+				<Image url="file:res/koieIkon.png" />
 			</ImageView>
 		</Pane>
 	</fx:define>
