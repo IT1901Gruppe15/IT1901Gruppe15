@@ -144,7 +144,7 @@
 							<graphic>
 								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
 									preserveRatio="true">
-									<Image url="file:res/hjemIkon.png" />
+									<Image url="gui/res/hjemIkon.png" />
 								</ImageView>
 							</graphic>
 						</Button>
@@ -153,7 +153,7 @@
 							<graphic>
 								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
 									preserveRatio="true">
-									<Image url="file:res/kartIkon.png" />
+									<Image url="gui/res/kartIkon.png" />
 								</ImageView>
 							</graphic>
 						</Button>
@@ -166,7 +166,7 @@
 							<graphic>
 								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
 									preserveRatio="true">
-									<Image url="file:res/medlemIkon.png" />
+									<Image url="gui/res/medlemIkon.png" />
 								</ImageView>
 							</graphic>
 						</Button>
@@ -175,7 +175,7 @@
 							<graphic>
 								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
 									preserveRatio="true">
-									<Image url="file:res/logoutIkon.png" />
+									<Image url="gui/res/logoutIkon.png" />
 								</ImageView>
 							</graphic>
 						</Button>
@@ -185,7 +185,7 @@
 			<right>
 				<Pane>
 					<ImageView layoutX="-5" layoutY="5">
-						<Image url="file:res/ntnuiLogo.png" />
+						<Image url="gui/res/ntnuiLogo.png" />
 					</ImageView>
 				</Pane>
 			</right>
@@ -209,7 +209,7 @@
 							<graphic>
 								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
 									preserveRatio="true">
-									<Image url="file:res/hjemIkon.png" />
+									<Image url="gui/res/hjemIkon.png" />
 								</ImageView>
 							</graphic>
 						</Button>
@@ -218,7 +218,7 @@
 							<graphic>
 								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
 									preserveRatio="true">
-									<Image url="file:res/kartIkon.png" />
+									<Image url="gui/res/kartIkon.png" />
 								</ImageView>
 							</graphic>
 						</Button>
@@ -227,7 +227,7 @@
 							<graphic>
 								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
 									preserveRatio="true">
-									<Image url="file:res/rapportIkon.png" />
+									<Image url="gui/res/rapportIkon.png" />
 								</ImageView>
 							</graphic>
 						</Button>
@@ -236,7 +236,7 @@
 							<graphic>
 								<ImageView fitHeight="32" fitWidth="32" pickOnBounds="true"
 									preserveRatio="true">
-									<Image url="file:res/logoutIkon.png" />
+									<Image url="gui/res/logoutIkon.png" />
 								</ImageView>
 							</graphic>
 						</Button>
@@ -246,7 +246,7 @@
 			<right>
 				<Pane>
 					<ImageView layoutX="-5" layoutY="5">
-						<Image url="file:res/ntnuiLogo.png" />
+						<Image url="gui/res/ntnuiLogo.png" />
 					</ImageView>
 				</Pane>
 			</right>
@@ -280,76 +280,76 @@
 	<fx:define>
 		<Pane fx:id="mapPane">
 			<ImageView layoutX="2" layoutY="1">
-				<Image url="file:res/kart.png" />
+				<Image url="gui/res/kart.png" />
 			</ImageView>
 			<ImageView id="FlåkoiaMap" layoutX="310" layoutY="305">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="FosenkoiaMap" layoutX="290" layoutY="130">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="HeinfjordstuaMap" layoutX="375" layoutY="230">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="HognabuMap" layoutX="530" layoutY="320">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="HolmsåkoiaMap" layoutX="550" layoutY="330">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="HolvassgammaMap" layoutX="300" layoutY="30">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="IglbuMap" layoutX="270" layoutY="370">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="KamtjønnkoiaMap" layoutX="105" layoutY="445">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="KråklikåtenMap" layoutX="350" layoutY="320">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="KvernmovollenMap" layoutX="420" layoutY="380">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="KåsenMap" layoutX="145" layoutY="300">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="LynhøgenMap" layoutX="360" layoutY="280">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="MortenskåtenMap" layoutX="410" layoutY="350">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="NicokoiaMap" layoutX="340" layoutY="300">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="RindasløaMap" layoutX="100" layoutY="335">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="SelbukåtenMap" layoutX="430" layoutY="225">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="SonvasskoiaMap" layoutX="500" layoutY="205">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="StabburetMap" layoutX="570" layoutY="305">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="StakkslettbuaMap" layoutX="85" layoutY="285">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="TelinMap" layoutX="200" layoutY="405">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="TaagaabuMap" layoutX="360" layoutY="410">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="VekvessætraMap" layoutX="210" layoutY="475">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 			<ImageView id="ØvensengetMap" layoutX="450" layoutY="580">
-				<Image url="file:res/koieIkon.png" />
+				<Image url="gui/res/koieIkon.png" />
 			</ImageView>
 		</Pane>
 	</fx:define>
