@@ -247,8 +247,6 @@ public class GUIController {
 	 * Hjelpemetode for å fylle koie-panelet med informasjon
 	 */
 	private void fyllKoiePane() { // finner all informasjon som skal vises i koie-panelet
-		adminKalender.setValue(LocalDate.now()); // setter dato på kalendere til i dag
-		brukerKalender.setValue(LocalDate.now()); 
 		try {
 			ResultSet altDB = connection.getAltUtstyr(TheFormator.formaterKoieNavn(activeKoie));
 			ResultSet odelagtDB = connection.getOdelagt(TheFormator.formaterKoieNavn(activeKoie));
