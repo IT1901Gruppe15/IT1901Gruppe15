@@ -108,6 +108,7 @@ public class GUIController {
 	@FXML private Label adminKoieVedstatusText; // tekst med antall dager til neste veddugnad i koie-panelet for admin
 	@FXML private Text adminAntallSengeplasserText; // tekst med totalt antall sengeplasser i koie-panelet for admin
 	@FXML private Text adminLedigeSengeplasserText; // tekst med ledige sengeplasser i koie-panelet for admin
+	@FXML private TextArea reservasjonsField; // tekstfelt med epost til de som har reservert på den dagen
 	@FXML private TextField adminKoieLeggTilUtstyrField; // tekstfelt for å legge til nytt utstyr i koie-panelet for admin
 	@FXML private ComboBox<String> adminKoieOdelagteTingDropDown; // drop-down meny med ødelagte ting i koie-panelet for admin
 	@FXML private ComboBox<String> adminKoieGjenglemteTingDropDown; // drop-down meny med gjenglemte ting i koie-panelet for admin
@@ -152,6 +153,7 @@ public class GUIController {
 		adminKalender.setOnAction(new EventHandler<ActionEvent>() { // når man endrer dato
 			public void handle(ActionEvent event) {
 				oppdaterSengeplasser(true, adminKalender.getValue()); // oppdaterer info om sengeplasser i koie-panelet for admin
+				
 			}
 		});
 		brukerKalender.setValue(LocalDate.now());  // setter default dato til idag
@@ -195,7 +197,7 @@ public class GUIController {
 			}
 		});
 	}
-	
+
 	/**
 	 * Lager en lytter på primaryStage som stenger databasen når programmet lukkes
 	 * 
@@ -203,10 +205,10 @@ public class GUIController {
 	 */
 	public void initStengDBListener(final Stage stage) {
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-	          public void handle(WindowEvent we) {
-	              connection.getDB().stengDB();
-	          }
-	      });
+			public void handle(WindowEvent we) {
+				connection.getDB().stengDB();
+			}
+		});
 	}
 
 	/**
@@ -245,6 +247,8 @@ public class GUIController {
 	 * Hjelpemetode for å fylle koie-panelet med informasjon
 	 */
 	private void fyllKoiePane() { // finner all informasjon som skal vises i koie-panelet
+		adminKalender.setValue(LocalDate.now()); // setter dato på kalendere til i dag
+		brukerKalender.setValue(LocalDate.now()); 
 		try {
 			ResultSet altDB = connection.getAltUtstyr(TheFormator.formaterKoieNavn(activeKoie));
 			ResultSet odelagtDB = connection.getOdelagt(TheFormator.formaterKoieNavn(activeKoie));
@@ -328,8 +332,17 @@ public class GUIController {
 	 * @param isAdmin Om brukeren er admin
 	 * @param date Datoen man skal finne ledige sengeplasser for
 	 */
-	private void oppdaterSengeplasser(boolean isAdmin, LocalDate date) { // setter inn riktig antall totalt/tilgjengelige sengeplasser
+	private void oppdaterSengeplasser(boolean isAdmin, LocalDate date) { // setter inn riktig antall totalt/tilgjengelige sengeplasser		
 		try {
+			if (bruker.isAdmin()) {		
+				reservasjonsField.setText("");
+				ResultSet eposter = connection.getReservasjonsEpost(TheFormator.formaterKoieNavn(activeKoie), adminKalender.getValue().toString());
+				while(eposter.next()) {	
+					System.out.println(eposter.getString(1));
+					reservasjonsField.setText(reservasjonsField.getText() + "\n" + eposter.getString(1));
+				}
+				reservasjonsField.setText(reservasjonsField.getText().trim());
+			}
 			ResultSet antallSengeplasser = connection.getSengeplasser(TheFormator.formaterKoieNavn(activeKoie));
 			ResultSet reserverteSengeplasser = connection.getReservertePlasser(TheFormator.formaterKoieNavn(activeKoie), date.toString());
 			if (antallSengeplasser.next()) {
@@ -349,6 +362,11 @@ public class GUIController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@FXML
+	private void seReservasjoner(ActionEvent event) {
+
 	}
 
 	/**

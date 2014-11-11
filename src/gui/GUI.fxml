@@ -369,10 +369,10 @@
 				focusTraversable="false" layoutX="350" layoutY="70" prefWidth="100" />
 			<Label text="Gjenglemte ting" layoutX="350" layoutY="50" />
 			<Label text="Vedstatus" layoutX="500" layoutY="50" />
-			<Label fx:id="adminKoieVedstatusText" layoutX="500" layoutY="70" />
+			<Label fx:id="adminKoieVedstatusText" layoutX="500" layoutY="75"
+				style="-fx-font-size: 14px;" />
 			<Button text="Veddugnad utført" onAction="#veddugnadUtfort"
-				focusTraversable="false" layoutX="500" layoutY="100"
-				style="-fx-font-size: 10px;" />
+				focusTraversable="false" layoutX="475" layoutY="125" />
 			<Label text="Kalender" layoutX="600" layoutY="50" />
 			<DatePicker fx:id="adminKalender" layoutX="600" layoutY="70"
 				focusTraversable="false" />
@@ -380,13 +380,15 @@
 				layoutX="600" layoutY="120" />
 			<Text fx:id="adminLedigeSengeplasserText" text="Ledige sengeplasser: xx"
 				layoutX="600" layoutY="140" />
+			<TextArea fx:id="reservasjonsField" layoutX="600" layoutY="160"
+				focusTraversable="false" prefWidth="150" prefHeight="150"/>
 			<TextField fx:id="adminKoieLeggTilUtstyrField" layoutX="15"
 				layoutY="250" focusTraversable="false" />
 			<Button text="Legg til nytt utstyr" onAction="#leggTilUtstyr"
 				layoutX="200" layoutY="250" focusTraversable="false" />
 			<Text id="welcome-text"
 				text="Epost om frakting av utstyr vil &#10;bli sendt til neste person som &#10;har reservert sengeplass på koia"
-				layoutX="200" layoutY="300" />
+				layoutX="200" layoutY="325" />
 			<Text fx:id="adminKoieNyttUtstyrMelding" layoutX="15" layoutY="300" />
 			<Button text="Ting funnet" onAction="#finnUtstyr" layoutX="350"
 				layoutY="125" focusTraversable="false" />
