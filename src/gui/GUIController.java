@@ -309,7 +309,6 @@ public class GUIController {
 				oppdaterSengeplasser(true, adminKalender.getValue());
 				adminKoieLeggTilUtstyrField.setText("");
 			} else {
-
 				brukerKoieStatusName.setText(activeKoie);
 				brukerAlleTingField.setText(ferdigAlt);
 				brukerOdelagteTingField.setText(ferdigÿdelagt);
@@ -338,7 +337,6 @@ public class GUIController {
 				reservasjonsField.setText("");
 				ResultSet eposter = connection.getReservasjonsEpost(TheFormator.formaterKoieNavn(activeKoie), adminKalender.getValue().toString());
 				while(eposter.next()) {	
-					System.out.println(eposter.getString(1));
 					reservasjonsField.setText(reservasjonsField.getText() + "\n" + eposter.getString(1));
 				}
 				reservasjonsField.setText(reservasjonsField.getText().trim());
@@ -362,11 +360,6 @@ public class GUIController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	@FXML
-	private void seReservasjoner(ActionEvent event) {
-
 	}
 
 	/**

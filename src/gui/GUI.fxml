@@ -380,8 +380,10 @@
 				layoutX="600" layoutY="120" />
 			<Text fx:id="adminLedigeSengeplasserText" text="Ledige sengeplasser: xx"
 				layoutX="600" layoutY="140" />
-			<TextArea fx:id="reservasjonsField" layoutX="600" layoutY="160"
-				focusTraversable="false" prefWidth="150" prefHeight="150"/>
+			<Text text="Eposter som har reservert denne datoen" layoutX="600"
+				layoutY="180" />
+			<TextArea fx:id="reservasjonsField" layoutX="600" layoutY="190"
+				focusTraversable="false" editable="false" prefWidth="210" prefHeight="150" />
 			<TextField fx:id="adminKoieLeggTilUtstyrField" layoutX="15"
 				layoutY="250" focusTraversable="false" />
 			<Button text="Legg til nytt utstyr" onAction="#leggTilUtstyr"

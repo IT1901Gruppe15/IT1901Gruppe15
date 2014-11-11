@@ -39,8 +39,6 @@ public class Reservasjon {
 	 * @param dateToValidate dato som skal valideres
 	 * @param dateFormat angir formatet som datoen skal være på
 	 * @return true eller false avhening om dato ble valideret som riktig eller ikke
-	 * @throws ParseException
-	 *
 	 */
 	public boolean isThisDateValid(String dateToValidate, String dateFormat) {
 		if (dateToValidate == null) {
