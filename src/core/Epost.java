@@ -85,10 +85,8 @@ public class Epost {
 
 			// Now set the actual message
 			message.setText(msg);
-			System.out.println(address);
 			// Send message
 			Transport.send(message);
-			System.out.println("Sent message successfully....");
 		}catch (MessagingException mex) {
 			mex.printStackTrace();
 		}

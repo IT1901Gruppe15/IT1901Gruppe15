@@ -53,8 +53,8 @@ public class Reservasjon {
 
 		try {
 
+			@SuppressWarnings("unused")
 			Date date = sdf.parse(dateToValidate);
-			System.out.println(date);
 
 		} catch (ParseException e) {
 
@@ -74,7 +74,6 @@ public class Reservasjon {
 	 */
 	public void validate(final String hex) throws IllegalArgumentException {
 		matcher = pattern.matcher(hex);
-		System.out.println(hex);
 		if (!matcher.matches()) {
 			throw new IllegalArgumentException("feil epost format");
 		}

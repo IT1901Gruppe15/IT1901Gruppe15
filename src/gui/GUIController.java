@@ -137,12 +137,6 @@ public class GUIController {
 	 * Initialiserer GUI
 	 */
 	public void initialize() { //basically konstruktør
-		//Stage stage = (Stage) root.getScene().getRoot().getWindow();
-		/*stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-	          public void handle(WindowEvent we) {
-	              System.out.println("Stage is closing");
-	          }
-	      });*/
 		Reservasjon res = new Reservasjon();
 		res.lesReservasjon();
 		rapportDropDown.getItems().addAll("Flåkoia", "Fosenkoia", "Heinfjordstua", "Hognabu", "Holmsåkoia", "Holvassgamma", "Iglbu", "Kamtjønnkoia", "Kråklikåten", "Kvernmovollen", "Kåsen", "Lynhøgen", "Mortenskåten", "Nicokoia", "Rindalsløa", "Selbukåten", "Sonvasskoia", "Stabburet", "Stakkslettbua", "Telin", "Taagaabu", "Vekvessætra", "Øvensenget");
