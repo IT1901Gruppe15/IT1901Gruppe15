@@ -381,7 +381,7 @@ public class DBConnection {
 	 * 
 	 * @param koieID Koia det gjelder.
 	 * @param dato Eposter for denne datoen.
-	 * @return
+	 * @return ResultSet med alle eposter som har reservert på den koie på den datoen
 	 */
 	public ResultSet getReservasjonsEpost(String koieID, String dato){
 		String q = ("select Epost from Reservasjon where ReservertKoieID = '" + koieID + "' and Dato = '" + dato + "' order by Dato asc;");

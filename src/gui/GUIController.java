@@ -595,7 +595,7 @@ public class GUIController {
 	/**
 	 * Legger til nytt utstyr til en koie i databasen
 	 * 
-	 * @param eventHendelsen som kalte metoden
+	 * @param event Hendelsen som kalte metoden
 	 */
 	@FXML
 	private void leggTilUtstyr(ActionEvent event) {

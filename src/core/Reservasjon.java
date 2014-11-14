@@ -119,6 +119,7 @@ public class Reservasjon {
 	/**
 	 *	Metode for å oppdatere database med feltene epost
 	 *
+	 * @throws FileNotFoundException
 	 * @author morten
 	 */
 	private void wipeFile() throws FileNotFoundException{

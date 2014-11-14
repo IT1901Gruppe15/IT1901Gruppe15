@@ -120,6 +120,7 @@ public class Vedstatus {
 	 * Finner hvor mange dager det er i hver måned
 	 * 
 	 * @param m Hvilken måned det er ut ifra tallet i datoen
+	 * @param skuddar Om det er skuddår
 	 * @return Integer med antall dager i m måneder
 	 */
 	private static int finnManed(int m, Boolean skuddar) {

@@ -17,7 +17,7 @@ public class Utstyr {
 	 * Konstruktør for klassen Utstyr som setter forskjellige felt
 	 * @param koieID navnet på aktuell koide
 	 * @param navn navn på utstyr
-	 * @param innkjøpsdato dato for kjøp av utstyr
+	 * @param innkjopsdato dato for kjøp av utstyr
 	 * @param status status om utstyrer er ødelagt eller ikke,der 0 er ødelagt og 1 er ikke ødelagt
 	 * @param admin_id navnet til adminen som legger til utstyr
 	 */
