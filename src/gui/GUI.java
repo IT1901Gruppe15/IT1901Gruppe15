@@ -17,7 +17,7 @@ public class GUI extends Application {
 		Parent root = loader.load();
 		final GUIController controller = loader.getController();
 		controller.initStengDBListener(primaryStage);
-		primaryStage.getIcons().add(new Image("file:res/ntnuiIkon.png"));
+		primaryStage.getIcons().add(new Image("gui/res/ntnuiIkon.png"));
 		primaryStage.setTitle("NTNUI Koiesystem");
 		primaryStage.setMinWidth(950);
 		primaryStage.setMinHeight(750);

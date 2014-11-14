@@ -17,7 +17,6 @@ public class Vedstatus {
 	 * @throws SQLException
 	 */
 	public static int lagVedEstimat(String koieID) throws SQLException{
-		System.out.println(koieID);
 		ArrayList<Integer> tallX, tallY;
 		ArrayList<String> datoer;
 		String dato=null;

@@ -45,17 +45,17 @@ public class RapportHandler {
 					if(odelagteTing.contains(";")){
 						String[] temp = odelagteTing.split(";");
 						for(int i = 0; i<temp.length; i++){
-							try{
+							try {
 								RapportHandler.Odelegg(temp[i], koieID, odelagteTing, gjenglemteTing, vedstatus);
-							}catch(Exception e){
-								System.out.println(e);
+							} catch(SQLException e) {
+								e.printStackTrace();
 							}
 						}
 					}else{
 						try{
 							RapportHandler.Odelegg(odelagteTing, koieID, odelagteTing, gjenglemteTing, vedstatus); 
-						}catch(Exception e){
-							System.out.println(e);
+						}catch(SQLException e){
+							e.printStackTrace();
 						}
 					}
 				}

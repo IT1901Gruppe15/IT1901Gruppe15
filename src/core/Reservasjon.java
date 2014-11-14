@@ -39,8 +39,6 @@ public class Reservasjon {
 	 * @param dateToValidate dato som skal valideres
 	 * @param dateFormat angir formatet som datoen skal være på
 	 * @return true eller false avhening om dato ble valideret som riktig eller ikke
-	 * @throws ParseException
-	 *
 	 */
 	public boolean isThisDateValid(String dateToValidate, String dateFormat) {
 		if (dateToValidate == null) {
@@ -53,8 +51,8 @@ public class Reservasjon {
 
 		try {
 
+			@SuppressWarnings("unused")
 			Date date = sdf.parse(dateToValidate);
-			System.out.println(date);
 
 		} catch (ParseException e) {
 
@@ -74,7 +72,6 @@ public class Reservasjon {
 	 */
 	public void validate(final String hex) throws IllegalArgumentException {
 		matcher = pattern.matcher(hex);
-		System.out.println(hex);
 		if (!matcher.matches()) {
 			throw new IllegalArgumentException("feil epost format");
 		}
@@ -90,7 +87,7 @@ public class Reservasjon {
 		BufferedReader reader = null;
 
 		try {	
-			reader = new BufferedReader(new FileReader("textfiles/inputtext.txt"));
+			reader = new BufferedReader(new FileReader("textfiles/reservasjoner.txt"));
 			String line = null;
 			while(( line=reader.readLine() )!=null){
 				
