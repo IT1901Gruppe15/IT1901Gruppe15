@@ -383,7 +383,8 @@
 			<Text text="Eposter som har reservert denne datoen" layoutX="600"
 				layoutY="180" />
 			<TextArea fx:id="reservasjonsField" layoutX="600" layoutY="190"
-				focusTraversable="false" editable="false" prefWidth="210" prefHeight="150" />
+				focusTraversable="false" editable="false" prefWidth="210"
+				prefHeight="150" />
 			<TextField fx:id="adminKoieLeggTilUtstyrField" layoutX="15"
 				layoutY="250" focusTraversable="false" />
 			<Button text="Legg til nytt utstyr" onAction="#leggTilUtstyr"
@@ -418,7 +419,8 @@
 				focusTraversable="false" layoutX="285" layoutY="70" prefWidth="125"
 				prefHeight="150" />
 			<Label text="Vedstatus" layoutX="435" layoutY="50" />
-			<Label fx:id="brukerKoieVedstatusText" layoutX="435" layoutY="70" />
+			<Label fx:id="brukerKoieVedstatusText" layoutX="435" layoutY="75"
+				style="-fx-font-size: 14px;" />
 			<Label text="Kalender" layoutX="535" layoutY="50" />
 			<DatePicker fx:id="brukerKalender" layoutX="535" layoutY="70"
 				focusTraversable="false" />
