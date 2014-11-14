@@ -87,7 +87,7 @@ public class Reservasjon {
 		BufferedReader reader = null;
 
 		try {	
-			reader = new BufferedReader(new FileReader("textfiles/inputtext.txt"));
+			reader = new BufferedReader(new FileReader("textfiles/reservasjoner.txt"));
 			String line = null;
 			while(( line=reader.readLine() )!=null){
 				
