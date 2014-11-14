@@ -122,7 +122,7 @@ public class Reservasjon {
 	 * @author morten
 	 */
 	private void wipeFile() throws FileNotFoundException{
-		PrintWriter writer = new PrintWriter("textfiles/inputtext.txt");
+		PrintWriter writer = new PrintWriter("textfiles/reservasjoner.txt");
 		writer.print("");
 		writer.close();
 	}
