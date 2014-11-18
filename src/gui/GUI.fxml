@@ -72,7 +72,7 @@
 				</HBox>
 			</VBox>
 			<Label fx:id="registreringsFeil" style="-fx-font-size: 14px; -fx-text-fill: #ff0000"
-				layoutX="550" layoutY="475" />
+				layoutX="550" layoutY="550" />
 			<Label
 				text="Brukernavn må ikke finnes fra før&#10;Passordene må matche&#10;Telefonnummeret må inneholde 8 siffer"
 				layoutX="525" layoutY="450" />
