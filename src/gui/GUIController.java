@@ -333,7 +333,7 @@ public class GUIController {
 		try {
 			if (bruker.isAdmin()) {		
 				reservasjonsField.setText("");
-				ResultSet eposter = connection.getReservasjonsEpost(TheFormator.formaterKoieNavn(activeKoie), adminKalender.getValue().toString());
+				ResultSet eposter = connection.getReservasjonsEpostIDag(TheFormator.formaterKoieNavn(activeKoie), adminKalender.getValue().toString());
 				while(eposter.next()) {	
 					reservasjonsField.setText(reservasjonsField.getText() + "\n" + eposter.getString(1));
 				}
@@ -612,7 +612,7 @@ public class GUIController {
 			}
 			connection.registrerUtstyr(adminKoieLeggTilUtstyrField.getText(), LocalDate.now().toString(), 1, bruker.getBrukernavn(), TheFormator.formaterKoieNavn(activeKoie));
 			String epostAdresse = "";
-			ResultSet epostDB = connection.getReservasjonsEpost(TheFormator.formaterKoieNavn(activeKoie), LocalDate.now().toString());
+			ResultSet epostDB = connection.getReservasjonsEpostFremover(TheFormator.formaterKoieNavn(activeKoie), LocalDate.now().toString());
 			if (epostDB.next()) {
 				epostAdresse = epostDB.getString(1);
 			}

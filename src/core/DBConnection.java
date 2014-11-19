@@ -383,8 +383,21 @@ public class DBConnection {
 	 * @param dato Eposter for denne datoen.
 	 * @return ResultSet med alle eposter som har reservert på den koie på den datoen
 	 */
-	public ResultSet getReservasjonsEpost(String koieID, String dato){
+	public ResultSet getReservasjonsEpostIDag(String koieID, String dato){
 		String q = ("select Epost from Reservasjon where ReservertKoieID = '" + koieID + "' and Dato = '" + dato + "' order by Dato asc;");
+		
+		return db.sporDB(q);
+	}
+	
+	/**
+	 * Returnerer en liste med eposter for datoer fra innsendt dato.
+	 * 
+	 * @param koieID Koia det gjelder.
+	 * @param dato Eposter for denne datoen.
+	 * @return ResultSet med alle eposter som har reservert på den koie på den datoen og framover
+	 */
+	public ResultSet getReservasjonsEpostFremover(String koieID, String dato){
+		String q = ("select Epost from Reservasjon where ReservertKoieID = '" + koieID + "' and Dato >= '" + dato + "' order by Dato asc;");
 		
 		return db.sporDB(q);
 	}
